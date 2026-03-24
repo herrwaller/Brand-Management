@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 4: Brands and People · Interactive Script</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB; --bg2:#EBE7DE; --bg3:#DAD5C8; --card:#FDFAF4;
+  --ink:#1A1714; --ink2:#46403A; --ink3:#7A756C;
+  --border:rgba(26,23,20,.10); --border2:rgba(26,23,20,.06);
+  --green:#4A8A28; --r:12px;
+  --accent:#C84020;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* ── HEADER ── */
+.lecture-header{background:#1A1714;color:#F5F2EB;padding:40px 48px 36px;position:relative;overflow:hidden}
+.lecture-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(
+  45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 12px);}
+.lh-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:10px}
+.lh-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,46px);font-weight:700;line-height:1.1;margin-bottom:8px}
+.lh-title span{color:#6AAA38}
+.lh-sub{font-size:13px;color:rgba(245,242,235,.55);margin-bottom:20px}
+.lh-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.toc-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;padding:5px 14px;font-size:11.5px;color:rgba(245,242,235,.65);
+  cursor:pointer;transition:all .15s;text-decoration:none}
+.toc-item:hover{background:rgba(255,255,255,.12);color:#F5F2EB}
+.lang-row{position:absolute;top:24px;right:24px;display:flex;gap:6px}
+.lb{background:none;border:1px solid rgba(245,242,235,.25);color:rgba(245,242,235,.55);
+    padding:4px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .15s}
+.lb.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ── LAYOUT ── */
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* ── SECTION ── */
+.section{padding:52px 0 24px;border-bottom:1px solid var(--border2)}
+.section:last-child{border-bottom:none}
+.sec-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);
+  font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(74,138,40,.2)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:700;
+  margin-bottom:14px;line-height:1.2}
+.sec-text{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:16px;max-width:680px}
+.sec-text-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);line-height:1.9;
+  margin-bottom:16px;max-width:680px;padding-left:14px;border-left:2px solid var(--bg3)}
+em{font-style:normal;color:var(--green);font-weight:500}
+
+/* ── CALLOUT ── */
+.callout{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  border-left:3px solid var(--green);padding:16px 20px;margin:18px 0;font-size:13.5px;
+  color:var(--ink2);line-height:1.7}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink3);
+  margin-top:6px;line-height:1.85}
+
+/* ── TWO APPROACHES ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+@media(max-width:580px){.two-col{grid-template-columns:1fr}}
+.approach-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  padding:18px;position:relative;overflow:hidden}
+.approach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.approach-card.individual::before{background:#C84020}
+.approach-card.social::before{background:#2A5FA8}
+.ac-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.approach-card.individual .ac-label{color:#C84020}
+.approach-card.social .ac-label{color:#2A5FA8}
+.ac-q{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.ac-body{font-size:12.5px;color:var(--ink2);line-height:1.68}
+.ac-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.8}
+
+/* ── BIG FIVE QUIZ ── */
+.quiz-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;margin:20px 0}
+.quiz-progress{height:3px;background:var(--bg2);border-radius:2px;margin-bottom:18px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:var(--green);transition:width .4s ease;width:0%}
+.quiz-q{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:14px;line-height:1.5}
+.quiz-q-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);margin-bottom:14px;line-height:1.75}
+.quiz-scale{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.quiz-scale-lbl{font-size:11px;color:var(--ink3);min-width:80px}
+.quiz-scale-lbl.right{text-align:right}
+.quiz-btns{display:flex;gap:6px;flex:1}
+.qbtn{flex:1;padding:10px 4px;border:1.5px solid var(--border);border-radius:8px;background:#fff;
+  font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--ink2)}
+.qbtn:hover{border-color:var(--green);background:rgba(74,138,40,.06)}
+.qbtn.selected{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.quiz-nav-info{font-size:12px;color:var(--ink3)}
+.qnav-btn{background:var(--ink);color:#F5F2EB;border:none;border-radius:8px;
+  padding:9px 22px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .15s}
+.qnav-btn:hover{background:#333}
+.qnav-btn:disabled{background:var(--bg3);color:var(--ink3);cursor:default}
+
+/* OCEAN result */
+.ocean-result{display:none;margin-top:14px}
+.ocean-result.show{display:block}
+.ocean-bar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ocean-dim{font-size:12px;font-weight:500;width:130px;flex-shrink:0;color:var(--ink2)}
+.ocean-track{flex:1;height:9px;background:var(--bg2);border-radius:5px;overflow:hidden}
+.ocean-fill{height:100%;border-radius:5px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.ocean-pct{font-size:12px;color:var(--ink3);width:36px;text-align:right}
+.ocean-note{font-size:12.5px;color:var(--ink2);margin-top:14px;padding:12px 14px;
+  background:var(--bg2);border-radius:8px;line-height:1.65}
+.ocean-note-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.8}
+
+/* ── LIMBIC WHEEL (compact) ── */
+.wheel-wrap{margin:20px 0}
+.wheel-wrap svg{display:block;width:100%;max-width:520px;margin:0 auto;height:auto}
+.type-detail{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 18px;margin-top:12px;display:none}
+.type-detail.show{display:block;animation:fi .25s ease}
+.td-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.td-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.td-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700}
+.td-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3)}
+.td-desc{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:8px}
+.td-desc-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.8;margin-bottom:8px}
+.td-marketing{font-size:12px;color:var(--ink3);border-top:1px solid var(--border2);padding-top:8px;line-height:1.65}
+.td-mkt-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-top:4px;line-height:1.8}
+.wheel-hint{text-align:center;font-size:12px;color:var(--ink3);margin-bottom:8px}
+
+/* ── TWINS ── */
+.twins-wrap{margin:20px 0}
+.twins-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:520px){.twins-grid{grid-template-columns:1fr}}
+.twin-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:18px}
+.twin-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:10px}
+.twin-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:6px}
+.twin-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
+.twins-reveal{text-align:center;margin-top:4px}
+.reveal-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 24px;
+  font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .15s}
+.reveal-btn:hover{background:#3A7A20}
+.twins-insight{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;margin-top:14px;font-size:13.5px;color:var(--ink2);line-height:1.7}
+.twins-insight.show{display:block;animation:fi .3s ease}
+.ti-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:8px;color:var(--accent)}
+.ti-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-top:8px;line-height:1.85}
+
+/* ── SINUS MINI MAP ── */
+.sinus-mini{margin:20px 0;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.sinus-mini svg{display:block;width:100%;height:auto}
+.milieu-bubble{cursor:pointer;transition:opacity .2s}
+.milieu-bubble:hover ellipse{opacity:.85}
+.milieu-detail{padding:14px 18px;border-top:1px solid var(--border2);display:none;font-size:13px;color:var(--ink2);line-height:1.68}
+.milieu-detail.show{display:block}
+.md-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;margin-bottom:4px}
+
+/* ── PERSONA BUILDER ── */
+.persona-builder{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin:20px 0}
+.pb-step{display:none}
+.pb-step.active{display:block;animation:fi .25s ease}
+.pb-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:12px}
+.pb-field{margin-bottom:14px}
+.pb-label{font-size:11.5px;color:var(--ink3);letter-spacing:.06em;margin-bottom:5px;
+  font-weight:500;text-transform:uppercase;display:block}
+.pb-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:var(--ink);
+  transition:border-color .15s;outline:none}
+.pb-input:focus{border-color:var(--green)}
+.pb-select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:var(--ink);
+  appearance:none;cursor:pointer}
+.pb-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.pb-row{grid-template-columns:1fr}}
+.pb-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.pb-btn{background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 20px;
+  font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .15s}
+.pb-btn:hover{background:#3A7A20}
+.pb-btn.secondary{background:var(--bg2);color:var(--ink2)}
+.pb-btn.secondary:hover{background:var(--bg3)}
+.pb-progress{display:flex;gap:6px;align-items:center}
+.pb-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3);transition:background .2s}
+.pb-dot.done{background:var(--green)}
+.pb-dot.current{background:var(--ink)}
+
+/* PERSONA CARD */
+.persona-card{display:none;background:linear-gradient(135deg,#F5F2EB 0%,#EBE7DE 100%);
+  border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-top:14px}
+.persona-card.show{display:block;animation:fi .4s ease}
+.pc-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.pc-avatar{width:52px;height:52px;border-radius:50%;background:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700}
+.pc-tagline{font-size:12px;color:var(--ink3);margin-top:2px}
+.pc-body{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px}
+@media(max-width:480px){.pc-body{grid-template-columns:1fr}}
+.pc-block{background:#fff;border-radius:8px;padding:12px;border:1px solid var(--border2)}
+.pc-block-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.pc-block-val{color:var(--ink2);line-height:1.6}
+.pc-block-val strong{color:var(--green);font-weight:500}
+
+/* ── BRAND MINI GAME ── */
+.game-wrap{background:#1A1714;border-radius:var(--r);overflow:hidden;margin:20px 0}
+.game-inner{padding:20px}
+.game-score-row{display:flex;justify-content:space-between;align-items:center;
+  padding:12px 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.game-score-label{font-size:11px;color:rgba(245,242,235,.4);letter-spacing:.08em;text-transform:uppercase}
+.game-score-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#F5F2EB}
+.game-brand{background:#252220;border:2px solid rgba(255,255,255,.08);border-radius:12px;
+  padding:18px 24px;text-align:center;margin:16px auto;max-width:240px;cursor:default}
+.game-brand-emoji{font-size:38px;display:block;margin-bottom:6px}
+.game-brand-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#F5F2EB}
+.game-brand-sector{font-size:11px;color:rgba(245,242,235,.4);margin-top:2px;letter-spacing:.05em}
+.game-instruction{text-align:center;font-size:12px;color:rgba(245,242,235,.4);margin-bottom:14px}
+.game-zones{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+@media(max-width:500px){.game-zones{grid-template-columns:repeat(2,1fr)}}
+.gz{background:#252220;border:1.5px solid rgba(255,255,255,.08);border-radius:8px;
+  padding:10px 6px;text-align:center;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.gz::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--zc)}
+.gz:hover{border-color:var(--zc);background:#302C28}
+.gz-name{font-size:11.5px;font-weight:500;color:#F5F2EB;line-height:1.2}
+.gz-hint{font-size:9px;color:rgba(245,242,235,.35);margin-top:2px;line-height:1.3}
+.gz.flash-ok{animation:gFlashOk .5s ease}
+.gz.flash-ng{animation:gFlashNg .5s ease}
+.gz.flash-cl{animation:gFlashCl .5s ease}
+@keyframes gFlashOk{0%{background:#252220}40%{background:rgba(42,122,58,.4);border-color:#2A7A3A}100%{background:#252220}}
+@keyframes gFlashNg{0%{background:#252220}40%{background:rgba(180,40,30,.3);border-color:#C84020}100%{background:#252220}}
+@keyframes gFlashCl{0%{background:#252220}40%{background:rgba(160,120,20,.3);border-color:#A07820}100%{background:#252220}}
+.game-fb{display:none;background:#252220;border:1px solid rgba(255,255,255,.08);border-radius:10px;
+  padding:14px 16px;margin-top:12px;font-size:12.5px;color:rgba(245,242,235,.75);line-height:1.65}
+.game-fb.show{display:block;animation:fi .2s ease}
+.game-fb strong{color:#F5F2EB}
+.game-next{display:block;width:100%;margin-top:10px;background:var(--accent);color:#fff;
+  border:none;border-radius:8px;padding:10px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+.game-over{display:none;text-align:center;padding:24px}
+.game-over.show{display:block}
+.go-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#F5F2EB;margin-bottom:6px}
+.go-score{font-size:14px;color:rgba(245,242,235,.6);margin-bottom:16px}
+.go-restart{background:var(--green);color:#fff;border:none;border-radius:8px;padding:10px 24px;
+  font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+
+/* ── ASSIGNMENT ── */
+.assignment{background:var(--card);border:2px solid var(--green);border-radius:var(--r);
+  padding:24px;margin:20px 0}
+.asgn-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.asgn-badge{background:var(--green);color:#fff;font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:700;padding:6px 14px;border-radius:6px}
+.asgn-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700}
+.asgn-body{font-size:13.5px;color:var(--ink2);line-height:1.72;margin-bottom:16px}
+.asgn-body-zh{font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink3);line-height:1.88;margin-bottom:16px}
+.asgn-field{margin-bottom:14px}
+.asgn-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);
+  font-weight:500;margin-bottom:5px;display:block}
+.asgn-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:var(--ink);
+  transition:border-color .15s;outline:none;resize:vertical;min-height:70px}
+.asgn-input:focus{border-color:var(--green)}
+.asgn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.asgn-row{grid-template-columns:1fr}}
+.asgn-select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;
+  font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:var(--ink)}
+.asgn-save{background:var(--green);color:#fff;border:none;border-radius:8px;padding:11px 28px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s;margin-top:6px}
+.asgn-save:hover{background:#3A7A20}
+.asgn-saved{display:none;color:var(--green);font-size:13px;margin-top:8px}
+.asgn-saved.show{display:block}
+
+/* ── READING ── */
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 18px;margin:16px 0;display:flex;align-items:center;gap:14px}
+.rb-icon{width:36px;height:36px;background:var(--green);border-radius:6px;display:flex;
+  align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rb-text{font-size:13px;color:var(--ink2);line-height:1.6}
+.rb-title{font-weight:500;color:var(--ink);margin-bottom:2px}
+
+/* ── GENERAL ── */
+.note{background:var(--bg2);border-radius:8px;padding:11px 14px;font-size:12px;
+  color:var(--ink3);line-height:1.65;margin:12px 0;font-style:italic}
+.spacer{height:20px}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<!-- ──────────── HEADER ──────────── -->
+<div class="lecture-header">
+  <div class="lang-row">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+  <div class="lh-tag">Brand Management Basics · Lecture #4</div>
+  <div class="lh-title">Brands and <span>People</span></div>
+  <div class="lh-sub en-only">Prof. Dr. Stefan Waller · Brand University of Applied Sciences</div>
+  <div class="lh-sub zh-only" style="font-family:'Noto Serif SC',serif">Stefan Waller教授 · 品牌应用科学大学</div>
+  <div class="lh-toc">
+    <a class="toc-item" href="#s-typology">Consumer Typology</a>
+    <a class="toc-item" href="#s-bigfive">Big Five Quiz</a>
+    <a class="toc-item" href="#s-limbic">Limbic Types</a>
+    <a class="toc-item" href="#s-twins">Sociodemographic Twins</a>
+    <a class="toc-item" href="#s-sinus">Sinus-Milieus</a>
+    <a class="toc-item" href="#s-persona">Persona Builder</a>
+    <a class="toc-item" href="#s-brands">Brand Game</a>
+    <a class="toc-item" href="#s-assignment">Assignment 4</a>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ──────────── 1. CONSUMER TYPOLOGY ──────────── -->
+<div class="section" id="s-typology">
+  <div class="sec-label">1 · Consumer Typology</div>
+  <div class="sec-title en-only">Two ways to look at consumers</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">看待消费者的两种视角</div>
+
+  <p class="sec-text en-only">To identify a consumer typology, there are two fundamentally different approaches. Each answers a different question and leads to different strategic conclusions for brand management.</p>
+  <p class="sec-text-zh zh-only">识别消费者类型有两种根本不同的方法。每种方法回答不同的问题，并为品牌管理提供不同的战略结论。</p>
+
+  <div class="two-col">
+    <div class="approach-card individual">
+      <div class="ac-label">Approach 1 · Limbic Types</div>
+      <div class="ac-q en-only">Who is this person — inside?</div>
+      <div class="ac-q zh-only" style="font-family:'Noto Serif SC',serif">这个人内心是谁？</div>
+      <p class="ac-body en-only">Looking <em>from the individual perspective</em>: What emotional drives, personality traits and neurological patterns shape this person's preferences and behaviour? These are stable, biologically rooted, and relatively independent of social class.</p>
+      <p class="ac-zh zh-only">从<em>个体视角</em>出发：什么样的情感驱动、人格特征和神经模式塑造了这个人的偏好和行为？这些特征稳定、有生物学根源，相对独立于社会阶层。</p>
+    </div>
+    <div class="approach-card social">
+      <div class="ac-label">Approach 2 · Sinus-Milieus</div>
+      <div class="ac-q en-only">Where does this person stand — in society?</div>
+      <div class="ac-q zh-only" style="font-family:'Noto Serif SC',serif">这个人在社会中处于什么位置？</div>
+      <p class="ac-body en-only">Looking <em>from the consumer group perspective</em>: Which social milieu, values and life circumstances shape this person's worldview? These shift over generations and vary significantly by region and culture.</p>
+      <p class="ac-zh zh-only">从<em>消费群体视角</em>出发：哪种社会阶层、价值观和生活环境塑造了这个人的世界观？这些因素随代际变化而变化，并因地区和文化不同而存在显著差异。</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong class="en-only">Key insight:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">核心洞察：</strong>
+    <span class="en-only"> Both lenses are needed. A brand that only knows <em>who</em> its customer is (personality) but not <em>where</em> they stand socially will miss important channel, pricing and messaging decisions — and vice versa.</span>
+    <div class="callout-zh zh-only">两种视角都不可或缺。一个品牌如果只知道顾客<em>是谁</em>（人格），但不知道他们在社会中处于<em>什么位置</em>，就会错误判断渠道、定价和传播决策——反之亦然。</div>
+  </div>
+
+  <div class="reading-box">
+    <div class="rb-icon">📖</div>
+    <div class="rb-text">
+      <div class="rb-title en-only">BM-Reader — Lecture #4</div>
+      <div class="rb-title zh-only" style="font-family:'Noto Serif SC',serif">BM教材 — 第四讲</div>
+      <span class="en-only">SINUS Markt- und Sozialforschung GmbH, 2017, Sinus-Milieus® 2017/18, Heidelberg</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">SINUS市场与社会研究有限公司，2017年，Sinus-Milieus® 2017/18，海德堡</span>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────── 2. BIG FIVE QUIZ ──────────── -->
+<div class="section" id="s-bigfive">
+  <div class="sec-label">2 · Individual Character</div>
+  <div class="sec-title en-only">Big Five Personality Traits — Quick Self-Check</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">大五人格特质——快速自测</div>
+
+  <p class="sec-text en-only">Before we look at the Limbic Types model, let's ground ourselves in the science it builds on. The Big Five (OCEAN) is the gold standard for personality research — developed from the 1980s onward using statistical analysis of personality language. Answer 10 quick statements to see your approximate profile.</p>
+  <p class="sec-text-zh zh-only">在了解Limbic类型模型之前，让我们先了解其科学基础。大五人格（OCEAN）是人格研究的黄金标准——从20世纪80年代起通过人格语言的统计分析发展而来。回答10个简短陈述，查看你的大致人格特征。</p>
+
+  <div class="quiz-wrap" id="quiz-wrap">
+    <div class="quiz-progress"><div class="quiz-progress-fill" id="qpfill"></div></div>
+    <div id="quiz-q-en" class="quiz-q en-only"></div>
+    <div id="quiz-q-zh" class="quiz-q-zh zh-only"></div>
+    <div class="quiz-scale">
+      <div class="quiz-scale-lbl en-only">Strongly disagree</div>
+      <div class="quiz-scale-lbl zh-only" style="font-family:'Noto Serif SC',serif">非常不同意</div>
+      <div class="quiz-btns" id="quiz-btns"></div>
+      <div class="quiz-scale-lbl right en-only">Strongly agree</div>
+      <div class="quiz-scale-lbl right zh-only" style="font-family:'Noto Serif SC',serif">非常同意</div>
+    </div>
+    <div class="quiz-nav">
+      <span class="quiz-nav-info" id="qinfo">1 / 10</span>
+      <button class="qnav-btn" id="qnext" onclick="nextQ()" disabled>
+        <span class="en-only">Next →</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">下一题 →</span>
+      </button>
+    </div>
+    <div class="ocean-result" id="ocean-result"></div>
+  </div>
+
+  <p class="sec-text en-only" style="margin-top:16px">Note: the <em>Limbic Types</em> model (next section) takes a similar approach but focuses specifically on emotional drives hard-wired in the limbic system, making it more actionable for neuromarketing. Personality is 30–60% heritable according to twin studies — meaning these tendencies are relatively fixed even across different social environments.</p>
+  <p class="sec-text-zh zh-only" style="margin-top:16px">注：下一节的<em>Limbic类型</em>模型采用类似方法，但专注于边缘系统中固化的情感驱动，使其在神经营销中更具实践性。根据双胞胎研究，人格有30-60%的遗传性——这意味着这些倾向即使在不同社会环境中也相对稳定。</p>
+</div>
+
+<!-- ──────────── 3. LIMBIC TYPES ──────────── -->
+<div class="section" id="s-limbic">
+  <div class="sec-label">3 · Limbic Types</div>
+  <div class="sec-title en-only">Seven emotionally-wired character types</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">七种情感驱动的人格类型</div>
+
+  <p class="sec-text en-only">Limbic® Types is a neuromarketing model by Gruppe Nymphenburg. It categorises people into 7 types based on their <em>dominant emotional drives</em> — rooted in the limbic system of the brain (emotions), not the neocortex (rational thought). The key insight: people are emotionally programmed to prefer certain lifestyles, and these preferences are stable across social conditions.</p>
+  <p class="sec-text-zh zh-only">Limbic®类型是Nymphenburg集团开发的神经营销模型。它根据人们的<em>主导情感驱动</em>将人分为7种类型——植根于大脑的边缘系统（情感），而非新皮质（理性思维）。核心洞察：人们在情感上被"编程"偏好某些生活方式，且这些偏好在不同社会条件下保持稳定。</p>
+
+  <div class="wheel-hint en-only">Click any segment to explore that type ↓</div>
+  <div class="wheel-hint zh-only" style="font-family:'Noto Serif SC',serif">点击任意区域了解该类型 ↓</div>
+  <div class="wheel-wrap" id="wheel-section">
+    <svg id="lwheel" viewBox="0 0 520 520">
+      <circle cx="260" cy="260" r="228" fill="#EBE7DE" stroke="rgba(26,23,20,.07)" stroke-width="1"/>
+      <g id="wsegs"></g><g id="wlbls"></g>
+      <line x1="32" y1="260" x2="488" y2="260" stroke="rgba(26,23,20,.12)" stroke-width="0.6" stroke-dasharray="3 5"/>
+      <line x1="260" y1="32" x2="260" y2="488" stroke="rgba(26,23,20,.12)" stroke-width="0.6" stroke-dasharray="3 5"/>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="260" y="20" text-anchor="middle">Hedonism</text>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="260" y="510" text-anchor="middle">Tradition &amp; Order</text>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="12" y="263" text-anchor="middle">Open</text>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="508" y="263" text-anchor="middle">Duty</text>
+      <text class="zh-only" font-size="10" font-family="'Noto Serif SC',serif" fill="#7A756C" x="260" y="20" text-anchor="middle">享乐</text>
+      <text class="zh-only" font-size="10" font-family="'Noto Serif SC',serif" fill="#7A756C" x="260" y="510" text-anchor="middle">传统</text>
+      <text class="zh-only" font-size="10" font-family="'Noto Serif SC',serif" fill="#7A756C" x="12" y="263" text-anchor="middle">开放</text>
+      <text class="zh-only" font-size="10" font-family="'Noto Serif SC',serif" fill="#7A756C" x="508" y="263" text-anchor="middle">责任</text>
+      <circle cx="260" cy="260" r="56" fill="#FDFAF4" stroke="rgba(26,23,20,.1)" stroke-width="0.8"/>
+      <text font-size="12" font-weight="500" font-family="'Cormorant Garamond',serif" fill="#46403A" x="260" y="257" text-anchor="middle">Limbic</text>
+      <text font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="260" y="272" text-anchor="middle">Types</text>
+    </svg>
+    <div class="type-detail" id="type-detail">
+      <div class="td-header">
+        <div class="td-dot" id="td-dot"></div>
+        <div>
+          <div class="td-name en-only" id="td-name-en"></div>
+          <div class="td-zh" id="td-name-zh"></div>
+        </div>
+      </div>
+      <div class="td-desc en-only" id="td-desc-en"></div>
+      <div class="td-desc-zh zh-only" id="td-desc-zh"></div>
+      <div class="td-marketing">
+        <strong class="en-only">Marketing notes:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">营销要点：</strong>
+        <span class="en-only" id="td-mkt-en"></span>
+        <div class="td-mkt-zh zh-only" id="td-mkt-zh"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────── 4. SOCIODEMOGRAPHIC TWINS ──────────── -->
+<div class="section" id="s-twins">
+  <div class="sec-label">4 · Sociodemographics</div>
+  <div class="sec-title en-only">Sociodemographic twins are not identical</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">社会人口学"双胞胎"并不相同</div>
+
+  <p class="sec-text en-only">Sociodemographics (age, gender, income, education) are the traditional way to segment consumers. But they have a fundamental weakness: two people can share <em>identical demographics</em> while having completely different values, lifestyles and brand preferences. The example below became famous in marketing literature.</p>
+  <p class="sec-text-zh zh-only">社会人口学（年龄、性别、收入、教育程度）是传统的消费者细分方式。但它有一个根本缺陷：两个人可以拥有<em>完全相同的人口学特征</em>，却有着截然不同的价值观、生活方式和品牌偏好。以下案例在营销学文献中广为人知。</p>
+
+  <div class="twins-wrap">
+    <div class="twins-grid">
+      <div class="twin-card">
+        <div class="twin-name en-only">King Charles III</div>
+        <div class="twin-name zh-only" style="font-family:'Noto Serif SC',serif">查尔斯三世国王</div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Male, born 1948</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">男性，1948年生</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Raised in the UK</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">在英国长大</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Married twice</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">结婚两次</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Lives in a castle</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">住在城堡里</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Wealthy &amp; famous</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">富有且知名</span></div>
+      </div>
+      <div class="twin-card">
+        <div class="twin-name">Ozzy Osbourne</div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Male, born 1948</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">男性，1948年生</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Raised in the UK</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">在英国长大</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Married twice</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">结婚两次</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Lives in a castle</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">住在城堡里</span></div>
+        <div class="twin-item"><div class="twin-dot"></div><span class="en-only">Wealthy &amp; famous</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">富有且知名</span></div>
+      </div>
+    </div>
+    <div class="twins-reveal">
+      <button class="reveal-btn" onclick="revealTwins()">
+        <span class="en-only">What does this tell us? →</span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">这告诉我们什么？→</span>
+      </button>
+    </div>
+    <div class="twins-insight" id="twins-insight">
+      <div class="ti-title en-only">Sociodemographics alone are not enough.</div>
+      <div class="ti-title zh-only" style="font-family:'Noto Serif SC',serif">仅靠社会人口学数据远远不够。</div>
+      <p class="en-only">King Charles and Ozzy Osbourne share every major demographic variable — yet they represent completely opposite brand worlds. Charles is a <em>Traditionalist</em> (heritage, restraint, duty), while Ozzy is a classic <em>Adventurer</em> (rebellion, excess, anti-establishment). No demographic model would predict this. This is why we need psychographic models like Limbic Types and Sinus-Milieus.</p>
+      <div class="ti-zh zh-only">查尔斯国王和奥兹·奥斯本拥有所有主要人口学变量——但他们代表着完全相反的品牌世界。查尔斯是<em>传统主义者</em>（传承、克制、责任），而奥兹是典型的<em>冒险家</em>（反叛、放纵、反建制）。没有任何人口学模型能预测到这一点。这正是我们需要Limbic类型和Sinus阶层这类心理图像学模型的原因。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────── 5. SINUS-MILIEUS ──────────── -->
+<div class="section" id="s-sinus">
+  <div class="sec-label">5 · Sinus-Milieus</div>
+  <div class="sec-title en-only">Social groups — the Sinus approach</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">社会群体——Sinus方法</div>
+
+  <p class="sec-text en-only">Sinus-Milieus® (Sinus-Institut, Heidelberg) groups people by <em>shared lifeworlds</em> — combining social status (vertical axis) with value orientation (horizontal axis). Their core claim: sociodemographic class and consumer behaviour do not necessarily correlate. The "potato graphic" below shows the 10 German milieus. Click any bubble to explore. <strong>Note:</strong> we work with the German model as reference; international models exist for 50+ countries.</p>
+  <p class="sec-text-zh zh-only">Sinus-Milieus®（Sinus研究院，海德堡）通过<em>共同生活世界</em>对人群进行分类——将社会地位（纵轴）与价值取向（横轴）相结合。其核心主张：社会人口学阶层与消费行为不一定相关。点击下方的气泡探索各阶层。<strong>注：</strong>我们以德国模型为参考；国际模型覆盖50余个国家。</p>
+
+  <div class="sinus-mini" id="sinus-section">
+    <svg viewBox="0 0 640 460">
+      <rect x="58" y="16" width="550" height="414" fill="#EBE7DF" rx="6"/>
+      <rect x="58" y="16" width="550" height="138" fill="rgba(42,95,168,.055)" rx="6"/>
+      <rect x="58" y="154" width="550" height="138" fill="rgba(120,110,80,.025)"/>
+      <rect x="58" y="292" width="550" height="138" fill="rgba(80,80,130,.04)"/>
+      <line x1="58" y1="154" x2="608" y2="154" stroke="rgba(26,23,20,.07)" stroke-width="1"/>
+      <line x1="58" y1="292" x2="608" y2="292" stroke="rgba(26,23,20,.07)" stroke-width="1"/>
+      <line x1="224" y1="16" x2="224" y2="430" stroke="rgba(26,23,20,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="390" y1="16" x2="390" y2="430" stroke="rgba(26,23,20,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="334" y="448" text-anchor="middle">← Tradition  ·  Value Orientation  ·  Modernity / Reorientation →</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="334" y="448" text-anchor="middle">← 传统 · 价值取向 · 现代化 / 重新定向 →</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="96" y="82" text-anchor="middle">Upper</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="96" y="222" text-anchor="middle">Middle</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="96" y="360" text-anchor="middle">Lower</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="96" y="82" text-anchor="middle">上层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="96" y="222" text-anchor="middle">中层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="96" y="360" text-anchor="middle">下层</text>
+      <g id="sbubbles"></g>
+    </svg>
+    <div class="milieu-detail" id="milieu-detail">
+      <div class="md-name en-only" id="md-name-en"></div>
+      <div class="md-name zh-only" id="md-name-zh"></div>
+      <div class="en-only" id="md-desc-en" style="color:var(--ink2);font-size:13px;line-height:1.68;margin-top:4px"></div>
+      <div class="zh-only" id="md-desc-zh" style="font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.85;margin-top:4px"></div>
+    </div>
+  </div>
+
+  <div class="note en-only">© SINUS Markt- und Sozialforschung GmbH, Heidelberg/Berlin. Figures represent 14+ population in Germany. The model is updated continuously to reflect societal change.</div>
+  <div class="note zh-only" style="font-family:'Noto Serif SC',serif">© SINUS市场与社会研究有限公司，海德堡/柏林。数据代表德国14岁及以上人口。模型持续更新以反映社会变迁。</div>
+</div>
+
+<!-- ──────────── 6. PERSONA BUILDER ──────────── -->
+<div class="section" id="s-persona">
+  <div class="sec-label">6 · Consumer Personas</div>
+  <div class="sec-title en-only">Build a consumer persona</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">构建消费者画像</div>
+
+  <p class="sec-text en-only">A consumer persona combines <em>both models</em>: a Limbic Type tells you how to talk to a person (emotional tone, messaging), while a Sinus Milieu tells you where to find them and what social context shapes them. Together they create a vivid, actionable picture of a real customer.</p>
+  <p class="sec-text-zh zh-only">消费者画像<em>结合了两种模型</em>：Limbic类型告诉你如何与人交流（情感基调、信息传递），而Sinus阶层告诉你在哪里找到他们以及什么社会环境塑造了他们。两者共同构建一个生动且可操作的真实顾客图像。</p>
+
+  <div class="callout">
+    <strong class="en-only">Example from lecture:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">课堂案例：</strong>
+    <span class="en-only"> <strong>LI Mengya, 20, Beijing, iPhone customer</strong> — Sinus: border of Adaptive Navigators / Performers (middle class, modern). Limbic: Performer. → She buys iPhone as a status symbol and identity statement: "I am sophisticated, successful, global."</span>
+    <div class="callout-zh zh-only"><strong>李梦雅，20岁，北京，iPhone用户</strong>——Sinus：适应性导航者/表演者交界处（中产阶级，现代导向）。Limbic：表演者。→ 她购买iPhone作为地位象征和身份表达："我是精致的、成功的、具有全球视野的。"</div>
+  </div>
+
+  <p class="sec-text en-only" style="margin-top:14px">Now build your own persona below. You'll use it in Assignment 4.</p>
+  <p class="sec-text-zh zh-only" style="margin-top:14px">现在在下方构建你自己的消费者画像。你将在第四次作业中使用它。</p>
+
+  <div class="persona-builder" id="persona-builder">
+    <div class="pb-step active" id="step-1">
+      <div class="pb-title en-only">Step 1 — Basic Profile</div>
+      <div class="pb-title zh-only" style="font-family:'Noto Serif SC',serif">第一步——基本信息</div>
+      <div class="pb-row">
+        <div class="pb-field">
+          <label class="pb-label en-only">Name</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">姓名</label>
+          <input class="pb-input" id="p-name" placeholder="e.g. Wang Fang / 王芳" />
+        </div>
+        <div class="pb-field">
+          <label class="pb-label en-only">Age & City</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">年龄与城市</label>
+          <input class="pb-input" id="p-age" placeholder="e.g. 28, Shanghai" />
+        </div>
+      </div>
+      <div class="pb-row">
+        <div class="pb-field">
+          <label class="pb-label en-only">Occupation</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">职业</label>
+          <input class="pb-input" id="p-job" placeholder="e.g. Marketing Manager" />
+        </div>
+        <div class="pb-field">
+          <label class="pb-label en-only">Brand context</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">品牌背景</label>
+          <input class="pb-input" id="p-brand" placeholder="e.g. iPhone, Starbucks, Nike…" />
+        </div>
+      </div>
+      <div class="pb-nav">
+        <div class="pb-progress"><div class="pb-dot current"></div><div class="pb-dot"></div><div class="pb-dot"></div></div>
+        <button class="pb-btn" onclick="pbNext(1)">
+          <span class="en-only">Next →</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">下一步 →</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="pb-step" id="step-2">
+      <div class="pb-title en-only">Step 2 — Psychographic Profile</div>
+      <div class="pb-title zh-only" style="font-family:'Noto Serif SC',serif">第二步——心理图像特征</div>
+      <div class="pb-row">
+        <div class="pb-field">
+          <label class="pb-label en-only">Limbic Type (primary)</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">Limbic主要类型</label>
+          <select class="pb-select" id="p-limbic">
+            <option value="">Select…</option>
+            <option>Performer · 表演者</option>
+            <option>Adventurer · 冒险家</option>
+            <option>Hedonist · 享乐主义者</option>
+            <option>Open-minded · 开放者</option>
+            <option>Harmoniser · 和谐者</option>
+            <option>Traditionalist · 传统主义者</option>
+            <option>Disciplined · 自律者</option>
+          </select>
+        </div>
+        <div class="pb-field">
+          <label class="pb-label en-only">Sinus Milieu (closest)</label>
+          <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">Sinus最近似阶层</label>
+          <select class="pb-select" id="p-sinus">
+            <option value="">Select…</option>
+            <option>Conservative-Elevated · 保守精英</option>
+            <option>Post-Materialists · 后物质主义者</option>
+            <option>Performers · 绩效精英</option>
+            <option>Expeditives · 探险先锋</option>
+            <option>Neo-Ecologists · 新生态主义者</option>
+            <option>Adaptive-Pragmatics · 适应性务实者</option>
+            <option>Consumption-Hedonists · 消费享乐主义者</option>
+            <option>Precarious · 社会边缘阶层</option>
+            <option>Nostalgic-Bourgeois · 怀旧市民阶层</option>
+            <option>Traditionals · 传统主义者</option>
+          </select>
+        </div>
+      </div>
+      <div class="pb-field">
+        <label class="pb-label en-only">Key values &amp; motivations (2–3 words)</label>
+        <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">核心价值观与动机（2-3个词）</label>
+        <input class="pb-input" id="p-values" placeholder="e.g. Status, efficiency, belonging…" />
+      </div>
+      <div class="pb-nav">
+        <div class="pb-progress"><div class="pb-dot done"></div><div class="pb-dot current"></div><div class="pb-dot"></div></div>
+        <div style="display:flex;gap:8px">
+          <button class="pb-btn secondary" onclick="pbPrev(2)">← <span class="en-only">Back</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">返回</span></button>
+          <button class="pb-btn" onclick="pbNext(2)"><span class="en-only">Next →</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">下一步 →</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-step" id="step-3">
+      <div class="pb-title en-only">Step 3 — Brand Relationship</div>
+      <div class="pb-title zh-only" style="font-family:'Noto Serif SC',serif">第三步——品牌关系</div>
+      <div class="pb-field">
+        <label class="pb-label en-only">Why does this persona buy/use this brand?</label>
+        <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">这个画像为什么购买/使用该品牌？</label>
+        <textarea class="pb-input" id="p-why" rows="3" placeholder="e.g. The iPhone signals success and taste. For Wang Fang, it's not about specs — it's about who she wants to be seen as."></textarea>
+      </div>
+      <div class="pb-field">
+        <label class="pb-label en-only">What messaging resonates with them?</label>
+        <label class="pb-label zh-only" style="font-family:'Noto Serif SC',serif">什么样的信息传递能引起共鸣？</label>
+        <textarea class="pb-input" id="p-msg" rows="2" placeholder="e.g. 'Think Different' — appeals to their self-image as creative, forward-thinking."></textarea>
+      </div>
+      <div class="pb-nav">
+        <div class="pb-progress"><div class="pb-dot done"></div><div class="pb-dot done"></div><div class="pb-dot current"></div></div>
+        <div style="display:flex;gap:8px">
+          <button class="pb-btn secondary" onclick="pbPrev(3)">← <span class="en-only">Back</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">返回</span></button>
+          <button class="pb-btn" onclick="buildPersona()">
+            <span class="en-only">Build Persona ✓</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">生成画像 ✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-card" id="persona-card"></div>
+</div>
+
+<!-- ──────────── 7. BRAND GAME ──────────── -->
+<div class="section" id="s-brands">
+  <div class="sec-label">7 · Brands &amp; Limbic Types</div>
+  <div class="sec-title en-only">Brand Assignment — Quick Game</div>
+  <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌归类——快速练习</div>
+
+  <p class="sec-text en-only">Brands speak to specific Limbic Types. The same product category can position itself toward entirely different types — Porsche vs VW, Starbucks vs Pinduoduo. Try to assign the next 5 brands to their primary Limbic Type. Some are at the border between two types — that's fine, it's part of the model.</p>
+  <p class="sec-text-zh zh-only">品牌面向特定的Limbic类型。同一产品类别可以完全不同地定位——保时捷对比大众，星巴克对比拼多多。试着将接下来5个品牌归入其主要Limbic类型。有些品牌处于两种类型的边界——这很正常，这正是模型的一部分。</p>
+
+  <div class="game-wrap" id="game-wrap">
+    <div class="game-score-row">
+      <span class="game-score-label en-only">Score</span>
+      <span class="game-score-label zh-only" style="font-family:'Noto Serif SC',serif">得分</span>
+      <span class="game-score-val" id="g-score">0</span>
+      <span class="game-score-label" id="g-round-info">1 / 5</span>
+    </div>
+    <div class="game-inner">
+      <div id="g-round-view">
+        <div class="game-brand" id="g-brand">
+          <span class="game-brand-emoji" id="g-emoji">⚡</span>
+          <div class="game-brand-name" id="g-name">Tesla</div>
+          <div class="game-brand-sector" id="g-sector">Automotive</div>
+        </div>
+        <div class="game-instruction en-only">Tap the Limbic Type that fits best</div>
+        <div class="game-instruction zh-only" style="font-family:'Noto Serif SC',serif">点击最匹配的Limbic类型</div>
+        <div class="game-zones" id="g-zones"></div>
+        <div class="game-fb" id="g-fb">
+          <div id="g-fb-text"></div>
+          <button class="game-next" id="g-next" onclick="gameNext()" style="display:none">
+            <span class="en-only">Next →</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">下一个 →</span>
+          </button>
+        </div>
+      </div>
+      <div class="game-over" id="g-over">
+        <div class="go-title en-only">Well done!</div>
+        <div class="go-title zh-only" style="font-family:'Noto Serif SC',serif">完成！</div>
+        <div class="go-score" id="go-score-text"></div>
+        <button class="go-restart" onclick="gameInit()">
+          <span class="en-only">Play again</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">再玩一次</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────── 8. ASSIGNMENT ──────────── -->
+<div class="section" id="s-assignment">
+  <div class="sec-label">8 · Assignment 4</div>
+  <div class="assignment">
+    <div class="asgn-header">
+      <div class="asgn-badge">Assignment 4</div>
+      <div class="asgn-title en-only">Consumer Personas for Your Brand</div>
+      <div class="asgn-title zh-only" style="font-family:'Noto Serif SC',serif">为你的品牌创建消费者画像</div>
+    </div>
+    <p class="asgn-body en-only">Create <strong>two consumer personas</strong> for your brand. Each persona should reference both a <strong>Limbic Type</strong> (individual emotional character) and a <strong>Sinus Milieu</strong> (social positioning). Include a visual representation — either AI-generated or sourced image — and explain the brand relationship.</p>
+    <p class="asgn-body-zh zh-only">为你的品牌创建<strong>两个消费者画像</strong>。每个画像应同时参考<strong>Limbic类型</strong>（个体情感特征）和<strong>Sinus阶层</strong>（社会定位）。包含一个可视化呈现——AI生成或引用图片——并解释品牌关系。</p>
+
+    <div class="asgn-row">
+      <div class="asgn-field">
+        <label class="asgn-label en-only">Your Brand</label>
+        <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">你的品牌</label>
+        <input class="asgn-input" id="a-brand" placeholder="e.g. Huawei, Nike, HEYTEA…" style="min-height:40px;resize:none" />
+      </div>
+      <div class="asgn-field">
+        <label class="asgn-label en-only">Lecture Reference</label>
+        <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">参考文献</label>
+        <input class="asgn-input" id="a-ref" value="SINUS GmbH, 2017, Sinus-Milieus® 2017/18, Heidelberg" style="min-height:40px;resize:none" />
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border2);padding-top:16px;margin-top:4px">
+      <div style="font-size:12px;color:var(--ink3);margin-bottom:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase">
+        <span class="en-only">Persona 1</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">画像一</span>
+      </div>
+      <div class="asgn-row">
+        <div class="asgn-field">
+          <label class="asgn-label en-only">Name, Age, City</label>
+          <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">姓名、年龄、城市</label>
+          <input class="asgn-input" id="a-p1-name" style="min-height:40px;resize:none" placeholder="e.g. Chen Wei, 26, Hangzhou" />
+        </div>
+        <div class="asgn-field">
+          <label class="asgn-label en-only">Limbic Type + Sinus Milieu</label>
+          <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">Limbic类型 + Sinus阶层</label>
+          <input class="asgn-input" id="a-p1-type" style="min-height:40px;resize:none" placeholder="e.g. Performer + Cosmopolitan Avantgarde" />
+        </div>
+      </div>
+      <div class="asgn-field">
+        <label class="asgn-label en-only">Description &amp; Brand Relationship</label>
+        <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">描述与品牌关系</label>
+        <textarea class="asgn-input" id="a-p1-desc" rows="4" placeholder="Describe values, lifestyle, and why this persona uses your brand. What motivates the purchase? What message resonates?"></textarea>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border2);padding-top:16px;margin-top:4px">
+      <div style="font-size:12px;color:var(--ink3);margin-bottom:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase">
+        <span class="en-only">Persona 2</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">画像二</span>
+      </div>
+      <div class="asgn-row">
+        <div class="asgn-field">
+          <label class="asgn-label en-only">Name, Age, City</label>
+          <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">姓名、年龄、城市</label>
+          <input class="asgn-input" id="a-p2-name" style="min-height:40px;resize:none" placeholder="e.g. Liu Hong, 44, Chengdu" />
+        </div>
+        <div class="asgn-field">
+          <label class="asgn-label en-only">Limbic Type + Sinus Milieu</label>
+          <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">Limbic类型 + Sinus阶层</label>
+          <input class="asgn-input" id="a-p2-type" style="min-height:40px;resize:none" placeholder="e.g. Harmoniser + Modern Mainstream" />
+        </div>
+      </div>
+      <div class="asgn-field">
+        <label class="asgn-label en-only">Description &amp; Brand Relationship</label>
+        <label class="asgn-label zh-only" style="font-family:'Noto Serif SC',serif">描述与品牌关系</label>
+        <textarea class="asgn-input" id="a-p2-desc" rows="4" placeholder="Describe values, lifestyle, and why this persona uses your brand."></textarea>
+      </div>
+    </div>
+
+    <button class="asgn-save" onclick="saveAssignment()">
+      <span class="en-only">Save my notes ↓</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">保存笔记 ↓</span>
+    </button>
+    <div class="asgn-saved" id="asgn-saved">
+      <span class="en-only">✓ Saved to this session. Copy your text before closing.</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">✓ 已保存至本次会话。关闭前请复制文本。</span>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <div class="reading-box">
+    <div class="rb-icon">📚</div>
+    <div class="rb-text">
+      <div class="rb-title en-only">Further Reading — Lecture #4</div>
+      <div class="rb-title zh-only" style="font-family:'Noto Serif SC',serif">延伸阅读——第四讲</div>
+      <span class="en-only">Burmann, C., Riley, N.-M., Halaszovich, T.F., Schade, M., 2017. Identity-based brand management. Springer Gabler, Wiesbaden, pp. 122–140</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">Burmann等，2017，《基于身份的品牌管理》，Springer Gabler，威斯巴登，第122-140页</span>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* ══════════════════════════════════════
+   DATA
+══════════════════════════════════════ */
+const LTYPES = [
+  {id:'performer',  en:'Performer',      zh:'表演者',      color:'#D45025', lc:'#F2D4C5', startDeg:-90,
+   descEn:'Career-oriented, brand-driven, seeks status through exclusive products. High quality expected; price secondary. Classic business person.',
+   descZh:'职业导向，品牌驱动，通过独家产品寻求地位。对高品质有高要求；价格其次。典型的商务人士。',
+   mktEn:'Branded products that symbolise status. Exclusive restaurants, shops. Classic, functional, premium.',
+   mktZh:'象征地位的品牌产品。高档餐厅与精品店。经典、功能性、高端。'},
+  {id:'adventurer', en:'Adventurer',     zh:'冒险家',      color:'#B83518', lc:'#F0C8B8', startDeg:-90+360/7,
+   descEn:'Individualistic, athletic, non-conformist. High risk-taking, low impulse control. Quality secondary — must push boundaries.',
+   descZh:'个人主义，热爱运动，不循规蹈矩。高风险偏好，低冲动控制。品质其次——必须突破边界。',
+   mktEn:'Must break conventions. Sporty, edgy style. No store loyalty. Loves discount campaigns.',
+   mktZh:'必须打破常规。运动感、前卫风格。无品牌忠诚度。喜爱促销活动。'},
+  {id:'hedonist',   en:'Hedonist',       zh:'享乐主义者',  color:'#A86E0E', lc:'#F5E0B2', startDeg:-90+360/7*2,
+   descEn:'Early adopter, spontaneous, body-oriented, individualistic. Very emotional. Quality less important — it\'s about now.',
+   descZh:'早期采纳者，自发性强，注重身体感受，个人主义。极具情感性。品质不那么重要——关键是当下。',
+   mktEn:'Latest trends, impulse buying, low store loyalty. Body as experience zone. Entertainment over everything.',
+   mktZh:'追求最新潮流，冲动购买，低品牌忠诚度。身体是体验领域。娱乐至上。'},
+  {id:'open',       en:'Open-minded',    zh:'开放者',      color:'#1A7848', lc:'#BEDEDC', startDeg:-90+360/7*3,
+   descEn:'Enjoys high quality, not very faithful to brands, goes for new product trends. Openness, well-being, tolerance, gentle enjoyment.',
+   descZh:'享受高品质，品牌忠诚度不高，追求产品新趋势。开放性、健康感、包容性、温和享乐。',
+   mktEn:'High enjoyment value, quality matters, low store loyalty. Branded goods following current fashion.',
+   mktZh:'高享受价值，品质重要，低门店忠诚度。跟随当前时尚的品牌产品。'},
+  {id:'harmoniser', en:'Harmoniser',     zh:'和谐者',      color:'#1860A8', lc:'#C0D8F5', startDeg:-90+360/7*4,
+   descEn:'Security-focused, highly socially oriented, faithful to brands/shops, needs long consulting, oriented towards nature.',
+   descZh:'安全感导向，高度社会化，对品牌/门店忠诚，需要较长的咨询时间，亲近自然。',
+   mktEn:'Home & garden products, regional goods. High store loyalty. Advice crucial. Natural materials.',
+   mktZh:'家居园艺产品，地区性商品。高门店忠诚度。咨询至关重要。天然材料。'},
+  {id:'traditionalist',en:'Traditionalist',zh:'传统主义者', color:'#474498', lc:'#CCCCE8', startDeg:-90+360/7*5,
+   descEn:'Backwards-looking, values security and quality, needs consultation, not flexible or experimental.',
+   descZh:'回望过去，重视安全感和品质，需要咨询，不灵活也不喜欢实验。',
+   mktEn:'Security and trust products. Rigid shopping habits, detailed advice needed. Natural materials, end-of-season deals.',
+   mktZh:'安全与信任产品。购物习惯固定，需要详细建议。天然材料，季末优惠。'},
+  {id:'disciplined', en:'Disciplined',   zh:'自律者',      color:'#377037', lc:'#C2DEC2', startDeg:-90+360/7*6,
+   descEn:'Trust-based, not very consumer-oriented, high quality, price-conscious, functional. Loves a good sale.',
+   descZh:'以信任为基础，消费导向不强，注重高品质，价格敏感，功能性为先。喜欢打折促销。',
+   mktEn:'Quality very important (test results). Functional. Familiar shops only. High price awareness.',
+   mktZh:'品质极为重要（测评结果）。功能性。只在熟悉的店购买。高价格意识。'},
+];
+
+const SINUS_M = [
+  {id:'est', en:'Conservative-Elevated', zh:'保守精英', pct:'11%', cx:175, cy:75, rx:80, ry:55, color:'#1A4A8A', lc:'#C4D4EE',
+   descEn:'Classic conservative establishment. Strong duty ethics, exclusivity and status. Values order and balance.',
+   descZh:'典型的保守精英群体。强烈的责任伦理，排他性与地位追求。重视秩序与平衡。'},
+  {id:'li',  en:'Liberal Intellectuals',  zh:'自由知识分子', pct:'7%',  cx:330, cy:68, rx:75, ry:50, color:'#5A1A8A', lc:'#DCCAEE',
+   descEn:'Intellectual elite with post-material roots. Sustainability, self-determination, diversity. Critical worldview.',
+   descZh:'具有后物质主义根基的知识精英。可持续发展、自我决定、多元化。批判性世界观。'},
+  {id:'perf',en:'Performers',             zh:'绩效精英',  pct:'8%',  cx:480, cy:72, rx:72, ry:50, color:'#1A5A8A', lc:'#BCD0E8',
+   descEn:'Efficiency-oriented performance elite. Global economic thinking. Style and consumption pioneers. High tech affinity.',
+   descZh:'效率导向的绩效精英。全球经济思维。风格与消费先驱。高度科技亲和力。'},
+  {id:'exp', en:'Expeditives',            zh:'探险先锋',  pct:'8%',  cx:550, cy:100, rx:70, ry:48, color:'#1A7A4A', lc:'#BCDECE',
+   descEn:'Ambitious creative bohème. Urban, hip, digital, cosmopolitan. Seeks unconventional experiences. Self-image as postmodern elite.',
+   descZh:'雄心勃勃的创意波西米亚人。都市化、时髦、数字化、国际视野。追求非传统体验。自视为后现代精英。'},
+  {id:'neo', en:'Neo-Ecologists',         zh:'新生态主义者',pct:'7%', cx:440, cy:118, rx:68, ry:46, color:'#2A7A2A', lc:'#C4E4C4',
+   descEn:'Progressive realists and drivers of global transformation. Optimistic; open to new value syntheses. Eco-conscious lifestyle.',
+   descZh:'进步的现实主义者，全球变革的推动者。乐观；开放新价值综合。生态意识生活方式。'},
+  {id:'apm', en:'Adaptive-Pragmatics',    zh:'适应性务实者',pct:'13%',cx:360, cy:218, rx:90, ry:60, color:'#8A5A1A', lc:'#EED8B4',
+   descEn:'The modern mainstream. Adaptable and performance-ready; pragmatic but seeks fun. Strong need for belonging and security.',
+   descZh:'现代主流阶层。适应性强，有上进心；务实但追求乐趣。对归属感和安全感有强烈需求。'},
+  {id:'kh',  en:'Consumption-Hedonists', zh:'消费享乐主义者',pct:'15%',cx:490, cy:300, rx:78, ry:54, color:'#8A3A1A', lc:'#EEC8B4',
+   descEn:'Fun-focused lower middle class. Lives in the here and now. Strong need for recognition. Irritated by sustainability demands.',
+   descZh:'以娱乐为导向的中下阶层。活在当下。对认可有强烈需求。对可持续发展的要求感到厌烦。'},
+  {id:'pre', en:'Precarious',             zh:'社会边缘阶层',pct:'9%', cx:295, cy:385, rx:76, ry:50, color:'#5A4A8A', lc:'#D4CCEE',
+   descEn:'Lower class striving for participation. Accumulation of disadvantages; feeling left behind. Resilient self-image.',
+   descZh:'努力寻求参与的底层群体。不利条件积累；有被抛弃感。坚韧的自我形象。'},
+  {id:'nb',  en:'Nostalgic-Bourgeois',    zh:'怀旧市民阶层',pct:'11%',cx:178, cy:242, rx:82, ry:56, color:'#6A3A8A', lc:'#DCCAEE',
+   descEn:'Harmony-oriented lower-middle class. Desires secure conditions. Growing fear of downward mobility. Yearning for the past.',
+   descZh:'以和谐为导向的中下阶层。渴望稳定的生活条件。对阶层下滑的担忧日增。对过去的向往。'},
+  {id:'trad',en:'Traditionals',           zh:'传统主义者', pct:'9%', cx:130, cy:358, rx:72, ry:48, color:'#4A2A8A', lc:'#CCCAEE',
+   descEn:'Security- and order-oriented older generation. Rooted in post-war values. Modest and frugal. Resistant to rapid change.',
+   descZh:'以安全感和秩序为导向的老一代群体。植根于战后价值观。朴素节俭。抵制快速变化。'},
+];
+
+/* ══════════════════════════════════════
+   WHEEL
+══════════════════════════════════════ */
+const CX=260,CY=260,ROUT=228,RIN=60,SW=360/7;
+const NS='http://www.w3.org/2000/svg';
+
+function polar(r,deg){const a=deg*Math.PI/180;return[CX+r*Math.cos(a),CY+r*Math.sin(a)]}
+function arcPath(r1,r2,s,sw){
+  const[x1o,y1o]=polar(r2,s),[x2o,y2o]=polar(r2,s+sw);
+  const[x1i,y1i]=polar(r1,s+sw),[x2i,y2i]=polar(r1,s);
+  const lf=sw>180?1:0;
+  return`M${x1o},${y1o}A${r2},${r2},0,${lf},1,${x2o},${y2o}L${x1i},${y1i}A${r1},${r1},0,${lf},0,${x2i},${y2i}Z`
+}
+function dk(hex,f){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`}
+
+let activeType=null;
+const segsG=document.getElementById('wsegs');
+const lblsG=document.getElementById('wlbls');
+
+LTYPES.forEach(t=>{
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d',arcPath(RIN,ROUT,t.startDeg,SW));
+  p.setAttribute('fill',t.lc);
+  p.setAttribute('stroke','#F5F2EB');
+  p.setAttribute('stroke-width','1.5');
+  p.style.cursor='pointer';
+  p.style.transition='opacity .2s,fill .15s';
+  p.dataset.id=t.id;
+  p.addEventListener('click',()=>showType(t.id));
+  segsG.appendChild(p);
+
+  const mid=t.startDeg+SW/2;
+  const lr=(RIN+ROUT)/2;
+  const[lx,ly]=polar(lr,mid);
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('pointer-events','none');
+
+  const ten=document.createElementNS(NS,'text');
+  ten.setAttribute('x',lx);ten.setAttribute('y',ly-4);
+  ten.setAttribute('text-anchor','middle');ten.setAttribute('dominant-baseline','central');
+  ten.setAttribute('font-size','11.5');ten.setAttribute('font-weight','600');
+  ten.setAttribute('font-family',"'Cormorant Garamond',serif");
+  ten.setAttribute('fill',dk(t.color,.68));ten.setAttribute('class','en-only');
+  ten.textContent=t.en; g.appendChild(ten);
+
+  const tzh=document.createElementNS(NS,'text');
+  tzh.setAttribute('x',lx);tzh.setAttribute('y',ly-4);
+  tzh.setAttribute('text-anchor','middle');tzh.setAttribute('dominant-baseline','central');
+  tzh.setAttribute('font-size','12');tzh.setAttribute('font-weight','600');
+  tzh.setAttribute('font-family',"'Noto Serif SC',serif");
+  tzh.setAttribute('fill',dk(t.color,.68));tzh.setAttribute('class','zh-only');
+  tzh.textContent=t.zh; g.appendChild(tzh);
+
+  const ts=document.createElementNS(NS,'text');
+  ts.setAttribute('x',lx);ts.setAttribute('y',ly+10);
+  ts.setAttribute('text-anchor','middle');ts.setAttribute('dominant-baseline','central');
+  ts.setAttribute('font-size','9');ts.setAttribute('font-family',"'DM Sans',sans-serif");
+  ts.setAttribute('fill',dk(t.color,.5)); ts.textContent=''; g.appendChild(ts);
+  lblsG.appendChild(g);
+});
+
+function showType(id){
+  if(activeType===id){clearType();return;}
+  activeType=id;
+  const t=LTYPES.find(x=>x.id===id);
+  document.querySelectorAll('#wsegs path').forEach(p=>{
+    const tt=LTYPES.find(x=>x.id===p.dataset.id);
+    p.setAttribute('fill',p.dataset.id===id?t.color:tt.lc);
+    p.style.opacity=p.dataset.id===id?'1':'.3';
+  });
+  document.getElementById('td-dot').style.background=t.color;
+  document.getElementById('td-name-en').textContent=t.en;
+  document.getElementById('td-name-zh').textContent=t.zh;
+  document.getElementById('td-desc-en').textContent=t.descEn;
+  document.getElementById('td-desc-zh').textContent=t.descZh;
+  document.getElementById('td-mkt-en').textContent=' '+t.mktEn;
+  document.getElementById('td-mkt-zh').textContent=t.mktZh;
+  const det=document.getElementById('type-detail');
+  det.classList.add('show');
+}
+function clearType(){
+  activeType=null;
+  document.querySelectorAll('#wsegs path').forEach(p=>{
+    p.setAttribute('fill',LTYPES.find(x=>x.id===p.dataset.id).lc);
+    p.style.opacity='1';
+  });
+  document.getElementById('type-detail').classList.remove('show');
+}
+document.getElementById('lwheel').addEventListener('click',e=>{
+  if(!e.target.closest('path[data-id]')) clearType();
+});
+
+/* ══════════════════════════════════════
+   SINUS MINI MAP
+══════════════════════════════════════ */
+const sbG=document.getElementById('sbubbles');
+let activeMilieu=null;
+
+SINUS_M.forEach(m=>{
+  const g=document.createElementNS(NS,'g');
+  g.classList.add('milieu-bubble');
+  g.dataset.id=m.id;
+
+  const el=document.createElementNS(NS,'ellipse');
+  el.setAttribute('cx',m.cx);el.setAttribute('cy',m.cy);
+  el.setAttribute('rx',m.rx);el.setAttribute('ry',m.ry);
+  el.setAttribute('fill',m.lc);el.setAttribute('stroke',m.color);el.setAttribute('stroke-width','1.5');
+  el.style.transition='opacity .2s';
+  g.appendChild(el);
+
+  const te=document.createElementNS(NS,'text');
+  te.setAttribute('x',m.cx);te.setAttribute('y',m.cy-5);
+  te.setAttribute('text-anchor','middle');te.setAttribute('dominant-baseline','central');
+  te.setAttribute('font-size','10');te.setAttribute('font-weight','600');
+  te.setAttribute('font-family',"'DM Sans',sans-serif");
+  te.setAttribute('fill',dk(m.color,.65));te.setAttribute('pointer-events','none');
+  te.setAttribute('class','en-only');te.textContent=m.en.split(' ').slice(0,2).join(' ');
+  g.appendChild(te);
+
+  const tz=document.createElementNS(NS,'text');
+  tz.setAttribute('x',m.cx);tz.setAttribute('y',m.cy-5);
+  tz.setAttribute('text-anchor','middle');tz.setAttribute('dominant-baseline','central');
+  tz.setAttribute('font-size','10');tz.setAttribute('font-weight','600');
+  tz.setAttribute('font-family',"'Noto Serif SC',serif");
+  tz.setAttribute('fill',dk(m.color,.65));tz.setAttribute('pointer-events','none');
+  tz.setAttribute('class','zh-only');tz.textContent=m.zh;
+  g.appendChild(tz);
+
+  const tp=document.createElementNS(NS,'text');
+  tp.setAttribute('x',m.cx);tp.setAttribute('y',m.cy+10);
+  tp.setAttribute('text-anchor','middle');tp.setAttribute('dominant-baseline','central');
+  tp.setAttribute('font-size','9');tp.setAttribute('font-family',"'DM Sans',sans-serif");
+  tp.setAttribute('fill',dk(m.color,.5));tp.setAttribute('pointer-events','none');
+  tp.textContent=m.pct; g.appendChild(tp);
+
+  g.addEventListener('click',()=>showMilieu(m.id));
+  sbG.appendChild(g);
+});
+
+function showMilieu(id){
+  if(activeMilieu===id){clearMilieu();return;}
+  activeMilieu=id;
+  const m=SINUS_M.find(x=>x.id===id);
+  document.querySelectorAll('#sbubbles g').forEach(g=>{
+    g.querySelector('ellipse').style.opacity=g.dataset.id===id?'1':'.28';
+  });
+  document.getElementById('md-name-en').textContent=m.en+' — '+m.pct;
+  document.getElementById('md-name-zh').textContent=m.zh+' — '+m.pct;
+  document.getElementById('md-desc-en').textContent=m.descEn;
+  document.getElementById('md-desc-zh').textContent=m.descZh;
+  const det=document.getElementById('milieu-detail');
+  det.classList.add('show');
+}
+function clearMilieu(){
+  activeMilieu=null;
+  document.querySelectorAll('#sbubbles g').forEach(g=>g.querySelector('ellipse').style.opacity='1');
+  document.getElementById('milieu-detail').classList.remove('show');
+}
+document.querySelector('.sinus-mini svg').addEventListener('click',e=>{
+  if(!e.target.closest('g.milieu-bubble')) clearMilieu();
+});
+
+/* ══════════════════════════════════════
+   BIG FIVE QUIZ
+══════════════════════════════════════ */
+const QS = [
+  {en:'I enjoy trying new and different things.',zh:'我喜欢尝试新鲜和不同的事物。',dim:'O',pos:true},
+  {en:'I always come prepared and keep things organised.',zh:'我做事总是有备而来，保持条理。',dim:'C',pos:true},
+  {en:'I feel energised when I am around other people.',zh:'和他人在一起时，我感到精力充沛。',dim:'E',pos:true},
+  {en:'I find it easy to trust others and assume good intentions.',zh:'我很容易信任他人，并假设他们有好意。',dim:'A',pos:true},
+  {en:'I often feel anxious or stressed, even without a clear reason.',zh:'我经常感到焦虑或有压力，即使没有明确原因。',dim:'N',pos:true},
+  {en:'I am fascinated by art, culture and abstract ideas.',zh:'我对艺术、文化和抽象观念感到着迷。',dim:'O',pos:true},
+  {en:'I sometimes leave tasks unfinished or lose focus easily.',zh:'我有时会留下未完成的任务或容易失去专注。',dim:'C',pos:false},
+  {en:'I tend to be quiet in social gatherings.',zh:'在社交聚会中，我往往比较安静。',dim:'E',pos:false},
+  {en:'I can be critical or harsh toward others.',zh:'我有时对他人过于苛刻或批评。',dim:'A',pos:false},
+  {en:'I am generally calm and rarely feel upset or irritated.',zh:'我通常很冷静，很少感到沮丧或烦躁。',dim:'N',pos:false},
+];
+let qIdx=0, qAnswers=new Array(QS.length).fill(null);
+
+function renderQ(){
+  const q=QS[qIdx];
+  document.getElementById('quiz-q-en').textContent=`Q${qIdx+1}. ${q.en}`;
+  document.getElementById('quiz-q-zh').textContent=`Q${qIdx+1}. ${q.zh}`;
+  document.getElementById('qinfo').textContent=`${qIdx+1} / ${QS.length}`;
+  document.getElementById('qpfill').style.width=`${(qIdx/QS.length)*100}%`;
+  const btns=document.getElementById('quiz-btns');
+  btns.innerHTML='';
+  [1,2,3,4,5].forEach(v=>{
+    const b=document.createElement('button');
+    b.className='qbtn'+(qAnswers[qIdx]===v?' selected':'');
+    b.textContent=v;
+    b.onclick=()=>{qAnswers[qIdx]=v;renderQ();document.getElementById('qnext').disabled=false;};
+    btns.appendChild(b);
+  });
+  document.getElementById('qnext').disabled=qAnswers[qIdx]===null;
+  document.getElementById('ocean-result').classList.remove('show');
+}
+
+function nextQ(){
+  if(qIdx<QS.length-1){qIdx++;renderQ();}
+  else showOcean();
+}
+
+function showOcean(){
+  const dims={O:[],C:[],E:[],A:[],N:[]};
+  QS.forEach((q,i)=>{
+    if(qAnswers[i]===null) return;
+    const v=q.pos?qAnswers[i]:(6-qAnswers[i]);
+    dims[q.dim].push(v);
+  });
+  const scores={};
+  const colors={O:'#1A7848',C:'#2A5FA8',E:'#D45025',A:'#474498',N:'#8A3A1A'};
+  const labels={
+    O:['Openness','开放性'],C:['Conscientiousness','尽责性'],
+    E:['Extraversion','外向性'],A:['Agreeableness','宜人性'],N:['Neuroticism','神经质']
+  };
+  let html='<div style="margin-bottom:10px;font-size:13px;font-weight:500;color:var(--ink)" class="en-only">Your OCEAN Profile</div>';
+  html+='<div style="margin-bottom:10px;font-size:13px;font-weight:500;color:var(--ink);font-family:\'Noto Serif SC\',serif" class="zh-only">你的OCEAN人格档案</div>';
+  Object.entries(dims).forEach(([d,vals])=>{
+    const avg=vals.length?Math.round((vals.reduce((a,b)=>a+b,0)/vals.length)*20):50;
+    scores[d]=avg;
+    const lbl=labels[d];
+    html+=`<div class="ocean-bar">
+      <div class="ocean-dim"><span class="en-only">${lbl[0]}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${lbl[1]}</span></div>
+      <div class="ocean-track"><div class="ocean-fill" style="width:0%;background:${colors[d]}" data-target="${avg}"></div></div>
+      <div class="ocean-pct">${avg}%</div></div>`;
+  });
+  // Brief interpretation
+  const topD=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  const interpEn={O:'High openness suggests curiosity and creativity — resonating with Open-minded Limbic Type.',C:'High conscientiousness aligns with the Disciplined Limbic Type — efficiency and duty.',E:'High extraversion connects to Performer or Adventurer types — visible, energetic.',A:'High agreeableness points toward Harmoniser — community and trust.',N:'High neuroticism can co-exist with many types; awareness of this trait helps in communication.'};
+  const interpZh={O:'高开放性表明好奇心与创造力——与"开放者"Limbic类型产生共鸣。',C:'高尽责性与"自律者"Limbic类型相符——效率与责任。',E:'高外向性与"表演者"或"冒险家"类型相关——显眼、充满活力。',A:'高宜人性指向"和谐者"——社区与信任。',N:'高神经质可以与许多类型共存；认识这一特质有助于沟通。'};
+  html+=`<div class="ocean-note"><strong class="en-only">Your strongest trait:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">你的最强特质：</strong>
+    <span class="en-only"> ${interpEn[topD]}</span>
+    <div class="ocean-note-zh zh-only">${interpZh[topD]}</div></div>`;
+  const r=document.getElementById('ocean-result');
+  r.innerHTML=html; r.classList.add('show');
+  document.getElementById('qpfill').style.width='100%';
+  setTimeout(()=>document.querySelectorAll('.ocean-fill').forEach(b=>b.style.width=b.dataset.target+'%'),100);
+  document.getElementById('qnext').disabled=true;
+}
+
+renderQ();
+
+/* ══════════════════════════════════════
+   TWINS
+══════════════════════════════════════ */
+function revealTwins(){
+  document.getElementById('twins-insight').classList.add('show');
+  document.querySelector('.reveal-btn').style.display='none';
+}
+
+/* ══════════════════════════════════════
+   PERSONA BUILDER
+══════════════════════════════════════ */
+function pbNext(from){
+  document.getElementById(`step-${from}`).classList.remove('active');
+  document.getElementById(`step-${from+1}`).classList.add('active');
+}
+function pbPrev(from){
+  document.getElementById(`step-${from}`).classList.remove('active');
+  document.getElementById(`step-${from-1}`).classList.add('active');
+}
+function buildPersona(){
+  const name=document.getElementById('p-name').value||'Unnamed';
+  const age=document.getElementById('p-age').value||'—';
+  const job=document.getElementById('p-job').value||'—';
+  const brand=document.getElementById('p-brand').value||'—';
+  const limbic=document.getElementById('p-limbic').value||'—';
+  const sinus=document.getElementById('p-sinus').value||'—';
+  const values=document.getElementById('p-values').value||'—';
+  const why=document.getElementById('p-why').value||'—';
+  const msg=document.getElementById('p-msg').value||'—';
+  const initials=name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
+  const ltype=LTYPES.find(t=>limbic.toLowerCase().includes(t.id)||limbic.includes(t.en));
+  const dot=ltype?ltype.color:'#4A8A28';
+  document.getElementById('persona-card').innerHTML=`
+    <div class="pc-header">
+      <div class="pc-avatar" style="background:${dot}">${initials}</div>
+      <div>
+        <div class="pc-name">${name}</div>
+        <div class="pc-tagline">${age} · ${job} · ${brand}</div>
+      </div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-block">
+        <div class="pc-block-label">Limbic Type</div>
+        <div class="pc-block-val"><strong>${limbic}</strong></div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-block-label">Sinus Milieu</div>
+        <div class="pc-block-val"><strong>${sinus}</strong></div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-block-label">Core Values</div>
+        <div class="pc-block-val">${values}</div>
+      </div>
+      <div class="pc-block">
+        <div class="pc-block-label">Brand Relationship</div>
+        <div class="pc-block-val">${why}</div>
+      </div>
+      <div class="pc-block" style="grid-column:1/-1">
+        <div class="pc-block-label">Resonant Message</div>
+        <div class="pc-block-val">${msg}</div>
+      </div>
+    </div>`;
+  document.getElementById('persona-card').classList.add('show');
+}
+
+/* ══════════════════════════════════════
+   BRAND MINI GAME
+══════════════════════════════════════ */
+const GAME_BRANDS = [
+  {emoji:'⚡',name:'Tesla',sector:'Automotive',type:'open',also:['performer'],
+   fbEn:'Tesla = Open-minded. Values-driven, forward-thinking, sustainability over status (though Performer is close — Tesla is also a status signal in China).',
+   fbZh:'特斯拉=开放者。价值观驱动、前瞻性、可持续发展优先于地位（表演者也接近——特斯拉在中国也是地位信号）。'},
+  {emoji:'🍵',name:'Moutai 茅台',sector:'Spirits',type:'traditionalist',also:['performer'],
+   fbEn:'Moutai = Traditionalist. Ritual, hierarchy, Confucian order. Gifting it says: I respect you and the social order.',
+   fbZh:'茅台=传统主义者。仪式、等级、儒家秩序。赠送茅台意味着：我尊重你和社会秩序。'},
+  {emoji:'🧋',name:'HEYTEA 喜茶',sector:'F&B',type:'hedonist',also:['performer'],
+   fbEn:'HEYTEA = Hedonist. Sensory pleasure, trend-following, the joy of the "it" drink — with a status edge (Performer also valid).',
+   fbZh:'喜茶=享乐主义者。感官享乐、追随潮流、"当下热门饮品"的乐趣——兼具地位优势（表演者也合适）。'},
+  {emoji:'💬',name:'WeChat 微信',sector:'Social Media',type:'harmoniser',also:['disciplined'],
+   fbEn:'WeChat = Harmoniser. Connective tissue of Chinese social life — family, community, belonging. (Disciplined also fits for the efficiency angle.)',
+   fbZh:'微信=和谐者。中国社会生活的连接纽带——家庭、社区、归属感。（效率角度也适合自律者。）'},
+  {emoji:'🚀',name:'DJI 大疆',sector:'Technology',type:'adventurer',also:['open'],
+   fbEn:'DJI = Adventurer. Aerial freedom, exploration, pushing visual limits. The brand of creators who go beyond.',
+   fbZh:'大疆=冒险家。空中自由、探索、突破视觉极限。超越者的品牌。'},
+];
+
+let gIdx=0, gScore=0, gWaiting=false, gQueue=[];
+
+function gameInit(){
+  gQueue=[...GAME_BRANDS].sort(()=>Math.random()-.5).slice(0,5);
+  gIdx=0; gScore=0; gWaiting=false;
+  document.getElementById('g-score').textContent='0';
+  document.getElementById('g-over').classList.remove('show');
+  document.getElementById('g-round-view').style.display='';
+  gameRender();
+}
+
+function gameRender(){
+  const b=gQueue[gIdx];
+  document.getElementById('g-emoji').textContent=b.emoji;
+  document.getElementById('g-name').textContent=b.name;
+  document.getElementById('g-sector').textContent=b.sector;
+  document.getElementById('g-round-info').textContent=`${gIdx+1} / 5`;
+  document.getElementById('g-fb').classList.remove('show');
+  document.getElementById('g-next').style.display='none';
+  gWaiting=false;
+  const zonesEl=document.getElementById('g-zones');
+  zonesEl.innerHTML='';
+  LTYPES.forEach(t=>{
+    const z=document.createElement('div');
+    z.className='gz'; z.dataset.tid=t.id;
+    z.style.setProperty('--zc',t.color);
+    z.innerHTML=`<div class="gz-name en-only">${t.en}</div><div class="gz-name zh-only" style="font-family:'Noto Serif SC',serif">${t.zh}</div><div class="gz-hint">${t.color==='#D45025'?'Status':''}${t.id==='adventurer'?'Risk':''}${t.id==='hedonist'?'Pleasure':''}${t.id==='open'?'Curiosity':''}${t.id==='harmoniser'?'Family':''}${t.id==='traditionalist'?'Order':''}${t.id==='disciplined'?'Efficiency':''}</div>`;
+    z.onclick=()=>gameAttempt(t.id,z,b);
+    zonesEl.appendChild(z);
+  });
+}
+
+function gameAttempt(tid,zEl,b){
+  if(gWaiting) return;
+  gWaiting=true;
+  const correct=tid===b.type, close=!correct&&(b.also||[]).includes(tid);
+  const pts=correct?10:close?5:0;
+  gScore+=pts;
+  document.getElementById('g-score').textContent=gScore;
+  zEl.classList.add(correct?'flash-ok':close?'flash-cl':'flash-ng');
+  if(!correct) document.querySelector(`#g-zones .gz[data-tid="${b.type}"]`)?.classList.add('flash-ok');
+  const isZh=document.body.classList.contains('zh');
+  const icon=correct?'✅':close?'🟡':'💡';
+  const pts_str=correct?'+10':close?'+5 ':'±0';
+  const fb=document.getElementById('g-fb');
+  fb.innerHTML=`<strong style="color:#F5F2EB">${icon} ${pts_str}</strong><br>${isZh?(b.fbZh||b.fbEn):b.fbEn}
+    <button class="game-next" id="g-next" onclick="gameNext()" style="display:block;margin-top:8px">
+      <span class="en-only">${gIdx<4?'Next →':'See results →'}</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">${gIdx<4?'下一个 →':'查看结果 →'}</span>
+    </button>`;
+  fb.classList.add('show');
+}
+
+function gameNext(){
+  gIdx++;
+  if(gIdx>=5){
+    document.getElementById('g-round-view').style.display='none';
+    document.getElementById('g-over').classList.add('show');
+    const pct=Math.round((gScore/50)*100);
+    const isZh=document.body.classList.contains('zh');
+    document.getElementById('go-score-text').textContent=isZh?`${gScore} / 50分 · ${pct}%`:`${gScore} / 50 pts · ${pct}%`;
+  } else {
+    gameRender();
+  }
+}
+
+gameInit();
+
+/* ══════════════════════════════════════
+   ASSIGNMENT SAVE
+══════════════════════════════════════ */
+function saveAssignment(){
+  document.getElementById('asgn-saved').classList.add('show');
+  setTimeout(()=>document.getElementById('asgn-saved').classList.remove('show'),3000);
+}
+
+/* ══════════════════════════════════════
+   LANG
+══════════════════════════════════════ */
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

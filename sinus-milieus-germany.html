@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinus-Milieus Germany · DE vs CN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0EDE6; --bg2:#E6E2D9; --bg3:#D8D4CA; --card:#FDFAF4;
+  --ink:#1A1816; --ink2:#46423C; --ink3:#7A756C;
+  --border:rgba(26,24,22,.10); --border2:rgba(26,24,22,.06);
+  --r:12px;
+  --de:#2A5FA8; --cn:#C84020;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+header{background:var(--ink);color:#F0EDE6;padding:26px 40px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ht{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hs{font-size:11px;color:rgba(240,237,230,.42);letter-spacing:.09em;text-transform:uppercase;margin-top:3px}
+.hz{font-family:'Noto Serif SC',serif;font-size:13px;color:rgba(240,237,230,.58);margin-top:2px}
+.lr{display:flex;gap:6px}
+.lb{background:none;border:1px solid rgba(240,237,230,.22);color:rgba(240,237,230,.58);
+    padding:5px 16px;border-radius:30px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .18s}
+.lb.on{background:#2A5FA8;border-color:#2A5FA8;color:#fff}
+.lb:hover:not(.on){background:rgba(240,237,230,.08);color:#fff}
+
+.intro{max-width:980px;margin:28px auto 0;padding:0 22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.intro{grid-template-columns:1fr}}
+.ib{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:15px 18px}
+.ib .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.ib p{font-size:13px;color:var(--ink2);line-height:1.72}
+.ib .zp{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.85;margin-top:5px}
+
+/* milieu group badges */
+.group-legend{max-width:980px;margin:20px auto 0;padding:0 22px;display:flex;flex-wrap:wrap;gap:8px}
+.gl-badge{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--ink2);cursor:pointer;transition:all .18s}
+.gl-badge:hover{border-color:var(--ink3)}
+.gl-badge.on{color:#fff;border-color:transparent}
+
+.main{max-width:980px;margin:18px auto 0;padding:0 22px;
+      display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
+@media(max-width:720px){.main{grid-template-columns:1fr}}
+.map-wrap{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.map-wrap svg{display:block;width:100%;height:auto}
+
+.dp{position:sticky;top:18px}
+.dc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:border-color .25s}
+.de-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+          height:240px;color:var(--ink3);gap:8px;text-align:center}
+.de-empty .arr-hint{font-size:24px;opacity:.22}
+.dch{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.dcdot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+.dcn-de{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--ink);line-height:1.1}
+.dcn-en{font-size:12px;color:var(--ink3);font-style:italic;margin-top:1px}
+.dcn-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2);margin-top:2px}
+.dcsh{margin-left:auto;font-size:12px;font-weight:500;color:var(--ink2);background:var(--bg2);padding:3px 10px;border-radius:20px}
+.dcgrp{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--border2)}
+.dcd{font-size:12.5px;color:var(--ink2);line-height:1.72;margin-bottom:8px}
+.dcdzh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.85;
+       margin-bottom:11px;padding-left:10px;border-left:2px solid var(--bg3)}
+.traits{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.tr{font-size:11px;padding:3px 9px;border-radius:20px}
+.ms{border-top:1px solid var(--border2);padding-top:10px}
+.ml{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.md{font-size:12px;color:var(--ink2);line-height:1.65}
+.mdzh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.8;margin-top:4px}
+
+/* comparison section */
+.cmp-section{max-width:980px;margin:36px auto 0;padding:0 22px}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);font-weight:700;margin-bottom:4px}
+.ss{font-size:12.5px;color:var(--ink3);margin-bottom:18px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:36px}
+@media(max-width:580px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-col{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:18px}
+.cmp-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.cmp-flag{width:22px;height:14px;border-radius:2px;flex-shrink:0}
+.cmp-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700}
+.cmp-sub{font-size:11px;color:var(--ink3)}
+.cmp-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.cmp-lbl{font-size:11.5px;color:var(--ink2);width:120px;flex-shrink:0;line-height:1.3}
+.cmp-lbl .lz{font-family:'Noto Serif SC',serif;font-size:10px;color:var(--ink3);display:block}
+.cmp-track{flex:1;height:7px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.cmp-fill{height:100%;border-radius:4px;transition:width .65s cubic-bezier(.4,0,.2,1)}
+.cmp-pct{font-size:11px;color:var(--ink3);width:28px;text-align:right;flex-shrink:0}
+
+/* DE cards grid */
+.cards-section{max-width:980px;margin:0 auto 44px;padding:0 22px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.mcard{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+       padding:14px 16px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.mcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc);opacity:.8}
+.mcard:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(0,0,0,.07);border-color:var(--tc)}
+.mcard-h{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.mc-dot{width:9px;height:9px;border-radius:50%;background:var(--tc);flex-shrink:0}
+.mc-de{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700}
+.mc-pct{margin-left:auto;font-size:11px;color:var(--ink3)}
+.mc-en{font-size:11px;color:var(--ink3);font-style:italic;margin-bottom:4px}
+.mc-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-bottom:4px}
+.mc-desc{font-size:11.5px;color:var(--ink2);line-height:1.62}
+.mc-desc-zh{font-family:'Noto Serif SC',serif;font-size:10.5px;color:var(--ink3);line-height:1.8}
+
+.note{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;
+      font-size:11.5px;color:var(--ink3);line-height:1.65;margin-bottom:18px}
+.note strong{color:var(--ink2)}
+
+footer{background:var(--ink);color:rgba(240,237,230,.38);text-align:center;padding:22px 20px;font-size:11.5px;line-height:1.85}
+
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fi{animation:fi .25s ease both}
+
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<header>
+  <div>
+    <div class="ht">Sinus-Milieus · Germany</div>
+    <div class="hs">Social Environment Model · DE vs CN Comparison</div>
+    <div class="hz zh-only">德国社会阶层模型 · 德中对比</div>
+  </div>
+  <div class="lr">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<div class="intro">
+  <div class="ib">
+    <div class="lbl en-only">About Germany's Model</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">关于德国模型</div>
+    <p class="en-only">The German Sinus-Milieus® divide society into <strong>10 milieus</strong> using the same two axes as the international model: social status (vertical) and value orientation (horizontal: tradition → modernity/reorientation). The model is updated continuously and is the gold standard in German-speaking marketing research.</p>
+    <p class="zp zh-only">德国Sinus社会阶层®模型沿相同的两条轴将社会划分为<strong>10个阶层</strong>：社会地位（纵轴）与价值取向（横轴：传统→现代/重新定向）。该模型持续更新，是德语市场营销研究的权威标准。</p>
+  </div>
+  <div class="ib">
+    <div class="lbl en-only">DE vs CN — Key contrast</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">德中对比——核心差异</div>
+    <p class="en-only">Germany has a highly differentiated <strong>post-material and ecological</strong> segment (Postmaterielle + Neo-Ökologische = 20%) absent in China's emerging-market model. China's model features a larger <strong>traditional and working-class</strong> base. The comparison below makes this visible.</p>
+    <p class="zp zh-only">德国拥有高度分化的<strong>后物质主义与生态导向</strong>阶层（后物质主义者+新生态阶层=20%），这在中国新兴市场模型中几乎没有对应。中国模型的<strong>传统阶层与工人阶层</strong>基础更为庞大。以下对比直观呈现这一差异。</p>
+  </div>
+</div>
+
+<!-- GROUP FILTER LEGEND -->
+<div class="group-legend" id="grp-legend"></div>
+
+<!-- MAP + DETAIL -->
+<div class="main">
+  <div class="map-wrap">
+    <svg id="de-map" viewBox="0 0 640 500">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- bg -->
+      <rect x="62" y="18" width="548" height="432" fill="#E8E4DB" rx="6"/>
+      <!-- status bands -->
+      <rect x="62" y="18"  width="548" height="144" fill="rgba(42,95,168,.055)" rx="6"/>
+      <rect x="62" y="162" width="548" height="144" fill="rgba(120,110,80,.03)"/>
+      <rect x="62" y="306" width="548" height="144" fill="rgba(80,80,130,.045)"/>
+      <!-- column shading: tradition / modernisation / reorientation -->
+      <rect x="62"  y="18" width="166" height="432" fill="rgba(140,100,50,.03)"/>
+      <rect x="394" y="18" width="216" height="432" fill="rgba(42,95,168,.03)"/>
+      <!-- grid lines -->
+      <line x1="62"  y1="162" x2="610" y2="162" stroke="rgba(26,24,22,.07)" stroke-width="1"/>
+      <line x1="62"  y1="306" x2="610" y2="306" stroke="rgba(26,24,22,.07)" stroke-width="1"/>
+      <line x1="228" y1="18"  x2="228" y2="450" stroke="rgba(26,24,22,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="394" y1="18"  x2="394" y2="450" stroke="rgba(26,24,22,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <!-- axes -->
+      <line x1="62"  y1="462" x2="610" y2="462" stroke="var(--ink3)" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="50"  y1="452" x2="50"  y2="18"  stroke="var(--ink3)" stroke-width="1" marker-end="url(#arr)"/>
+      <!-- EN axis labels -->
+      <text class="en-only" font-size="9.5" font-family="'DM Sans',sans-serif" fill="#7A756C" x="335" y="478" text-anchor="middle">← Tradition · Value Orientation · Modernity / Reorientation →</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="30" y="235" text-anchor="middle" transform="rotate(-90,30,235)">Social Status ↑</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="144" y="34" text-anchor="middle">Tradition</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="311" y="34" text-anchor="middle">Modernisation</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="502" y="34" text-anchor="middle">Reorientation</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="100" y="88"  text-anchor="middle">Upper</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="100" y="234" text-anchor="middle">Middle</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="100" y="378" text-anchor="middle">Lower</text>
+      <!-- ZH axis labels -->
+      <text class="zh-only" font-size="9.5" font-family="'Noto Serif SC',serif" fill="#7A756C" x="335" y="478" text-anchor="middle">← 传统 · 价值取向 · 现代化 / 重新定向 →</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="30" y="235" text-anchor="middle" transform="rotate(-90,30,235)">社会地位 ↑</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="144" y="34" text-anchor="middle">传统</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="311" y="34" text-anchor="middle">现代化</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="502" y="34" text-anchor="middle">重新定向</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="100" y="88"  text-anchor="middle">上层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="100" y="234" text-anchor="middle">中层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="100" y="378" text-anchor="middle">下层</text>
+      <g id="bubbles"></g>
+    </svg>
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <div class="dp">
+    <div class="dc" id="dc">
+      <div class="de-empty" id="de-empty">
+        <div class="arr-hint">←</div>
+        <p class="en-only">Click a milieu on the map<br>to explore it in detail.</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif">点击地图上的阶层，<br>查看详细信息。</p>
+      </div>
+      <div id="dc-inner" style="display:none">
+        <div class="dch">
+          <div class="dcdot" id="dcdot"></div>
+          <div>
+            <div class="dcn-de" id="dcn-de"></div>
+            <div class="dcn-en en-only" id="dcn-en"></div>
+            <div class="dcn-zh zh-only" id="dcn-zh"></div>
+          </div>
+          <div class="dcsh" id="dcsh"></div>
+        </div>
+        <div class="dcgrp" id="dcgrp"></div>
+        <div class="dcd en-only" id="dcd-en"></div>
+        <div class="dcdzh zh-only" id="dcd-zh"></div>
+        <div class="traits" id="dc-traits"></div>
+        <div class="ms">
+          <div class="ml en-only">Marketing relevance</div>
+          <div class="ml zh-only" style="font-family:'Noto Serif SC',serif">营销启示</div>
+          <div class="md en-only" id="dcm-en"></div>
+          <div class="mdzh zh-only" id="dcm-zh"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DE vs CN COMPARISON -->
+<div class="cmp-section">
+  <h2 class="sh">
+    <span class="en-only">Germany vs China — Structural Comparison</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">德国与中国——结构性对比</span>
+  </h2>
+  <p class="ss en-only">How the milieu landscape differs between a mature post-industrial society and a rapidly developing emerging market.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">成熟后工业社会与快速发展的新兴市场之间的阶层格局差异。</p>
+  <div class="note">
+    <strong class="en-only">Methodological note:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">方法论说明：</strong>
+    <span class="en-only"> The German figures are official Sinus-Institut data (2024). The China national average figures are teaching estimates derived from Sinus emerging-market research. Direct comparison requires caution: the German model has 10 milieus; China uses the 9-milieu emerging-market framework. The groupings below are approximate structural equivalents for pedagogical purposes.</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif"> 德国数据为Sinus研究院官方数据（2024年）。中国全国平均数据为基于Sinus新兴市场研究的教学估算。直接比较需谨慎：德国模型有10个阶层，中国使用9个阶层的新兴市场框架。以下分组为教学目的的近似结构对应。</span>
+  </div>
+  <div class="cmp-grid" id="cmp-grid"></div>
+</div>
+
+<!-- CARD GRID -->
+<div class="cards-section">
+  <h2 class="sh" style="margin-bottom:4px">
+    <span class="en-only">All Ten Milieus</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">十大社会阶层</span>
+  </h2>
+  <p class="ss en-only">Click any card to highlight it on the map above.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">点击卡片，在上方地图中高亮显示该阶层。</p>
+  <div class="cards-grid" id="cards-grid"></div>
+</div>
+
+<footer>
+  <p>Sinus-Milieus® is a registered trademark of Sinus-Institut GmbH, Heidelberg/Berlin · Sinus-Milieus®是Sinus研究院有限公司的注册商标</p>
+  <p style="margin-top:3px">German data: Sinus-Institut 2024. China estimates: teaching purposes only. · 德国数据：Sinus研究院2024年。中国估算：仅供教学使用。</p>
+</footer>
+
+<script>
+/* ──────────────────────────────────────
+   MILIEU DATA (10 German Sinus-Milieus)
+   mx/my = centre of "potato" blob on 640×500 SVG
+   group: Leit / Zukunft / Mainstream / Traditionell
+────────────────────────────────────── */
+const GROUPS = [
+  {id:'leit',    deLabel:'Leitmilieus',      enLabel:'Leading Milieus',       zhLabel:'引领阶层',       color:'#1A3A6A'},
+  {id:'zukunft', deLabel:'Zukunftsmilieus',  enLabel:'Future Milieus',        zhLabel:'未来阶层',       color:'#1A6A3A'},
+  {id:'mitte',   deLabel:'Moderner Mainstream', enLabel:'Modern Mainstream',  zhLabel:'现代主流',       color:'#6A4A1A'},
+  {id:'trad',    deLabel:'Traditioneller Mainstream', enLabel:'Traditional Mainstream', zhLabel:'传统主流', color:'#4A1A6A'},
+];
+
+const M = [
+  /* ── LEITMILIEUS ── */
+  { id:'kg',  de:'Konservativ-Gehobene', en:'Conservative-Elevated',  zh:'保守精英阶层',
+    pct:11, color:'#1A4A8A', lc:'#C4D4EE', group:'leit',
+    mx:180, my:80, r:38,
+    descEn:'The classic conservative establishment. Strong sense of duty, ambition and social responsibility. Values order, exclusivity and high culture. Feels responsible for preserving traditions.',
+    descZh:'典型的保守精英群体。责任感强，有进取心和社会担当。重视秩序、排他性与高雅文化。认为自己有责任守护传统。',
+    traits:[{en:'Duty-conscious',zh:'责任感强'},{en:'Exclusive',zh:'追求排他'},{en:'Cultural',zh:'热爱文化'},{en:'Conservative',zh:'保守'}],
+    mktEn:'Premium quality, heritage brands, classical culture. Golf, opera, established newspapers.',
+    mktZh:'高端品质、历史品牌、古典文化。高尔夫、歌剧、权威报纸。' },
+
+  { id:'pm',  de:'Postmaterielle', en:'Post-Materialists', zh:'后物质主义者',
+    pct:12, color:'#5A1A8A', lc:'#DCCAEE', group:'leit',
+    mx:330, my:75, r:40,
+    descEn:'Engaged, sovereign intellectual elite. Values sustainability, self-determination and diversity. Critical of consumerism; sees itself as society\'s moral compass and advocates for post-growth ideals.',
+    descZh:'积极参与的主权知识精英。重视可持续发展、自我决定与多元化。批判消费主义，视自己为社会道德指南针，倡导后增长理念。',
+    traits:[{en:'Sustainability',zh:'可持续发展'},{en:'Self-determination',zh:'自我决定'},{en:'Diversity',zh:'多元化'},{en:'Post-growth',zh:'后增长'}],
+    mktEn:'Fair trade, organic, ethical brands, cultural events. Educated urban professionals.',
+    mktZh:'公平贸易、有机产品、道德品牌、文化活动。受教育程度高的城市专业人士。' },
+
+  { id:'perf', de:'Performer', en:'Performers', zh:'绩效精英',
+    pct:10, color:'#1A5A8A', lc:'#BCD0E8', group:'leit',
+    mx:490, my:82, r:36,
+    descEn:'Efficiency-oriented performance elite with global economic thinking. High tech and digital affinity, sees itself as a style and consumption pioneer. Networker, career-focused, open to innovation.',
+    descZh:'效率导向的绩效精英，具有全球经济思维。对科技和数字化有高度亲和力，自视为风格与消费先驱。善于社交、以职业为重、开放创新。',
+    traits:[{en:'Global thinker',zh:'全球思维'},{en:'Tech-affine',zh:'科技导向'},{en:'High-achiever',zh:'高绩效'},{en:'Pioneer',zh:'先驱'}],
+    mktEn:'Premium tech, business travel, luxury efficiency. Forbes, LinkedIn, high-end gadgets.',
+    mktZh:'高端科技、商务出行、奢华效率。《福布斯》、LinkedIn、高端数码产品。' },
+
+  /* ── ZUKUNFTSMILIEUS ── */
+  { id:'exp', de:'Expeditive', en:'Expeditives', zh:'探险先锋',
+    pct:10, color:'#1A7A4A', lc:'#BCDECE', group:'zukunft',
+    mx:540, my:105, r:36,
+    descEn:'Ambitious creative bohème. Urban, hip, digital, cosmopolitan. Seeks unconventional experiences and challenges. Strong self-expression competence; self-image as postmodern elite.',
+    descZh:'雄心勃勃的创意波西米亚人。都市化、时髦、数字化、具有国际视野。追求非传统的体验与挑战。自我表达能力强，自视为后现代精英。',
+    traits:[{en:'Urban',zh:'都市化'},{en:'Creative',zh:'创意'},{en:'Cosmopolitan',zh:'国际视野'},{en:'Self-expressive',zh:'自我表达'}],
+    mktEn:'Creative economy, indie brands, street culture, social media content creation.',
+    mktZh:'创意经济、独立品牌、街头文化、社交媒体内容创作。' },
+
+  { id:'neo', de:'Neo-Ökologische', en:'Neo-Ecologists', zh:'新生态主义者',
+    pct:8, color:'#2A7A2A', lc:'#C4E4C4', group:'zukunft',
+    mx:450, my:118, r:32,
+    descEn:'Progressive realists and drivers of global transformation. Optimistic and action-oriented with strong awareness of planetary challenges. Blend of disruption and pragmatism, sustainability without sacrifice ideology.',
+    descZh:'进步的现实主义者，全球变革的推动力。乐观、行动导向，对地球挑战有强烈意识。融合颠覆与务实，倡导不以牺牲为前提的可持续生活。',
+    traits:[{en:'Eco-conscious',zh:'生态意识'},{en:'Pragmatic',zh:'务实'},{en:'Optimistic',zh:'乐观'},{en:'Activist',zh:'行动主义'}],
+    mktEn:'Sustainable products, circular economy, electric mobility, plant-based food.',
+    mktZh:'可持续产品、循环经济、电动出行、植物基食品。' },
+
+  /* ── MODERNER MAINSTREAM ── */
+  { id:'ap',  de:'Adaptiv-Pragmatische', en:'Adaptive-Pragmatics', zh:'适应性务实者',
+    pct:12, color:'#8A5A1A', lc:'#EED8B4', group:'mitte',
+    mx:355, my:220, r:42,
+    descEn:'The modern mainstream. Adaptable and performance-ready; pragmatic but also enjoys fun and entertainment. Strong need for belonging and security; growing dissatisfaction with societal change.',
+    descZh:'现代主流阶层。适应性强、有上进心，务实且热爱娱乐。对归属感和安全感有强烈需求；对社会变化日益感到不满。',
+    traits:[{en:'Pragmatic',zh:'务实'},{en:'Flexible',zh:'灵活'},{en:'Security-seeking',zh:'追求安全感'},{en:'Mainstream',zh:'主流'}],
+    mktEn:'Mass-market brands, streaming services, convenience products, loyalty programmes.',
+    mktZh:'大众市场品牌、流媒体服务、便捷产品、忠诚度计划。' },
+
+  { id:'kh',  de:'Konsum-Hedonisten', en:'Consumption-Hedonists', zh:'消费享乐主义者',
+    pct:8, color:'#8A3A1A', lc:'#EEC8B4', group:'mitte',
+    mx:470, my:295, r:32,
+    descEn:'Fun and entertainment-focused lower middle class. Lives in the here and now; strong need for recognition. Sees itself as the cool lifestyle mainstream; irritated by sustainability and political correctness demands.',
+    descZh:'以娱乐为导向的中下阶层。活在当下，对认可有强烈需求。自视为酷炫的生活方式主流；对可持续发展和政治正确的要求感到厌烦。',
+    traits:[{en:'Fun-seeking',zh:'享乐导向'},{en:'Now-focused',zh:'活在当下'},{en:'Recognition-need',zh:'渴望认可'},{en:'Anti-PC',zh:'反政治正确'}],
+    mktEn:'Entertainment media, gaming, fast fashion, energy drinks. TikTok, Reality TV.',
+    mktZh:'娱乐媒体、游戏、快时尚、能量饮料。TikTok、真人秀节目。' },
+
+  { id:'pre', de:'Prekäre', en:'Precarious', zh:'社会边缘阶层',
+    pct:9, color:'#5A4A8A', lc:'#D4CCEE', group:'mitte',
+    mx:290, my:385, r:34,
+    descEn:'The under-oriented lower class striving for participation. Accumulation of social disadvantages; feeling of being left behind, bitterness and resentment. Self-image as resilient survivors just getting by.',
+    descZh:'努力寻求参与的边缘底层群体。社会不利条件积累；有被抛弃感、苦涩与怨恨。自视为坚韧的幸存者，勉力维持生计。',
+    traits:[{en:'Marginalized',zh:'边缘化'},{en:'Resilient',zh:'坚韧'},{en:'Resentful',zh:'怨恨感'},{en:'Excluded',zh:'被排斥'}],
+    mktEn:'Value retailers, social media (short-form video), lottery, basic services.',
+    mktZh:'廉价零售商、社交媒体（短视频）、彩票、基本服务。' },
+
+  /* ── TRADITIONELLER MAINSTREAM ── */
+  { id:'nb',  de:'Nostalgisch-Bürgerliche', en:'Nostalgic-Bourgeois', zh:'怀旧市民阶层',
+    pct:11, color:'#6A3A8A', lc:'#DCCAEE', group:'trad',
+    mx:175, my:245, r:40,
+    descEn:'Harmony-oriented lower-middle class. Desires secure conditions and appropriate social status. Growing sense of overwhelm and fear of downward mobility; yearning for "the way things were".',
+    descZh:'以和谐为导向的中下阶层。渴望稳定的生活条件和合适的社会地位。对阶层下滑的担忧日增；对"过去的好时光"充满向往。',
+    traits:[{en:'Harmony-seeking',zh:'和谐导向'},{en:'Status-worried',zh:'担忧地位'},{en:'Nostalgic',zh:'怀旧'},{en:'Traditional',zh:'传统'}],
+    mktEn:'Established German brands, regional products, public broadcasting, print media.',
+    mktZh:'知名德国品牌、地区产品、公共广播、印刷媒体。' },
+
+  { id:'tr',  de:'Traditionelle', en:'Traditionals', zh:'传统主义者',
+    pct:9, color:'#4A2A8A', lc:'#CCCAEE', group:'trad',
+    mx:125, my:360, r:34,
+    descEn:'The security- and order-oriented older generation. Rooted in the values of the post-war period; modest and frugal. Strongly connected to home and community; resistant to rapid social change.',
+    descZh:'以安全感和秩序为导向的老一代群体。根植于战后时代的价值观；朴素节俭。对家园和社区有强烈依恋；抵制快速的社会变革。',
+    traits:[{en:'Security-oriented',zh:'安全感导向'},{en:'Frugal',zh:'节俭'},{en:'Order-loving',zh:'爱好秩序'},{en:'Rooted',zh:'归根'}],
+    mktEn:'Trusted German brands, functional value, home & garden, senior services.',
+    mktZh:'可信赖的德国品牌、功能性价值、家居园艺、老年人服务。' },
+];
+
+/* ── comparison data: cluster-level DE vs CN ── */
+const CMP = [
+  { enLabel:'Upper / Elite', deLabel:'Obere Milieus', zhLabel:'上层精英阶层',
+    de: [{de:'Konservativ-Gehobene',pct:11},{de:'Postmaterielle',pct:12},{de:'Performer',pct:10}],
+    cn: [{en:'Conservative Status Elite',pct:8},{en:'Post-Material Elite',pct:6},{en:'Progressive Modern Elite',pct:9}],
+    deTotal:33, cnTotal:23, color:'#2A5FA8' },
+  { enLabel:'Future / Creative', deLabel:'Zukunfts- & Kreativmilieus', zhLabel:'未来与创意阶层',
+    de: [{de:'Expeditive',pct:10},{de:'Neo-Ökologische',pct:8}],
+    cn: [{en:'Ambitious Avant-Garde',pct:8}],
+    deTotal:18, cnTotal:8, color:'#1A7A4A' },
+  { enLabel:'Modern Middle', deLabel:'Moderner Mainstream', zhLabel:'现代中层',
+    de: [{de:'Adaptiv-Pragmatische',pct:12},{de:'Konsum-Hedonisten',pct:8},{de:'Prekäre',pct:9}],
+    cn: [{en:'Adaptive-Pragmatic Middle',pct:14},{en:'Adapted Harmony-Seekers',pct:13}],
+    deTotal:29, cnTotal:27, color:'#8A5A1A' },
+  { enLabel:'Traditional / Lower', deLabel:'Trad. Mainstream & Unterschicht', zhLabel:'传统与底层阶层',
+    de: [{de:'Nostalgisch-Bürgerliche',pct:11},{de:'Traditionelle',pct:9}],
+    cn: [{en:'Enrooted Traditionalists',pct:12},{en:'Status & Tradition-Oriented Middle',pct:14},{en:'Working Class Without Prospects',pct:16}],
+    deTotal:20, cnTotal:42, color:'#4A1A6A' },
+];
+
+/* ────── BUILD SVG MAP ────── */
+const NS='http://www.w3.org/2000/svg';
+const bG=document.getElementById('bubbles');
+let activeId=null;
+
+function dk(hex,f){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return`rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`;
+}
+
+M.forEach(m=>{
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('cursor','pointer'); g.dataset.id=m.id; g.dataset.group=m.group;
+
+  // "potato" ellipse — wider than tall, tilt slightly
+  const el=document.createElementNS(NS,'ellipse');
+  el.setAttribute('cx',m.mx); el.setAttribute('cy',m.my);
+  el.setAttribute('rx', m.r+8); el.setAttribute('ry', m.r);
+  el.setAttribute('fill',m.lc); el.setAttribute('stroke',m.color); el.setAttribute('stroke-width','1.5');
+  el.style.transition='opacity .2s';
+  g.appendChild(el);
+
+  // DE name (2 lines if needed)
+  const words=m.de.split('-');
+  const td=document.createElementNS(NS,'text');
+  td.setAttribute('font-size','9.5'); td.setAttribute('font-weight','600');
+  td.setAttribute('font-family',"'DM Sans',sans-serif");
+  td.setAttribute('fill',dk(m.color,.65));
+  td.setAttribute('text-anchor','middle'); td.setAttribute('pointer-events','none');
+  if(words.length===1){
+    td.setAttribute('x',m.mx); td.setAttribute('y',m.my+1);
+    td.setAttribute('dominant-baseline','central');
+    td.textContent=m.de;
+  } else {
+    const t1=document.createElementNS(NS,'tspan');
+    t1.setAttribute('x',m.mx); t1.setAttribute('dy','0'); t1.textContent=words[0];
+    const t2=document.createElementNS(NS,'tspan');
+    t2.setAttribute('x',m.mx); t2.setAttribute('dy','11'); t2.textContent=words.slice(1).join('-');
+    td.setAttribute('x',m.mx); td.setAttribute('y',m.my-5);
+    td.appendChild(t1); td.appendChild(t2);
+  }
+  td.setAttribute('class','en-only');
+  g.appendChild(td);
+
+  // ZH name
+  const tz=document.createElementNS(NS,'text');
+  tz.setAttribute('x',m.mx); tz.setAttribute('y',m.my);
+  tz.setAttribute('text-anchor','middle'); tz.setAttribute('dominant-baseline','central');
+  tz.setAttribute('font-size','10'); tz.setAttribute('font-weight','600');
+  tz.setAttribute('font-family',"'Noto Serif SC',serif");
+  tz.setAttribute('fill',dk(m.color,.65)); tz.setAttribute('pointer-events','none');
+  tz.setAttribute('class','zh-only');
+  if(m.zh.length>6){
+    const mid=Math.ceil(m.zh.length/2);
+    const z1=document.createElementNS(NS,'tspan');
+    z1.setAttribute('x',m.mx); z1.setAttribute('dy','0'); z1.textContent=m.zh.slice(0,mid);
+    const z2=document.createElementNS(NS,'tspan');
+    z2.setAttribute('x',m.mx); z2.setAttribute('dy','12'); z2.textContent=m.zh.slice(mid);
+    tz.setAttribute('y',m.my-6); tz.appendChild(z1); tz.appendChild(z2);
+  } else { tz.textContent=m.zh; }
+  g.appendChild(tz);
+
+  // pct label
+  const tp=document.createElementNS(NS,'text');
+  tp.setAttribute('x',m.mx); tp.setAttribute('y',m.my+(m.de.includes('-')?13:11));
+  tp.setAttribute('text-anchor','middle'); tp.setAttribute('dominant-baseline','central');
+  tp.setAttribute('font-size','9'); tp.setAttribute('font-family',"'DM Sans',sans-serif");
+  tp.setAttribute('fill',dk(m.color,.5)); tp.setAttribute('pointer-events','none');
+  tp.textContent=m.pct+'%';
+  g.appendChild(tp);
+
+  g.addEventListener('click',()=>showDetail(m.id));
+  bG.appendChild(g);
+});
+
+/* ── GROUP BADGES ── */
+const grpLeg=document.getElementById('grp-legend');
+GROUPS.forEach(gr=>{
+  const b=document.createElement('button');
+  b.className='gl-badge'; b.dataset.gid=gr.id;
+  b.innerHTML=`<span class="en-only">${gr.enLabel}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${gr.zhLabel}</span>`;
+  b.addEventListener('click',()=>{
+    const isOn=b.classList.contains('on');
+    document.querySelectorAll('.gl-badge').forEach(x=>{x.classList.remove('on');x.style.background='';x.style.color='';});
+    clearDetail();
+    if(!isOn){
+      b.classList.add('on'); b.style.background=gr.color; b.style.color='#fff';
+      // highlight only this group
+      document.querySelectorAll('#bubbles g').forEach(g=>{
+        g.querySelector('ellipse').style.opacity=g.dataset.group===gr.id?'1':'.2';
+      });
+    } else {
+      document.querySelectorAll('#bubbles g').forEach(g=>{g.querySelector('ellipse').style.opacity='1';});
+    }
+  });
+  grpLeg.appendChild(b);
+});
+
+/* ── DETAIL PANEL ── */
+function showDetail(id){
+  if(activeId===id){clearDetail();return;}
+  activeId=id;
+  const m=M.find(x=>x.id===id);
+  const gr=GROUPS.find(g=>g.id===m.group);
+
+  document.querySelectorAll('#bubbles g').forEach(g=>{
+    const el=g.querySelector('ellipse');
+    if(g.dataset.id===id){el.setAttribute('fill',m.color);el.style.opacity='1';}
+    else{el.setAttribute('fill',M.find(x=>x.id===g.dataset.id).lc);el.style.opacity='.25';}
+  });
+
+  document.getElementById('dcdot').style.background=m.color;
+  document.getElementById('dcn-de').textContent=m.de;
+  document.getElementById('dcn-en').textContent=m.en;
+  document.getElementById('dcn-zh').textContent=m.zh;
+  document.getElementById('dcsh').textContent=m.pct+'%';
+  document.getElementById('dcgrp').innerHTML=`<span class="en-only">${gr.enLabel}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${gr.zhLabel}</span>`;
+  document.getElementById('dcd-en').textContent=m.descEn;
+  document.getElementById('dcd-zh').textContent=m.descZh;
+  document.getElementById('dcm-en').textContent=m.mktEn;
+  document.getElementById('dcm-zh').textContent=m.mktZh;
+
+  const td=document.getElementById('dc-traits'); td.innerHTML='';
+  m.traits.forEach(t=>{
+    const s=document.createElement('span'); s.className='tr';
+    s.style.background=m.lc; s.style.color=dk(m.color,.6);
+    s.innerHTML=`<span class="en-only">${t.en}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${t.zh}</span>`;
+    td.appendChild(s);
+  });
+
+  document.getElementById('dc').style.borderColor=m.color+'55';
+  document.getElementById('de-empty').style.display='none';
+  const dci=document.getElementById('dc-inner');
+  dci.style.display='block'; dci.classList.add('fi'); setTimeout(()=>dci.classList.remove('fi'),280);
+
+  document.querySelectorAll('.mcard').forEach(c=>{
+    c.style.opacity=c.dataset.id===id?'1':'0.42';
+    c.style.boxShadow=c.dataset.id===id?`0 0 0 2px ${m.color}44`:'';
+  });
+}
+
+function clearDetail(){
+  activeId=null;
+  document.querySelectorAll('#bubbles g').forEach(g=>{
+    g.querySelector('ellipse').setAttribute('fill',M.find(x=>x.id===g.dataset.id).lc);
+    g.querySelector('ellipse').style.opacity='1';
+  });
+  document.getElementById('de-empty').style.display='flex';
+  document.getElementById('dc-inner').style.display='none';
+  document.getElementById('dc').style.borderColor='';
+  document.querySelectorAll('.mcard').forEach(c=>{c.style.opacity='';c.style.boxShadow='';});
+}
+
+document.getElementById('de-map').addEventListener('click',e=>{
+  if(!e.target.closest('g[data-id]')) clearDetail();
+});
+
+/* ── COMPARISON GRID ── */
+const cmpGrid=document.getElementById('cmp-grid');
+CMP.forEach(cl=>{
+  const col=document.createElement('div');
+  col.className='cmp-grid';
+  col.style.cssText='grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px';
+
+  // DE column
+  const deCol=document.createElement('div');
+  deCol.className='cmp-col';
+  deCol.innerHTML=`
+    <div class="cmp-head">
+      <div class="cmp-flag" style="background:linear-gradient(#000 33%,#D00 33%,#D00 66%,#FFCE00 66%)"></div>
+      <div><div class="cmp-title">Germany</div><div class="cmp-sub en-only">${cl.deLabel} · ${cl.deTotal}%</div><div class="cmp-sub zh-only" style="font-family:'Noto Serif SC',serif">德国 · ${cl.deTotal}%</div></div>
+    </div>`;
+  cl.de.forEach(r=>{
+    const row=document.createElement('div'); row.className='cmp-row';
+    row.innerHTML=`<div class="cmp-lbl">${r.de}</div>
+      <div class="cmp-track"><div class="cmp-fill" style="background:${cl.color};width:0%" data-target="${r.pct}"></div></div>
+      <div class="cmp-pct">${r.pct}%</div>`;
+    deCol.appendChild(row);
+  });
+
+  // CN column
+  const cnCol=document.createElement('div');
+  cnCol.className='cmp-col';
+  cnCol.innerHTML=`
+    <div class="cmp-head">
+      <div class="cmp-flag" style="background:#DE2910;position:relative">
+        <div style="position:absolute;top:2px;left:3px;color:#FFDE00;font-size:8px">★</div>
+      </div>
+      <div><div class="cmp-title en-only">China (national avg.)</div><div class="cmp-title zh-only" style="font-family:'Noto Serif SC',serif">中国（全国平均）</div>
+        <div class="cmp-sub en-only">${cl.enLabel} · ${cl.cnTotal}%</div>
+        <div class="cmp-sub zh-only" style="font-family:'Noto Serif SC',serif">${cl.zhLabel} · ${cl.cnTotal}%</div></div>
+    </div>`;
+  cl.cn.forEach(r=>{
+    const row=document.createElement('div'); row.className='cmp-row';
+    row.innerHTML=`<div class="cmp-lbl">${r.en}</div>
+      <div class="cmp-track"><div class="cmp-fill" style="background:${cl.color};width:0%" data-target="${r.pct}"></div></div>
+      <div class="cmp-pct">${r.pct}%</div>`;
+    cnCol.appendChild(row);
+  });
+
+  col.appendChild(deCol); col.appendChild(cnCol);
+  cmpGrid.appendChild(col);
+});
+setTimeout(()=>{
+  document.querySelectorAll('.cmp-fill').forEach(b=>b.style.width=b.dataset.target+'%');
+},350);
+
+/* ── MILIEU CARD GRID ── */
+const cardsGrid=document.getElementById('cards-grid');
+M.forEach(m=>{
+  const gr=GROUPS.find(g=>g.id===m.group);
+  const c=document.createElement('div');
+  c.className='mcard'; c.dataset.id=m.id;
+  c.style.setProperty('--tc',m.color);
+  c.innerHTML=`
+    <div class="mcard-h">
+      <div class="mc-dot"></div>
+      <div class="mc-de en-only">${m.de}</div>
+      <div class="mc-pct">${m.pct}%</div>
+    </div>
+    <div class="mc-en en-only">${m.en}</div>
+    <div class="mc-zh" style="font-family:'Noto Serif SC',serif">${m.zh}</div>
+    <div class="mc-desc en-only">${m.descEn.slice(0,85)}…</div>
+    <div class="mc-desc-zh zh-only">${m.descZh.slice(0,55)}…</div>
+  `;
+  c.addEventListener('mouseover',()=>c.style.borderColor=m.color);
+  c.addEventListener('mouseout',()=>activeId===m.id?null:c.style.borderColor='');
+  c.addEventListener('click',()=>{
+    document.querySelector('.main').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>showDetail(m.id),360);
+  });
+  cardsGrid.appendChild(c);
+});
+
+/* ── LANG ── */
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

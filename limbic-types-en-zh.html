@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limbic Types · 边缘系统类型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #F5F2EC;
+  --bg2:     #ECEAE2;
+  --bg3:     #E0DDD4;
+  --card:    #FDFBF7;
+  --ink:     #1A1816;
+  --ink2:    #46423C;
+  --ink3:    #7A756C;
+  --border:  rgba(26,24,22,.11);
+  --border2: rgba(26,24,22,.06);
+  --r:       12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* HEADER */
+header{
+  background:var(--ink);color:#F5F2EC;
+  padding:26px 40px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.hd-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hd-sub{font-size:12px;color:rgba(245,242,236,.45);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.hd-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:rgba(245,242,236,.6);margin-top:2px}
+.lang-row{display:flex;gap:6px}
+.lb{background:none;border:1px solid rgba(245,242,236,.25);color:rgba(245,242,236,.6);
+    padding:6px 18px;border-radius:30px;font-family:'DM Sans',sans-serif;font-size:13px;
+    cursor:pointer;transition:all .18s}
+.lb.on{background:#C84020;border-color:#C84020;color:#fff}
+.lb:hover:not(.on){background:rgba(245,242,236,.1);color:#fff}
+
+/* INTRO STRIP */
+.intro{max-width:900px;margin:32px auto 0;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.intro{grid-template-columns:1fr}}
+.ib{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px 18px}
+.ib .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.ib p{font-size:13px;color:var(--ink2);line-height:1.72}
+.ib .zp{font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink3);line-height:1.85;margin-top:5px}
+
+/* WHEEL + PANEL */
+.ws{max-width:960px;margin:28px auto 0;padding:0 24px;
+    display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+@media(max-width:740px){.ws{grid-template-columns:1fr}}
+.ww svg{width:100%;height:auto;display:block}
+
+/* DETAIL */
+.dp{position:sticky;top:18px}
+.dc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;
+    min-height:300px;transition:border-color .25s}
+.de-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+          height:260px;color:var(--ink3);gap:8px;text-align:center}
+.de-empty .arr{font-size:26px;opacity:.25}
+.de-empty p{font-size:12.5px;line-height:1.65}
+.de-empty .ep2{font-family:'Noto Serif SC',serif;font-size:11.5px;opacity:.55;margin-top:2px}
+.dch{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.dcdot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+.dcn-en{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--ink);line-height:1.1}
+.dcn-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink2);margin-top:2px}
+.dcsh{margin-left:auto;font-size:11px;color:var(--ink3);background:var(--bg2);padding:3px 10px;border-radius:20px;white-space:nowrap}
+.dcd-en{font-size:13px;color:var(--ink2);line-height:1.72;margin-bottom:8px}
+.dcd-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.85;
+        margin-bottom:12px;padding-left:11px;border-left:2px solid var(--bg3)}
+.traits{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
+.tg{font-size:11px;padding:3px 10px;border-radius:20px;line-height:1.4}
+.tg .tzh{font-family:'Noto Serif SC',serif;font-size:10px;display:block;opacity:.7}
+.ms{border-top:1px solid var(--border2);padding-top:11px;margin-top:2px}
+.ml{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.md-en{font-size:12.5px;color:var(--ink2);line-height:1.65}
+.md-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.8;margin-top:5px}
+
+/* GRID */
+.gs{max-width:960px;margin:44px auto 0;padding:0 24px}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,26px);font-weight:700;margin-bottom:4px}
+.sh .szh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink3);font-weight:400;margin-left:10px}
+.ss{font-size:12.5px;color:var(--ink3);margin-bottom:18px}
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px;margin-bottom:40px}
+.tc{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px;
+    cursor:pointer;transition:transform .17s,box-shadow .17s,border-color .2s,opacity .2s;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc);border-radius:var(--r) var(--r) 0 0;opacity:.75}
+.tc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07);border-color:var(--tc)}
+.tch{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.tcdot{width:9px;height:9px;border-radius:50%;background:var(--tc);flex-shrink:0}
+.tcn-en{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700}
+.tcn-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3)}
+.tcsh{margin-left:auto;font-size:10.5px;color:var(--ink3)}
+.tcd-en{font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:5px}
+.tcd-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.8}
+
+/* AXES */
+.axs{max-width:960px;margin:0 auto 44px;padding:0 24px}
+.ax-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:500px){.ax-grid{grid-template-columns:1fr}}
+.axc{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:15px 17px}
+.axn{font-size:14px;font-weight:500;margin-bottom:2px}
+.axz{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-bottom:7px}
+.axc p{font-size:12.5px;color:var(--ink2);line-height:1.68}
+.axc .pz{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.8}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(245,242,236,.4);text-align:center;padding:22px 20px;font-size:11.5px;line-height:1.85}
+
+/* ANIM */
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.fi{animation:fi .28s ease both}
+
+/* LANG */
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<header>
+  <div>
+    <div class="hd-title">Limbic Types</div>
+    <div class="hd-sub">Neuromarketing · Audience Psychology</div>
+    <div class="hd-zh zh-only">边缘系统类型模型 · 神经营销学</div>
+  </div>
+  <div class="lang-row">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="ib">
+    <div class="lbl en-only">About the Model</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">关于模型</div>
+    <p class="en-only">The Limbic® model (Gruppe Nymphenburg) divides people into seven types based on their limbic personality structures. It is grounded in neuroscience and evolutionary biology and is a leading tool in neuromarketing.</p>
+    <p class="zp zh-only">Limbic® 模型（Nymphenburg集团）根据边缘系统人格结构将人们分为七种类型。该模型以脑科学与进化生物学为基础，是神经营销领域的权威工具。</p>
+  </div>
+  <div class="ib">
+    <div class="lbl en-only">How to Use</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">使用方法</div>
+    <p class="en-only">Click any segment of the wheel to explore each personality type in detail — including key traits and marketing strategies. Use the EN / 中文 toggle to switch languages.</p>
+    <p class="zp zh-only">点击圆盘中的任意区域，深入了解每种人格类型——包括核心特征与营销策略。使用右上角切换中英文。</p>
+  </div>
+</div>
+
+<!-- WHEEL + DETAIL -->
+<div class="ws">
+  <div class="ww">
+    <svg id="lw" viewBox="0 0 540 540">
+      <!-- outer bg ring -->
+      <circle cx="270" cy="270" r="234" fill="#E8E4DC" stroke="none"/>
+      <circle cx="270" cy="270" r="232" fill="var(--bg2)" stroke="rgba(26,24,22,.07)" stroke-width="1"/>
+      <g id="segs"></g>
+      <g id="lbls"></g>
+      <!-- axes -->
+      <line x1="38" y1="270" x2="502" y2="270" stroke="rgba(26,24,22,.13)" stroke-width="0.6" stroke-dasharray="3 5"/>
+      <line x1="270" y1="38" x2="270" y2="502" stroke="rgba(26,24,22,.13)" stroke-width="0.6" stroke-dasharray="3 5"/>
+      <!-- axis labels EN -->
+      <text class="en-only" font-size="11" font-family="'DM Sans',sans-serif" fill="#7A756C" x="270" y="24" text-anchor="middle">Hedonism</text>
+      <text class="en-only" font-size="11" font-family="'DM Sans',sans-serif" fill="#7A756C" x="270" y="523" text-anchor="middle">Tradition &amp; Order</text>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="11" y="274" text-anchor="middle">Openness</text>
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="529" y="274" text-anchor="middle">Discipline</text>
+      <!-- axis labels ZH -->
+      <text class="zh-only" font-size="11" font-family="'Noto Serif SC',serif" fill="#7A756C" x="270" y="24" text-anchor="middle">享乐主义</text>
+      <text class="zh-only" font-size="11" font-family="'Noto Serif SC',serif" fill="#7A756C" x="270" y="523" text-anchor="middle">传统与秩序</text>
+      <text class="zh-only" font-size="11" font-family="'Noto Serif SC',serif" fill="#7A756C" x="11" y="274" text-anchor="middle">开放</text>
+      <text class="zh-only" font-size="11" font-family="'Noto Serif SC',serif" fill="#7A756C" x="529" y="274" text-anchor="middle">责任</text>
+      <!-- center -->
+      <circle cx="270" cy="270" r="58" fill="#FDFBF7" stroke="rgba(26,24,22,.1)" stroke-width="0.8"/>
+      <text font-size="13" font-weight="600" font-family="'Cormorant Garamond',serif" fill="#46423C" x="270" y="266" text-anchor="middle">Limbic</text>
+      <text font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="270" y="281" text-anchor="middle">Types</text>
+    </svg>
+  </div>
+
+  <div class="dp">
+    <div class="dc" id="dc">
+      <div class="de-empty" id="de-empty">
+        <div class="arr">←</div>
+        <p class="en-only">Click a segment in the wheel<br>to explore a personality type.</p>
+        <p class="ep2 zh-only">点击圆盘中的区域<br>了解该类型详情</p>
+      </div>
+      <div id="dc-inner" style="display:none">
+        <div class="dch">
+          <div class="dcdot" id="dcdot"></div>
+          <div>
+            <div class="dcn-en en-only" id="dcn-en"></div>
+            <div class="dcn-zh" id="dcn-zh"></div>
+          </div>
+          <div class="dcsh" id="dcsh"></div>
+        </div>
+        <div class="dcd-en en-only" id="dcd-en"></div>
+        <div class="dcd-zh zh-only" id="dcd-zh"></div>
+        <div class="traits" id="dc-traits"></div>
+        <div class="ms">
+          <div class="ml en-only">Marketing strategy</div>
+          <div class="ml zh-only" style="font-family:'Noto Serif SC',serif">营销策略</div>
+          <div class="md-en en-only" id="dcm-en"></div>
+          <div class="md-zh zh-only" id="dcm-zh"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS GRID -->
+<div class="gs" style="margin-top:48px">
+  <h2 class="sh en-only">All Seven Types</h2>
+  <h2 class="sh zh-only" style="font-family:'Noto Serif SC',serif">七种类型一览</h2>
+  <p class="ss en-only">Click a card to highlight it on the wheel above.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">点击卡片，在上方圆盘中高亮显示该类型。</p>
+  <div class="tg-grid" id="tg-grid"></div>
+</div>
+
+<!-- AXES -->
+<div class="axs">
+  <h2 class="sh" style="margin-bottom:16px">
+    <span class="en-only">The Two Axes</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">两条坐标轴</span>
+  </h2>
+  <div class="ax-grid">
+    <div class="axc">
+      <div class="axn en-only">Hedonism ↔ Tradition</div>
+      <div class="axn zh-only" style="font-family:'Noto Serif SC',serif">享乐主义 ↔ 传统</div>
+      <div class="axz">Vertical axis · 纵轴</div>
+      <p class="en-only">This vertical axis spans from pleasure-seeking, stimulation-oriented needs (top) to order-seeking, security-focused attitudes (bottom).</p>
+      <p class="pz zh-only">这条纵轴跨越了以寻求愉悦、刺激为导向的需求（上方）与追求秩序、安全为主的态度（下方）。</p>
+    </div>
+    <div class="axc">
+      <div class="axn en-only">Openness ↔ Discipline</div>
+      <div class="axn zh-only" style="font-family:'Noto Serif SC',serif">开放 ↔ 责任</div>
+      <div class="axz">Horizontal axis · 横轴</div>
+      <p class="en-only">This horizontal axis spans from openness to novelty, individuality and change (left) to a sense of duty, stability and social responsibility (right).</p>
+      <p class="pz zh-only">这条横轴跨越了对新事物的开放性、个性与变化（左侧）与责任感、稳定性及社会责任（右侧）。</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Limbic® is a registered concept of Gruppe Nymphenburg Consult AG &nbsp;·&nbsp; Limbic®是Nymphenburg咨询集团的注册概念</p>
+  <p style="margin-top:3px">Teaching material · 教学材料 &nbsp;·&nbsp; Not for commercial use · 仅供教学使用</p>
+</footer>
+
+<script>
+const CX=270,CY=270,ROUT=232,RIN=60;
+const SW=360/7; // exactly 51.4286° each — no overlaps
+
+const T=[
+  {id:'performer',  en:'Performer',      zh:'表演者',    share:'~10%', color:'#D45025', lc:'#F2D4C5',
+   startDeg:-90,
+   descEn:'Performers seek variety, fun and attention. They are self-confident, creative and love being the centre of attention. New trends and experiences excite them; routine bores them quickly.',
+   descZh:'表演者追求变化、乐趣和关注。他们自信、富有创造力，喜欢成为焦点。新趋势和体验令他们兴奋，日常规律很快让他们感到无聊。',
+   traits:[{en:'Adventurous',zh:'冒险精神'},{en:'Creative',zh:'创造力'},{en:'Show-off',zh:'喜欢展示'},{en:'Trend-aware',zh:'潮流意识'}],
+   mktEn:'Visual impact, exclusive experiences, status products. Message: "Stand out from the crowd."',
+   mktZh:'视觉冲击、独家体验、身份象征产品。核心信息："与众不同。"'},
+
+  {id:'adventurer', en:'Adventurer',     zh:'冒险家',    share:'~9%',  color:'#B83518', lc:'#F0C8B8',
+   startDeg:-90+SW*1,
+   descEn:'Adventurers value freedom and independence above all. They act impulsively, love risk and refuse to be constrained by rules. Challenges spur them on.',
+   descZh:'冒险家最重视自由与独立。他们行动冲动，热爱风险，不愿受规则束缚。挑战是他们前进的动力。',
+   traits:[{en:'Free spirit',zh:'自由精神'},{en:'Risk-loving',zh:'爱冒险'},{en:'Impulsive',zh:'冲动性'},{en:'Unconventional',zh:'非传统'}],
+   mktEn:'Outdoor, extreme sports, spontaneous purchases. Message: "No limits."',
+   mktZh:'户外运动、极限挑战、冲动购买。核心信息："没有边界。"'},
+
+  {id:'hedonist',   en:'Hedonist',       zh:'享乐主义者', share:'~11%', color:'#A86E0E', lc:'#F5E0B2',
+   startDeg:-90+SW*2,
+   descEn:'Hedonists live in the moment. They seek pleasure, relaxation and sensory enjoyment. Quality and comfort matter greatly to them; they dislike deprivation.',
+   descZh:'享乐主义者活在当下。他们追求享乐、放松和感官愉悦。品质与舒适对他们至关重要，克制与他们无缘。',
+   traits:[{en:'Pleasure-seeking',zh:'享乐导向'},{en:'Sensory',zh:'感官敏感'},{en:'Spontaneous',zh:'随性自在'},{en:'Comfort-loving',zh:'追求舒适'}],
+   mktEn:'Luxury, gourmet, wellness experiences. Message: "Treat yourself."',
+   mktZh:'奢侈品、美食、健康体验。核心信息："犒赏一下自己。"'},
+
+  {id:'open',       en:'Open-minded',    zh:'开放者',    share:'~12%', color:'#1A7848', lc:'#BEDCCC',
+   startDeg:-90+SW*3,
+   descEn:'Open-minded types are curious, culturally engaged and spiritually receptive. They seek meaning, personal growth and deeper experiences beyond the mainstream.',
+   descZh:'开放者好奇心强，对文化感兴趣，思想开放。他们追求意义、个人成长以及超越主流的深层体验。',
+   traits:[{en:'Curious',zh:'好奇心'},{en:'Cultural',zh:'文化包容'},{en:'Growth-oriented',zh:'追求成长'},{en:'Empathetic',zh:'感同身受'}],
+   mktEn:'Niche cultures, ethics, sustainability. Message: "More than ordinary."',
+   mktZh:'小众文化、道德消费、可持续性。核心信息："超越平凡。"'},
+
+  {id:'harmonizer', en:'Harmoniser',     zh:'和谐者',    share:'~15%', color:'#1860A8', lc:'#BACED8',
+   startDeg:-90+SW*4,
+   descEn:'Harmonisers place family and community at the centre of their lives. They are empathetic, helpful and place great value on trust, closeness and belonging.',
+   descZh:'和谐者将家庭和社群置于生活中心。他们富有同理心、乐于助人，高度重视信任、亲密感和归属感。',
+   traits:[{en:'Empathy',zh:'同理心'},{en:'Family-first',zh:'家庭为先'},{en:'Helpful',zh:'乐于助人'},{en:'Trusting',zh:'注重信任'}],
+   mktEn:'Family products, community, security. Message: "There for each other."',
+   mktZh:'家庭产品、社群、安全感。核心信息："彼此守护。"'},
+
+  {id:'traditionalist',en:'Traditionalist',zh:'传统主义者',share:'~16%',color:'#474498', lc:'#CCCCE5',
+   startDeg:-90+SW*5,
+   descEn:'Traditionalists value stability, order and proven values. They are dutiful, respect authority and prefer reliability over risk.',
+   descZh:'传统主义者重视稳定、秩序和经过检验的价值观。他们有责任感，尊重权威，偏好可靠性而非风险。',
+   traits:[{en:'Order-minded',zh:'秩序感'},{en:'Dutiful',zh:'责任心'},{en:'Respectful',zh:'尊重权威'},{en:'Reliable',zh:'可靠性'}],
+   mktEn:'Brand loyalty, quality promise, longevity. Message: "Proven and dependable."',
+   mktZh:'品牌忠诚、质量承诺、经久耐用。核心信息："经过验证，值得信赖。"'},
+
+  {id:'disciplined', en:'Disciplined',   zh:'自律者',    share:'~18%', color:'#377037', lc:'#C2DEC2',
+   startDeg:-90+SW*6,
+   descEn:'The Disciplined are the largest group. Goal-oriented, rational and high-performing, they prioritise efficiency and quality. Decisions are fact-based.',
+   descZh:'自律者是最大的群体。他们目标明确、理性务实、追求高绩效。效率与质量是首要考量，决策以事实为依据。',
+   traits:[{en:'Goal-driven',zh:'目标导向'},{en:'Rational',zh:'理性决策'},{en:'Efficient',zh:'高效执行'},{en:'Quality-focused',zh:'追求品质'}],
+   mktEn:'Performance data, ROI, test reports. Message: "Convinced by facts."',
+   mktZh:'性能数据、投资回报、测评报告。核心信息："以事实说话。"'}
+];
+
+function polar(r,deg){const a=deg*Math.PI/180;return[CX+r*Math.cos(a),CY+r*Math.sin(a)]}
+function arcPath(r1,r2,s,sw){
+  const[x1o,y1o]=polar(r2,s),[x2o,y2o]=polar(r2,s+sw);
+  const[x1i,y1i]=polar(r1,s+sw),[x2i,y2i]=polar(r1,s);
+  const lf=sw>180?1:0;
+  return`M${x1o},${y1o}A${r2},${r2},0,${lf},1,${x2o},${y2o}L${x1i},${y1i}A${r1},${r1},0,${lf},0,${x2i},${y2i}Z`
+}
+function dk(hex,f){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return`rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`
+}
+
+const NS='http://www.w3.org/2000/svg';
+const segsG=document.getElementById('segs');
+const lblsG=document.getElementById('lbls');
+const grid=document.getElementById('tg-grid');
+let activeId=null;
+
+T.forEach(t=>{
+  // ── SEGMENT ──
+  const p=document.createElementNS(NS,'path');
+  p.setAttribute('d',arcPath(RIN,ROUT,t.startDeg,SW));
+  p.setAttribute('fill',t.lc);
+  p.setAttribute('stroke','#F5F2EC');
+  p.setAttribute('stroke-width','1.8');
+  p.style.cursor='pointer';
+  p.style.transition='opacity .2s, fill .2s';
+  p.dataset.id=t.id;
+  p.addEventListener('click',()=>showDetail(t.id));
+  segsG.appendChild(p);
+
+  // ── LABEL ──
+  const mid=t.startDeg+SW/2;
+  const lr=(RIN+ROUT)/2;
+  const[lx,ly]=polar(lr,mid);
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('pointer-events','none');
+
+  const ten=document.createElementNS(NS,'text');
+  ten.setAttribute('x',lx);ten.setAttribute('y',ly-5);
+  ten.setAttribute('text-anchor','middle');ten.setAttribute('dominant-baseline','central');
+  ten.setAttribute('font-size','12.5');ten.setAttribute('font-weight','600');
+  ten.setAttribute('font-family',"'Cormorant Garamond',serif");
+  ten.setAttribute('fill',dk(t.color,.65));
+  ten.setAttribute('class','en-only');
+  ten.textContent=t.en;
+  g.appendChild(ten);
+
+  const tzh=document.createElementNS(NS,'text');
+  tzh.setAttribute('x',lx);tzh.setAttribute('y',ly-5);
+  tzh.setAttribute('text-anchor','middle');tzh.setAttribute('dominant-baseline','central');
+  tzh.setAttribute('font-size','13');tzh.setAttribute('font-weight','600');
+  tzh.setAttribute('font-family',"'Noto Serif SC',serif");
+  tzh.setAttribute('fill',dk(t.color,.65));
+  tzh.setAttribute('class','zh-only');
+  tzh.textContent=t.zh;
+  g.appendChild(tzh);
+
+  const tsh=document.createElementNS(NS,'text');
+  tsh.setAttribute('x',lx);tsh.setAttribute('y',ly+11);
+  tsh.setAttribute('text-anchor','middle');tsh.setAttribute('dominant-baseline','central');
+  tsh.setAttribute('font-size','10');tsh.setAttribute('font-family',"'DM Sans',sans-serif");
+  tsh.setAttribute('fill',dk(t.color,.52));
+  tsh.textContent=t.share;
+  g.appendChild(tsh);
+  lblsG.appendChild(g);
+
+  // ── GRID CARD ──
+  const card=document.createElement('div');
+  card.className='tc';card.style.setProperty('--tc',t.color);card.dataset.id=t.id;
+  card.innerHTML=`
+    <div class="tch">
+      <div class="tcdot"></div>
+      <div>
+        <div class="tcn-en en-only">${t.en}</div>
+        <div class="tcn-zh">${t.zh}</div>
+      </div>
+      <div class="tcsh">${t.share}</div>
+    </div>
+    <div class="tcd-en en-only">${t.descEn}</div>
+    <div class="tcd-zh zh-only">${t.descZh}</div>`;
+  card.addEventListener('click',()=>{
+    document.querySelector('.ws').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>showDetail(t.id),380);
+  });
+  grid.appendChild(card);
+});
+
+function showDetail(id){
+  if(activeId===id){clearDetail();return;}
+  activeId=id;
+  const t=T.find(x=>x.id===id);
+
+  document.querySelectorAll('#segs path').forEach(p=>{
+    const tt=T.find(x=>x.id===p.dataset.id);
+    if(p.dataset.id===id){p.setAttribute('fill',t.color);p.style.opacity='1';}
+    else{p.setAttribute('fill',tt.lc);p.style.opacity='.28';}
+  });
+
+  document.getElementById('dcdot').style.background=t.color;
+  document.getElementById('dcn-en').textContent=t.en;
+  document.getElementById('dcn-zh').textContent=t.zh;
+  document.getElementById('dcsh').textContent=t.share;
+  document.getElementById('dcd-en').textContent=t.descEn;
+  document.getElementById('dcd-zh').textContent=t.descZh;
+  document.getElementById('dcm-en').textContent=t.mktEn;
+  document.getElementById('dcm-zh').textContent=t.mktZh;
+
+  const td=document.getElementById('dc-traits');td.innerHTML='';
+  t.traits.forEach(tr=>{
+    const s=document.createElement('span');s.className='tg';
+    s.style.background=t.lc;s.style.color=dk(t.color,.58);
+    s.innerHTML=`<span class="en-only">${tr.en}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${tr.zh}</span>`;
+    td.appendChild(s);
+  });
+
+  document.getElementById('dc').style.borderColor=t.color+'55';
+  document.getElementById('de-empty').style.display='none';
+  const dci=document.getElementById('dc-inner');
+  dci.style.display='block';dci.classList.add('fi');setTimeout(()=>dci.classList.remove('fi'),300);
+
+  document.querySelectorAll('.tc').forEach(c=>{
+    c.style.opacity=c.dataset.id===id?'1':'.45';
+    c.style.boxShadow=c.dataset.id===id?`0 0 0 2px ${t.color}44`:'';
+  });
+}
+
+function clearDetail(){
+  activeId=null;
+  document.querySelectorAll('#segs path').forEach(p=>{
+    p.setAttribute('fill',T.find(x=>x.id===p.dataset.id).lc);p.style.opacity='1';
+  });
+  document.getElementById('de-empty').style.display='flex';
+  document.getElementById('dc-inner').style.display='none';
+  document.getElementById('dc').style.borderColor='';
+  document.querySelectorAll('.tc').forEach(c=>{c.style.opacity='';c.style.boxShadow='';});
+}
+
+document.getElementById('lw').addEventListener('click',e=>{
+  const hit=e.target.closest('path[data-id]');
+  if(!hit)clearDetail();
+});
+
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

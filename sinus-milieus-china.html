@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinus Meta-Milieus · China Regional Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F1EB; --bg2:#EAE7DF; --bg3:#DEDAD0; --card:#FDFBF6;
+  --ink:#1A1816; --ink2:#46423C; --ink3:#7A756C;
+  --border:rgba(26,24,22,.10); --border2:rgba(26,24,22,.06);
+  --r:12px;
+  /* milieu colors */
+  --c1:#C84020; --c2:#8B3A8B; --c3:#1868B8; --c4:#16885A;
+  --c5:#B07010; --c6:#2A9090; --c7:#7070C0; --c8:#886040; --c9:#608030;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6;font-size:15px}
+
+/* ── HEADER ── */
+header{background:var(--ink);color:#F4F1EB;padding:26px 40px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ht{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hs{font-size:11px;color:rgba(244,241,235,.42);letter-spacing:.09em;text-transform:uppercase;margin-top:3px}
+.hz{font-family:'Noto Serif SC',serif;font-size:13px;color:rgba(244,241,235,.58);margin-top:2px}
+.lr{display:flex;gap:6px}
+.lb{background:none;border:1px solid rgba(244,241,235,.22);color:rgba(244,241,235,.58);
+    padding:5px 16px;border-radius:30px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .18s}
+.lb.on{background:#C84020;border-color:#C84020;color:#fff}
+.lb:hover:not(.on){background:rgba(244,241,235,.08);color:#fff}
+
+/* ── INTRO ── */
+.intro{max-width:980px;margin:28px auto 0;padding:0 22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.intro{grid-template-columns:1fr}}
+.ib{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:15px 18px}
+.ib .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.ib p{font-size:13px;color:var(--ink2);line-height:1.72}
+.ib .zp{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.85;margin-top:5px}
+
+/* ── TABS ── */
+.tabs-wrap{max-width:980px;margin:28px auto 0;padding:0 22px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+     padding:8px 18px;font-size:13px;cursor:pointer;transition:all .18s;color:var(--ink2)}
+.tab.on{background:var(--ink);color:#F4F1EB;border-color:var(--ink)}
+.tab:hover:not(.on){border-color:var(--ink3)}
+.tab-sub{font-size:10px;opacity:.6;display:block}
+
+/* ── MAP + PANEL layout ── */
+.main{max-width:980px;margin:18px auto 0;padding:0 22px;
+      display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
+@media(max-width:720px){.main{grid-template-columns:1fr}}
+
+/* ── MILIEU MAP (SVG) ── */
+.map-wrap{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.map-wrap svg{display:block;width:100%;height:auto}
+
+/* ── DETAIL PANEL ── */
+.dp{position:sticky;top:18px}
+.dc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:border-color .25s}
+.de-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+          height:240px;color:var(--ink3);gap:8px;text-align:center}
+.de-empty .arr{font-size:24px;opacity:.22}
+.de-empty p{font-size:12.5px;line-height:1.65}
+.dch{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.dcdot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+.dcn-en{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--ink);line-height:1.1}
+.dcn-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2);margin-top:2px}
+.dcsh{margin-left:auto;font-size:11px;color:var(--ink3);background:var(--bg2);padding:3px 9px;border-radius:20px}
+.dcd-en{font-size:12.5px;color:var(--ink2);line-height:1.72;margin-bottom:8px}
+.dcd-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.85;
+        margin-bottom:11px;padding-left:10px;border-left:2px solid var(--bg3)}
+.traits{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.tr{font-size:11px;padding:3px 9px;border-radius:20px;line-height:1.4}
+.ms{border-top:1px solid var(--border2);padding-top:10px}
+.ml{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.md{font-size:12px;color:var(--ink2);line-height:1.65}
+.mdzh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.8;margin-top:4px}
+
+/* ── REGION BAR CHART ── */
+.region-section{max-width:980px;margin:28px auto 0;padding:0 22px}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);font-weight:700;margin-bottom:4px}
+.ss{font-size:12.5px;color:var(--ink3);margin-bottom:18px}
+.region-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+@media(max-width:600px){.region-grid{grid-template-columns:1fr}}
+.reg-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:18px;overflow:hidden}
+.reg-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;margin-bottom:2px}
+.reg-sub{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-bottom:14px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer}
+.bar-row:hover .bar-fill{filter:brightness(.92)}
+.bar-label{font-size:11.5px;color:var(--ink2);width:130px;flex-shrink:0;line-height:1.3}
+.bar-label .bl-zh{font-family:'Noto Serif SC',serif;font-size:10px;color:var(--ink3);display:block}
+.bar-track{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.bar-pct{font-size:11px;color:var(--ink3);width:30px;text-align:right;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(244,241,235,.38);text-align:center;padding:22px 20px;font-size:11.5px;line-height:1.85;margin-top:40px}
+
+/* ANIM */
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fi{animation:fi .25s ease both}
+
+/* LANG */
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+/* NOTE BOX */
+.note{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;
+      font-size:11.5px;color:var(--ink3);line-height:1.65;margin-bottom:20px}
+.note strong{color:var(--ink2)}
+</style>
+</head>
+<body class="en">
+
+<header>
+  <div>
+    <div class="ht">Sinus Meta-Milieus · China</div>
+    <div class="hs">Emerging Markets Model · Regional Comparison</div>
+    <div class="hz zh-only">新兴市场模型 · 中国区域比较</div>
+  </div>
+  <div class="lr">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="ib">
+    <div class="lbl en-only">About the Model</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">关于模型</div>
+    <p class="en-only">The Sinus Meta-Milieus® for Emerging Markets divide society into <strong>9 milieus</strong> along two axes: social status (vertical) and value orientation (horizontal: tradition → modernity). China is mapped using this framework. The map below shows each milieu's approximate position.</p>
+    <p class="zp zh-only">新兴市场Sinus元精英®模型沿两条轴将社会分为<strong>9个阶层</strong>：社会地位（纵轴）和价值取向（横轴：传统→现代）。点击地图中的各精英阶层，了解详细信息。</p>
+  </div>
+  <div class="ib">
+    <div class="lbl en-only">Regional Logic</div>
+    <div class="lbl zh-only" style="font-family:'Noto Serif SC',serif">区域差异逻辑</div>
+    <p class="en-only">China's milieu landscape varies sharply by region. Coastal megacities like <strong>Shanghai</strong> and <strong>Zhejiang</strong> have larger upper and modern milieus; inland provinces like <strong>Guizhou</strong> have larger traditional and lower-status segments — yet Guizhou's role as China's "Data Valley" shows how economic transformation can coexist with a still-traditional milieu base. The bar charts below make this visible.</p>
+    <p class="zp zh-only">中国的社会阶层分布因地区而存在显著差异。上海、浙江等沿海大城市的上层与现代阶层占比更高；云南、安徽等内陆省份的传统阶层和中下层规模更大。下方条形图直观呈现这一对比。</p>
+    <p class="zp zh-only">中国的社会阶层分布因地区而存在显著差异。上海、浙江等沿海大城市的上层与现代阶层占比更高；贵州等内陆省份的传统阶层和中下层规模更大——但贵州作为中国"数据谷"的角色，展示了经济转型如何与仍以传统为主的阶层基础并存。下方条形图直观呈现这一对比。</p>
+  </div>
+</div>
+
+<!-- TAB SELECTOR (for map region overlay) -->
+<div class="tabs-wrap">
+  <div style="font-size:12px;color:var(--ink3);margin-bottom:10px" class="en-only">Show milieu distribution for:</div>
+  <div style="font-size:12px;color:var(--ink3);margin-bottom:10px;font-family:'Noto Serif SC',serif" class="zh-only">显示区域的阶层分布：</div>
+  <div class="tabs">
+    <button class="tab on" onclick="setRegion('nat')" id="tab-nat">
+      <span class="en-only">China (National avg.)<span class="tab-sub">All regions</span></span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">全国平均<span class="tab-sub">所有地区</span></span>
+    </button>
+    <button class="tab" onclick="setRegion('sh')" id="tab-sh">
+      <span class="en-only">Shanghai<span class="tab-sub">Tier-1 metropolis</span></span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">上海<span class="tab-sub">一线城市</span></span>
+    </button>
+    <button class="tab" onclick="setRegion('zj')" id="tab-zj">
+      <span class="en-only">Zhejiang<span class="tab-sub">Coastal / affluent</span></span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">浙江<span class="tab-sub">沿海富裕省份</span></span>
+    </button>
+    <button class="tab" onclick="setRegion('ynan')" id="tab-ynan">
+      <span class="en-only">Guizhou<span class="tab-sub">Inland · "Data Valley"</span></span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">贵州省<span class="tab-sub">内陆 · "数据谷"</span></span>
+    </button>
+    <button class="tab" onclick="setRegion('gs')" id="tab-gs">
+      <span class="en-only">Gansu<span class="tab-sub">Northwest · traditional</span></span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">甘肃省<span class="tab-sub">西北 · 传统农业省</span></span>
+    </button>
+  </div>
+</div>
+
+<!-- MAP + DETAIL -->
+<div class="main">
+  <div class="map-wrap">
+    <svg id="milieu-map" viewBox="0 0 620 480">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- background grid -->
+      <rect x="60" y="20" width="520" height="420" fill="#EDEAE2" rx="6"/>
+      <!-- region color bands (horizontal = status) -->
+      <rect x="60" y="20"  width="520" height="140" fill="rgba(200,64,32,.05)" rx="6"/><!-- upper -->
+      <rect x="60" y="160" width="520" height="140" fill="rgba(180,160,120,.04)"/><!-- middle -->
+      <rect x="60" y="300" width="520" height="140" fill="rgba(100,100,160,.05)"/><!-- lower -->
+      <!-- grid lines -->
+      <line x1="60"  y1="160" x2="580" y2="160" stroke="rgba(26,24,22,.06)" stroke-width="1"/>
+      <line x1="60"  y1="300" x2="580" y2="300" stroke="rgba(26,24,22,.06)" stroke-width="1"/>
+      <line x1="250" y1="20"  x2="250" y2="440" stroke="rgba(26,24,22,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="420" y1="20"  x2="420" y2="440" stroke="rgba(26,24,22,.06)" stroke-width="1" stroke-dasharray="3 4"/>
+
+      <!-- axis arrows -->
+      <line x1="60" y1="450" x2="580" y2="450" stroke="var(--ink3)" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="50" y1="440" x2="50"  y2="20"  stroke="var(--ink3)" stroke-width="1" marker-end="url(#arr)"/>
+
+      <!-- axis labels EN -->
+      <text class="en-only" font-size="10" font-family="'DM Sans',sans-serif" fill="#7A756C" x="318" y="468" text-anchor="middle">← Tradition · Value Orientation · Modernity →</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="28" y="230" text-anchor="middle" transform="rotate(-90,28,230)">Social Status ↑</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="110" y="37" text-anchor="middle">Upper</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="110" y="178" text-anchor="middle">Middle</text>
+      <text class="en-only" font-size="9" font-family="'DM Sans',sans-serif" fill="#7A756C" x="110" y="318" text-anchor="middle">Lower</text>
+      <!-- axis labels ZH -->
+      <text class="zh-only" font-size="10" font-family="'Noto Serif SC',serif" fill="#7A756C" x="318" y="468" text-anchor="middle">← 传统 · 价值取向 · 现代 →</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="28" y="230" text-anchor="middle" transform="rotate(-90,28,230)">社会地位 ↑</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="110" y="37" text-anchor="middle">上层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="110" y="178" text-anchor="middle">中层</text>
+      <text class="zh-only" font-size="9" font-family="'Noto Serif SC',serif" fill="#7A756C" x="110" y="318" text-anchor="middle">下层</text>
+
+      <!-- milieu bubbles drawn by JS -->
+      <g id="bubbles"></g>
+    </svg>
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <div class="dp">
+    <div class="dc" id="dc">
+      <div class="de-empty" id="de-empty">
+        <div class="arr">←</div>
+        <p class="en-only">Click a milieu bubble on the map to explore it in detail.</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif">点击地图上的阶层气泡，查看详细信息。</p>
+      </div>
+      <div id="dc-inner" style="display:none">
+        <div class="dch">
+          <div class="dcdot" id="dcdot"></div>
+          <div>
+            <div class="dcn-en en-only" id="dcn-en"></div>
+            <div class="dcn-zh" id="dcn-zh"></div>
+          </div>
+          <div class="dcsh" id="dcsh"></div>
+        </div>
+        <div class="dcd-en en-only" id="dcd-en"></div>
+        <div class="dcd-zh zh-only" id="dcd-zh"></div>
+        <div class="traits" id="dc-traits"></div>
+        <div class="ms">
+          <div class="ml en-only">China context</div>
+          <div class="ml zh-only" style="font-family:'Noto Serif SC',serif">中国语境</div>
+          <div class="md en-only" id="dcm-en"></div>
+          <div class="mdzh zh-only" id="dcm-zh"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REGIONAL BAR CHARTS -->
+<div class="region-section">
+  <h2 class="sh">
+    <span class="en-only">Regional Distribution Comparison</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">区域分布对比</span>
+  </h2>
+  <p class="ss en-only">Estimated milieu sizes (% of adult population 18–65) per region. Click any bar to highlight that milieu on the map above.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">各地区成人人口（18-65岁）的估计阶层规模（%）。点击任意条形，在上方地图中高亮显示该阶层。</p>
+  <div class="note">
+    <strong class="en-only">Note:</strong><strong class="zh-only" style="font-family:'Noto Serif SC',serif">注：</strong>
+    <span class="en-only"> The regional percentages are <em>illustrative estimates</em> based on Sinus emerging-market research, China socioeconomic data (NBS, McKinsey China Consumer Reports), and academic literature on Chinese social stratification. They are intended for teaching purposes and discussion — not as official Sinus country data. <strong>Guizhou note:</strong> Despite ranking among China's poorest provinces by GDP per capita (~54% urbanisation), Guizhou hosts major data centres for Apple, Huawei and Alibaba, creating a small but notable tech-elite cluster reflected in slightly elevated Progressive Modern Elite shares. <strong>Gansu note:</strong> China's second-poorest province (~47% urbanisation, heavily agricultural, significant Hui Muslim communities), representing the most traditional and structurally underdeveloped milieu profile of all five regions.</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif"> 区域百分比为<em>示意性估计</em>，基于Sinus新兴市场研究、中国社会经济数据（国家统计局、麦肯锡中国消费者报告）及中国社会分层学术文献，仅供教学讨论，非官方Sinus国家数据。<strong>贵州说明：</strong>尽管贵州人均GDP位于全国末位（城镇化率约54%），但苹果、华为、阿里巴巴等企业在此建立了大型数据中心，形成了一个规模不大但值得关注的科技精英群体。<strong>甘肃说明：</strong>中国第二贫困省份（城镇化率约47%，以农业为主，回族穆斯林社区占比较高），在五个地区中呈现出最传统、结构发展程度最低的阶层特征。</span>
+  </div>
+  <div class="region-grid" id="region-grid"></div>
+</div>
+
+<!-- MILIEU LEGEND GRID -->
+<div class="region-section" style="margin-top:0">
+  <h2 class="sh">
+    <span class="en-only">All Nine Milieus</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">九大社会阶层</span>
+  </h2>
+  <p class="ss en-only">Click any card to see details in the panel above.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">点击卡片，在上方面板查看详情。</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:40px" id="card-grid"></div>
+</div>
+
+<footer>
+  <p>Based on Sinus Meta-Milieus® Emerging Markets (Sinus Institut / Gruppe Nymphenburg). Regional estimates for teaching purposes only.</p>
+  <p style="font-family:'Noto Serif SC',serif;margin-top:3px">基于新兴市场Sinus元阶层®模型（Sinus研究院）· 区域数据仅供教学讨论使用</p>
+  <p style="margin-top:6px;font-size:10.5px">© Sinus-Institut GmbH, Heidelberg/Berlin · Teaching material · 教学材料</p>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────
+   DATA
+───────────────────────────────────────────── */
+const M = [
+  { id:'cse', en:'Conservative Status Elite', zh:'保守地位精英',
+    color:'#C84020', lc:'#F5D0C4',
+    mx:145, my:70, r:34,
+    descEn:'High self-confidence and classic performance ethics. Values exclusivity, status, and the preservation of social order. Career-focused; consumption signals prestige.',
+    descZh:'高度自信，具有经典的责任与绩效伦理。重视排他性、地位与社会秩序的维护。以事业为重，消费彰显地位。',
+    traits:[{en:'Status-conscious',zh:'地位意识'},{en:'Conservative',zh:'保守'},{en:'Prestige-driven',zh:'追求声望'},{en:'Disciplined',zh:'自律'}],
+    mktEn:'Luxury brands, heritage, exclusivity. Strong in state-owned enterprise leadership and old-money families.',
+    mktZh:'奢侈品牌、传承、排他性。在国企领导层和老牌富裕家庭中尤为突出。',
+    // regional data: nat, shanghai, zhejiang, guizhou
+    reg:{nat:8, sh:12, zj:10, ynan:3, gs:2} },
+
+  { id:'pme', en:'Post-Material Elite', zh:'后物质主义精英',
+    color:'#8B3A8B', lc:'#E8C8E8',
+    mx:430, my:65, r:30,
+    descEn:'Academic elite with post-material roots. High affinity for art, culture and education. Critical of globalization; advocates for justice and public welfare.',
+    descZh:'具有后物质主义根基的学术精英。对艺术、文化和教育有高度亲和力。对全球化持批判态度，倡导公平与公共福祉。',
+    traits:[{en:'Intellectual',zh:'知识分子'},{en:'Cultural',zh:'文化导向'},{en:'Critical',zh:'批判性'},{en:'Ethical',zh:'道德导向'}],
+    mktEn:'Niche culture, sustainable luxury, quality education. Found in top universities, NGOs, arts sector.',
+    mktZh:'小众文化、可持续奢华、优质教育。见于顶尖高校、NGO和艺术领域。',
+    reg:{nat:6, sh:9, zj:7, ynan:2, gs:1} },  
+
+  { id:'poe', en:'Progressive Modern Elite', zh:'进步现代精英',
+    color:'#1868B8', lc:'#C0D8F5',
+    mx:530, my:75, r:36,
+    descEn:'Globally-minded, efficiency-oriented modern elite. Early adopters of technology, interested in career and digital innovation. Open to change and new ideas.',
+    descZh:'具有全球视野、效率导向的现代精英。技术早期采用者，对职业发展和数字创新充满热情。开放变化，接受新思想。',
+    traits:[{en:'Global mindset',zh:'全球视野'},{en:'Tech-savvy',zh:'科技达人'},{en:'Career-driven',zh:'事业驱动'},{en:'Innovative',zh:'创新'}],
+    mktEn:'Premium tech, startup culture, international brands. Strong in tech hubs like Hangzhou, Shenzhen, Shanghai.',
+    mktZh:'高端科技、创业文化、国际品牌。在杭州、深圳、上海等科技中心尤为集中。',
+    reg:{nat:9, sh:16, zj:15, ynan:5, gs:3} },
+
+  { id:'aav', en:'Ambitious Avant-Garde', zh:'野心勃勃的先锋',
+    color:'#16885A', lc:'#BCDECF',
+    mx:510, my:185, r:32,
+    descEn:'Cosmopolitan, urban and mobile. Pronounced self-expression, post-modern values. Digital nomads and lifestyle vanguards. Creative professionals and entrepreneurs.',
+    descZh:'具有国际视野、城市化、流动性强。自我表达意识强，持后现代价值观。数字游民和生活方式先行者。创意从业者和创业者。',
+    traits:[{en:'Cosmopolitan',zh:'国际化'},{en:'Creative',zh:'创意'},{en:'Self-expressive',zh:'自我表达'},{en:'Mobile',zh:'流动性强'}],
+    mktEn:'Lifestyle brands, creative economy, co-working. Core of China\'s "新中产" creative class.',
+    mktZh:'生活方式品牌、创意经济、联合办公。中国"新中产"创意阶层的核心。',
+    reg:{nat:8, sh:12, zj:11, ynan:4, gs:2} },
+
+  { id:'apm', en:'Adaptive-Pragmatic Middle', zh:'适应性务实中层',
+    color:'#B07010', lc:'#F0DFB0',
+    mx:370, my:210, r:38,
+    descEn:'Modern, flexible middle class. Balances performance and enjoyment. Pragmatic in approach, optimistic about the future. Digitally engaged, open to change.',
+    descZh:'现代化、灵活的中产阶级。兼顾绩效与享乐。处事务实，对未来充满乐观。数字化参与度高，开放变化。',
+    traits:[{en:'Pragmatic',zh:'务实'},{en:'Flexible',zh:'灵活'},{en:'Optimistic',zh:'乐观'},{en:'Digitally active',zh:'数字活跃'}],
+    mktEn:'Mass-premium, mobile commerce, lifestyle upgrades. China\'s largest growing middle-class segment.',
+    mktZh:'大众高端、移动商务、生活品质升级。中国增速最快的中产阶层。',
+    reg:{nat:14, sh:16, zj:17, ynan:9, gs:7} },
+
+  { id:'ahs', en:'Adapted Harmony-Seekers', zh:'适应性和谐追求者',
+    color:'#2A9090', lc:'#B8DFDF',
+    mx:195, my:215, r:36,
+    descEn:'Conservative-materialistic, status-oriented. Seek order, harmony and community. Balance between tradition and modernity. Feel pressure to keep up with change.',
+    descZh:'保守物质主义，地位导向。追求秩序、和谐与社区归属感。在传统与现代之间寻求平衡。感受到跟上变化的压力。',
+    traits:[{en:'Harmony-seeking',zh:'和谐导向'},{en:'Status-aware',zh:'地位意识'},{en:'Community-oriented',zh:'社区导向'},{en:'Cautious',zh:'谨慎'}],
+    mktEn:'Family brands, home ownership, social mobility products. Core of aspirational suburban China.',
+    mktZh:'家庭品牌、房产、社会流动性产品。中国城郊上升阶层的核心。',
+    reg:{nat:13, sh:11, zj:13, ynan:16, gs:15} },
+
+  { id:'ert', en:'Enrooted Traditionalists', zh:'根深蒂固的传统主义者',
+    color:'#7070C0', lc:'#CFCFEA',
+    mx:125, my:320, r:36,
+    descEn:'Strong community and family ties. Ritualized everyday life, obedience and modesty. Afraid of losing traditions. Deeply rooted in local culture and customs.',
+    descZh:'强烈的社区和家庭纽带。仪式化的日常生活，顺从与谦逊。担忧失去传统。深深植根于地方文化和习俗。',
+    traits:[{en:'Traditional',zh:'传统'},{en:'Family-centred',zh:'以家庭为中心'},{en:'Modest',zh:'谦逊'},{en:'Community-bound',zh:'社区依附'}],
+    mktEn:'Local brands, staple goods, family products. Dominant in rural inland China.',
+    mktZh:'本地品牌、基本商品、家庭产品。在中国内陆农村地区占主导地位。',
+    reg:{nat:12, sh:5, zj:8, ynan:24, gs:28} },
+
+  { id:'stm', en:'Status & Tradition-Oriented Middle', zh:'地位与传统导向中层',
+    color:'#886040', lc:'#DECCB8',
+    mx:215, my:340, r:34,
+    descEn:'Middle class anchored in tradition. Hardworking and security-oriented. Aspires to social mobility but cautious about risk. Values face (面子) and social recognition.',
+    descZh:'植根于传统的中产阶层。勤劳，以安全感为导向。渴望社会流动，但对风险持谨慎态度。重视面子和社会认可。',
+    traits:[{en:'Security-seeking',zh:'安全感导向'},{en:'"Face"-conscious',zh:'面子意识'},{en:'Hardworking',zh:'勤劳'},{en:'Risk-averse',zh:'规避风险'}],
+    mktEn:'Insurance, home goods, local prestige brands. Key segment in tier-3/4 cities.',
+    mktZh:'保险、家居用品、本地知名品牌。三四线城市的核心阶层。',
+    reg:{nat:14, sh:8, zj:11, ynan:18, gs:22} },
+
+  { id:'wcp', en:'Lower Income Mainstream', zh:'低收入主流阶层',
+    color:'#608030', lc:'#CCDDAA',
+    mx:310, my:390, r:38,
+    descEn:'Socially deprived, uprooted. Overwhelmed by modernization. Short-term consumer orientation and basic needs focus. Seek entertainment for distraction. Solidarity within own network.',
+    descZh:'社会底层，缺乏归属感。被现代化所压倒。以短期消费和基本需求为导向。寻求娱乐转移注意力。在自身网络内有强烈的团结感。',
+    traits:[{en:'Basic needs focus',zh:'基本需求为先'},{en:'Overwhelmed',zh:'不堪重负'},{en:'Short-term',zh:'短视消费'},{en:'Solidarity',zh:'内部团结'}],
+    mktEn:'Value retail, entertainment, mobile apps (Douyin). Migrant workers and informal economy workers.',
+    mktZh:'价格实惠的零售、娱乐、移动应用（抖音）。外来务工人员和非正规经济从业者。',
+    reg:{nat:16, sh:11, zj:8, ynan:19, gs:20} },
+];
+
+const REGIONS = [
+  { id:'nat',  enName:'China (National avg.)',    zhName:'全国平均',    enSub:'Estimated national average',    zhSub:'全国平均估算' },
+  { id:'sh',   enName:'Shanghai',                 zhName:'上海',        enSub:'Tier-1 megacity',               zhSub:'一线特大城市' },
+  { id:'zj',   enName:'Zhejiang',                 zhName:'浙江省',      enSub:'Coastal affluent province',     zhSub:'沿海富裕省份' },
+  { id:'ynan', enName:'Guizhou',                  zhName:'贵州省',      enSub:'Inland · "Data Valley"',        zhSub:'内陆省份 · "数据谷"' },
+  { id:'gs',   enName:'Gansu',                    zhName:'甘肃省',      enSub:'Northwest · traditional',       zhSub:'西北 · 传统农业省' },
+];
+
+/* ─── BUILD MAP BUBBLES ─── */
+const NS='http://www.w3.org/2000/svg';
+const bG=document.getElementById('bubbles');
+let activeId=null, activeRegion='nat';
+
+function dk(hex,f){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return`rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`;
+}
+
+M.forEach(m=>{
+  const g=document.createElementNS(NS,'g');
+  g.setAttribute('cursor','pointer');
+  g.dataset.id=m.id;
+
+  const circ=document.createElementNS(NS,'circle');
+  circ.setAttribute('cx',m.mx); circ.setAttribute('cy',m.my); circ.setAttribute('r',m.r);
+  circ.setAttribute('fill',m.lc); circ.setAttribute('stroke',m.color); circ.setAttribute('stroke-width','1.5');
+  circ.style.transition='opacity .2s, r .2s';
+  g.appendChild(circ);
+
+  // EN label
+  const ten=document.createElementNS(NS,'text');
+  ten.setAttribute('x',m.mx); ten.setAttribute('y',m.my-4);
+  ten.setAttribute('text-anchor','middle'); ten.setAttribute('dominant-baseline','central');
+  ten.setAttribute('font-size','9.5'); ten.setAttribute('font-weight','600');
+  ten.setAttribute('font-family',"'DM Sans',sans-serif");
+  ten.setAttribute('fill',dk(m.color,.7)); ten.setAttribute('class','en-only');
+  ten.setAttribute('pointer-events','none');
+  // wrap long names
+  const words=m.en.split(' ');
+  if(words.length<=2){
+    ten.textContent=m.en;
+    ten.setAttribute('y',m.my);
+  } else {
+    const mid=Math.ceil(words.length/2);
+    const tspan1=document.createElementNS(NS,'tspan');
+    tspan1.setAttribute('x',m.mx); tspan1.setAttribute('dy','0');
+    tspan1.textContent=words.slice(0,mid).join(' ');
+    const tspan2=document.createElementNS(NS,'tspan');
+    tspan2.setAttribute('x',m.mx); tspan2.setAttribute('dy','12');
+    tspan2.textContent=words.slice(mid).join(' ');
+    ten.setAttribute('y',m.my-6);
+    ten.appendChild(tspan1); ten.appendChild(tspan2);
+  }
+  g.appendChild(ten);
+
+  // ZH label
+  const tzh=document.createElementNS(NS,'text');
+  tzh.setAttribute('x',m.mx); tzh.setAttribute('y',m.my);
+  tzh.setAttribute('text-anchor','middle'); tzh.setAttribute('dominant-baseline','central');
+  tzh.setAttribute('font-size','10'); tzh.setAttribute('font-weight','600');
+  tzh.setAttribute('font-family',"'Noto Serif SC',serif");
+  tzh.setAttribute('fill',dk(m.color,.7)); tzh.setAttribute('class','zh-only');
+  tzh.setAttribute('pointer-events','none');
+  if(m.zh.length>7){
+    const mid=Math.ceil(m.zh.length/2);
+    const z1=document.createElementNS(NS,'tspan');
+    z1.setAttribute('x',m.mx); z1.setAttribute('dy','0'); z1.textContent=m.zh.slice(0,mid);
+    const z2=document.createElementNS(NS,'tspan');
+    z2.setAttribute('x',m.mx); z2.setAttribute('dy','13'); z2.textContent=m.zh.slice(mid);
+    tzh.setAttribute('y',m.my-6); tzh.appendChild(z1); tzh.appendChild(z2);
+  } else {
+    tzh.textContent=m.zh;
+  }
+  g.appendChild(tzh);
+
+  g.addEventListener('click',()=>showDetail(m.id));
+  bG.appendChild(g);
+});
+
+/* ─── DETAIL PANEL ─── */
+function showDetail(id){
+  if(activeId===id){clearDetail();return;}
+  activeId=id;
+  const m=M.find(x=>x.id===id);
+
+  // dim others
+  document.querySelectorAll('#bubbles g').forEach(g=>{
+    const mm=M.find(x=>x.id===g.dataset.id);
+    const circ=g.querySelector('circle');
+    if(g.dataset.id===id){circ.setAttribute('fill',m.color);circ.style.opacity='1';}
+    else{circ.setAttribute('fill',mm.lc);circ.style.opacity='.28';}
+  });
+
+  document.getElementById('dcdot').style.background=m.color;
+  document.getElementById('dcn-en').textContent=m.en;
+  document.getElementById('dcn-zh').textContent=m.zh;
+  document.getElementById('dcsh').textContent=m.reg[activeRegion]+'%';
+  document.getElementById('dcd-en').textContent=m.descEn;
+  document.getElementById('dcd-zh').textContent=m.descZh;
+  document.getElementById('dcm-en').textContent=m.mktEn;
+  document.getElementById('dcm-zh').textContent=m.mktZh;
+
+  const td=document.getElementById('dc-traits'); td.innerHTML='';
+  m.traits.forEach(t=>{
+    const s=document.createElement('span'); s.className='tr';
+    s.style.background=m.lc; s.style.color=dk(m.color,.6);
+    s.innerHTML=`<span class="en-only">${t.en}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${t.zh}</span>`;
+    td.appendChild(s);
+  });
+
+  document.getElementById('dc').style.borderColor=m.color+'55';
+  document.getElementById('de-empty').style.display='none';
+  const dci=document.getElementById('dc-inner');
+  dci.style.display='block'; dci.classList.add('fi'); setTimeout(()=>dci.classList.remove('fi'),280);
+
+  // highlight bar row
+  document.querySelectorAll('.bar-row').forEach(r=>{
+    r.style.opacity=r.dataset.id===id?'1':'0.45';
+  });
+}
+
+function clearDetail(){
+  activeId=null;
+  document.querySelectorAll('#bubbles g').forEach(g=>{
+    const mm=M.find(x=>x.id===g.dataset.id);
+    g.querySelector('circle').setAttribute('fill',mm.lc);
+    g.querySelector('circle').style.opacity='1';
+  });
+  document.getElementById('de-empty').style.display='flex';
+  document.getElementById('dc-inner').style.display='none';
+  document.getElementById('dc').style.borderColor='';
+  document.querySelectorAll('.bar-row').forEach(r=>r.style.opacity='1');
+}
+
+document.getElementById('milieu-map').addEventListener('click',e=>{
+  if(!e.target.closest('g[data-id]')) clearDetail();
+});
+
+/* ─── SIZE BUBBLES BY REGION ─── */
+function sizeByRegion(region){
+  document.querySelectorAll('#bubbles g').forEach(g=>{
+    const mm=M.find(x=>x.id===g.dataset.id);
+    const circ=g.querySelector('circle');
+    const pct=mm.reg[region];
+    // scale radius: base 20, max pct=22 → r=46, min pct=2 → r=16
+    const newR=Math.round(16 + (pct/22)*(46-16));
+    circ.setAttribute('r',newR);
+  });
+}
+
+/* ─── REGION BARS ─── */
+const rGrid=document.getElementById('region-grid');
+REGIONS.forEach(reg=>{
+  const card=document.createElement('div');
+  card.className='reg-card'; card.id='regcard-'+reg.id;
+  card.innerHTML=`
+    <div class="reg-title en-only">${reg.enName}</div>
+    <div class="reg-title zh-only" style="font-family:'Noto Serif SC',serif">${reg.zhName}</div>
+    <div class="reg-sub en-only">${reg.enSub}</div>
+    <div class="reg-sub zh-only">${reg.zhSub}</div>
+  `;
+  // sort by descending share for this region
+  const sorted=[...M].sort((a,b)=>b.reg[reg.id]-a.reg[reg.id]);
+  sorted.forEach(m=>{
+    const pct=m.reg[reg.id];
+    const row=document.createElement('div');
+    row.className='bar-row'; row.dataset.id=m.id;
+    row.innerHTML=`
+      <div class="bar-label">
+        <span class="en-only">${m.en.split(' ').slice(0,2).join(' ')}</span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">${m.zh}</span>
+        <span class="bl-zh en-only" style="font-family:'Noto Serif SC',serif">${m.zh}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:${m.color}" data-target="${pct}"></div></div>
+      <div class="bar-pct">${pct}%</div>
+    `;
+    row.addEventListener('click',()=>{
+      document.querySelector('.main').scrollIntoView({behavior:'smooth',block:'start'});
+      setTimeout(()=>showDetail(m.id),350);
+    });
+    card.appendChild(row);
+  });
+  rGrid.appendChild(card);
+});
+
+// animate bars on load
+setTimeout(()=>{
+  document.querySelectorAll('.bar-fill').forEach(b=>{
+    b.style.width=b.dataset.target+'%';
+  });
+},300);
+
+/* ─── MILIEU CARD GRID ─── */
+const cardGrid=document.getElementById('card-grid');
+M.forEach(m=>{
+  const card=document.createElement('div');
+  card.style.cssText=`background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden`;
+  card.dataset.id=m.id;
+  card.innerHTML=`
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${m.color};opacity:.8"></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="width:9px;height:9px;border-radius:50%;background:${m.color};flex-shrink:0"></div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700" class="en-only">${m.en}</div>
+        <div style="font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2)">${m.zh}</div>
+      </div>
+    </div>
+    <div style="font-size:11.5px;color:var(--ink2);line-height:1.65" class="en-only">${m.descEn.slice(0,90)}…</div>
+    <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.8" class="zh-only">${m.descZh.slice(0,60)}…</div>
+  `;
+  card.addEventListener('mouseover',()=>card.style.borderColor=m.color);
+  card.addEventListener('mouseout',()=>card.style.borderColor='');
+  card.addEventListener('click',()=>{
+    document.querySelector('.main').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>showDetail(m.id),350);
+  });
+  cardGrid.appendChild(card);
+});
+
+/* ─── TAB / REGION SWITCH ─── */
+function setRegion(r){
+  activeRegion=r;
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.classList.toggle('on', t.id==='tab-'+r);
+  });
+  sizeByRegion(r);
+  if(activeId){
+    const m=M.find(x=>x.id===activeId);
+    document.getElementById('dcsh').textContent=m.reg[r]+'%';
+  }
+  // highlight active region card
+  document.querySelectorAll('.reg-card').forEach(c=>{
+    c.style.boxShadow=c.id==='regcard-'+r?'0 0 0 2px var(--ink)':'';
+    c.style.background=c.id==='regcard-'+r?'var(--bg2)':'var(--card)';
+  });
+}
+
+// initial sizing
+sizeByRegion('nat');
+
+/* ─── LANG SWITCH ─── */
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

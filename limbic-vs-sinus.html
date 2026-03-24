@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limbic Types vs Sinus Milieus · Individual ↔ Social</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2EFE8; --bg2:#E8E4DC; --bg3:#DAD6CC; --card:#FDFAF5;
+  --ink:#1A1816; --ink2:#46423C; --ink3:#7A756C;
+  --border:rgba(26,24,22,.10); --border2:rgba(26,24,22,.06);
+  --r:12px;
+  --climbic:#C84020; --csinus:#2A5FA8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* ── HEADER ── */
+header{background:var(--ink);color:#F2EFE8;padding:26px 40px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ht{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.8vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.hs{font-size:11px;color:rgba(242,239,232,.42);letter-spacing:.09em;text-transform:uppercase;margin-top:3px}
+.hz{font-family:'Noto Serif SC',serif;font-size:13px;color:rgba(242,239,232,.58);margin-top:2px}
+.lr{display:flex;gap:6px}
+.lb{background:none;border:1px solid rgba(242,239,232,.22);color:rgba(242,239,232,.58);
+    padding:5px 16px;border-radius:30px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .18s}
+.lb.on{background:#C84020;border-color:#C84020;color:#fff}
+.lb:hover:not(.on){background:rgba(242,239,232,.08);color:#fff}
+
+/* ── CONCEPT SECTION ── */
+.concept{max-width:980px;margin:32px auto 0;padding:0 22px}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.4vw,26px);font-weight:700;margin-bottom:4px}
+.ss{font-size:13px;color:var(--ink3);margin-bottom:20px;line-height:1.65}
+
+/* two-column concept cards */
+.concept-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+@media(max-width:620px){.concept-pair{grid-template-columns:1fr}}
+
+.cc{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:20px 22px;position:relative;overflow:hidden}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.cc.limbic::before{background:var(--climbic)}
+.cc.sinus::before{background:var(--csinus)}
+.cc-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.cc.limbic .cc-tag{color:var(--climbic)}
+.cc.sinus  .cc-tag{color:var(--csinus)}
+.cc-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:10px;color:var(--ink)}
+.cc-rows{display:flex;flex-direction:column;gap:9px}
+.cc-row{display:grid;grid-template-columns:90px 1fr;gap:10px;font-size:12.5px}
+.cc-row .lbl{color:var(--ink3);font-size:11px;letter-spacing:.04em;padding-top:1px}
+.cc-row .val{color:var(--ink2);line-height:1.6}
+.cc-row .val-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.75;margin-top:2px}
+
+/* VS divider */
+.vs-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:8px 0 20px}
+.vs-line{flex:1;height:1px;background:var(--border)}
+.vs-badge{background:var(--ink);color:#F2EFE8;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;
+          width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* contrast table */
+.contrast-table{width:100%;border-collapse:collapse;margin-bottom:28px;background:var(--card);
+                border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;font-size:12.5px}
+.contrast-table thead{background:var(--bg2)}
+.contrast-table th{padding:10px 14px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.07em;
+                   text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border)}
+.contrast-table th.lh{color:var(--climbic)}
+.contrast-table th.sh2{color:var(--csinus)}
+.contrast-table td{padding:10px 14px;border-bottom:1px solid var(--border2);vertical-align:top;line-height:1.6;color:var(--ink2)}
+.contrast-table td.dim{color:var(--ink3);font-size:11.5px}
+.contrast-table tr:last-child td{border-bottom:none}
+.zh-row{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-top:2px;line-height:1.75}
+
+/* ── MATRIX SECTION ── */
+.matrix-section{max-width:980px;margin:36px auto 0;padding:0 22px}
+.matrix-intro{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:18px;max-width:720px}
+.matrix-intro-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.85;margin-bottom:18px;max-width:720px}
+
+/* filter row */
+.filter-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;align-items:center}
+.filter-label{font-size:11px;color:var(--ink3);letter-spacing:.05em;margin-right:4px}
+.ftag{font-size:11.5px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);
+      background:var(--card);color:var(--ink2);cursor:pointer;transition:all .15s;line-height:1.3}
+.ftag:hover{border-color:var(--ink3)}
+.ftag.on{color:#fff;border-color:transparent}
+.ftag.limbic-tag.on{background:var(--climbic)}
+.ftag.sinus-tag.on{background:var(--csinus)}
+
+/* matrix grid */
+.matrix-wrap{overflow-x:auto;margin-bottom:40px}
+.matrix{border-collapse:collapse;min-width:640px;width:100%}
+/* col header = Limbic Types */
+.matrix .col-head{
+  font-size:10px;font-weight:500;letter-spacing:.04em;
+  padding:8px 6px 6px;text-align:center;vertical-align:bottom;
+  border-bottom:2px solid var(--climbic);color:var(--climbic);
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  height:90px;white-space:nowrap;
+}
+.matrix .col-head-zh{
+  font-family:'Noto Serif SC',serif;font-size:10px;
+  display:block;color:rgba(200,64,32,.6);margin-top:2px;
+}
+/* row header = Sinus Milieus */
+.matrix .row-head{
+  font-size:11px;font-weight:500;padding:7px 12px 7px 4px;
+  text-align:right;white-space:nowrap;color:var(--csinus);
+  border-right:2px solid var(--csinus);min-width:140px;
+  vertical-align:middle;line-height:1.3;
+}
+.matrix .row-head .rh-zh{
+  font-family:'Noto Serif SC',serif;font-size:10px;
+  color:rgba(42,95,168,.6);display:block;margin-top:1px;
+}
+/* cells */
+.matrix td.cell{
+  width:62px;text-align:center;padding:5px 3px;
+  border:1px solid var(--border2);vertical-align:middle;
+  cursor:pointer;transition:all .15s;position:relative;
+}
+.matrix td.cell:hover{border-color:var(--ink3);z-index:2}
+.dot{
+  width:28px;height:28px;border-radius:50%;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:500;transition:transform .15s;
+  border:1.5px solid transparent;
+}
+.matrix td.cell:hover .dot{transform:scale(1.18)}
+/* strength encoding */
+.s0 .dot{background:var(--bg2);border-color:var(--bg3);color:var(--ink3);opacity:.4}
+.s1 .dot{background:#EEE8D8;border-color:#C8C0A8;color:var(--ink3)}
+.s2 .dot{background:#DCCCA8;border-color:#A89870;color:var(--ink2)}
+.s3 .dot{background:#C8A840;border-color:#906820;color:#3A2800}
+.s4 .dot{background:#A06820;border-color:#703800;color:#fff}
+
+/* tooltip — floating panel, positioned via JS to avoid clipping */
+.tt{display:none}
+#tt-panel{
+  display:none;position:fixed;
+  background:var(--ink);color:#F2EFE8;
+  font-size:12px;line-height:1.6;padding:10px 13px;border-radius:8px;
+  z-index:9999;pointer-events:none;width:230px;white-space:normal;
+  box-shadow:0 4px 18px rgba(0,0,0,.28);
+}
+
+/* legend */
+.dot-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
+.dl-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink3)}
+.dl-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+
+/* highlight strip */
+.matrix tr.row-active .row-head{background:rgba(42,95,168,.06)}
+.matrix td.col-active{background:rgba(200,64,32,.04)}
+.matrix tr.row-active td.col-active .dot{transform:scale(1.22);border-width:2px}
+
+footer{background:var(--ink);color:rgba(242,239,232,.38);text-align:center;padding:22px 20px;font-size:11.5px;line-height:1.85;margin-top:8px}
+
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fi{animation:fi .25s ease both}
+
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<header>
+  <div>
+    <div class="ht">Individual Character vs Social Group</div>
+    <div class="hs">Limbic Types · Sinus Milieus · A Teaching Framework</div>
+    <div class="hz zh-only">个体性格 vs 社会群体 · 两种模型的教学框架</div>
+  </div>
+  <div class="lr">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<!-- CONCEPT COMPARISON -->
+<div class="concept">
+  <h2 class="sh">
+    <span class="en-only">Two Models, Two Questions</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">两个模型，两个问题</span>
+  </h2>
+  <p class="ss en-only">Both models segment people — but they ask fundamentally different questions and serve different analytical purposes. Understanding the contrast is the key to using either well.</p>
+  <p class="ss zh-only" style="font-family:'Noto Serif SC',serif">两种模型都对人群进行细分——但它们提出的是本质上不同的问题，服务于不同的分析目的。理解两者的对比，是有效运用任一模型的关键。</p>
+
+  <div class="concept-pair">
+    <!-- LIMBIC -->
+    <div class="cc limbic">
+      <div class="cc-tag">Limbic Types</div>
+      <div class="cc-title en-only">Who are you — inside?</div>
+      <div class="cc-title zh-only" style="font-family:'Noto Serif SC',serif">你内心深处是谁？</div>
+      <div class="cc-rows">
+        <div class="cc-row">
+          <span class="lbl en-only">Core question</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">核心问题</span>
+          <span>
+            <div class="val en-only">What drives this person emotionally and neurologically?</div>
+            <div class="val-zh zh-only">是什么在情感和神经层面驱动这个人？</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Unit of analysis</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">分析单位</span>
+          <span>
+            <div class="val en-only">The individual personality</div>
+            <div class="val-zh zh-only">个体人格</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Theoretical root</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">理论根基</span>
+          <span>
+            <div class="val en-only">Neuroscience, evolutionary biology, personality psychology</div>
+            <div class="val-zh zh-only">脑科学、进化生物学、人格心理学</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Map axes</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">坐标轴</span>
+          <span>
+            <div class="val en-only">Hedonism ↔ Tradition &nbsp;/&nbsp; Openness ↔ Discipline</div>
+            <div class="val-zh zh-only">享乐主义 ↔ 传统 &nbsp;/&nbsp; 开放 ↔ 责任</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Primary use</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">主要用途</span>
+          <span>
+            <div class="val en-only">Messaging, tone, emotional appeal, brand personality</div>
+            <div class="val-zh zh-only">信息传递、语气、情感诉求、品牌个性</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Stability</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">稳定性</span>
+          <span>
+            <div class="val en-only">Relatively fixed — rooted in neurobiology</div>
+            <div class="val-zh zh-only">相对固定——植根于神经生物学</div>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SINUS -->
+    <div class="cc sinus">
+      <div class="cc-tag">Sinus Milieus</div>
+      <div class="cc-title en-only">Where do you stand — in society?</div>
+      <div class="cc-title zh-only" style="font-family:'Noto Serif SC',serif">你在社会中处于什么位置？</div>
+      <div class="cc-rows">
+        <div class="cc-row">
+          <span class="lbl en-only">Core question</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">核心问题</span>
+          <span>
+            <div class="val en-only">Which social environment shapes this person's worldview?</div>
+            <div class="val-zh zh-only">哪种社会环境塑造了这个人的世界观？</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Unit of analysis</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">分析单位</span>
+          <span>
+            <div class="val en-only">The social group / lifeworld</div>
+            <div class="val-zh zh-only">社会群体 / 生活世界</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Theoretical root</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">理论根基</span>
+          <span>
+            <div class="val en-only">Sociology, social stratification, value research</div>
+            <div class="val-zh zh-only">社会学、社会分层理论、价值观研究</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Map axes</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">坐标轴</span>
+          <span>
+            <div class="val en-only">Social status (low → high) &nbsp;/&nbsp; Value orientation (tradition → modernity)</div>
+            <div class="val-zh zh-only">社会地位（低→高） &nbsp;/&nbsp; 价值取向（传统→现代）</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Primary use</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">主要用途</span>
+          <span>
+            <div class="val en-only">Channel selection, media planning, societal positioning</div>
+            <div class="val-zh zh-only">渠道选择、媒体规划、社会定位</div>
+          </span>
+        </div>
+        <div class="cc-row">
+          <span class="lbl en-only">Stability</span>
+          <span class="lbl zh-only" style="font-family:'Noto Serif SC',serif">稳定性</span>
+          <span>
+            <div class="val en-only">Shifts over decades — tracks societal change</div>
+            <div class="val-zh zh-only">随年代变化——追踪社会变迁</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VS DIVIDER -->
+  <div class="vs-row">
+    <div class="vs-line"></div>
+    <div class="vs-badge">↕</div>
+    <div class="vs-line"></div>
+  </div>
+
+  <!-- CONTRAST TABLE -->
+  <table class="contrast-table">
+    <thead>
+      <tr>
+        <th class="dim en-only">Dimension</th>
+        <th class="dim zh-only" style="font-family:'Noto Serif SC',serif">维度</th>
+        <th class="lh en-only">Limbic Types</th>
+        <th class="lh zh-only" style="font-family:'Noto Serif SC',serif">Limbic 类型</th>
+        <th class="sh2 en-only">Sinus Milieus</th>
+        <th class="sh2 zh-only" style="font-family:'Noto Serif SC',serif">Sinus 社会阶层</th>
+      </tr>
+    </thead>
+    <tbody id="contrast-body"></tbody>
+  </table>
+</div>
+
+<!-- MATRIX SECTION -->
+<div class="matrix-section">
+  <h2 class="sh">
+    <span class="en-only">Mapping: Which Limbic Types Appear in Which Sinus Milieus?</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">映射：哪些Limbic类型出现在哪些Sinus阶层中？</span>
+  </h2>
+  <p class="matrix-intro en-only">Each person has both a Limbic Type and a Sinus Milieu — the two dimensions are independent but correlate. This matrix shows the <em>likelihood of overlap</em>: a darker cell means that Limbic Type is frequently found within that Sinus Milieu. Hover a cell for the reasoning. Click a row or column header to highlight.</p>
+  <p class="matrix-intro-zh zh-only">每个人既有Limbic类型，也属于某个Sinus阶层——两个维度相互独立但存在相关性。此矩阵显示<em>重叠的可能性</em>：颜色越深，表示该Limbic类型在对应Sinus阶层中出现的频率越高。悬停单元格查看原因，点击行/列标题高亮显示。</p>
+
+  <!-- dot legend -->
+  <div class="dot-legend">
+    <span class="dl-item"><div class="dl-dot" style="background:#E8E4D8;border:1.5px solid #C8C0A8"></div><span class="en-only">Rare / unlikely</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">罕见</span></span>
+    <span class="dl-item"><div class="dl-dot" style="background:#DCCCA8;border:1.5px solid #A89870"></div><span class="en-only">Occasional</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">偶尔出现</span></span>
+    <span class="dl-item"><div class="dl-dot" style="background:#C8A840;border:1.5px solid #906820"></div><span class="en-only">Common</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">常见</span></span>
+    <span class="dl-item"><div class="dl-dot" style="background:#A06820;border:1.5px solid #703800"></div><span class="en-only">Strongly associated</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">强关联</span></span>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix" id="matrix-table">
+      <thead><tr id="matrix-head"></tr></thead>
+      <tbody id="matrix-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p>Limbic® is a registered concept of Gruppe Nymphenburg · Sinus-Milieus® is a registered trademark of Sinus-Institut GmbH</p>
+  <p style="font-family:'Noto Serif SC',serif;margin-top:3px">Limbic®是Nymphenburg集团的注册概念 · Sinus-Milieus®是Sinus研究院的注册商标</p>
+  <p style="margin-top:5px">Teaching material · 教学材料 · Not for commercial use · 仅供教学使用</p>
+</footer>
+
+<div id="tt-panel"></div>
+
+<script>
+/* ── CONTRAST TABLE DATA ── */
+const CONTRASTS = [
+  { dim:'What it explains', dimZh:'解释什么',
+    limbic:'Inner emotional drives & personality tendencies', limbicZh:'内在情感驱动与人格倾向',
+    sinus:'Shared lifeworld, values & social position', sinusZh:'共同的生活世界、价值观与社会位置' },
+  { dim:'Level of analysis', dimZh:'分析层次',
+    limbic:'Individual (psychological)', limbicZh:'个体（心理学）',
+    sinus:'Group (sociological)', sinusZh:'群体（社会学）' },
+  { dim:'Number of types', dimZh:'类型数量',
+    limbic:'7 types', limbicZh:'7种类型',
+    sinus:'9–10 milieus (varies by country)', sinusZh:'9–10个阶层（因国而异）' },
+  { dim:'Data source', dimZh:'数据来源',
+    limbic:'Psychometric questionnaires, neuro research', limbicZh:'心理测量问卷、神经科学研究',
+    sinus:'Ethnographic interviews + large-scale surveys', sinusZh:'民族志访谈＋大规模调查' },
+  { dim:'Changes with…', dimZh:'随……而变化',
+    limbic:'Rarely — personality is relatively stable over a lifetime', limbicZh:'几乎不变——人格在一生中相对稳定',
+    sinus:'Societal shifts, economic development, generational change', sinusZh:'社会变迁、经济发展、代际更替' },
+  { dim:'Best answers', dimZh:'最适合回答',
+    limbic:'"How should we speak to this person?"', limbicZh:'"我们应该如何与这个人沟通？"',
+    sinus:'"Where does this person live — socially and culturally?"', sinusZh:'"这个人社会和文化上处于哪个位置？"' },
+  { dim:'In China context', dimZh:'在中国情境中',
+    limbic:'Broadly applicable — emotional drivers are cross-cultural', limbicZh:'适用范围广——情感驱动因素具有跨文化性',
+    sinus:'Reveals regional divides (coast vs inland) and rapid social change', sinusZh:'揭示区域差异（沿海vs内陆）与快速社会变迁' },
+];
+
+const tbody = document.getElementById('contrast-body');
+CONTRASTS.forEach(r=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td class="dim">
+      <div class="en-only">${r.dim}</div>
+      <div class="zh-only" style="font-family:'Noto Serif SC',serif">${r.dimZh}</div>
+    </td>
+    <td>
+      <div class="en-only">${r.limbic}</div>
+      <div class="val-zh zh-only">${r.limbicZh}</div>
+    </td>
+    <td>
+      <div class="en-only">${r.sinus}</div>
+      <div class="val-zh zh-only">${r.sinusZh}</div>
+    </td>`;
+  tbody.appendChild(tr);
+});
+
+/* ── MATRIX DATA ── */
+// Limbic Types (columns)
+const LT = [
+  {id:'perf',  en:'Performer',      zh:'表演者',      color:'#D45025'},
+  {id:'adv',   en:'Adventurer',     zh:'冒险家',      color:'#B83518'},
+  {id:'hed',   en:'Hedonist',       zh:'享乐主义者',  color:'#A86E0E'},
+  {id:'open',  en:'Open-minded',    zh:'开放者',      color:'#1A7848'},
+  {id:'harm',  en:'Harmoniser',     zh:'和谐者',      color:'#1860A8'},
+  {id:'trad',  en:'Traditionalist', zh:'传统主义者',  color:'#474498'},
+  {id:'disc',  en:'Disciplined',    zh:'自律者',      color:'#377037'},
+];
+
+// Sinus Milieus (rows) — using China emerging-market model
+const SM = [
+  {id:'poe', en:'Progressive Modern Elite', zh:'进步现代精英'},
+  {id:'pme', en:'Post-Material Elite',      zh:'后物质主义精英'},
+  {id:'cse', en:'Conservative Status Elite',zh:'保守地位精英'},
+  {id:'aav', en:'Ambitious Avant-Garde',    zh:'野心先锋'},
+  {id:'apm', en:'Adaptive-Pragmatic Middle',zh:'适应性务实中层'},
+  {id:'ahs', en:'Adapted Harmony-Seekers',  zh:'适应性和谐追求者'},
+  {id:'ert', en:'Enrooted Traditionalists', zh:'根深蒂固传统主义者'},
+  {id:'stm', en:'Status & Trad. Middle',    zh:'地位与传统导向中层'},
+  {id:'wcp', en:'Lower Income Mainstream',  zh:'低收入主流阶层'},
+];
+
+// Matrix values: [perf, adv, hed, open, harm, trad, disc]
+// 0=none, 1=rare, 2=occasional, 3=common, 4=strong
+// + tooltip text [EN, ZH]
+const MATRIX = {
+  poe: { vals:[3,4,2,3,1,0,4], tips:[
+    ['High performer energy in fast-paced tech world','科技快节奏世界中的高表演者能量'],
+    ['Risk-taking, startup culture, disruptive thinking','冒险精神、创业文化、颠覆性思维'],
+    ['Occasional lifestyle indulgence alongside ambition','雄心之余偶尔的生活享乐'],
+    ['Open to global ideas, cross-cultural curiosity','开放全球理念、跨文化好奇心'],
+    ['Rare — this milieu is competitive, not harmony-seeking','较少——该阶层竞争性强，非和谐导向'],
+    ['Very rare — rejects tradition as limiting','极少——视传统为束缚'],
+    ['Core driver: efficiency, performance, goal mastery','核心驱动：效率、绩效、目标掌控'],
+  ]},
+  pme: { vals:[1,0,3,4,2,1,3], tips:[
+    ['Some creative self-expression, but not fame-seeking','有创意表达，但不追名逐利'],
+    ['Very rare — risk-aversion higher here','极少——此处风险回避较强'],
+    ['Aesthetic pleasure, quality food, cultural indulgence','审美享受、高品质餐饮、文化熏陶'],
+    ['Strongest match — values, diversity, growth mindset','最强匹配——价值观、多元化、成长心态'],
+    ['Care for community and social justice','关注社群与社会公平'],
+    ['Mild — values some traditions in ethical sense','轻微——在道德意义上重视部分传统'],
+    ['Goal-driven in intellectual/activist sense','在知识/行动主义意义上有目标驱动'],
+  ]},
+  cse: { vals:[2,1,1,1,3,4,4], tips:[
+    ['Some status-display behaviour, but more restrained','有些地位展示行为，但更为克制'],
+    ['Rare — conservative elite avoids risk','较少——保守精英规避风险'],
+    ['Quiet luxury and refined taste, not overt hedonism','低调奢华与精致品味，非外显享乐主义'],
+    ['Selective openness — to high culture, not counterculture','有选择的开放——高雅文化而非反文化'],
+    ['Strong family duty, social obligation','强烈的家庭责任与社会义务'],
+    ['Core identity: tradition, hierarchy, proven values','核心身份：传统、等级、经过检验的价值观'],
+    ['Strong: duty, performance ethics, self-mastery','强烈：责任、绩效伦理、自我掌控'],
+  ]},
+  aav: { vals:[4,4,3,4,1,0,2], tips:[
+    ['Defining trait: self-expression, creativity, visibility','核心特征：自我表达、创意、曝光度'],
+    ['Urban nomad, startup energy, boundary-pushing','城市游牧、创业活力、突破边界'],
+    ['Curated pleasure and aesthetic lifestyle','精心策划的享乐与美学生活方式'],
+    ['Strongly curious, cross-cultural, experimental','强烈好奇心、跨文化、实验精神'],
+    ['Some community sense within creative networks','在创意网络中有一定的社群意识'],
+    ['Very rare — avant-garde rejects conformity','极少——先锋阶层拒绝从众'],
+    ['Present when pursuing mastery of creative craft','在追求创意技艺精通时有所体现'],
+  ]},
+  apm: { vals:[2,2,4,2,3,2,4], tips:[
+    ['Lifestyle trends, social media, brand awareness','生活方式趋势、社交媒体、品牌意识'],
+    ['Moderate — calculated risks for advancement','适中——为晋升而有计划地冒险'],
+    ['Strongest here: consumption, entertainment, comfort','在此最强：消费、娱乐、舒适'],
+    ['Pragmatic openness to new ideas if useful','对新想法的务实开放，前提是有用'],
+    ['Strong need for social belonging and family stability','强烈的社会归属感与家庭稳定需求'],
+    ['Moderate: respects norms but adapts','适中：尊重规范但也适应变化'],
+    ['Core: efficiency, pragmatism, getting ahead','核心：效率、务实、向上流动'],
+  ]},
+  ahs: { vals:[1,0,2,1,4,4,3], tips:[
+    ['Rare — performance is less valued here','较少——绩效在此阶层不那么受重视'],
+    ['Very rare — security over adventure','极少——安全感优先于冒险'],
+    ['Moderate: family celebrations, social eating','适中：家庭庆典、聚餐共享'],
+    ['Selective — openness to community, not disruption','有选择性——对社群开放，不接受颠覆'],
+    ['Defining: family harmony, social cohesion, face (面子)','核心特征：家庭和谐、社会凝聚力、面子'],
+    ['Strong: social norms, community expectations','强烈：社会规范、社群期望'],
+    ['Present: duty to family and community','有所体现：对家庭与社群的责任'],
+  ]},
+  ert: { vals:[0,0,1,0,3,4,3], tips:[
+    ['Very rare — display and novelty not valued','极少——不重视展示与新奇'],
+    ['Very rare — security is paramount','极少——安全感是首要考量'],
+    ['Modest pleasures within tradition','在传统框架内的朴素享乐'],
+    ['Very rare — deeply rooted, resists change','极少——根深蒂固，抵制变化'],
+    ['Strong: community ties, mutual support','强烈：社群纽带、互帮互助'],
+    ['Defining: obedience, custom, ritual, local identity','核心特征：服从、习俗、仪式、地方认同'],
+    ['Moderate: rural work ethic, routine and reliability','适中：农村劳动伦理、规律与可靠性'],
+  ]},
+  stm: { vals:[1,0,1,0,3,4,4], tips:[
+    ['Rare — status display is more restrained','较少——地位展示较为克制'],
+    ['Very rare — risk avoided','极少——规避风险'],
+    ['Modest — within budget and social expectation','朴素——在预算和社会期望范围内'],
+    ['Very rare — tradition is anchor, not curiosity','极少——传统是锚，而非好奇心'],
+    ['Strong: family duty, face consciousness (面子)','强烈：家庭责任、面子意识'],
+    ['Defining: social norms, hierarchy, saving face','核心特征：社会规范、等级制度、保全面子'],
+    ['Strong: hard work, security orientation','强烈：勤劳、安全感导向'],
+  ]},
+  wcp: { vals:[2,2,4,0,2,2,1], tips:[
+    ['Aspirational display to gain recognition','为获得认可而进行的向往型展示'],
+    ['Some — impulsive spending, escapism','有一些——冲动消费、逃避现实'],
+    ['Strongest: immediate pleasure, entertainment, Douyin','最强：即时享乐、娱乐、抖音'],
+    ['Very rare — overwhelmed by change, not curious','极少——被变化压倒，而非好奇'],
+    ['Some solidarity within peer group','在同伴群体内有一定的团结感'],
+    ['Moderate — familiar norms as comfort','适中——熟悉的规范作为慰藉'],
+    ['Low — short-term focus dominates','低——短期导向为主'],
+  ]},
+};
+
+/* ── BUILD MATRIX ── */
+const thead = document.getElementById('matrix-head');
+// corner cell
+const corner = document.createElement('th');
+corner.style.cssText='min-width:140px;padding:8px 4px 6px 4px;border-right:2px solid var(--csinus);border-bottom:2px solid var(--climbic)';
+corner.innerHTML=`<div style="font-size:9px;color:var(--ink3);text-align:right;padding-right:4px" class="en-only">Sinus ↓ &nbsp; Limbic →</div>
+  <div style="font-size:9px;color:var(--ink3);text-align:right;padding-right:4px;font-family:'Noto Serif SC',serif" class="zh-only">Sinus↓ Limbic→</div>`;
+thead.appendChild(corner);
+
+LT.forEach((lt,ci)=>{
+  const th=document.createElement('th');
+  th.className='col-head';
+  th.style.borderBottom=`2px solid ${lt.color}`;
+  th.dataset.ci=ci;
+  th.style.color=lt.color;
+  th.innerHTML=`<span class="en-only">${lt.en}</span><span class="col-head-zh zh-only" style="color:${lt.color}">${lt.zh}</span>`;
+  th.style.cursor='pointer';
+  th.addEventListener('click',()=>toggleColHighlight(ci));
+  thead.appendChild(th);
+});
+
+const tbodyM = document.getElementById('matrix-body');
+SM.forEach((sm,ri)=>{
+  const row=document.createElement('tr');
+  row.dataset.ri=ri;
+  // row header
+  const rh=document.createElement('td');
+  rh.className='row-head';
+  rh.dataset.ri=ri;
+  rh.style.cursor='pointer';
+  rh.innerHTML=`<span class="en-only">${sm.en}</span><span class="rh-zh zh-only">${sm.zh}</span>`;
+  rh.addEventListener('click',()=>toggleRowHighlight(ri));
+  row.appendChild(rh);
+  // cells
+  const rowData = MATRIX[sm.id];
+  rowData.vals.forEach((v,ci)=>{
+    const lt=LT[ci];
+    const td=document.createElement('td');
+    td.className=`cell s${v}`;
+    td.dataset.ci=ci; td.dataset.ri=ri;
+    const tipEN=rowData.tips[ci][0], tipZH=rowData.tips[ci][1];
+    td.innerHTML=`<div class="dot">${v===0?'·':v===1?'▪':v===2?'●':v===3?'◉':'★'}</div>`;
+    td.dataset.tipEn=rowData.tips[ci][0];
+    td.dataset.tipZh=rowData.tips[ci][1];
+    td.dataset.ltEn=lt.en; td.dataset.ltZh=lt.zh;
+    td.dataset.smEn=sm.en; td.dataset.smZh=sm.zh;
+    row.appendChild(td);
+  });
+  tbodyM.appendChild(row);
+});
+
+/* ── HIGHLIGHT LOGIC ── */
+let activeRow=null, activeCol=null;
+function toggleRowHighlight(ri){
+  const same = activeRow===ri;
+  clearHighlight();
+  if(!same){
+    activeRow=ri;
+    document.querySelectorAll(`#matrix-body tr[data-ri="${ri}"]`).forEach(r=>r.classList.add('row-active'));
+  }
+}
+function toggleColHighlight(ci){
+  const same = activeCol===ci;
+  clearHighlight();
+  if(!same){
+    activeCol=ci;
+    document.querySelectorAll(`#matrix-body td.cell[data-ci="${ci}"]`).forEach(td=>td.classList.add('col-active'));
+    document.querySelectorAll(`#matrix-head th[data-ci="${ci}"]`).forEach(th=>th.style.textDecoration='underline');
+  }
+}
+function clearHighlight(){
+  activeRow=null; activeCol=null;
+  document.querySelectorAll('#matrix-body tr').forEach(r=>r.classList.remove('row-active'));
+  document.querySelectorAll('#matrix-body td.cell').forEach(td=>td.classList.remove('col-active'));
+  document.querySelectorAll('#matrix-head th').forEach(th=>th.style.textDecoration='');
+}
+
+/* ── FLOATING TOOLTIP ── */
+const ttp = document.getElementById('tt-panel');
+const W = 230;
+
+document.querySelectorAll('#matrix-body td.cell').forEach(td=>{
+  td.addEventListener('mouseenter', e=>{
+    const isZh = document.body.classList.contains('zh');
+    const title = isZh
+      ? `<strong style="display:block;margin-bottom:4px;font-family:'Noto Serif SC',serif">${td.dataset.ltZh} × ${td.dataset.smZh}</strong><span style="font-family:'Noto Serif SC',serif">${td.dataset.tipZh}</span>`
+      : `<strong style="display:block;margin-bottom:4px">${td.dataset.ltEn} × ${td.dataset.smEn}</strong>${td.dataset.tipEn}`;
+    ttp.innerHTML=title;
+    ttp.style.display='block';
+    positionTip(e);
+  });
+  td.addEventListener('mousemove', positionTip);
+  td.addEventListener('mouseleave', ()=>{ ttp.style.display='none'; });
+});
+
+function positionTip(e){
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const tipH = ttp.offsetHeight || 80;
+  let x = e.clientX + 14;
+  let y = e.clientY - tipH - 10;
+  // flip left if too close to right edge
+  if(x + W > vw - 10) x = e.clientX - W - 14;
+  // flip below if above viewport
+  if(y < 8) y = e.clientY + 20;
+  ttp.style.left = x + 'px';
+  ttp.style.top  = y + 'px';
+}
+
+/* ── LANG ── */
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

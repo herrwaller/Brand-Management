@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limbic Brand Game · 品牌归类游戏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2EEE8; --bg2:#E8E3DB; --bg3:#DAD4CA; --card:#FDFAF5; --card2:#F0EBE2;
+  --ink:#1A1714; --ink2:#46403A; --ink3:#7A756C;
+  --border:rgba(26,23,20,.12); --border2:rgba(26,23,20,.07);
+  --r:10px;
+  --correct:#1A6A2A; --wrong:#8A2020;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.5;user-select:none}
+
+/* HEADER */
+header{background:#1A1714;color:#F2EEE8;border-bottom:none;
+  padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ht{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,26px);font-weight:700;letter-spacing:-.01em}
+.ht span{color:#C84020}
+.hsub{font-size:11px;color:var(--ink3);letter-spacing:.07em;text-transform:uppercase;margin-top:2px}
+.hright{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lb{background:none;border:1px solid rgba(242,238,232,.3);color:rgba(242,238,232,.6);
+    padding:4px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .15s}
+.lb.on{background:#C84020;border-color:#C84020;color:#fff}
+.lb:hover:not(.on){border-color:rgba(242,238,232,.6);color:#F2EEE8}
+.score-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;
+  padding:5px 14px;font-size:12px;color:rgba(242,238,232,.7);display:flex;align-items:center;gap:6px}
+.score-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#F2EEE8}
+
+/* PROGRESS BAR */
+.prog-wrap{height:3px;background:var(--bg3);position:relative}
+.prog-fill{height:100%;background:#C84020;transition:width .4s ease;width:0%}
+
+/* MAIN GAME AREA */
+.game{max-width:980px;margin:0 auto;padding:22px 20px}
+
+/* ROUND HEADER */
+.round-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.round-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.round-q{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,20px);font-weight:600;color:var(--ink2)}
+
+/* BRAND CARD — the draggable item */
+.brand-stage{display:flex;justify-content:center;align-items:center;min-height:160px;margin-bottom:24px}
+.brand-card{
+  background:#FFFFFF;
+  border:2px solid var(--border);
+  border-radius:16px;
+  padding:22px 36px;text-align:center;cursor:grab;
+  transition:transform .15s, box-shadow .15s, border-color .2s;
+  min-width:200px;max-width:280px;
+  box-shadow:0 6px 24px rgba(0,0,0,.10);
+}
+.brand-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 32px rgba(0,0,0,.14)}
+.brand-card.dragging{opacity:.4;transform:scale(.96);cursor:grabbing}
+.brand-card.correct{border-color:#1A8A2A;background:#F0FAF2}
+.brand-card.wrong{border-color:#C84020;background:#FEF4F0;animation:shake .4s ease}
+.brand-emoji{font-size:48px;margin-bottom:10px;display:block}
+.brand-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#1A1714;line-height:1.1}
+.brand-sector{font-size:12px;color:#7A756C;margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+
+/* INSTRUCTION */
+.instruction{text-align:center;font-size:13px;color:var(--ink3);margin-bottom:20px}
+.instruction-zh{font-family:'Noto Serif SC',serif;font-size:12px}
+
+/* DROP ZONES — the 7 Limbic Types */
+.zones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.zones{grid-template-columns:repeat(2,1fr)}}
+.zone{
+  background:#FFFFFF;border:2px solid rgba(26,23,20,.10);border-radius:var(--r);
+  padding:13px 10px;text-align:center;cursor:pointer;
+  transition:all .18s;position:relative;overflow:hidden;min-height:76px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+}
+.zone::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--zc)}
+.zone:hover,.zone.drag-over{
+  border-color:var(--zc);background:#FAFAF8;
+  transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.08)
+}
+.zone.drag-over{border-style:dashed}
+.zone.flash-correct{animation:flashGreen .55s ease forwards}
+.zone.flash-wrong{animation:flashRed .55s ease forwards}
+.zone.flash-close{animation:flashAmber .55s ease forwards}
+@keyframes flashGreen{0%{background:#fff}40%{background:#D4F0DA;border-color:#1A8A2A}100%{background:#fff}}
+@keyframes flashRed{0%{background:#fff}40%{background:#FDDDD8;border-color:#C84020}100%{background:#fff}}
+@keyframes flashAmber{0%{background:#fff}40%{background:#FFF0C0;border-color:#A07820}100%{background:#fff}}
+.zone-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:#1A1714;line-height:1.2}
+.zone-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:#7A756C;margin-top:1px}
+.zone-hint{font-size:10px;color:#9A9590;margin-top:2px;line-height:1.4}
+
+/* FEEDBACK OVERLAY */
+.feedback{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:#FFFFFF;border:1px solid rgba(26,23,20,.12);border-radius:16px;
+  padding:28px 32px;text-align:center;z-index:100;
+  box-shadow:0 16px 48px rgba(0,0,0,.18);min-width:280px;max-width:420px;
+  display:none;
+}
+.feedback.show{display:block;animation:popIn .25s cubic-bezier(.34,1.56,.64,1)}
+.fb-icon{font-size:40px;margin-bottom:10px}
+.fb-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.fb-title.ok{color:#4A9A5A}
+.fb-title.close{color:#A07820}
+.fb-title.ng{color:#C84020}
+.fb-body{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:16px}
+.fb-body-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-top:5px;line-height:1.8}
+.fb-btn{background:#C84020;color:#fff;border:none;border-radius:8px;
+  padding:10px 28px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:background .15s;width:100%}
+.fb-btn:hover{background:#A83010}
+.fb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;display:none}
+.fb-overlay.show{display:block}
+
+/* RESULTS SCREEN */
+.results{display:none;text-align:center;padding:32px 20px}
+.results.show{display:block;animation:fi .4s ease}
+.results-icon{font-size:52px;margin-bottom:12px}
+.results-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;margin-bottom:6px}
+.results-score{font-size:15px;color:var(--ink2);margin-bottom:24px}
+.results-score strong{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink)}
+.results-breakdown{max-width:520px;margin:0 auto 28px;display:flex;flex-direction:column;gap:8px}
+.rb-row{display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid rgba(26,23,20,.08);
+  border-radius:8px;padding:10px 14px;font-size:13px}
+.rb-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0}
+.rb-brand{font-weight:500;min-width:90px;color:var(--ink)}
+.rb-arrow{color:var(--ink3);font-size:12px}
+.rb-type{color:var(--ink2);flex:1}
+.rb-result{font-size:16px;margin-left:auto}
+.restart-btn{background:#FFFFFF;border:1px solid rgba(26,23,20,.15);color:#1A1714;
+  border-radius:8px;padding:12px 32px;font-family:'DM Sans',sans-serif;font-size:14px;
+  cursor:pointer;transition:all .15s;margin:0 6px}
+.restart-btn:hover{background:var(--bg2);border-color:var(--ink3)}
+.restart-btn.primary{background:#C84020;border-color:#C84020;color:#fff}
+.restart-btn.primary:hover{background:#A83010}
+
+/* ANIMATIONS */
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes flashGreen{0%{background:var(--card)}40%{background:rgba(42,122,58,.25);border-color:#2A7A3A}100%{background:var(--card)}}
+@keyframes flashRed{0%{background:var(--card)}40%{background:rgba(138,32,32,.2);border-color:#8A2020}100%{background:var(--card)}}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,-50%) scale(.88)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<header>
+  <div>
+    <div class="ht">Limbic <span>Brand</span> Game</div>
+    <div class="hsub en-only">Assign brands to their Limbic Type</div>
+    <div class="hsub zh-only" style="font-family:'Noto Serif SC',serif">将品牌归入对应的Limbic类型</div>
+  </div>
+  <div class="hright">
+    <div class="score-pill">
+      <span class="en-only">Score</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif">得分</span>
+      <span class="score-num" id="score-display">0</span>
+    </div>
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+<div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+
+<div class="game" id="game-area">
+
+  <!-- ROUND VIEW -->
+  <div id="round-view">
+    <div class="round-info">
+      <div class="round-label">
+        <span class="en-only">Round <span id="round-num">1</span> of <span id="round-total">12</span></span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">第<span id="round-num-zh">1</span>题 / <span id="round-total-zh">12</span>题</span>
+      </div>
+      <div class="round-q">
+        <span class="en-only" id="q-text-en">Which Limbic Type fits this brand?</span>
+        <span class="zh-only" id="q-text-zh" style="font-family:'Noto Serif SC',serif">这个品牌属于哪种Limbic类型？</span>
+      </div>
+    </div>
+
+    <!-- BRAND CARD -->
+    <div class="brand-stage">
+      <div class="brand-card" id="brand-card" draggable="true">
+        <span class="brand-emoji" id="brand-emoji">🚗</span>
+        <div class="brand-name" id="brand-name">Porsche</div>
+        <div class="brand-sector" id="brand-sector">Automotive</div>
+      </div>
+    </div>
+
+    <div class="instruction">
+      <span class="en-only">Drag the brand to a type — or click a type to assign</span>
+      <span class="zh-only instruction-zh">将品牌拖到对应类型，或点击类型进行归类</span>
+    </div>
+
+    <!-- DROP ZONES -->
+    <div class="zones" id="zones"></div>
+  </div>
+
+  <!-- RESULTS VIEW -->
+  <div class="results" id="results-view">
+    <div class="results-icon" id="res-icon">🎯</div>
+    <div class="results-title" id="res-title"></div>
+    <div class="results-score" id="res-score"></div>
+    <div class="results-breakdown" id="res-breakdown"></div>
+    <div>
+      <button class="restart-btn primary" onclick="restartGame()">
+        <span class="en-only">Play Again</span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">再玩一次</span>
+      </button>
+      <button class="restart-btn" onclick="restartGame(true)">
+        <span class="en-only">Different brands</span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">换一组品牌</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK OVERLAY -->
+<div class="fb-overlay" id="fb-overlay" onclick="closeFeedback()"></div>
+<div class="feedback" id="feedback">
+  <div class="fb-icon" id="fb-icon"></div>
+  <div class="fb-title" id="fb-title"></div>
+  <div class="fb-body" id="fb-body"></div>
+  <button class="fb-btn" onclick="closeFeedback()" id="fb-btn">Next →</button>
+</div>
+
+<script>
+/* ─── DATA ─── */
+const TYPES = [
+  {id:'performer',   en:'Performer',      zh:'表演者',      color:'#D45025', hint:'Status · Achievement · Display'},
+  {id:'adventurer',  en:'Adventurer',     zh:'冒险家',      color:'#B83518', hint:'Risk · Freedom · Thrill'},
+  {id:'hedonist',    en:'Hedonist',       zh:'享乐主义者',  color:'#A86E0E', hint:'Pleasure · Comfort · Indulgence'},
+  {id:'open',        en:'Open-minded',    zh:'开放者',      color:'#1A7848', hint:'Curiosity · Meaning · Culture'},
+  {id:'harmoniser',  en:'Harmoniser',     zh:'和谐者',      color:'#1860A8', hint:'Family · Trust · Belonging'},
+  {id:'traditionalist',en:'Traditionalist',zh:'传统主义者', color:'#474498', hint:'Order · Reliability · Heritage'},
+  {id:'disciplined', en:'Disciplined',    zh:'自律者',      color:'#377037', hint:'Efficiency · Quality · Rationality'},
+];
+
+// Each brand: emoji, name, sector, correct type, also:[adjacent types for partial credit], explanation EN/ZH
+// All brands are well-known and active in the China market
+const ALL_BRANDS = [
+  // Automotive
+  {emoji:'🏎️', name:'Porsche',       sector:'Automotive',      type:'performer',   also:['adventurer'],
+   expEn:'Porsche is pure status and performance. The brand appeals to achievement-oriented personalities who want to be seen succeeding.',
+   expZh:'保时捷代表纯粹的地位与绩效。品牌吸引那些希望展示成功的成就导向型人群。',
+   alsoEn:'Adventurer is a fair argument — Porsche does sell driving thrills and freedom. But the dominant signal is status and achievement, not rebellion.',
+   alsoZh:'选"冒险家"也有道理——保时捷确实传递驾驶快感与自由。但主导信号是地位与成就，而非反叛。'},
+  {emoji:'🚗', name:'BMW',            sector:'Automotive',      type:'performer',   also:['disciplined'],
+   expEn:'"The Ultimate Driving Machine" — efficiency, performance, visible success. BMW is China\'s bestselling premium car and a classic Performer brand.',
+   expZh:'"终极驾驶机器"——效率、性能与可见的成功。宝马是中国最畅销的豪华车，典型的表演者品牌。',
+   alsoEn:'Disciplined fits too — BMW buyers are often rational high-achievers who care about engineering precision. But the status-display element pushes it to Performer.',
+   alsoZh:'选"自律者"也合理——宝马买家往往是注重工程精度的理性高绩效人士。但地位展示的元素将其推向表演者。'},
+  {emoji:'⭐', name:'Mercedes-Benz',  sector:'Automotive',      type:'traditionalist', also:['performer'],
+   expEn:'Mercedes signals established success, authority and heritage. In China it\'s the car of seniority and corporate power — not flash, but gravitas.',
+   expZh:'奔驰象征既有成就、权威与传承。在中国，它是资历与企业权力的座驾——不张扬，但有分量。',
+   alsoEn:'Performer is close — Mercedes is clearly premium and status-signalling. The distinction: Performer is about achievement energy, Traditionalist about established authority.',
+   alsoZh:'选"表演者"也接近——奔驰显然是高端且具有地位信号的。区别在于：表演者关乎成就能量，传统主义者关乎既有权威。'},
+  {emoji:'⚡', name:'Tesla',           sector:'Automotive',      type:'open',         also:['performer'],
+   expEn:'Tesla attracts forward-thinking, values-driven personalities. In China it signals tech curiosity and a belief in a sustainable future — not just a car.',
+   expZh:'特斯拉吸引前瞻性、价值观驱动的人群。在中国，它传递科技好奇心和对可持续未来的信仰——不只是一辆车。',
+   alsoEn:'Performer works too — Tesla\'s premium price and aspirational image attract status-seekers. But the brand\'s core message is curiosity and values, not displaying success.',
+   alsoZh:'选"表演者"也成立——特斯拉的高价格和向往型形象吸引追求地位者。但品牌核心信息是好奇心与价值观，而非展示成功。'},
+  {emoji:'🔋', name:'BYD',            sector:'Automotive',      type:'disciplined',  also:['open'],
+   expEn:'BYD wins on rational value: the best EV specs at competitive prices. It speaks to efficient, fact-based decision-makers who care about performance per yuan.',
+   expZh:'比亚迪以理性价值取胜：最佳电动车配置，具竞争力的价格。它面向高效、基于事实决策、关注性价比的消费者。',
+   alsoEn:'Open-minded fits for some buyers — BYD is electric and forward-looking. But the brand competes primarily on specs and price rationale, not values or curiosity.',
+   alsoZh:'对部分买家来说"开放者"也合适——比亚迪是电动的、面向未来的。但品牌主要以配置和价格理性竞争，而非价值观或好奇心。'},
+  {emoji:'🚙', name:'Volkswagen',     sector:'Automotive',      type:'harmoniser',   also:['traditionalist'],
+   expEn:'VW is the trusted family car in China — reliable, practical, widely owned. It speaks to belonging, security and shared everyday life.',
+   expZh:'大众在中国是值得信赖的家庭用车——可靠、实用、普及率高。它传递归属感、安全感与共同的日常生活。',
+   alsoEn:'Traditionalist is reasonable — VW is reliable and established. But Harmoniser captures the key motivation better: family safety and belonging, not tradition for its own sake.',
+   alsoZh:'选"传统主义者"合理——大众可靠、历史悠久。但"和谐者"更好地捕捉了核心动机：家庭安全与归属感，而非传统本身。'},
+  {emoji:'🦁', name:'Land Rover',     sector:'Automotive',      type:'adventurer',   also:['performer'],
+   expEn:'Built for exploration and off-road freedom. Land Rover speaks to the desire to go beyond the ordinary — popular among China\'s outdoor enthusiasts.',
+   expZh:'为探索与越野自由而生。路虎传递超越平凡的渴望——在中国户外爱好者中颇受欢迎。',
+   alsoEn:'Performer is valid — Land Rover is also a premium status brand in Chinese cities. But the core brand identity is adventure and exploration, even if many never leave the road.',
+   alsoZh:'选"表演者"成立——路虎在中国城市也是高端地位品牌。但核心品牌身份是冒险与探索，即使很多车主从未离开公路。'},
+  {emoji:'🌿', name:'NIO (蔚来)',      sector:'Automotive',      type:'open',         also:['performer'],
+   expEn:'NIO is a lifestyle brand, not just a car. It builds community, sells a vision of smart sustainable living, and appeals to culturally open urban professionals.',
+   expZh:'蔚来是生活方式品牌，而不只是汽车。它构建社群，销售智能可持续生活的愿景，吸引文化开放的城市专业人士。',
+   alsoEn:'Performer fits too — NIO is premium-priced and attracts ambitious young professionals. But the brand differentiates itself through community and values, not status display.',
+   alsoZh:'选"表演者"也合适——蔚来价格高端，吸引有雄心的年轻专业人士。但品牌通过社群和价值观而非地位展示来差异化自己。'},
+
+  // Luxury & Fashion
+  {emoji:'👜', name:'Louis Vuitton',  sector:'Luxury Fashion',  type:'performer',    also:['traditionalist'],
+   expEn:'LV is China\'s most recognised luxury brand — the global language of visible success. The logo says: I have arrived.',
+   expZh:'LV是中国最知名的奢侈品牌——可见成功的全球语言。那个标志传递的是：我已成功。',
+   alsoEn:'Traditionalist is a fair argument — LV has heritage and craftsmanship. But in China the brand is primarily consumed as a status signal, making Performer the dominant type.',
+   alsoZh:'选"传统主义者"有道理——LV有传承和工艺。但在中国，该品牌主要作为地位信号被消费，表演者是主导类型。'},
+  {emoji:'🧥', name:'Hermès',         sector:'Luxury Fashion',  type:'traditionalist', also:['hedonist'],
+   expEn:'Hermès is the anti-trend. Craftsmanship, heritage, exclusivity through restraint. It appeals to those who value what endures over what is fashionable.',
+   expZh:'爱马仕是反潮流的。工艺、传承、通过克制实现的排他性。它吸引那些珍视经久不衰胜过时髦的人。',
+   alsoEn:'Hedonist fits — Hermès products deliver exquisite sensory pleasure. But the brand\'s soul is restraint and heritage, not pleasure-seeking. The Birkin is an investment, not an indulgence.',
+   alsoZh:'选"享乐主义者"合适——爱马仕产品带来精致的感官享受。但品牌的灵魂是克制与传承，而非享乐追求。铂金包是投资，不是放纵。'},
+  {emoji:'💎', name:'Chanel',          sector:'Luxury Fashion',  type:'hedonist',     also:['performer'],
+   expEn:'Chanel is sensory luxury — beauty, elegance and the pleasure of the finer things. In China it is the quintessential self-reward brand for successful women.',
+   expZh:'香奈儿是感官奢华——美丽、优雅与精致的享受。在中国，它是成功女性自我犒赏的标志性品牌。',
+   alsoEn:'Performer is close — Chanel is clearly a status brand. But the emotional core is sensory pleasure and self-reward ("treat yourself"), which makes Hedonist the primary type.',
+   alsoZh:'选"表演者"接近——香奈儿显然是地位品牌。但情感核心是感官享乐与自我犒赏（"犒赏自己"），使享乐主义者成为主要类型。'},
+  {emoji:'👟', name:'Nike',            sector:'Sportswear',      type:'performer',    also:['adventurer'],
+   expEn:'"Just Do It" — peak performance, achievement, the winner\'s mindset. Nike is the Performer\'s everyday anthem, hugely popular across China.',
+   expZh:'"Just Do It"——巅峰表现、成就感、胜者心态。耐克是表演者的日常心声，在中国广受欢迎。',
+   alsoEn:'Adventurer works — Nike also sells freedom, pushing limits, and individual expression. The key: Nike\'s heroes are champions and record-breakers, not explorers.',
+   alsoZh:'选"冒险家"也成立——耐克也销售自由、突破极限和个人表达。关键在于：耐克的英雄是冠军和纪录打破者，而非探险家。'},
+  {emoji:'🏃', name:'Anta (安踏)',     sector:'Sportswear',      type:'disciplined',  also:['harmoniser'],
+   expEn:'China\'s top sportswear brand by sales. Anta offers professional-grade performance at rational prices — quality you can trust, no premium for the logo.',
+   expZh:'中国销量第一的运动品牌。安踏以合理价格提供专业级性能——值得信赖的品质，无需为标志溢价。',
+   alsoEn:'Harmoniser is valid — Anta\'s mass-market reach and family-oriented marketing give it community warmth. But the rational value-for-money promise is the brand\'s primary driver.',
+   alsoZh:'选"和谐者"成立——安踏的大众市场覆盖和家庭导向营销赋予其社群温度。但理性的性价比承诺才是品牌的主要驱动力。'},
+  {emoji:'🌸', name:'Florasis (花西子)',sector:'Beauty',          type:'open',         also:['traditionalist'],
+   expEn:'Florasis blends ancient Chinese aesthetics with modern beauty. It appeals to culturally curious consumers proud of Chinese heritage — the "Guochao" generation.',
+   expZh:'花西子将古典中国美学与现代美妆融合。它吸引对中国传统文化自豪、具有文化好奇心的消费者——"国潮"一代。',
+   alsoEn:'Traditionalist is a fair answer — Florasis is deeply rooted in Chinese heritage. But the brand is about cultural curiosity and a new identity, not order or stability.',
+   alsoZh:'选"传统主义者"是合理答案——花西子深深植根于中华传承。但品牌关乎文化好奇心与新身份认同，而非秩序或稳定。'},
+
+  // Food & Beverage
+  {emoji:'☕', name:'Starbucks',       sector:'F&B',             type:'hedonist',     also:['harmoniser'],
+   expEn:'Starbucks sells sensory pleasure and the daily ritual of self-reward. The customised drink is a small indulgence — quintessential hedonism, now China\'s top coffee chain.',
+   expZh:'星巴克销售感官享乐与每日自我犒赏的仪式感。定制饮品是小小放纵——典型享乐主义，现为中国最大咖啡连锁。',
+   alsoEn:'Harmoniser is fair — Starbucks is also a meeting place, a "third space" for social connection. But the core appeal is sensory indulgence and treating yourself.',
+   alsoZh:'选"和谐者"有道理——星巴克也是聚会场所，是社交连接的"第三空间"。但核心吸引力是感官放纵与犒赏自己。'},
+  {emoji:'🧋', name:'HEYTEA (喜茶)',   sector:'F&B',             type:'hedonist',     also:['performer'],
+   expEn:'HEYTEA turned bubble tea into a premium lifestyle experience. Long queues, collabs with luxury brands, and the pleasure of the "it" drink of the moment.',
+   expZh:'喜茶将奶茶变成了高端生活方式体验。长队、与奢侈品牌的联名，以及享用"当下热门饮品"的乐趣。',
+   alsoEn:'Performer has merit — the queue and the luxury collabs make HEYTEA a status object. But the primary motivation is sensory pleasure and trend-following, not achievement display.',
+   alsoZh:'选"表演者"有道理——排队和奢侈品联名使喜茶成为地位象征。但主要动机是感官享乐和跟随潮流，而非成就展示。'},
+  {emoji:'🍜', name:'Haidilao (海底捞)',sector:'F&B',            type:'harmoniser',   also:['hedonist'],
+   expEn:'Haidilao is the hotpot experience of togetherness. Famous for extraordinary hospitality, care and the joy of sharing a long meal with family and friends.',
+   expZh:'海底捞是团聚的火锅体验。以卓越的热情好客、体贴入微与和家人朋友共享漫长一餐的喜悦而闻名。',
+   alsoEn:'Hedonist is reasonable — Haidilao is also about sensory pleasure and indulgence. But the defining experience is togetherness and care for others, which is Harmoniser at its core.',
+   alsoZh:'选"享乐主义者"合理——海底捞也关乎感官享乐与放纵。但决定性体验是共聚与关爱他人，这是和谐者的核心。'},
+  {emoji:'🍵', name:'Moutai (茅台)',   sector:'Spirits',         type:'traditionalist', also:['performer'],
+   expEn:'Moutai is ritual, hierarchy and the weight of Chinese tradition. A bottle of Moutai signals respect for order and historical continuity — the ultimate gift in formal settings.',
+   expZh:'茅台是仪式、等级与中华传统的分量。一瓶茅台传递对秩序与历史延续性的尊重——正式场合的终极礼物。',
+   alsoEn:'Performer is valid — gifting Moutai is absolutely about status. But the deeper logic is Confucian hierarchy and ritual propriety, which makes Traditionalist the primary type.',
+   alsoZh:'选"表演者"成立——赠送茅台绝对关乎地位。但更深层的逻辑是儒家等级与礼仪规范，使传统主义者成为主要类型。'},
+  {emoji:'🥛', name:'Nongfu Spring (农夫山泉)', sector:'Beverages', type:'open',      also:['harmoniser'],
+   expEn:'"We don\'t make water, we are nature\'s porter." Nongfu Spring connects drinking water to environmental values, natural purity and a mindful way of living.',
+   expZh:'"我们不生产水，我们只是大自然的搬运工。"农夫山泉将饮水与环境价值观、自然纯净和正念生活方式相连接。',
+   alsoEn:'Harmoniser fits — Nongfu Spring also speaks to family health and shared everyday care. But the brand\'s positioning is about nature, environmental awareness and living meaningfully.',
+   alsoZh:'选"和谐者"合适——农夫山泉也传递家庭健康与日常共同关怀。但品牌定位关乎自然、环保意识和有意义地生活。'},
+
+  // Technology & Apps
+  {emoji:'🍎', name:'Apple',           sector:'Technology',      type:'performer',    also:['open'],
+   expEn:'Apple is the premium status signal in tech. The iPhone is China\'s aspirational device — it sells identity: creative, sophisticated, successful.',
+   expZh:'苹果是科技领域的高端地位信号。iPhone是中国的向往型设备——它销售身份认同：创意、精致、成功。',
+   alsoEn:'Open-minded is fair — Apple\'s original brand DNA was creativity and thinking differently. But in China\'s market, iPhone is overwhelmingly a status object.',
+   alsoZh:'选"开放者"有道理——苹果原始品牌DNA是创意与不同凡想。但在中国市场，iPhone压倒性地是一个地位象征。'},
+  {emoji:'🤖', name:'Huawei',          sector:'Technology',      type:'disciplined',  also:['performer'],
+   expEn:'Huawei is engineering excellence and technical mastery. "Powered by Huawei" signals rational confidence in Chinese innovation — quality proven through performance.',
+   expZh:'华为是工程卓越与技术精通。"华为赋能"传递对中国创新的理性自信——通过绩效验证的品质。',
+   alsoEn:'Performer fits — Huawei Mate series is clearly a status phone, especially post-sanctions. But the brand\'s identity is built on engineering rigour, not status display.',
+   alsoZh:'选"表演者"合适——华为Mate系列显然是地位手机，尤其是制裁后。但品牌身份建立在工程严谨性上，而非地位展示。'},
+  {emoji:'📱', name:'Xiaomi',           sector:'Technology',      type:'disciplined',  also:['open'],
+   expEn:'Maximum specs, honest price. Xiaomi\'s whole brand promise is rational: don\'t pay for the logo — pay for what the product actually does.',
+   expZh:'最高配置，诚实价格。小米整个品牌承诺是理性的：不为标志买单——为产品实际功能买单。',
+   alsoEn:'Open-minded could work — Xiaomi\'s fan culture and community engagement have a values-driven quality. But the brand wins primarily on rational value proposition.',
+   alsoZh:'选"开放者"也可以——小米的粉丝文化和社区参与具有价值观驱动的特质。但品牌主要以理性价值主张取胜。'},
+  {emoji:'💬', name:'WeChat (微信)',    sector:'Social Media',    type:'harmoniser',   also:['disciplined'],
+   expEn:'WeChat is the connective tissue of Chinese social life — family groups, work, community, payments. It exists to maintain belonging and the fabric of relationships.',
+   expZh:'微信是中国社会生活的连接纽带——家庭群、工作、社区、支付。它的存在是为了维系归属感与关系网络。',
+   alsoEn:'Disciplined fits the work-use case — WeChat is a hyper-efficient productivity tool. But its emotional core is connection and belonging, not efficiency.',
+   alsoZh:'选"自律者"适合工作场景——微信是超高效的生产力工具。但其情感核心是连接与归属感，而非效率。'},
+  {emoji:'🎵', name:'Douyin (抖音)',    sector:'Social Media',    type:'hedonist',     also:['harmoniser'],
+   expEn:'Infinite scroll, instant entertainment, the dopamine feed. Douyin is hedonism engineered — pleasure optimised to the millisecond, 700M daily active users.',
+   expZh:'无限滚动、即时娱乐、多巴胺信息流。抖音是被工程化的享乐主义——快乐被精确到毫秒级地优化，日活用户7亿。',
+   alsoEn:'Harmoniser is valid — Douyin fosters huge communities and social sharing. But the algorithm is built for one purpose: maximising pleasure and time-on-app.',
+   alsoZh:'选"和谐者"成立——抖音培育了庞大的社群和社交分享。但算法是为一个目的而构建的：最大化享乐和使用时间。'},
+  {emoji:'🛍️', name:'Pinduoduo (拼多多)', sector:'E-commerce',   type:'disciplined',  also:['harmoniser'],
+   expEn:'Pinduoduo ruthlessly optimises for value: lowest prices, group-buying logic, no frills. Pure rational consumption — why pay more for the same thing?',
+   expZh:'拼多多以价值为导向，力求极致：最低价格、拼团逻辑、无多余功能。纯粹理性消费——为什么要为同样的东西多付钱？',
+   alsoEn:'Harmoniser is interesting — the group-buying mechanic is inherently social and community-driven. But the core motivation is rational savings, not togetherness.',
+   alsoZh:'选"和谐者"很有趣——拼团机制本质上是社交和社区驱动的。但核心动机是理性省钱，而非共聚。'},
+  {emoji:'🚀', name:'DJI (大疆)',       sector:'Technology',      type:'adventurer',   also:['open'],
+   expEn:'DJI drones unlock a new perspective on the world — aerial freedom, exploration, and the thrill of seeing from above. The brand of creators who push limits.',
+   expZh:'大疆无人机开启看世界的新视角——空中自由、探索与俯瞰的震撼。这是那些突破极限的创作者的品牌。',
+   alsoEn:'Open-minded fits the creative user — DJI also attracts curious, artistically-driven personalities. The distinction: Adventurer is about the thrill of exploration, Open-minded about meaning-making.',
+   alsoZh:'选"开放者"适合创意用户——大疆也吸引好奇、有艺术驱动力的人格。区别在于：冒险家关乎探索的刺激，开放者关乎创造意义。'},
+  {emoji:'🎮', name:'NetEase (网易)',   sector:'Gaming',          type:'hedonist',     also:['adventurer'],
+   expEn:'NetEase delivers entertainment, immersion and escapism. Its games offer rich fantasy worlds to dive into — pure pleasure designed for maximum engagement.',
+   expZh:'网易提供娱乐、沉浸与逃离现实。其游戏构建了可以尽情探索的丰富奇幻世界——为最大化参与感而设计的纯粹享乐。',
+   alsoEn:'Adventurer works — games are also about exploration and pushing into unknown worlds. But the design goal is maximum pleasure and engagement, which is the Hedonist\'s domain.',
+   alsoZh:'选"冒险家"成立——游戏也关乎探索和进入未知世界。但设计目标是最大化享乐和参与度，这是享乐主义者的领域。'},
+
+  // Home & Living
+  {emoji:'📦', name:'IKEA',            sector:'Home & Living',   type:'harmoniser',   also:['disciplined'],
+   expEn:'IKEA is about home, family, togetherness — at an accessible price. 35+ stores across China. The brand is warmth, practicality and the joy of a shared nest.',
+   expZh:'宜家关乎家庭、亲密与共处——价格亲民。中国有35家以上门店。品牌传递温暖、实用与共同营巢的喜悦。',
+   alsoEn:'Disciplined is valid — IKEA is also a rational choice: good design at fair prices. But the brand\'s emotional core is the warmth of home and family, not efficiency.',
+   alsoZh:'选"自律者"成立——宜家也是理性选择：以合理价格提供好设计。但品牌的情感核心是家和家庭的温暖，而非效率。'},
+  {emoji:'🏠', name:'Midea (美的)',     sector:'Home Appliances', type:'disciplined',  also:['harmoniser'],
+   expEn:'China\'s largest home appliance brand. Midea wins on rational merits: reliable engineering, energy efficiency, value for money. The smart choice for the smart household.',
+   expZh:'中国最大家电品牌。美的以理性优势取胜：可靠的工程设计、节能效率、物有所值。智慧家庭的明智之选。',
+   alsoEn:'Harmoniser is fair — Midea markets heavily around family comfort and home life. But consumers choose it for rational reasons: performance, reliability, price.',
+   alsoZh:'选"和谐者"有道理——美的大量围绕家庭舒适和居家生活进行营销。但消费者因理性原因选择它：性能、可靠性、价格。'},
+  {emoji:'🌍', name:'Lululemon',        sector:'Sportswear',      type:'open',         also:['performer'],
+   expEn:'Lululemon sells mindfulness, self-development and conscious living through activewear. In China its growth is driven by values-oriented urban millennials seeking meaning beyond work.',
+   expZh:'露露柠檬通过运动服饰销售正念、自我成长与有意识的生活方式。在中国，其增长由追求工作之外意义的价值观导向型城市千禧一代驱动。',
+   alsoEn:'Performer is very reasonable — Lululemon is premium-priced and worn as a status signal in China\'s gyms. But the brand aspires to mean more: mindfulness, growth, conscious living.',
+   alsoZh:'选"表演者"非常合理——露露柠檬价格高端，在中国健身房作为地位信号穿戴。但品牌希望意味着更多：正念、成长、有意识地生活。'},
+  {emoji:'🏔️', name:'The North Face', sector:'Outdoor Apparel',  type:'adventurer',   also:['open'],
+   expEn:'The North Face equips explorers: mountains, trails, expeditions. In China its popularity among urban outdoor enthusiasts speaks to the growing desire for adventure beyond city limits.',
+   expZh:'北面装备探险者：山脉、徒步、远征。在中国城市户外爱好者中的流行，反映了越来越强烈的超越城市边界的冒险渴望。',
+   alsoEn:'Open-minded fits part of the audience — TNF also attracts environmentally aware, culturally curious people. But the primary brand promise is adventure and physical exploration.',
+   alsoZh:'选"开放者"适合部分受众——北面也吸引有环保意识、文化好奇心的人群。但主要品牌承诺是冒险与身体探索。'},
+];
+
+/* ─── GAME STATE ─── */
+let currentLang = 'en';
+let queue = [], currentIdx = 0, score = 0;
+let answers = [], waitingNext = false;
+
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5) }
+
+function buildQueue(shuffle2=false){
+  // pick 12 brands — ensure variety across types
+  const byType = {};
+  TYPES.forEach(t=>byType[t.id]=[]);
+  ALL_BRANDS.forEach(b=>byType[b.type].push(b));
+  const picked = [];
+  // 1–2 per type, total 12
+  const counts = [2,2,2,2,2,1,1]; // 12 total
+  TYPES.forEach((t,i)=>{
+    const pool = shuffle2 ? shuffle(byType[t.id]) : byType[t.id];
+    for(let j=0;j<Math.min(counts[i],pool.length);j++) picked.push(pool[j]);
+  });
+  return shuffle(picked).slice(0,12);
+}
+
+function initGame(reshuffle=false){
+  queue = buildQueue(reshuffle);
+  currentIdx = 0; score = 0; answers = []; waitingNext = false;
+  document.getElementById('score-display').textContent = '0';
+  document.getElementById('results-view').classList.remove('show');
+  document.getElementById('round-view').style.display = '';
+  updateProgress();
+  renderRound();
+}
+
+function renderRound(){
+  const brand = queue[currentIdx];
+  const total = queue.length;
+  document.getElementById('round-num').textContent = currentIdx+1;
+  document.getElementById('round-total').textContent = total;
+  document.getElementById('round-num-zh').textContent = currentIdx+1;
+  document.getElementById('round-total-zh').textContent = total;
+  document.getElementById('brand-emoji').textContent = brand.emoji;
+  document.getElementById('brand-name').textContent = brand.name;
+  document.getElementById('brand-sector').textContent = brand.sector;
+  const card = document.getElementById('brand-card');
+  card.classList.remove('correct','wrong','dragging');
+  // reset zones
+  document.querySelectorAll('.zone').forEach(z=>{
+    z.classList.remove('flash-correct','flash-wrong','drag-over');
+  });
+}
+
+function updateProgress(){
+  const pct = (currentIdx / queue.length)*100;
+  document.getElementById('prog-fill').style.width = pct+'%';
+}
+
+/* ─── BUILD ZONES ─── */
+const zonesEl = document.getElementById('zones');
+TYPES.forEach(t=>{
+  const z = document.createElement('div');
+  z.className='zone'; z.dataset.type=t.id;
+  z.style.setProperty('--zc', t.color);
+  z.innerHTML=`
+    <div class="zone-name en-only">${t.en}</div>
+    <div class="zone-name zh-only" style="font-family:'Noto Serif SC',serif">${t.zh}</div>
+    <div class="zone-hint">${t.hint}</div>`;
+  // click to assign
+  z.addEventListener('click', ()=>attempt(t.id, z));
+  // drag events
+  z.addEventListener('dragover', e=>{e.preventDefault();z.classList.add('drag-over')});
+  z.addEventListener('dragleave', ()=>z.classList.remove('drag-over'));
+  z.addEventListener('drop', e=>{e.preventDefault();z.classList.remove('drag-over');attempt(t.id, z)});
+  zonesEl.appendChild(z);
+});
+
+/* ─── DRAG FROM BRAND ─── */
+const brandCard = document.getElementById('brand-card');
+brandCard.addEventListener('dragstart', e=>{
+  brandCard.classList.add('dragging');
+  e.dataTransfer.effectAllowed='move';
+});
+brandCard.addEventListener('dragend', ()=>brandCard.classList.remove('dragging'));
+
+// Touch drag support
+let touchStartX=0, touchStartY=0, touchClone=null;
+brandCard.addEventListener('touchstart', e=>{
+  const t=e.touches[0];
+  touchStartX=t.clientX; touchStartY=t.clientY;
+},{passive:true});
+brandCard.addEventListener('touchmove', e=>{
+  e.preventDefault();
+  const t=e.touches[0];
+  if(!touchClone){
+    touchClone=brandCard.cloneNode(true);
+    touchClone.style.cssText=`position:fixed;opacity:.7;pointer-events:none;z-index:200;
+      width:${brandCard.offsetWidth}px;transform:scale(.95)`;
+    document.body.appendChild(touchClone);
+  }
+  touchClone.style.left=(t.clientX - brandCard.offsetWidth/2)+'px';
+  touchClone.style.top=(t.clientY - 40)+'px';
+  // highlight zone under finger
+  document.querySelectorAll('.zone').forEach(z=>{
+    const r=z.getBoundingClientRect();
+    const over=t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom;
+    z.classList.toggle('drag-over',over);
+  });
+},{passive:false});
+brandCard.addEventListener('touchend', e=>{
+  if(touchClone){touchClone.remove();touchClone=null;}
+  const t=e.changedTouches[0];
+  document.querySelectorAll('.zone').forEach(z=>{
+    z.classList.remove('drag-over');
+    const r=z.getBoundingClientRect();
+    if(t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom){
+      attempt(z.dataset.type, z);
+    }
+  });
+});
+
+/* ─── ATTEMPT ─── */
+function attempt(typeId, zoneEl){
+  if(waitingNext) return;
+  waitingNext = true;
+  const brand = queue[currentIdx];
+  const correct  = typeId === brand.type;
+  const close    = !correct && (brand.also||[]).includes(typeId);
+  const correctType = TYPES.find(t=>t.id===brand.type);
+
+  const result = correct ? 'correct' : close ? 'close' : 'wrong';
+  answers.push({brand, guessed:typeId, result});
+
+  if(correct){
+    score += 10;
+    document.getElementById('score-display').textContent = score;
+    brandCard.classList.add('correct');
+    zoneEl.classList.add('flash-correct');
+  } else if(close){
+    score += 5;
+    document.getElementById('score-display').textContent = score;
+    brandCard.classList.add('correct'); // amber-ish via CSS
+    zoneEl.classList.add('flash-close');
+    document.querySelector(`.zone[data-type="${brand.type}"]`)?.classList.add('flash-correct');
+  } else {
+    brandCard.classList.add('wrong');
+    zoneEl.classList.add('flash-wrong');
+    document.querySelector(`.zone[data-type="${brand.type}"]`)?.classList.add('flash-correct');
+  }
+
+  setTimeout(()=>showFeedback(brand, result, correctType, typeId), 350);
+}
+
+function showFeedback(brand, result, correctType, guessedId){
+  const correct = result==='correct', close = result==='close';
+  const guessedType = TYPES.find(t=>t.id===guessedId);
+  document.getElementById('fb-icon').textContent = correct ? '✅' : close ? '🟡' : '💡';
+  const title = document.getElementById('fb-title');
+  title.className = 'fb-title ' + (correct?'ok': close?'close':'ng');
+  title.innerHTML = correct
+    ? `<span class="en-only">Correct! +10</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">正确！+10分</span>`
+    : close
+    ? `<span class="en-only">Good argument! +5</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">有道理！+5分</span>`
+    : `<span class="en-only">Not quite… +0</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">差一点… +0分</span>`;
+
+  const body = document.getElementById('fb-body');
+  const tc = correctType.color;
+  const gc = guessedType ? guessedType.color : tc;
+
+  let bodyHTML = '';
+  if(correct){
+    bodyHTML = `
+      <div class="en-only">${brand.expEn}</div>
+      <div class="zh-only fb-body-zh">${brand.expZh}</div>`;
+  } else if(close){
+    bodyHTML = `
+      <div class="en-only">
+        <strong style="color:${gc}">${guessedType.en}</strong> is a reasonable argument — but the primary type is <strong style="color:${tc}">${correctType.en}</strong>.<br><br>
+        ${brand.alsoEn||''}<br><br>
+        <span style="color:${tc};font-size:11px">Primary type: ${brand.expEn}</span>
+      </div>
+      <div class="zh-only fb-body-zh">
+        <strong style="color:${gc}">${guessedType.zh}</strong>有道理——但主要类型是<strong style="color:${tc}">${correctType.zh}</strong>。<br><br>
+        ${brand.alsoZh||''}<br><br>
+        <span style="color:${tc};font-size:11px">主要类型：${brand.expZh}</span>
+      </div>`;
+  } else {
+    bodyHTML = `
+      <div class="en-only">
+        <strong style="color:${tc}">${brand.name}</strong> belongs to <strong style="color:${tc}">${correctType.en}</strong>.<br><br>
+        ${brand.expEn}
+      </div>
+      <div class="zh-only fb-body-zh">
+        <strong style="color:${tc}">${brand.name}</strong> 属于 <strong style="color:${tc}">${correctType.zh}</strong>。<br><br>
+        ${brand.expZh}
+      </div>`;
+  }
+  body.innerHTML = bodyHTML;
+
+  const btn = document.getElementById('fb-btn');
+  const isLast = currentIdx >= queue.length-1;
+  btn.innerHTML = isLast
+    ? `<span class="en-only">See Results 🎯</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">查看结果 🎯</span>`
+    : `<span class="en-only">Next Brand →</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">下一个品牌 →</span>`;
+
+  document.getElementById('feedback').classList.add('show');
+  document.getElementById('fb-overlay').classList.add('show');
+}
+
+function closeFeedback(){
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('fb-overlay').classList.remove('show');
+  currentIdx++;
+  waitingNext = false;
+  updateProgress();
+  if(currentIdx >= queue.length){
+    showResults();
+  } else {
+    renderRound();
+  }
+}
+
+function showResults(){
+  document.getElementById('round-view').style.display='none';
+  const rv = document.getElementById('results-view');
+  rv.classList.add('show');
+  const total = queue.length;
+  const maxScore = total * 10;
+  const pct = Math.round((score/maxScore)*100);
+  const closeCount = answers.filter(a=>a.result==='close').length;
+
+  let icon='🎯', titleEn='Nice work!', titleZh='干得不错！';
+  if(pct>=90){icon='🏆';titleEn='Brand Expert!';titleZh='品牌专家！';}
+  else if(pct>=70){icon='🎯';titleEn='Solid understanding!';titleZh='理解扎实！';}
+  else if(pct>=50){icon='📚';titleEn='Keep exploring!';titleZh='继续探索！';}
+  else{icon='💡';titleEn='Room to grow!';titleZh='继续加油！';}
+
+  document.getElementById('res-icon').textContent=icon;
+  document.getElementById('res-title').innerHTML=
+    `<span class="en-only">${titleEn}</span><span class="zh-only" style="font-family:'Noto Serif SC',serif">${titleZh}</span>`;
+  document.getElementById('res-score').innerHTML=
+    `<strong>${score}</strong> / ${maxScore} pts &nbsp;·&nbsp; ${pct}%`
+    + (closeCount > 0 ? `<br><span style="font-size:12px;color:#A07820">🟡 ${closeCount} adjacent type${closeCount>1?'s':''} — good arguments!</span>` : '');
+
+  const bd = document.getElementById('res-breakdown');
+  bd.innerHTML='';
+  answers.forEach(a=>{
+    const ct=TYPES.find(t=>t.id===a.brand.type);
+    const row=document.createElement('div');
+    row.className='rb-row';
+    const icon = a.result==='correct'?'✅': a.result==='close'?'🟡':'❌';
+    const pts  = a.result==='correct'?'+10': a.result==='close'?'+5':'0';
+    row.innerHTML=`
+      <span class="rb-icon">${a.brand.emoji}</span>
+      <span class="rb-brand">${a.brand.name}</span>
+      <span class="rb-arrow en-only">→</span>
+      <span class="rb-type" style="color:${ct.color}">
+        <span class="en-only">${ct.en}</span>
+        <span class="zh-only" style="font-family:'Noto Serif SC',serif">${ct.zh}</span>
+      </span>
+      <span class="rb-result">${icon}</span>
+      <span style="font-size:11px;color:var(--ink3);margin-left:2px">${pts}</span>`;
+    bd.appendChild(row);
+  });
+  document.getElementById('prog-fill').style.width='100%';
+}
+
+function restartGame(reshuffle=false){
+  initGame(reshuffle);
+}
+
+/* ─── LANG ─── */
+function setLang(l){
+  currentLang=l;
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+
+/* ─── START ─── */
+initGame();
+</script>
+</body>
+</html>

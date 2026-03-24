@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Management Basics · Student Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F1EA; --bg2:#EAE6DC; --bg3:#D8D3C8; --card:#FDFAF4;
+  --ink:#1A1714; --ink2:#46403A; --ink3:#7A756C;
+  --border:rgba(26,23,20,.10); --border2:rgba(26,23,20,.06);
+  --green:#4A8A28; --r:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.65}
+
+/* ── HERO ── */
+.hero{background:#1A1714;color:#F4F1EA;padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 55% at 50% -10%, rgba(74,138,40,.22) 0%, transparent 70%)}
+.hero-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(244,241,234,.35);margin-bottom:14px;position:relative}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5.5vw,56px);
+  font-weight:700;line-height:1.06;margin-bottom:10px;letter-spacing:-.01em;position:relative}
+.hero-title em{font-style:normal;color:#72B83E}
+.hero-sub{font-size:14px;color:rgba(244,241,234,.48);margin-bottom:4px;position:relative}
+.hero-sub-zh{font-family:'Noto Serif SC',serif;font-size:12.5px;
+  color:rgba(244,241,234,.3);margin-bottom:30px;position:relative}
+.hero-prof{display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:30px;padding:7px 18px;font-size:12px;
+  color:rgba(244,241,234,.5);position:relative}
+.prof-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* ── LANG BAR ── */
+.lang-bar{background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:10px 28px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(4px)}
+.lb-label{font-size:12px;color:var(--ink3)}
+.lb-label-zh{font-family:'Noto Serif SC',serif}
+.lang-btns{display:flex;gap:6px}
+.lb{background:none;border:1px solid var(--border);color:var(--ink2);
+  padding:4px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;
+  font-size:12px;cursor:pointer;transition:all .15s}
+.lb.on{background:var(--green);border-color:var(--green);color:#fff}
+.lb:hover:not(.on){border-color:var(--ink3);color:var(--ink)}
+
+/* ── PAGE ── */
+.page{max-width:980px;margin:0 auto;padding:0 22px 60px}
+
+/* ── SECTION LABEL ── */
+.sec-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);
+  font-weight:500;margin-top:48px;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(74,138,40,.18)}
+
+/* ── FEATURED CARD ── */
+.featured{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  overflow:hidden;display:grid;grid-template-columns:220px 1fr;
+  text-decoration:none;color:inherit;
+  transition:box-shadow .2s,transform .18s;margin-bottom:12px}
+@media(max-width:620px){.featured{grid-template-columns:1fr}}
+.featured:hover{box-shadow:0 10px 40px rgba(0,0,0,.10);transform:translateY(-2px)}
+.feat-left{background:linear-gradient(155deg,#1A1714 0%,#2C2420 100%);
+  padding:30px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:170px}
+.feat-eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(244,241,234,.35);margin-bottom:12px}
+.feat-number{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;
+  color:rgba(244,241,234,.08);line-height:1;margin-bottom:-8px}
+.feat-lect{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;
+  color:#F4F1EA;line-height:1.2}
+.feat-lect span{color:#72B83E}
+.feat-badge{margin-top:16px;background:var(--green);color:#fff;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;
+  display:inline-block;align-self:flex-start}
+.feat-right{padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;margin-bottom:8px}
+.feat-desc{font-size:13px;color:var(--ink2);line-height:1.72;margin-bottom:12px}
+.feat-desc-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.88;margin-bottom:12px}
+.feat-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.chip{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--bg2);color:var(--ink3)}
+.feat-cta{font-size:13px;color:var(--green);font-weight:500}
+
+/* ── TOOL GRID ── */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px}
+.tool-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  padding:22px;text-decoration:none;color:inherit;display:block;
+  position:relative;overflow:hidden;
+  transition:box-shadow .2s,transform .18s,border-color .15s}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tc)}
+.tool-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.09);
+  transform:translateY(-2px);border-color:rgba(var(--tc-rgb),.35)}
+.tc-icon{font-size:30px;margin-bottom:12px;display:block}
+.tc-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;margin-bottom:2px}
+.tc-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-bottom:10px}
+.tc-desc{font-size:12.5px;color:var(--ink2);line-height:1.68;margin-bottom:10px}
+.tc-desc-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.82;margin-bottom:10px}
+.tc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.tc-tag{font-size:10.5px;padding:2px 9px;border-radius:12px;
+  border:1px solid var(--border);color:var(--ink3);background:#fff}
+.tc-arrow{margin-top:14px;font-size:12px;color:var(--ink3);font-weight:400}
+
+/* ── HOW TO USE ── */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px}
+.how-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:18px}
+.how-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;
+  color:var(--bg3);line-height:1;margin-bottom:8px}
+.how-step{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.how-step-zh{font-family:'Noto Serif SC',serif;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.how-desc{font-size:12px;color:var(--ink3);line-height:1.65}
+.how-desc-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.78}
+
+/* ── FOOTER ── */
+footer{background:#1A1714;color:rgba(244,241,234,.3);
+  text-align:center;padding:26px 20px;font-size:11.5px;line-height:1.9}
+footer a{color:rgba(244,241,234,.4);text-decoration:none}
+
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Brand Management Basics · Student Resource Portal</div>
+  <h1 class="hero-title">Brands and <em>People</em></h1>
+  <p class="hero-sub en-only">Lecture #4 · Consumer Typology, Limbic Types &amp; Sinus-Milieus</p>
+  <p class="hero-sub-zh zh-only">第四讲 · 消费者类型、Limbic类型与Sinus社会阶层</p>
+  <div class="hero-prof">
+    <div class="prof-dot"></div>
+    <span>Prof. Dr. Stefan Waller · Brand University of Applied Sciences</span>
+  </div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <span class="lb-label en-only">All tools are bilingual — switch anytime</span>
+  <span class="lb-label lb-label-zh zh-only">所有工具均支持双语——随时切换</span>
+  <div class="lang-btns">
+    <button class="lb on" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('zh')">中文</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- FEATURED: LECTURE -->
+  <div class="sec-label">
+    <span class="en-only">Start here — full lecture</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">从这里开始——完整讲义</span>
+  </div>
+
+  <a class="featured" href="lecture4-brands-and-people.html">
+    <div class="feat-left">
+      <div>
+        <div class="feat-eyebrow en-only">Complete interactive lecture</div>
+        <div class="feat-eyebrow zh-only" style="font-family:'Noto Serif SC',serif">完整互动讲义</div>
+        <div class="feat-number">4</div>
+        <div class="feat-lect">Brands &<br><span>People</span></div>
+      </div>
+      <div class="feat-badge en-only">Recommended start</div>
+      <div class="feat-badge zh-only" style="font-family:'Noto Serif SC',serif">建议从此开始</div>
+    </div>
+    <div class="feat-right">
+      <div>
+        <div class="feat-title en-only">Lecture #4 — Full Interactive Script</div>
+        <div class="feat-title zh-only" style="font-family:'Noto Serif SC',serif">第四讲——完整互动讲义</div>
+        <p class="feat-desc en-only">The entire lecture in one interactive page: consumer typology theory, Big Five personality quiz, Limbic Types wheel, the King Charles vs Ozzy insight, Sinus-Milieu map, persona builder, brand assignment game, and Assignment 4. Everything you need in one place.</p>
+        <p class="feat-desc-zh zh-only">将整个讲座整合在一个互动页面中：消费者类型学理论、大五人格测试、Limbic类型轮盘、查尔斯国王vs奥兹的洞察、Sinus阶层地图、消费者画像构建器、品牌归类游戏，以及第四次作业——一站式完成所有内容。</p>
+        <div class="feat-chips">
+          <span class="chip">Big Five Quiz</span>
+          <span class="chip">Limbic Wheel</span>
+          <span class="chip">Sinus Map</span>
+          <span class="chip">Persona Builder</span>
+          <span class="chip">Brand Game</span>
+          <span class="chip">Assignment 4</span>
+        </div>
+      </div>
+      <div class="feat-cta en-only">Open full lecture →</div>
+      <div class="feat-cta zh-only" style="font-family:'Noto Serif SC',serif">打开完整讲义 →</div>
+    </div>
+  </a>
+
+  <!-- TOOL CARDS -->
+  <div class="sec-label">
+    <span class="en-only">Individual tools — explore each model in depth</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">独立工具——深入探索各模型</span>
+  </div>
+
+  <div class="tool-grid">
+
+    <a class="tool-card" href="limbic-types-en-zh.html" style="--tc:#C84020">
+      <span class="tc-icon">🧠</span>
+      <div class="tc-name en-only">Limbic Types</div>
+      <div class="tc-name zh-only" style="font-family:'Noto Serif SC',serif">Limbic 类型轮盘</div>
+      <div class="tc-zh en-only">边缘系统人格类型</div>
+      <p class="tc-desc en-only">The interactive Limbic® wheel — all 7 types. Click any segment to reveal personality traits, buying behaviour and marketing notes, adapted for the China market context.</p>
+      <p class="tc-desc-zh zh-only">Limbic®互动轮盘——全部7种类型。点击任意区域查看人格特征、购买行为和营销要点，已针对中国市场情境调整。</p>
+      <div class="tc-tags">
+        <span class="tc-tag en-only">7 types</span>
+        <span class="tc-tag en-only">Clickable wheel</span>
+        <span class="tc-tag en-only">Marketing notes</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">7种类型</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">可点击轮盘</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">营销要点</span>
+      </div>
+      <div class="tc-arrow en-only">Open →</div>
+      <div class="tc-arrow zh-only" style="font-family:'Noto Serif SC',serif">打开 →</div>
+    </a>
+
+    <a class="tool-card" href="sinus-milieus-china.html" style="--tc:#2A5FA8">
+      <span class="tc-icon">🇨🇳</span>
+      <div class="tc-name en-only">Sinus Milieus · China</div>
+      <div class="tc-name zh-only" style="font-family:'Noto Serif SC',serif">Sinus阶层 · 中国</div>
+      <div class="tc-zh en-only">新兴市场区域对比</div>
+      <p class="tc-desc en-only">9 emerging-market milieus mapped for China, with a regional bar chart comparing Shanghai, Zhejiang, Guizhou ("Data Valley") and Gansu. Illustrates how dramatically social landscapes shift by region.</p>
+      <p class="tc-desc-zh zh-only">中国9个新兴市场阶层地图，通过柱状图对比上海、浙江、贵州（"数据谷"）和甘肃。直观呈现社会格局的显著地区差异。</p>
+      <div class="tc-tags">
+        <span class="tc-tag en-only">9 milieus</span>
+        <span class="tc-tag en-only">4 regions</span>
+        <span class="tc-tag en-only">Bubble map</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">9个阶层</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">4个地区</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">气泡图</span>
+      </div>
+      <div class="tc-arrow en-only">Open →</div>
+      <div class="tc-arrow zh-only" style="font-family:'Noto Serif SC',serif">打开 →</div>
+    </a>
+
+    <a class="tool-card" href="sinus-milieus-germany.html" style="--tc:#1A4A8A">
+      <span class="tc-icon">🇩🇪</span>
+      <div class="tc-name en-only">Sinus Milieus · Germany</div>
+      <div class="tc-name zh-only" style="font-family:'Noto Serif SC',serif">Sinus阶层 · 德国</div>
+      <div class="tc-zh en-only">德中结构对比参考</div>
+      <p class="tc-desc en-only">The classic 10-milieu German Sinus model — the "potato graphic" made interactive. Filter by group, click each milieu for details, and compare the DE vs CN structure side by side.</p>
+      <p class="tc-desc-zh zh-only">经典德国Sinus模型，含10个阶层——将"土豆图"转化为可交互形式。按组筛选，点击阶层查看详情，并排对比德中结构。</p>
+      <div class="tc-tags">
+        <span class="tc-tag en-only">10 milieus</span>
+        <span class="tc-tag en-only">DE vs CN</span>
+        <span class="tc-tag en-only">Potato graphic</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">10个阶层</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">德中对比</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">土豆图</span>
+      </div>
+      <div class="tc-arrow en-only">Open →</div>
+      <div class="tc-arrow zh-only" style="font-family:'Noto Serif SC',serif">打开 →</div>
+    </a>
+
+    <a class="tool-card" href="limbic-vs-sinus.html" style="--tc:#6A3A8A">
+      <span class="tc-icon">↔️</span>
+      <div class="tc-name en-only">Individual vs Social</div>
+      <div class="tc-name zh-only" style="font-family:'Noto Serif SC',serif">个体 vs 社会群体</div>
+      <div class="tc-zh en-only">两种模型的概念对比</div>
+      <p class="tc-desc en-only">Side-by-side comparison of Limbic Types (individual psychology) and Sinus-Milieus (social groups). Includes a 7×9 interactive matrix showing which types cluster in which milieus.</p>
+      <p class="tc-desc-zh zh-only">Limbic类型（个体心理学）与Sinus阶层（社会群体）的并排对比。包含7×9互动矩阵，显示哪种类型集中在哪个阶层。</p>
+      <div class="tc-tags">
+        <span class="tc-tag en-only">Concept comparison</span>
+        <span class="tc-tag en-only">7×9 matrix</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">概念对比</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">7×9矩阵</span>
+      </div>
+      <div class="tc-arrow en-only">Open →</div>
+      <div class="tc-arrow zh-only" style="font-family:'Noto Serif SC',serif">打开 →</div>
+    </a>
+
+    <a class="tool-card" href="limbic-brand-game.html" style="--tc:#D45025">
+      <span class="tc-icon">🎮</span>
+      <div class="tc-name en-only">Brand Assignment Game</div>
+      <div class="tc-name zh-only" style="font-family:'Noto Serif SC',serif">品牌归类游戏</div>
+      <div class="tc-zh en-only">Limbic品牌归类挑战</div>
+      <p class="tc-desc en-only">Drag or click to assign 12 China-active brands to their Limbic Type. Three-level scoring: ✅ correct, 🟡 adjacent type, ❌ wrong — with explanations for every answer. 31-brand pool.</p>
+      <p class="tc-desc-zh zh-only">拖放或点击，将12个在华活跃品牌归入对应Limbic类型。三档评分：✅正确、🟡相邻类型、❌错误——每题附详细解释。题库含31个品牌。</p>
+      <div class="tc-tags">
+        <span class="tc-tag en-only">31 brands</span>
+        <span class="tc-tag en-only">China-relevant</span>
+        <span class="tc-tag en-only">Drag &amp; drop</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">31个品牌</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">中国品牌</span>
+        <span class="tc-tag zh-only" style="font-family:'Noto Serif SC',serif">拖放操作</span>
+      </div>
+      <div class="tc-arrow en-only">Open →</div>
+      <div class="tc-arrow zh-only" style="font-family:'Noto Serif SC',serif">打开 →</div>
+    </a>
+
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="sec-label">
+    <span class="en-only">Suggested workflow</span>
+    <span class="zh-only" style="font-family:'Noto Serif SC',serif">建议学习流程</span>
+  </div>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-step en-only">Read the lecture</div>
+      <div class="how-step-zh zh-only">阅读讲义</div>
+      <p class="how-desc en-only">Work through the full interactive lecture to get the theoretical foundation, take the Big Five quiz and explore both models in context.</p>
+      <p class="how-desc-zh zh-only">通读完整互动讲义，建立理论基础，完成大五人格测试，在情境中探索两种模型。</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-step en-only">Explore the models</div>
+      <div class="how-step-zh zh-only">深入探索各模型</div>
+      <p class="how-desc en-only">Use the dedicated Limbic Types wheel and the China Sinus map to explore each model in more detail at your own pace.</p>
+      <p class="how-desc-zh zh-only">使用专属的Limbic类型轮盘和中国Sinus地图，按自己的节奏深入了解每个模型。</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-step en-only">Compare DE &amp; CN</div>
+      <div class="how-step-zh zh-only">对比德国与中国</div>
+      <p class="how-desc en-only">Open the German Sinus model and the comparison page to understand how milieu structures differ across societies and what this means for global brands.</p>
+      <p class="how-desc-zh zh-only">打开德国Sinus模型和对比页面，理解阶层结构在不同社会中的差异，以及这对全球品牌意味着什么。</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">04</div>
+      <div class="how-step en-only">Test yourself</div>
+      <div class="how-step-zh zh-only">检验自己</div>
+      <p class="how-desc en-only">Play the Brand Game to see if you can correctly apply the Limbic model to real brands. Aim for the adjacent-type cases — that's where the real discussion happens.</p>
+      <p class="how-desc-zh zh-only">通过品牌游戏检验你是否能正确应用Limbic模型。重点关注相邻类型的案例——那里才是真正值得深思的地方。</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>Brand Management Basics · Lecture #4 · Brands and People</div>
+  <div style="font-family:'Noto Serif SC',serif;margin-top:3px">品牌管理基础 · 第四讲 · 品牌与人</div>
+  <div style="margin-top:8px">Prof. Dr. Stefan Waller · Brand University of Applied Sciences · <a href="mailto:stefan.waller@brand-university.de">stefan.waller@brand-university.de</a></div>
+  <div style="margin-top:4px">Limbic® Gruppe Nymphenburg · Sinus-Milieus® Sinus-Institut GmbH · Teaching use only · 仅供教学使用</div>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.className = l;
+  document.querySelectorAll('.lb').forEach(b =>
+    b.classList.toggle('on',
+      (l==='en' && b.textContent==='EN') ||
+      (l==='zh' && b.textContent==='中文')
+    )
+  );
+}
+</script>
+</body>
+</html>
