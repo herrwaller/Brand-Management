@@ -89,8 +89,11 @@ body.zh .en-only{display:none!important}
 .strategy-tag.con{background:rgba(200,64,32,.10);color:var(--accent)}
 
 /* ROLES CARDS */
-.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0 24px}
 @media(max-width:640px){.roles-grid{grid-template-columns:1fr}}
+.case-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin:28px 0 4px;display:flex;align-items:center;gap:10px}
+.case-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.case-label span{color:var(--green)}
 .role-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 18px;box-shadow:0 2px 8px var(--border2)}
 .role-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:12px;margin-bottom:10px}
 .role-badge.flagship{background:rgba(74,138,40,.15);color:var(--green)}
@@ -423,8 +426,11 @@ body.zh .en-only{display:none!important}
     <h2 class="sec-title en-only">Strategic Brand Roles</h2>
     <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">战略品牌角色</h2>
 
-    <p class="sec-text en-only">Within a brand portfolio, individual brands are not equally important — they play different strategic roles. Understanding these roles prevents cannibalisation, clarifies budget allocation, and ensures the portfolio addresses all relevant market segments. Using Henkel's detergent portfolio as a case study:</p>
-    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">在品牌组合中，各个品牌的重要性并不相同——它们扮演不同的战略角色。理解这些角色可以防止相互蚕食，明确预算分配，并确保品牌组合覆盖所有相关市场细分。以汉高洗涤剂组合为案例：</p>
+    <p class="sec-text en-only">Within a brand portfolio, individual brands are not equally important — they play different strategic roles. Understanding these roles prevents cannibalisation, clarifies budget allocation, and ensures the portfolio addresses all relevant market segments.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">在品牌组合中，各个品牌的重要性并不相同——它们扮演不同的战略角色。理解这些角色可以防止相互蚕食，明确预算分配，并确保品牌组合覆盖所有相关市场细分。</p>
+
+    <p class="case-label en-only">Case Study <span>Germany · Henkel Detergents</span></p>
+    <p class="case-label zh-only" style="font-family:'Noto Serif SC',serif">案例 <span>德国 · 汉高洗涤剂</span></p>
 
     <div class="roles-grid">
       <div class="role-card">
@@ -434,7 +440,6 @@ body.zh .en-only{display:none!important}
         <div class="role-desc en-only">Highest quality, premium price, heavy advertising investment. Defines the standard for the category. The brand the company is most proud of and most willing to invest in.</div>
         <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">最高质量、溢价定价、大量广告投入。定义品类标准。公司最引以为豪、最愿意投资的品牌。</div>
       </div>
-
       <div class="role-card">
         <span class="role-badge flanker en-only">Flanker / Fighter Brand</span>
         <span class="role-badge flanker zh-only">侧翼/战斗品牌</span>
@@ -442,13 +447,39 @@ body.zh .en-only{display:none!important}
         <div class="role-desc en-only">Positioned as "value for money". Its role is to compete with private labels and protect the flagship brand's market share without cannibalising the premium offering.</div>
         <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">定位为"性价比"。其作用是与自有品牌竞争，保护旗舰品牌的市场份额，同时不蚕食高端产品。</div>
       </div>
-
       <div class="role-card">
         <span class="role-badge cashcow en-only">Cash Cow Brand</span>
         <span class="role-badge cashcow zh-only">现金奶牛品牌</span>
         <div class="role-brand">Weisser Riese</div>
         <div class="role-desc en-only">Minimal advertising, loyal customer base, high profitability, low growth. Generates margin that funds investment in the flagship and flanker brands.</div>
         <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">广告最少、拥有忠实消费群体、利润率高、增长缓慢。产生利润，为旗舰品牌和侧翼品牌的投入提供资金。</div>
+      </div>
+    </div>
+
+    <p class="case-label en-only">Case Study <span>China · Haier Group — Home Appliances</span></p>
+    <p class="case-label zh-only" style="font-family:'Noto Serif SC',serif">案例 <span>中国 · 海尔集团——家用电器</span></p>
+
+    <div class="roles-grid">
+      <div class="role-card">
+        <span class="role-badge flagship en-only">Flagship Brand</span>
+        <span class="role-badge flagship zh-only">旗舰品牌</span>
+        <div class="role-brand">卡萨帝 Casarte</div>
+        <div class="role-desc en-only">Ultra-premium "art of living" appliances — refrigerators, washing machines, and wine cellars priced 3–5× the category average. Launched 2007 to compete with Miele and Sub-Zero in China's high-end segment. Heavy brand investment, flagship store network, design collaborations. Haier's prestige vehicle and margin driver.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">超高端"艺术生活"家电——冰箱、洗衣机和酒柜，定价为品类均价的3至5倍。2007年推出，旨在中国高端市场与美诺、Sub-Zero竞争。大量品牌投入、旗舰店网络、设计联名合作。海尔的形象担当与利润引擎。</div>
+      </div>
+      <div class="role-card">
+        <span class="role-badge flanker en-only">Flanker / Fighter Brand</span>
+        <span class="role-badge flanker zh-only">侧翼/战斗品牌</span>
+        <div class="role-brand">统帅 Leader</div>
+        <div class="role-desc en-only">Online-first, value-for-money sub-brand launched on Tmall and JD.com to compete directly with Xiaomi, Hisense, and TCL in the budget segment. Lean product range, minimal offline presence, aggressive pricing. Shields Haier's core brand from a price war in the mass market.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">以线上为主的性价比子品牌，在天猫和京东推出，直接与小米、海信和TCL在预算细分市场竞争。精简产品线，极少线下门店，激进定价。保护海尔核心品牌免受大众市场价格战的冲击。</div>
+      </div>
+      <div class="role-card">
+        <span class="role-badge cashcow en-only">Cash Cow Brand</span>
+        <span class="role-badge cashcow zh-only">现金奶牛品牌</span>
+        <div class="role-brand">海尔 Haier</div>
+        <div class="role-desc en-only">The original master brand — globally recognised (no. 1 in white goods by volume, Euromonitor 2023), with deep retailer relationships and a loyal installed base. Growth is moderate, but the brand generates stable, high-volume revenue that cross-subsidises Casarte's premiumisation and Leader's price competition.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">原始母品牌——全球知名（欧睿国际2023年白色家电销量第一），与零售商关系深厚，拥有忠实的存量用户群。增速平稳，但品牌创造稳定的高销量收入，交叉补贴卡萨帝的高端化投入和统帅的价格竞争。</div>
       </div>
     </div>
   </section>
