@@ -72,6 +72,20 @@ body.en .zh-only{display:none!important}
 .strat-link{display:inline-block;margin-top:7px;font-size:11px;font-weight:600;color:var(--green);text-decoration:none;border:1px solid rgba(74,138,40,.3);padding:3px 10px;border-radius:20px;transition:all .15s}
 .strat-link:hover{background:rgba(74,138,40,.08);border-color:var(--green)}
 
+/* ── CO-BRANDING / VERTICAL ── */
+.cobrand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+@media(max-width:780px){.cobrand-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.cobrand-grid{grid-template-columns:1fr}}
+.cobrand-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+.cobrand-card .cb-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-family:'DM Sans',sans-serif;display:block}
+.cobrand-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.cobrand-card p{font-size:13.5px;color:var(--ink3);line-height:1.6;margin:0}
+.vert-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13.5px}
+.vert-table th{background:var(--ink);color:#F5F2EB;padding:10px 14px;text-align:left;font-family:'DM Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em}
+.vert-table td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
+.vert-table tr:last-child td{border-bottom:none}
+.vert-table td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+
 .assignment-box{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px;margin:44px 0}
 .assignment-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 12px;border-radius:20px;margin-bottom:16px}
 .assignment-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#F5F2EB}
@@ -113,6 +127,12 @@ body.en .zh-only{display:none!important}
       <a href="#s-consolidation" class="toc-pill zh-only">品牌整合</a>
       <a href="#s-expansion" class="toc-pill en-only">Brand Expansion</a>
       <a href="#s-expansion" class="toc-pill zh-only">品牌扩张</a>
+      <a href="#s-vertical" class="toc-pill en-only">Vertical Extensions</a>
+      <a href="#s-vertical" class="toc-pill zh-only">垂直延伸</a>
+      <a href="#s-subbrand" class="toc-pill en-only">Sub-Brand vs. New Brand</a>
+      <a href="#s-subbrand" class="toc-pill zh-only">子品牌与新品牌</a>
+      <a href="#s-cobranding" class="toc-pill en-only">Co-Branding</a>
+      <a href="#s-cobranding" class="toc-pill zh-only">联合品牌</a>
       <a href="#s-assignment" class="toc-pill en-only">Assignment 9</a>
       <a href="#s-assignment" class="toc-pill zh-only">作业 9</a>
     </div>
@@ -427,6 +447,187 @@ body.en .zh-only{display:none!important}
         </div>
       </li>
     </ul>
+  </div>
+
+  <!-- S5: Vertical Extensions -->
+  <div class="section" id="s-vertical">
+    <div class="sec-label en-only">Section 5</div>
+    <div class="sec-label zh-only">第五节</div>
+    <h2 class="sec-title en-only">Vertical Extensions &amp; Brand Overstretching</h2>
+    <h2 class="sec-title zh-only">垂直延伸与品牌过度延伸</h2>
+
+    <div class="sec-text en-only">
+      <p>Beyond horizontal category extensions, brands can also extend <em>vertically</em> — moving up into more premium segments ("trading up") or down into more value-conscious segments ("trading down"). Both directions carry specific risks.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>除了横向品类延伸之外，品牌还可以<em>垂直</em>延伸——向上进入更高端的细分市场（"向上延伸"）或向下进入更注重性价比的细分市场（"向下延伸"）。两个方向都存在特定风险。</p>
+    </div>
+
+    <table class="vert-table en-only">
+      <thead><tr><th>Direction</th><th>Logic</th><th>Risk</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Trading Up ↑</td>
+          <td>Leverage parent brand equity to attract premium buyers who otherwise wouldn't consider it</td>
+          <td>Consumers may not believe the premium claim — "premium" and parent brand are incompatible in their minds</td>
+          <td>Honda → Acura (separate brand); Toyota → Lexus (separate brand) — both decided the parent brand was insufficient for luxury</td>
+        </tr>
+        <tr>
+          <td>Trading Down ↓</td>
+          <td>Reach more value-conscious segments without abandoning the premium positioning of the core brand</td>
+          <td>Dilution of premium image — loyal premium customers feel "their" brand has been cheapened; "flagship" signal weakens</td>
+          <td>Mercedes-Benz A-Class: reaching younger, more budget-conscious buyers, at the risk of blurring the "three-pointed star" prestige signal</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="vert-table zh-only">
+      <thead><tr><th>方向</th><th>逻辑</th><th>风险</th><th>案例</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>向上延伸 ↑</td>
+          <td>利用母品牌资产吸引原本不会考虑它的高端消费者</td>
+          <td>消费者可能不相信高端定位——在他们心目中"高端"与母品牌不兼容</td>
+          <td>本田→讴歌（独立品牌）；丰田→雷克萨斯（独立品牌）——两者都认为母品牌不足以支撑豪华定位</td>
+        </tr>
+        <tr>
+          <td>向下延伸 ↓</td>
+          <td>在不放弃核心品牌高端定位的情况下，触达更注重性价比的细分市场</td>
+          <td>高端形象稀释——忠实的高端客户感觉"他们的"品牌被廉价化；"旗舰"信号减弱</td>
+          <td>梅赛德斯-奔驰A级：接触更年轻、更注重预算的消费者，但有模糊"三叉星"威望信号的风险</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sec-text en-only" style="margin-top:20px">
+      <p><strong>Brand Overstretching — The Sony Case:</strong> Every brand has a boundary beyond which it cannot credibly extend. Sony is a cautionary tale: starting from a strong identity in premium consumer electronics (TVs, Walkman, PlayStation), Sony extended into financial services, insurance, and banking — categories with no connection to its core engineering competence. Consumers could not reconcile the Sony brand with financial products. Brand value fell drastically. The lesson: a brand's identity defines its extendability. Brands with narrow product-specific identities are harder to extend than brands with broader competence-based identities (e.g., Apple's "design and innovation" travels further than Sony's "consumer electronics engineering").</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:20px">
+      <p><strong>品牌过度延伸——索尼案例：</strong>每个品牌都有一个边界，超过这个边界就无法可信地延伸。索尼是一个警示故事：从消费电子（电视、随身听、PlayStation）的强大身份出发，索尼延伸到金融服务、保险和银行业——这些品类与其核心工程能力毫无关联。消费者无法将索尼品牌与金融产品联系起来。品牌价值急剧下降。教训：品牌身份决定了其可延伸性。具有狭义产品特定身份的品牌比具有更广泛能力基础身份的品牌更难延伸（例如，苹果的"设计与创新"比索尼的"消费电子工程"传播得更远）。</p>
+    </div>
+  </div>
+
+  <!-- S6: Sub-Brand vs. New Brand -->
+  <div class="section" id="s-subbrand">
+    <div class="sec-label en-only">Section 6</div>
+    <div class="sec-label zh-only">第六节</div>
+    <h2 class="sec-title en-only">Sub-Brand vs. New Brand — When to Break Away</h2>
+    <h2 class="sec-title zh-only">子品牌与新品牌——何时独立</h2>
+
+    <div class="sec-text en-only">
+      <p>Not every extension can or should travel under the parent brand. When the product or positioning is too distant from the parent brand's identity, a new brand — or at least a clearly differentiated sub-brand — may be required. The decision framework depends on two dimensions: <strong>product fit</strong> (how similar is the new product to what the brand already does?) and <strong>brand fit</strong> (does the brand's personality extend credibly into this space?).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>并非每次延伸都能或应该在母品牌旗帜下进行。当产品或定位与母品牌身份距离太远时，可能需要一个新品牌——或至少一个明确差异化的子品牌。决策框架取决于两个维度：<strong>产品契合度</strong>（新产品与品牌现有产品的相似程度）和<strong>品牌契合度</strong>（品牌个性是否可以可信地延伸到这一领域）。</p>
+    </div>
+
+    <div class="callout">
+      <div class="en-only"><strong>When product fit is good but brand fit is bad</strong> — a new brand name may help signal a new personality. Example: X-Box by Microsoft (gaming ≠ enterprise software). <br><strong>When brand fit is good but product fit is weak</strong> — another name may not be needed. Example: Armani Perfume (luxury lifestyle brand ≠ electronics, but the personality transfers).</div>
+      <div class="callout-zh zh-only"><strong>当产品契合度好但品牌契合度差时</strong>——新品牌名称可能有助于传递新的个性。例子：微软的X-Box（游戏≠企业软件）。<br><strong>当品牌契合度好但产品契合度弱时</strong>——可能不需要另一个名称。例子：阿玛尼香水（奢华生活方式品牌≠电子产品，但个性可以转移）。</div>
+    </div>
+
+    <div class="sec-text en-only" style="margin-top:24px">
+      <p><strong>The Acura Case — Trading Up Requires a New Brand:</strong> In 1986, Honda became the first Japanese automaker to target the luxury car segment. The problem: "Honda" evoked practical, family-oriented transportation — the opposite of luxury cachet. Research showed that consumers could not accept a luxury Honda. Simply adding a premium sub-model was insufficient. Honda created an entirely new brand: <em>Acura</em>. The name evoked "accuracy" and precision engineering, avoided any Japanese or Honda associations, and was positioned with a European-luxury flavour. Toyota followed with Lexus, Nissan with Infiniti. All three concluded that the parent brand equity could not be stretched into luxury — a new identity was required to compete in that space.</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:24px">
+      <p><strong>讴歌案例——向上延伸需要新品牌：</strong>1986年，本田成为第一家瞄准豪华车细分市场的日本汽车制造商。问题是："本田"让人联想到实用、家庭导向的交通工具——与豪华品质的光环截然相反。研究表明，消费者无法接受豪华版本田。仅仅添加一个高端子型号是不够的。本田创造了一个全新品牌：<em>讴歌（Acura）</em>。这个名字让人联想到"精确"和精密工程，避免了任何日本或本田的联想，并以欧式豪华风格定位。丰田随后推出了雷克萨斯，日产推出了英菲尼迪。三家公司都得出结论：母品牌资产无法延伸到豪华领域——需要一个新的身份才能在该领域竞争。</p>
+    </div>
+  </div>
+
+  <!-- S7: Co-Branding -->
+  <div class="section" id="s-cobranding">
+    <div class="sec-label en-only">Section 7</div>
+    <div class="sec-label zh-only">第七节</div>
+    <h2 class="sec-title en-only">Co-Branding</h2>
+    <h2 class="sec-title zh-only">联合品牌</h2>
+
+    <div class="sec-text en-only">
+      <p>Co-branding is the practice of combining two independent brands — often from different product categories — in a single product or joint promotion. Instead of extending alone, a brand leverages a partner's equity to reach consumers it could not reach independently, or to signal a quality attribute it cannot credibly claim alone.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>联合品牌是将两个独立品牌——通常来自不同产品品类——结合在单一产品或联合促销中的做法。品牌不是单独延伸，而是利用合作伙伴的资产来接触它无法独立接触的消费者，或者传递它无法单独可信地声明的质量属性。</p>
+    </div>
+
+    <div class="cobrand-grid en-only">
+      <div class="cobrand-card" style="border-top:3px solid #C84020">
+        <span class="cb-tag" style="color:#C84020">🇨🇳 China Case · 2023</span>
+        <h4>Luckin Coffee × Moutai</h4>
+        <p>China's most viral co-branding of 2023: Luckin Coffee and Moutai (茅台), China's most prestigious baijiu brand, launched the "Sauce-Aroma Latte" (酱香拿铁) — a coffee drink containing a small measure of Moutai liqueur. Day-one sales: 5.42 million cups. Revenue: ¥100M+ in 24 hours. Logic: Luckin got prestige transfer from an ultra-premium heritage brand; Moutai reached young urban consumers who had never bought baijiu. A masterclass in using co-branding to bridge generational brand gaps.</p>
+        <a class="strat-link" href="https://www.luckincoffee.com" target="_blank">→ luckincoffee.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #9B4EA8">
+        <span class="cb-tag" style="color:#9B4EA8">🇨🇳 China Case · 2023</span>
+        <h4>Fendi × Hey Tea (喜茶)</h4>
+        <p>In 2023, Italian luxury house Fendi co-branded with Hey Tea (喜茶), China's leading premium tea chain, launching a limited co-branded cup and tote bag. For Fendi: direct access to millions of young Chinese consumers in daily brand touchpoints, in a format that felt culturally native. For Hey Tea: legitimacy and PR value from a global luxury house. The collaboration generated massive social media coverage on Weibo and Xiaohongshu (RED). It sparked debate — some luxury purists complained of dilution — but brand recall for Fendi among younger Chinese consumers measurably increased.</p>
+        <a class="strat-link" href="https://www.heytea.com" target="_blank">→ heytea.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #C87A10">
+        <span class="cb-tag" style="color:#C87A10">🇨🇳 Guochao · China</span>
+        <h4>Li-Ning × Dunhuang (敦煌)</h4>
+        <p>Chinese sportswear brand Li-Ning has built its identity around the "Guochao" (国潮 — "national trend") movement — a consumer shift toward pride in Chinese culture and domestic brands. Its collaboration with the Dunhuang Research Academy placed ancient Buddhist cave art motifs onto sportswear. The collection sold out and went viral. For Li-Ning, co-branding with a Chinese cultural institution rather than a foreign luxury label signals confidence in Chinese heritage. The Guochao trend has pushed Li-Ning's valuation above Adidas in China — a reversal unthinkable a decade ago.</p>
+        <a class="strat-link" href="https://www.li-ning.com.cn" target="_blank">→ li-ning.com.cn</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #2A5FA8">
+        <span class="cb-tag" style="color:#2A5FA8">Luxury × Streetwear · Global</span>
+        <h4>Gucci × Adidas (2022)</h4>
+        <p>In 2022, Gucci and Adidas launched a full collection blending Gucci's Italian luxury identity with Adidas's iconic three-stripe sportswear aesthetic. The collection used both logos visibly side by side — no subordinate brand. For Gucci: cultural relevance and access to younger streetwear consumers. For Adidas: premium positioning lift and association with high fashion. The co-branding highlighted how luxury × sportswear has become a sustained category, not a one-off stunt. Prices ranged from €400 sneakers to €3,500 tracksuits.</p>
+        <a class="strat-link" href="https://www.gucci.com" target="_blank">→ gucci.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #4A8A28">
+        <span class="cb-tag" style="color:#4A8A28">Ingredient Branding · Classic</span>
+        <h4>Intel Inside</h4>
+        <p>Intel's "Intel Inside" campaign (from 1991) turned an invisible internal component into a consumer-facing brand asset. PC manufacturers co-branded their products with the Intel sticker, transferring Intel's "performance" and "reliability" associations to the finished product. Consumers began demanding Intel chips — giving Intel pricing power over its OEM customers. Lesson: a supplier brand can become a purchase driver when it solves a quality uncertainty the buyer cannot verify themselves.</p>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #1A1714">
+        <span class="cb-tag">Luxury × Streetwear · Pioneer</span>
+        <h4>Supreme × Louis Vuitton (2017)</h4>
+        <p>The collection that defined luxury × streetwear co-branding. Supreme and Louis Vuitton launched a co-branded drop in 2017. For LV: access to younger, streetwear-oriented audiences and the cultural credibility of the most hyped brand in the world. For Supreme: legitimacy from the world's most valuable luxury house. The collection sold out globally in minutes. It proved that co-branding across seemingly incompatible brand universes can generate enormous value — when both partners command cult following and control scarcity.</p>
+      </div>
+    </div>
+    <div class="cobrand-grid zh-only">
+      <div class="cobrand-card" style="border-top:3px solid #C84020">
+        <span class="cb-tag" style="color:#C84020">🇨🇳 中国案例 · 2023</span>
+        <h4>瑞幸咖啡 × 茅台</h4>
+        <p>2023年中国最具病毒式传播的联名案例：瑞幸咖啡与中国最负盛名的白酒品牌茅台推出"酱香拿铁"——一款含少量茅台酒的咖啡饮品。首日销售量：542万杯，收入超过1亿元。逻辑：瑞幸从超高端传统品牌获得声望转移；茅台接触到从未购买过白酒的年轻城市消费者。这是利用联合品牌跨越品牌代际差距的教科书案例。</p>
+        <a class="strat-link" href="https://www.luckincoffee.com" target="_blank">→ luckincoffee.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #9B4EA8">
+        <span class="cb-tag" style="color:#9B4EA8">🇨🇳 中国案例 · 2023</span>
+        <h4>Fendi × 喜茶</h4>
+        <p>2023年，意大利奢侈品牌Fendi与中国顶级茶饮品牌喜茶推出限量联名杯和托特包。对Fendi而言：以文化原生的方式，在日常品牌接触点直接接触数百万年轻中国消费者。对喜茶而言：来自全球奢侈品牌的正当性和公关价值。该联名在微博和小红书上引发了大量社交媒体讨论。部分奢侈品纯粹主义者抱怨品牌稀释，但Fendi在年轻中国消费者中的品牌记忆可衡量地提高了。</p>
+        <a class="strat-link" href="https://www.heytea.com" target="_blank">→ heytea.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #C87A10">
+        <span class="cb-tag" style="color:#C87A10">🇨🇳 国潮 · 中国文化</span>
+        <h4>李宁 × 敦煌研究院</h4>
+        <p>中国运动品牌李宁围绕"国潮"运动——消费者对中国文化和国内品牌的自豪感转变——构建其品牌形象。与敦煌研究院的合作将古代佛教石窟艺术图案融入运动服。该系列售罄并广泛传播。李宁选择与中国文化机构而非外国奢侈品牌联名，传递了对中华文化的信心。国潮趋势推动李宁在中国的估值超越阿迪达斯——这是十年前无法想象的逆转。</p>
+        <a class="strat-link" href="https://www.li-ning.com.cn" target="_blank">→ li-ning.com.cn</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #2A5FA8">
+        <span class="cb-tag" style="color:#2A5FA8">奢侈品 × 运动品牌 · 全球</span>
+        <h4>Gucci × Adidas (2022)</h4>
+        <p>2022年，Gucci与Adidas推出完整联名系列，将Gucci的意大利奢华身份与Adidas标志性三条纹运动美学融合。两个标志并排显示——没有从属品牌。对Gucci：文化相关性和接触更年轻的街头服饰消费者。对Adidas：高端定位提升和与高端时尚的关联。此次联名表明奢侈品×运动装已成为持续的品类，而非一次性噱头。价格从400欧元运动鞋到3500欧元运动套装不等。</p>
+        <a class="strat-link" href="https://www.gucci.com" target="_blank">→ gucci.com</a>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #4A8A28">
+        <span class="cb-tag" style="color:#4A8A28">成分品牌 · 经典案例</span>
+        <h4>英特尔内置</h4>
+        <p>英特尔的"Intel Inside"活动（1991年起）将一个不可见的内部组件变成了面向消费者的品牌资产。PC制造商在产品上贴上英特尔贴纸，将英特尔的"性能"和"可靠性"联想转移到成品上。消费者开始要求英特尔芯片——给了英特尔对OEM客户的定价权。教训：当供应商品牌解决了买家无法自行验证的质量不确定性时，它可以成为购买驱动力。</p>
+      </div>
+      <div class="cobrand-card" style="border-top:3px solid #1A1714">
+        <span class="cb-tag">奢侈品 × 街头服饰 · 先驱</span>
+        <h4>Supreme × 路易威登 (2017)</h4>
+        <p>定义奢侈品×街头服饰联合品牌的系列。Supreme与路易威登于2017年推出联名限定款。对LV：接触更年轻的街头服饰受众，以及全球最受追捧品牌的文化可信度。对Supreme：来自全球最有价值奢侈品牌的合法性。该系列在全球几分钟内售罄。它证明了，当两个合作伙伴都拥有狂热追随者并控制稀缺性时，跨越看似不兼容品牌领域的联合品牌可以创造巨大价值。</p>
+      </div>
+    </div>
+
+    <div class="sec-text en-only" style="margin-top:4px">
+      <p><strong>Pros of co-branding:</strong> Each brand gains goodwill, new customers, and potential cost savings. A new or weaker brand can "piggyback" on a better-known partner's equity.</p>
+      <p><strong>Cons:</strong> A poor fit hurts both brands. If the co-brand partner faces a scandal or quality failure, the association creates negative spillover. Best practice: co-brand only with partners that share complementary values, hold best-in-class status in their category, and grant full review rights over joint communications.</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:4px">
+      <p><strong>联合品牌的优势：</strong>每个品牌都获得好感、新客户和潜在的成本节约。新品牌或较弱的品牌可以"搭便车"于更知名合作伙伴的资产。</p>
+      <p><strong>劣势：</strong>契合度差会伤害两个品牌。如果联合品牌合作伙伴面临丑闻或质量失败，这种关联会产生负面溢出效应。最佳实践：只与拥有互补价值观、在其品类中保持最佳地位并授予联合传播完整审查权的合作伙伴进行联合品牌。</p>
+    </div>
   </div>
 
   <!-- ASSIGNMENT -->
