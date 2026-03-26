@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 7: Brands in the Marketing Mix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* 4P Grid */
+.fourp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:600px){.fourp-grid{grid-template-columns:1fr}}
+.fourp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px}
+.fourp-card .fourp-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.fourp-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+.fourp-card p{font-size:14px;color:var(--ink3);line-height:1.65;margin:0}
+
+.assignment-box{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px;margin:44px 0}
+.assignment-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.assignment-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#F5F2EB}
+.assignment-box .sec-text{color:rgba(245,242,235,.8)}
+.assignment-box .sec-text-zh{color:rgba(245,242,235,.6)}
+
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin:32px 0;display:flex;gap:14px;align-items:flex-start}
+.reading-icon{background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.reading-box p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+
+/* ── INTEGRATED COMMUNICATION EXPLORER ── */
+.ic-wrap{margin:32px 0}
+
+/* Dimension tabs */
+.ic-dim-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.ic-dim-btn{border:2px solid var(--border);background:var(--card);border-radius:20px;padding:8px 18px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;color:var(--ink2);transition:all .15s;display:flex;align-items:center;gap:7px}
+.ic-dim-btn .ic-dim-icon{font-size:16px}
+.ic-dim-btn[data-dim="content"].active{background:rgba(74,138,40,.1);border-color:var(--green);color:var(--green)}
+.ic-dim-btn[data-dim="formal"].active{background:rgba(42,95,168,.1);border-color:#2A5FA8;color:#2A5FA8}
+.ic-dim-btn[data-dim="chrono"].active{background:rgba(200,122,16,.1);border-color:#C87A10;color:#C87A10}
+
+/* Dimension explanation */
+.ic-dim-desc{border-radius:var(--r);padding:14px 18px;margin-bottom:24px;font-size:14px;line-height:1.7;transition:all .2s}
+.ic-dim-desc.content{background:rgba(74,138,40,.07);border-left:3px solid var(--green);color:var(--ink2)}
+.ic-dim-desc.formal{background:rgba(42,95,168,.07);border-left:3px solid #2A5FA8;color:var(--ink2)}
+.ic-dim-desc.chrono{background:rgba(200,122,16,.08);border-left:3px solid #C87A10;color:var(--ink2)}
+.ic-dim-desc-zh{font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink3);margin-top:6px}
+
+/* Campaign header */
+.ic-campaign-hdr{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;padding:14px 18px;background:#1A1714;border-radius:var(--r)}
+.ic-campaign-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#F5F2EB;flex:1}
+.ic-campaign-meta{font-size:11px;color:rgba(245,242,235,.45)}
+.ic-campaign-link{font-size:11.5px;background:rgba(74,138,40,.25);color:#7EC855;border:1px solid rgba(74,138,40,.4);padding:4px 12px;border-radius:12px;text-decoration:none;transition:all .15s;white-space:nowrap}
+.ic-campaign-link:hover{background:rgba(74,138,40,.4);color:#B0E878}
+
+/* Timeline */
+.ic-tl-outer{position:relative;padding:0 0 10px}
+.ic-tl-bar{display:flex;align-items:flex-start;justify-content:space-between;position:relative;padding:0 24px;margin-bottom:0}
+.ic-tl-bar::before{content:'';position:absolute;top:20px;left:44px;right:44px;height:2px;background:var(--bg3);z-index:0}
+.ic-tl-progress{position:absolute;top:20px;left:44px;height:2px;background:var(--green);z-index:1;transition:width .3s ease}
+.ic-phase{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative;z-index:2;cursor:pointer}
+.ic-phase-dot{width:40px;height:40px;border-radius:50%;border:3px solid var(--bg3);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;flex-shrink:0}
+.ic-phase.active .ic-phase-dot{border-color:var(--green);background:var(--green);box-shadow:0 0 0 4px rgba(74,138,40,.2)}
+.ic-phase.visited .ic-phase-dot{border-color:rgba(74,138,40,.5);background:rgba(74,138,40,.12)}
+.ic-phase-date{font-size:10px;font-weight:600;color:var(--ink3);text-align:center;letter-spacing:.04em}
+.ic-phase-label{font-size:12px;font-weight:600;color:var(--ink2);text-align:center}
+.ic-phase.active .ic-phase-label{color:var(--green)}
+.ic-phase-channels{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;max-width:100px}
+.ic-ch-tag{font-size:9.5px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:1px 5px;color:var(--ink3)}
+.ic-phase.active .ic-ch-tag{background:rgba(74,138,40,.08);border-color:rgba(74,138,40,.25);color:var(--green)}
+
+/* Scrubber */
+.ic-scrubber-wrap{padding:16px 44px 0;position:relative}
+.ic-scrubber{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:transparent;outline:none;cursor:pointer}
+.ic-scrubber::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--green);border:3px solid #fff;box-shadow:0 1px 6px rgba(74,138,40,.4);cursor:pointer;transition:transform .1s}
+.ic-scrubber::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.ic-scrubber::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--green);border:3px solid #fff;box-shadow:0 1px 6px rgba(74,138,40,.4);cursor:pointer}
+.ic-step-labels{display:flex;justify-content:space-between;padding:6px 44px 0;font-size:10px;color:var(--ink3)}
+
+/* Detail card */
+.ic-detail{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-top:22px;min-height:80px;transition:opacity .15s}
+.ic-detail-phase-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.ic-detail-phase-label.content{color:var(--green)}
+.ic-detail-phase-label.formal{color:#2A5FA8}
+.ic-detail-phase-label.chrono{color:#C87A10}
+.ic-detail-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:10px}
+.ic-detail-body{font-size:14px;color:var(--ink2);line-height:1.75}
+.ic-detail-body-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);line-height:1.9;margin-top:8px}
+
+/* Second campaign ref */
+.ic-ref-box{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-top:24px}
+.ic-ref-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.ic-ref-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.ic-ref-text{font-size:13px;color:var(--ink2);line-height:1.6}
+.ic-ref-link{color:var(--green);text-decoration:none;font-weight:500}
+.ic-ref-link:hover{text-decoration:underline}
+
+@media(max-width:580px){
+  .ic-tl-bar{padding:0 8px}
+  .ic-tl-bar::before{left:28px;right:28px}
+  .ic-tl-progress{left:28px}
+  .ic-phase-dot{width:32px;height:32px;font-size:13px}
+  .ic-phase-date{font-size:9px}
+  .ic-phase-channels{display:none}
+  .ic-scrubber-wrap{padding:16px 28px 0}
+  .ic-step-labels{padding:6px 28px 0}
+  .ic-dim-btn{padding:6px 12px;font-size:12px}
+}
+
+/* ── COMMUNICATION LEVEL SIMULATOR ── */
+.csim-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px 22px;margin:28px 0}
+.csim-tabs{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.csim-tab{border:2px solid var(--border);border-radius:30px;padding:8px 22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--ink3);transition:all .2s;display:flex;align-items:center;gap:6px}
+.csim-tab.active{background:var(--green);border-color:var(--green);color:#fff}
+.csim-stage{display:none}.csim-stage.visible{display:block}
+.csim-desc{font-size:13.5px;color:var(--ink3);margin-bottom:18px;line-height:1.7}
+.csim-desc-zh{font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink3);margin-bottom:18px;line-height:1.8}
+
+/* Brand node */
+.csim-brand{width:62px;height:62px;border-radius:50%;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;flex-shrink:0;text-align:center;line-height:1.3;transition:box-shadow .3s}
+.csim-brand .csim-bicon{font-size:21px;display:block;margin-bottom:1px}
+.csim-brand.pulse{animation:csimPulse .7s ease}
+@keyframes csimPulse{0%,100%{box-shadow:0 0 0 0 rgba(74,138,40,.45)}55%{box-shadow:0 0 0 20px rgba(74,138,40,0)}}
+
+/* Animated fill-line */
+.csim-hline{height:3px;background:var(--bg3);border-radius:2px;position:relative;overflow:hidden;flex-shrink:0}
+.csim-hline::before{content:'';position:absolute;inset:0;width:0;background:var(--green);transition:width .5s ease}
+.csim-hline.go::before{width:100%}
+.csim-arr{color:var(--bg3);font-size:11px;flex-shrink:0;transition:color .35s;margin:0 1px}
+.csim-arr.go{color:var(--green)}
+
+/* Consumer icons */
+.csim-consumers{display:flex;flex-wrap:wrap;gap:5px;padding-left:8px}
+.csim-c{font-size:18px;opacity:.17;transform:scale(.62);transition:opacity .22s,transform .22s;display:inline-block;line-height:1}
+.csim-c.active{opacity:1;transform:scale(1)}
+
+/* Single-level layout */
+.csim-single-layout{display:flex;align-items:center;gap:0;padding:6px 0}
+.csim-single-line{flex:1;margin:0 4px}
+
+/* Multi-level layout */
+.csim-multi-outer{display:flex;align-items:center;gap:0;padding:6px 0}
+.csim-brand-conn{width:20px;height:3px;background:var(--bg3);flex-shrink:0;transition:background .4s;border-radius:2px}
+.csim-brand-conn.go{background:var(--green)}
+.csim-multi-rows{flex:1;border-left:3px solid var(--bg3);display:flex;flex-direction:column;gap:18px;padding:8px 0;transition:border-color .4s}
+.csim-multi-rows.go{border-color:var(--green)}
+.csim-row{display:flex;align-items:center}
+.csim-row-stub{width:18px;height:3px;background:var(--bg3);flex-shrink:0;transition:background .4s;border-radius:0 2px 2px 0}
+.csim-row-stub.go{background:var(--green)}
+
+/* Multiplier node */
+.csim-mult{border:2px solid var(--border);border-radius:10px;padding:7px 11px;min-width:104px;text-align:center;background:var(--bg);flex-shrink:0;opacity:.28;transition:opacity .3s,border-color .3s,background .3s}
+.csim-mult.active{opacity:1;border-color:var(--accent);background:rgba(200,64,32,.05)}
+.csim-mult .cm-icon{font-size:19px;display:block;margin-bottom:2px}
+.csim-mult .cm-name{font-size:10px;font-weight:700;font-family:'DM Sans',sans-serif;color:var(--ink2);display:block}
+.csim-mult .cm-sub{font-size:9px;color:var(--ink3);display:block}
+.csim-mult-line{flex:1;margin:0 4px}
+
+/* Stats bar */
+.csim-stats{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding:14px 20px;background:var(--bg);border-radius:10px;gap:16px;flex-wrap:wrap}
+.csim-reach-num{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--green);line-height:1.2;display:inline-block}
+.csim-reach-lbl{font-size:10.5px;font-family:'DM Sans',sans-serif;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.csim-ctrl-lbl{font-size:10px;font-family:'DM Sans',sans-serif;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;text-align:right}
+.csim-pips{display:flex;gap:4px;justify-content:flex-end}
+.csim-pip{width:11px;height:11px;border-radius:50%;background:var(--bg3);transition:background .3s}
+.csim-pip.on{background:var(--green)}
+
+/* Simulate button */
+.csim-btn-wrap{text-align:center;margin-top:18px}
+.csim-btn{background:var(--green);color:#fff;border:none;border-radius:30px;padding:10px 32px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:opacity .2s,transform .1s}
+.csim-btn:hover{opacity:.85}
+.csim-btn:active{transform:scale(.97)}
+.csim-btn:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:580px){
+  .csim-multi-outer{flex-wrap:wrap;gap:12px}
+  .csim-consumers{gap:3px}
+  .csim-c{font-size:15px}
+  .csim-mult{min-width:88px}
+}
+</style>
+</head>
+<body class="en">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Lecture 7</div>
+    </div>
+    <h1 class="en-only">Brands in the Marketing Mix</h1>
+    <h1 class="zh-only">品牌与营销组合</h1>
+    <div class="hero-zh en-only">品牌与营销组合</div>
+    <div class="toc-pills">
+      <a href="#s-4p" class="toc-pill en-only">The 4P / 4C Framework</a>
+      <a href="#s-4p" class="toc-pill zh-only">4P / 4C框架</a>
+      <a href="#s-pricing" class="toc-pill en-only">Pricing Policy</a>
+      <a href="#s-pricing" class="toc-pill zh-only">定价政策</a>
+      <a href="#s-communication" class="toc-pill en-only">Communication Policy</a>
+      <a href="#s-communication" class="toc-pill zh-only">传播政策</a>
+      <a href="#s-integrated" class="toc-pill en-only">Integrated Communication</a>
+      <a href="#s-integrated" class="toc-pill zh-only">整合传播</a>
+      <a href="#s-assignment" class="toc-pill en-only">Assignment 7</a>
+      <a href="#s-assignment" class="toc-pill zh-only">作业 7</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- S1: 4P/4C -->
+  <div class="section" id="s-4p">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">The 4P / 4C Framework</h2>
+    <h2 class="sec-title zh-only">4P / 4C框架</h2>
+
+    <div class="sec-text en-only">
+      <p>Brand management is not only strategic (who are we, what do we stand for?) but also operational (how do we bring the brand to market?). The Marketing Mix — the classic "4Ps" — is the operational toolkit for brand management. For branded products, all four Ps must be aligned with the brand identity. A luxury brand with poor product quality, discounted prices, mass distribution, and cheap advertising destroys brand equity.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>品牌管理不仅是战略性的（我们是谁，我们代表什么？），也是运营性的（我们如何将品牌推向市场？）。营销组合——经典的"4P"——是品牌管理的运营工具箱。对于品牌产品，所有四个P必须与品牌识别保持一致。一个产品质量低劣、价格折扣、大众分销、廉价广告的奢侈品牌会摧毁品牌资产。</p>
+    </div>
+
+    <div class="fourp-grid">
+      <div class="fourp-card">
+        <div class="fourp-label en-only">P1 / C1</div>
+        <div class="fourp-label zh-only">P1 / C1</div>
+        <h4 class="en-only">Product → Customer Value</h4>
+        <h4 class="zh-only">产品 → 顾客价值</h4>
+        <p class="en-only">The tangible and intangible features of the product or service that deliver value to the consumer.</p>
+        <p class="zh-only">向消费者传递价值的产品或服务的有形和无形特征。</p>
+      </div>
+      <div class="fourp-card">
+        <div class="fourp-label en-only">P2 / C2</div>
+        <div class="fourp-label zh-only">P2 / C2</div>
+        <h4 class="en-only">Price → Costs</h4>
+        <h4 class="zh-only">价格 → 成本</h4>
+        <p class="en-only">The financial terms under which the product is offered — a powerful signal of brand quality and positioning.</p>
+        <p class="zh-only">产品提供的财务条款——品牌质量和定位的有力信号。</p>
+      </div>
+      <div class="fourp-card">
+        <div class="fourp-label en-only">P3 / C3</div>
+        <div class="fourp-label zh-only">P3 / C3</div>
+        <h4 class="en-only">Promotion → Communication</h4>
+        <h4 class="zh-only">促销 → 传播</h4>
+        <p class="en-only">All forms of communication with the target audience — advertising, PR, social media, events, and more.</p>
+        <p class="zh-only">与目标受众的所有形式的沟通——广告、公关、社交媒体、活动等。</p>
+      </div>
+      <div class="fourp-card">
+        <div class="fourp-label en-only">P4 / C4</div>
+        <div class="fourp-label zh-only">P4 / C4</div>
+        <h4 class="en-only">Place → Convenience</h4>
+        <h4 class="zh-only">渠道 → 便利性</h4>
+        <p class="en-only">The distribution and availability of the product — where and how consumers can access the brand.</p>
+        <p class="zh-only">产品的分销和可及性——消费者可以在哪里以及如何获取品牌。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: Pricing -->
+  <div class="section" id="s-pricing">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">Pricing Policy &amp; the Veblen Effect</h2>
+    <h2 class="sec-title zh-only">定价政策与凡勃伦效应</h2>
+
+    <div class="sec-text en-only">
+      <p>Pricing is often the most underestimated brand lever. Price signals quality: in the absence of other information, consumers use price as a proxy for quality. This is why certain brands must maintain premium pricing — a price reduction signals weakness, not value.</p>
+      <p>Key characteristics of pricing as a brand instrument: Fast feasibility (quickest variable to implement), Fast response (customers and competitors react quickly), Difficult to revise (prices set as reference values have long-term impact), Strong effect (directly affects buying behaviour).</p>
+      <p>The Veblen Effect (named after economist Thorstein Veblen): For luxury goods, raising the price can increase demand, because the higher price enhances the product's status appeal. Veblen goods violate the standard law of demand. Examples: Rolex watches, Hermès Birkin bags, Ferrari — reducing their prices would reduce their desirability.</p>
+      <p>Strategic implications: For premium/luxury brands, pricing must always be consistent with brand positioning. Discounting destroys the brand image faster than any quality issue.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>定价往往是最被低估的品牌杠杆。价格传递质量信号：在缺乏其他信息的情况下，消费者将价格用作质量的替代指标。这就是为什么某些品牌必须维持溢价定价——降价意味着弱势，而非价值。</p>
+      <p>定价作为品牌工具的关键特征：快速可行性（最快能实施的变量），快速反应（顾客和竞争对手迅速回应），难以修正（一旦设定的价格作为参考值具有长期影响），强效应（直接影响购买行为）。</p>
+      <p>凡勃伦效应（以经济学家Thorstein Veblen命名）：对于奢侈品，提价可以增加需求，因为更高的价格增强了产品的地位吸引力。凡勃伦商品违背了标准的需求法则。例子：劳力士手表、爱马仕铂金包、法拉利——降价会降低它们的吸引力。</p>
+      <p>战略含义：对于高端/奢侈品牌，定价必须始终与品牌定位保持一致。折扣比任何质量问题都能更快地摧毁品牌形象。</p>
+    </div>
+
+    <div class="callout">
+      <div class="en-only">"A luxury brand that discounts destroys itself faster than any competitor could."</div>
+      <div class="callout-zh zh-only">打折的奢侈品牌比任何竞争对手都能更快地自我毁灭。</div>
+    </div>
+  </div>
+
+  <!-- S3: Communication Policy -->
+  <div class="section" id="s-communication">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Communication Policy</h2>
+    <h2 class="sec-title zh-only">传播政策</h2>
+
+    <div class="sec-text en-only">
+      <p>Communication is the most visible dimension of brand management — the part consumers directly encounter. Brand Communication transmits the brand identity to target groups in a content- and formally consistent way. Marketing Communication informs, persuades, and reminds consumers of the brand essence.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>传播是品牌管理最显眼的维度——消费者直接接触的部分。品牌传播以内容和形式一致的方式将品牌识别传递给目标群体。营销传播告知、说服和提醒消费者品牌的本质。</p>
+    </div>
+
+    <!-- Communication Goals Tiles -->
+    <div class="fourp-grid" style="grid-template-columns:repeat(3,1fr);margin-top:8px">
+      <div class="fourp-card" style="border-top:3px solid var(--green)">
+        <div class="fourp-label en-only">Goal 01</div>
+        <div class="fourp-label zh-only">目标 01</div>
+        <h4 class="en-only" style="display:flex;align-items:center;gap:8px"><span>📣</span> Brand Awareness</h4>
+        <h4 class="zh-only" style="display:flex;align-items:center;gap:8px"><span>📣</span> 品牌认知</h4>
+        <p class="en-only">Recognition through name, logo, packaging, and consistent messaging — making the brand retrievable in the consumer's memory.</p>
+        <p class="zh-only">通过名称、标志、包装和一致的信息建立识别——使品牌在消费者记忆中可被提取。</p>
+      </div>
+      <div class="fourp-card" style="border-top:3px solid var(--accent)">
+        <div class="fourp-label en-only">Goal 02</div>
+        <div class="fourp-label zh-only">目标 02</div>
+        <h4 class="en-only" style="display:flex;align-items:center;gap:8px"><span>💡</span> Brand Image</h4>
+        <h4 class="zh-only" style="display:flex;align-items:center;gap:8px"><span>💡</span> 品牌形象</h4>
+        <p class="en-only">Building positive emotional and cognitive associations — shaping how consumers feel about and relate to the brand.</p>
+        <p class="zh-only">建立积极的情感和认知联想——塑造消费者对品牌的感受和关联。</p>
+      </div>
+      <div class="fourp-card" style="border-top:3px solid #8B6914">
+        <div class="fourp-label en-only">Goal 03</div>
+        <div class="fourp-label zh-only">目标 03</div>
+        <h4 class="en-only" style="display:flex;align-items:center;gap:8px"><span>🛒</span> Purchase Behaviour</h4>
+        <h4 class="zh-only" style="display:flex;align-items:center;gap:8px"><span>🛒</span> 购买行为</h4>
+        <p class="en-only">Converting awareness and positive attitude into actual buying — the measurable endpoint of the communication funnel.</p>
+        <p class="zh-only">将认知和积极态度转化为实际购买——传播漏斗的可衡量终点。</p>
+      </div>
+    </div>
+
+    <!-- Communication Level Simulator -->
+    <div class="csim-wrap">
+      <div class="csim-tabs">
+        <button class="csim-tab active" data-mode="single" onclick="csimSetMode('single')">
+          📡 <span class="en-only">Single-Level</span><span class="zh-only">单层次传播</span>
+        </button>
+        <button class="csim-tab" data-mode="multi" onclick="csimSetMode('multi')">
+          🌐 <span class="en-only">Multi-Level</span><span class="zh-only">多层次传播</span>
+        </button>
+      </div>
+
+      <!-- SINGLE-LEVEL -->
+      <div class="csim-stage visible" id="csim-stage-single">
+        <p class="csim-desc en-only">The brand communicates <strong>directly</strong> to consumers. High control — but reach is limited to owned channels and paid media budget.</p>
+        <p class="csim-desc-zh zh-only">品牌<strong>直接</strong>向消费者传播。控制力强——但触达范围受限于自有渠道与付费媒体预算。</p>
+        <div class="csim-single-layout">
+          <div class="csim-brand" id="csim-brand-s"><span class="csim-bicon">🏢</span>Brand</div>
+          <div class="csim-hline csim-single-line" id="csim-sline"></div>
+          <div class="csim-arr" id="csim-sarr">▶</div>
+          <div class="csim-consumers">
+            <span class="csim-c" data-s>👤</span><span class="csim-c" data-s>👤</span>
+            <span class="csim-c" data-s>👤</span><span class="csim-c" data-s>👤</span>
+            <span class="csim-c" data-s>👤</span><span class="csim-c" data-s>👤</span>
+          </div>
+        </div>
+        <div class="csim-stats">
+          <div>
+            <div class="csim-reach-lbl en-only">Reach</div>
+            <div class="csim-reach-lbl zh-only">覆盖范围</div>
+            <div><span class="csim-reach-num" id="csim-reach-s">–</span></div>
+          </div>
+          <div>
+            <div class="csim-ctrl-lbl en-only">Brand control</div>
+            <div class="csim-ctrl-lbl zh-only">品牌控制力</div>
+            <div class="csim-pips">
+              <div class="csim-pip on"></div><div class="csim-pip on"></div>
+              <div class="csim-pip on"></div><div class="csim-pip on"></div>
+              <div class="csim-pip on"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MULTI-LEVEL -->
+      <div class="csim-stage" id="csim-stage-multi">
+        <p class="csim-desc en-only">The brand communicates <strong>via multipliers</strong> — influencers, media, word-of-mouth. Reach grows exponentially, but brand control decreases at each level.</p>
+        <p class="csim-desc-zh zh-only">品牌通过<strong>传播者</strong>进行沟通——意见领袖、媒体、口碑。覆盖呈指数增长，但每层品牌控制力随之降低。</p>
+        <div class="csim-multi-outer">
+          <div class="csim-brand" id="csim-brand-m"><span class="csim-bicon">🏢</span>Brand</div>
+          <div class="csim-brand-conn" id="csim-bconn"></div>
+          <div class="csim-multi-rows" id="csim-vbar">
+
+            <!-- Row 1: Influencer -->
+            <div class="csim-row">
+              <div class="csim-row-stub" id="csim-stub-inf"></div>
+              <div class="csim-mult" id="csim-mult-inf">
+                <span class="cm-icon">📱</span>
+                <span class="cm-name en-only">Influencer</span><span class="cm-name zh-only">意见领袖</span>
+                <span class="cm-sub en-only">niche authority</span><span class="cm-sub zh-only">垂直领域权威</span>
+              </div>
+              <div class="csim-hline csim-mult-line" id="csim-mline-inf"></div>
+              <div class="csim-arr" id="csim-marr-inf">▶</div>
+              <div class="csim-consumers">
+                <span class="csim-c" data-group="inf">👤</span><span class="csim-c" data-group="inf">👤</span>
+                <span class="csim-c" data-group="inf">👤</span><span class="csim-c" data-group="inf">👤</span>
+                <span class="csim-c" data-group="inf">👤</span><span class="csim-c" data-group="inf">👤</span>
+                <span class="csim-c" data-group="inf">👤</span><span class="csim-c" data-group="inf">👤</span>
+              </div>
+            </div>
+
+            <!-- Row 2: Media / PR -->
+            <div class="csim-row">
+              <div class="csim-row-stub" id="csim-stub-med"></div>
+              <div class="csim-mult" id="csim-mult-med">
+                <span class="cm-icon">📺</span>
+                <span class="cm-name en-only">Media / PR</span><span class="cm-name zh-only">媒体 / 公关</span>
+                <span class="cm-sub en-only">broad reach</span><span class="cm-sub zh-only">广泛覆盖</span>
+              </div>
+              <div class="csim-hline csim-mult-line" id="csim-mline-med"></div>
+              <div class="csim-arr" id="csim-marr-med">▶</div>
+              <div class="csim-consumers">
+                <span class="csim-c" data-group="med">👤</span><span class="csim-c" data-group="med">👤</span>
+                <span class="csim-c" data-group="med">👤</span><span class="csim-c" data-group="med">👤</span>
+                <span class="csim-c" data-group="med">👤</span><span class="csim-c" data-group="med">👤</span>
+                <span class="csim-c" data-group="med">👤</span><span class="csim-c" data-group="med">👤</span>
+                <span class="csim-c" data-group="med">👤</span><span class="csim-c" data-group="med">👤</span>
+              </div>
+            </div>
+
+            <!-- Row 3: Word-of-Mouth -->
+            <div class="csim-row">
+              <div class="csim-row-stub" id="csim-stub-wom"></div>
+              <div class="csim-mult" id="csim-mult-wom">
+                <span class="cm-icon">💬</span>
+                <span class="cm-name en-only">Word-of-Mouth</span><span class="cm-name zh-only">口碑传播</span>
+                <span class="cm-sub en-only">peer-to-peer spread</span><span class="cm-sub zh-only">口耳相传</span>
+              </div>
+              <div class="csim-hline csim-mult-line" id="csim-mline-wom"></div>
+              <div class="csim-arr" id="csim-marr-wom">▶</div>
+              <div class="csim-consumers">
+                <span class="csim-c" data-group="wom">👤</span><span class="csim-c" data-group="wom">👤</span>
+                <span class="csim-c" data-group="wom">👤</span><span class="csim-c" data-group="wom">👤</span>
+                <span class="csim-c" data-group="wom">👤</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="csim-stats">
+          <div>
+            <div class="csim-reach-lbl en-only">Reach</div>
+            <div class="csim-reach-lbl zh-only">覆盖范围</div>
+            <div><span class="csim-reach-num" id="csim-reach-m">–</span></div>
+          </div>
+          <div>
+            <div class="csim-ctrl-lbl en-only">Brand control</div>
+            <div class="csim-ctrl-lbl zh-only">品牌控制力</div>
+            <div class="csim-pips">
+              <div class="csim-pip on"></div><div class="csim-pip on"></div>
+              <div class="csim-pip"></div><div class="csim-pip"></div>
+              <div class="csim-pip"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="csim-btn-wrap">
+        <button class="csim-btn" id="csim-sim-btn" onclick="csimSimulate()">
+          <span class="en-only">▶ Simulate</span><span class="zh-only">▶ 模拟传播</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sec-text en-only" style="margin-top:4px">
+      <p>China advertising market note: China is the world's second-largest advertising market after the USA — US$199 billion vs. US$379 billion for the USA in 2024 (Source: GroupM year-end forecast). Digital advertising dominates, with social platforms (WeChat, Douyin/TikTok, Weibo) as primary channels.</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:4px">
+      <p>中国广告市场注：中国是继美国之后全球第二大广告市场——2024年中国广告市场规模约1990亿美元，美国约3790亿美元（数据来源：GroupM年终预测）。数字广告占主导地位，社交平台（微信、抖音/TikTok、微博）是主要渠道。</p>
+    </div>
+  </div>
+
+  <!-- S4: Integrated Communication -->
+  <div class="section" id="s-integrated">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">Integrated Communication</h2>
+    <h2 class="sec-title zh-only">整合传播</h2>
+
+    <div class="sec-text en-only">
+      <p>Integrated Communication means the planned, consistent coordination of all communication measures across tools, channels, and time to present a unified brand message. The goal is that every touchpoint a consumer encounters — from a TV ad to an Instagram story to an in-store display — reinforces the same core message rather than contradicting it.</p>
+      <p>Integration operates across <strong>three dimensions</strong>: (1) <strong>Content integration</strong> — consistent topics and key messages across all channels; (2) <strong>Formal integration</strong> — consistent visual identity (logo, colours, typefaces, imagery style) at every touchpoint; (3) <strong>Chronological integration</strong> — coordinated timing so messages reinforce rather than compete with each other.</p>
+      <p>A brand that runs a premium TV campaign while simultaneously discounting in email marketing sends contradictory signals. Integration prevents this fragmentation. The interactive case study below shows how McDonald's "Raise Your Arches" (2023) executed all three dimensions across a precisely choreographed three-phase campaign — and became one of the most awarded integrated campaigns of the decade.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>整合传播意味着有计划地、一致地协调所有传播工具、渠道和时间维度上的传播措施，呈现统一的品牌信息。目标是消费者接触的每一个触点——从电视广告到Instagram故事到店内展示——都强化同一核心信息，而非产生矛盾。</p>
+      <p>整合在<strong>三个维度</strong>上运作：（1）<strong>内容整合</strong>——所有渠道的主题和关键信息保持一致；（2）<strong>形式整合</strong>——所有触点的视觉识别保持一致（标志、颜色、字体、图像风格）；（3）<strong>时序整合</strong>——协调时机，使信息相互强化而非竞争。</p>
+      <p>一个播出高端电视广告同时在电子邮件营销中大幅折扣的品牌传递出矛盾的信号。整合可以防止这种碎片化。下方的互动案例研究展示了麦当劳2023年"Raise Your Arches"活动如何在精心编排的三阶段活动中执行所有三个维度——并成为十年来获奖最多的整合传播活动之一。</p>
+    </div>
+
+    <!-- Interactive Integrated Communication Explorer -->
+    <div class="ic-wrap">
+
+      <!-- Dimension tabs -->
+      <div class="ic-dim-tabs">
+        <button class="ic-dim-btn active" data-dim="content" onclick="icSelectDim('content')">
+          <span class="ic-dim-icon">💬</span>
+          <span class="en-only">Content Integration</span>
+          <span class="zh-only">内容整合</span>
+        </button>
+        <button class="ic-dim-btn" data-dim="formal" onclick="icSelectDim('formal')">
+          <span class="ic-dim-icon">🎨</span>
+          <span class="en-only">Formal Integration</span>
+          <span class="zh-only">形式整合</span>
+        </button>
+        <button class="ic-dim-btn" data-dim="chrono" onclick="icSelectDim('chrono')">
+          <span class="ic-dim-icon">📅</span>
+          <span class="en-only">Chronological Integration</span>
+          <span class="zh-only">时序整合</span>
+        </button>
+      </div>
+
+      <!-- Dimension description -->
+      <div class="ic-dim-desc content" id="ic-dim-desc">
+        <span class="en-only" id="ic-dim-desc-en">Consistent topics and core messages across all channels and formats. Every execution — whether a TV spot, billboard, or TikTok — should express the same idea, the same brand story, the same promise.</span>
+        <div class="ic-dim-desc-zh zh-only" id="ic-dim-desc-zh">所有渠道和格式中主题和核心信息保持一致。每个执行——无论是电视广告、广告牌还是TikTok——都应表达同一理念、同一品牌故事、同一承诺。</div>
+      </div>
+
+      <!-- Campaign header -->
+      <div class="ic-campaign-hdr">
+        <div>
+          <div class="ic-campaign-name en-only">McDonald's — "Raise Your Arches" (2023)</div>
+          <div class="ic-campaign-name zh-only">麦当劳 — "Raise Your Arches" (2023)</div>
+          <div class="ic-campaign-meta en-only">Agency: Leo Burnett London · Silver Pencil, The One Show · 162M views · 40+ countries</div>
+          <div class="ic-campaign-meta zh-only">创意代理：Leo Burnett London · The One Show银奖 · 1.62亿次观看 · 覆盖40+国家</div>
+        </div>
+        <a class="ic-campaign-link" href="https://leoburnett.co.uk/raise-your-arches/" target="_blank" rel="noopener">↗ Agency Case Study</a>
+      </div>
+
+      <!-- Timeline -->
+      <div class="ic-tl-outer">
+        <div class="ic-tl-bar" id="ic-tl-bar">
+          <div class="ic-tl-progress" id="ic-tl-progress" style="width:0%"></div>
+          <!-- Phase nodes injected by JS -->
+        </div>
+        <div class="ic-scrubber-wrap">
+          <input type="range" class="ic-scrubber" id="ic-scrubber" min="0" max="3" step="1" value="0" oninput="icScrub(this.value)">
+        </div>
+        <div class="ic-step-labels">
+          <span>Jan 10</span><span>Jan 13</span><span>Jan 16</span><span>Jan–Mar</span>
+        </div>
+      </div>
+
+      <!-- Detail card -->
+      <div class="ic-detail" id="ic-detail"></div>
+
+      <!-- Second reference -->
+      <div class="ic-ref-box">
+        <div class="ic-ref-icon">📌</div>
+        <div>
+          <div class="ic-ref-label en-only">Further Case Study</div>
+          <div class="ic-ref-label zh-only">延伸案例</div>
+          <p class="ic-ref-text en-only">
+            <strong>Heinz — "It Has to Be Heinz" (2023)</strong> · Agency: Wieden+Kennedy ·
+            Heinz's first global brand platform in 150+ years. Uses real consumer stories (smuggling Heinz through airport security, Heinz tattoos) to prove irrational love for the brand. Ran across TV, Times Square OOH, TikTok, print, and earned media. 12.5B impressions globally. ·
+            <a class="ic-ref-link" href="https://news.kraftheinzcompany.com/press-releases-details/2023/HEINZ-Unveils-First-Global-Creative-Brand-Platform-in-Over-150-Years/default.aspx" target="_blank" rel="noopener">↗ Official press release</a>
+          </p>
+          <p class="ic-ref-text zh-only" style="font-family:'Noto Serif SC',serif;font-size:12.5px">
+            <strong>亨氏 — "It Has to Be Heinz"（2023）</strong>· 创意代理：Wieden+Kennedy ·
+            亨氏150余年来首个全球品牌平台。通过真实消费者故事（将亨氏走私过机场安检、亨氏纹身）证明对品牌的非理性热爱。覆盖电视、时代广场户外、TikTok、平面及赢得媒体，全球获得125亿次曝光。·
+            <a class="ic-ref-link" href="https://news.kraftheinzcompany.com/press-releases-details/2023/HEINZ-Unveils-First-Global-Creative-Brand-Platform-in-Over-150-Years/default.aspx" target="_blank" rel="noopener">↗ 官方新闻稿</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ASSIGNMENT -->
+  <div class="assignment-box" id="s-assignment">
+    <div class="assignment-badge">Assignment 7</div>
+    <h3 class="en-only">Describe the USP of Your Brand</h3>
+    <h3 class="zh-only">描述你的品牌独特卖点</h3>
+    <div class="sec-text en-only">
+      <p>(1) Describe the Unique Selling Proposition (USP) of your brand: What are the basic benefits and what enhanced/additional benefits make it distinctive? Make sure the benefits align with your previously defined positioning.</p>
+      <p>(2) Describe a relevant trend in China (or your target market) that your brand is responding to or could respond to.</p>
+      <p>(3) Analyse one specific communication campaign by your brand: What channel(s) did they use? What message? Was the communication integrated or fragmented? (2–3 slides)</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>（1）描述你品牌的独特卖点（USP）：基础利益是什么，什么增强/附加利益使其与众不同？确保这些利益与你之前定义的定位相一致。</p>
+      <p>（2）描述中国（或你的目标市场）中的一个相关趋势，你的品牌正在或可以回应。</p>
+      <p>（3）分析你品牌的一个具体传播活动：他们使用了哪些渠道？传递了什么信息？传播是整合的还是碎片化的？（2-3页幻灯片）</p>
+    </div>
+  </div>
+
+  <!-- READING -->
+  <div class="reading-box">
+    <div class="reading-icon">Read</div>
+    <p>Homburg, C. 2017, <em>Marketingmanagement: Strategie – Instrumente – Umsetzung – Unternehmensführung</em>, 6th edition, Springer Gabler · Kotler, P. &amp; Keller, K.L. 2016, <em>Marketing Management</em>, 15th global edition, Pearson</p>
+  </div>
+
+</div>
+
+<nav class="nav-bar">
+  <a href="lecture6-market-conditions.html" class="nav-btn">← Lecture 6</a>
+  <span class="nav-info">LECTURE 7 · BRAND MANAGEMENT</span>
+  <a href="lecture8-internationalisation.html" class="nav-btn">Lecture 8 →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang||(lang==='zh'&&b.textContent.trim()==='中文')));
+  icRender();
+}
+
+/* ═══════════════════════════════════════
+   INTEGRATED COMMUNICATION EXPLORER
+   ═══════════════════════════════════════ */
+
+const IC_DIMS = {
+  content:{
+    en:'Consistent topics and core messages across all channels and formats. Every execution — whether a TV spot, billboard, or TikTok — should express the same idea, the same brand story, the same promise.',
+    zh:'所有渠道和格式中主题和核心信息保持一致。每个执行——无论是电视广告、广告牌还是TikTok——都应表达同一理念、同一品牌故事、同一承诺。',
+    cls:'content'
+  },
+  formal:{
+    en:'Consistent visual identity — logo, colours, typography, imagery style, tone of voice — applied uniformly across every touchpoint, from packaging to social media to out-of-home advertising.',
+    zh:'视觉识别保持一致——标志、颜色、字体、图像风格、语调——均匀应用于每个触点，从包装到社交媒体到户外广告。',
+    cls:'formal'
+  },
+  chrono:{
+    en:'Coordinated timing across channels and campaign phases: messages are sequenced to build on each other — teaser before launch, activation after awareness peak — rather than all competing for attention at once.',
+    zh:'跨渠道和活动阶段的协调时机：信息按顺序编排，相互叠加——预热先于发布，激活在认知高峰之后——而非同时竞争注意力。',
+    cls:'chrono'
+  }
+};
+
+const IC_PHASES = [
+  {
+    date:'Jan 10, 2023',
+    dateZh:'2023年1月10日',
+    label:{en:'Teaser',zh:'预热'},
+    emoji:'🤨',
+    channels:['Owned Social (UK)','Twitter/X','Instagram'],
+    content:{
+      content:{
+        title:{en:'Message: "You already know."',zh:'信息："你已经知道了。"'},
+        body:{en:'A single raised-eyebrow emoji 🤨 posted on McDonald\'s UK social channels. No product. No logo. No brand name. The message is communicated purely through a universal cultural symbol — the knowing look. Every subsequent execution in every channel must answer this same question: why did that emoji mean McDonald\'s?',zh:'麦当劳英国社交频道发布了一个挑眉表情符号🤨。没有产品、没有标志、没有品牌名称。信息完全通过通用文化符号——知晓的眼神——来传达。此后每个渠道的每个执行都必须回答同一个问题：为什么这个表情符号意味着麦当劳？'}
+      },
+      formal:{
+        title:{en:'No visual identity — and that\'s intentional.',zh:'没有视觉识别——这是刻意为之。'},
+        body:{en:'The teaser contains zero McDonald\'s visual assets. This only works because the brand has built such a strong formal identity over decades that its absence is itself recognisable. The eyebrow subtly mirrors the arch shape of the Golden Arches — a visual pun that will become explicit three days later. Formal integration enables a brand to communicate without showing itself.',zh:'预热内容中没有任何麦当劳视觉资产。这之所以有效，是因为该品牌几十年来建立了如此强大的形式识别，以至于其缺席本身就是可识别的。眉毛微妙地映射了金拱门的拱形——一个视觉双关，三天后将变得清晰。形式整合使品牌能够在不展示自身的情况下进行传播。'}
+      },
+      chrono:{
+        title:{en:'Phase 1 of 3 — SEED: Create suspense before spending.',zh:'三阶段中的第1阶段——播种：在花费之前制造悬念。'},
+        body:{en:'Posting a single emoji three days before the launch film earns organic media attention without any media buy. This is chronological integration\'s core principle: start with a question. The three-day gap between Jan 10 and Jan 13 is deliberate — it lets curiosity build. You cannot rush chronological integration; the gap is part of the message.',zh:'在推广影片发布前三天发布一个表情符号，无需任何媒体购买即可赢得自然媒体关注。这是时序整合的核心原则：以问题开始。1月10日与1月13日之间的三天间隔是刻意安排的——让好奇心积累。时序整合不能催促；间隔本身就是信息的一部分。'}
+      }
+    }
+  },
+  {
+    date:'Jan 13, 2023',
+    dateZh:'2023年1月13日',
+    label:{en:'Launch',zh:'发布'},
+    emoji:'🎬',
+    channels:['TV','Online Video','TikTok','Instagram','Snapchat'],
+    content:{
+      content:{
+        title:{en:'Message: "An eyebrow raise is an invitation."',zh:'信息："挑眉是一种邀请。"'},
+        body:{en:'The hero film (directed by Edgar Wright) reveals the idea: an eyebrow raise is a wordless, universally understood invitation to go to McDonald\'s. Every scene — a boring meeting, a gym class, a grocery store — shows people exchanging knowing looks. No product shown. No price. No slogan. One single idea, executed across every channel: the invitation that needs no words.',zh:'英雄影片（由Edgar Wright执导）揭示了创意：挑眉是去麦当劳的无声、普世邀请。每个场景——无聊的会议、健身课、杂货店——都展示人们交换会意的眼神。没有展示产品、价格或口号。一个单一创意，在每个渠道执行：不需要言语的邀请。'}
+      },
+      formal:{
+        title:{en:'The Golden Arches become eyebrow arches.',zh:'金拱门变成眉毛拱门。'},
+        body:{en:'Simultaneously on all owned channels, McDonald\'s replaced its logo with an eyebrow illustration. Red and yellow are present but restrained — the arch shape is the hero. The film uses warm, slightly nostalgic lighting and the iconic McDonald\'s typeface on the end card. Formal integration means: when the logo is swapped for eyebrows, every consumer still knows immediately that it is McDonald\'s.',zh:'在所有自有渠道同步，麦当劳用眉毛插图替换了其标志。红色和黄色存在但克制——拱形是主角。影片在结尾卡片上使用温暖、略带怀旧的灯光和标志性的麦当劳字体。形式整合意味着：当标志被眉毛替换时，每个消费者仍然立即知道这是麦当劳。'}
+      },
+      chrono:{
+        title:{en:'Phase 2 of 3 — SCALE: Simultaneous TV + social explosion.',zh:'三阶段中的第2阶段——扩大：电视+社交同步爆发。'},
+        body:{en:'Three days after the teaser, the answer arrives simultaneously across TV, social, and online video. Simultaneity is the chronological key: launching on TV and social at the same moment means conversations in different media reinforce each other. When someone sees the ad on TV and then sees the same eyebrow on TikTok an hour later, the message frequency multiplies without requiring additional budget.',zh:'在预热三天后，答案在电视、社交和在线视频上同步到来。同步性是时序整合的关键：在电视和社交媒体同时发布，意味着不同媒体中的对话相互强化。当有人在电视上看到广告，然后一小时后在TikTok上看到同样的眉毛，信息频率在不需要额外预算的情况下成倍增加。'}
+      }
+    }
+  },
+  {
+    date:'Jan 16, 2023',
+    dateZh:'2023年1月16日',
+    label:{en:'Activation',zh:'激活'},
+    emoji:'📲',
+    channels:["McDonald's App",'AR Filters','Influencers','In-store'],
+    content:{
+      content:{
+        title:{en:'Message: "Now come and get it."',zh:'信息："现在来吧。"'},
+        body:{en:'The app launches a two-week daily deals programme — converting the emotional high of the launch film into immediate purchase action. Content shifts from "feel" to "act." AR eyebrow-raise filters on Snapchat and Instagram let users become part of the campaign themselves. The core message hasn\'t changed — but now it has a commercial call-to-action attached.',zh:'应用程序推出为期两周的每日优惠计划——将发布影片的情感高峰转化为即时购买行动。内容从"感受"转向"行动"。Snapchat和Instagram上的AR挑眉滤镜让用户成为活动本身的一部分。核心信息没有改变——但现在附加了商业行动号召。'}
+      },
+      formal:{
+        title:{en:'Formal identity travels into UGC and influencer content.',zh:'形式识别延伸至用户生成内容和网红内容。'},
+        body:{en:'AR filters, influencer briefs, and in-store POS all carry the eyebrow motif and McDonald\'s red/yellow palette — maintaining visual consistency as the brand invites consumers to co-create. This is formal integration at its hardest: extending a visual language you do not fully control into spaces where users and influencers produce content. The eyebrow becomes a brand asset that anyone can perform.',zh:'AR滤镜、网红简报和店内POS都带有眉毛元素和麦当劳红/黄色调——在品牌邀请消费者共创时保持视觉一致性。这是形式整合最难的部分：将你无法完全控制的视觉语言延伸到用户和网红产生内容的空间。眉毛成为任何人都可以演绎的品牌资产。'}
+      },
+      chrono:{
+        title:{en:'Phase 3 of 3 — SPREAD: Convert awareness to purchase.',zh:'三阶段中的第3阶段——扩散：将认知转化为购买。'},
+        body:{en:'Three days after launch — once awareness has peaked — the app activation redirects energy from watching to buying. Influencer partnerships are timed to the post-launch week when organic search and social conversation are at their highest, amplifying rather than competing with the hero film. The 3-day rhythm (Jan 10 → 13 → 16) is the chronological backbone of the entire campaign.',zh:'在发布三天后——意识达到峰值——应用激活将能量从观看重定向到购买。网红合作时机安排在发布后一周，此时自然搜索和社交对话处于最高峰，起到放大而非与英雄影片竞争的效果。3天节奏（1月10日→13日→16日）是整个活动的时序骨干。'}
+      }
+    }
+  },
+  {
+    date:'Jan – Mar 2023',
+    dateZh:'2023年1月至3月',
+    label:{en:'Spread',zh:'扩散'},
+    emoji:'🌍',
+    channels:['UGC / TikTok trend','40+ markets','Earned media','Local TV adaptations'],
+    content:{
+      content:{
+        title:{en:'One idea, 40+ countries, 162 million views.',zh:'一个创意，40+国家，1.62亿次观看。'},
+        body:{en:'The eyebrow raise becomes a viral cultural gesture on TikTok — millions of users recreate it spontaneously without prompting. McDonald\'s adapts the hero film for local markets (different actors, same single idea) maintaining content consistency while allowing cultural relevance. 162 million views of the launch film. The single-idea discipline is what makes global scale possible: you cannot globalise a complicated message.',zh:'挑眉动作在TikTok上成为病毒式文化手势——数百万用户无需提示自发地重新创作。麦当劳为本地市场改编英雄影片（不同演员，相同单一创意），在保持内容一致性的同时实现文化相关性。推广影片获得1.62亿次观看。单一创意纪律是全球规模化成为可能的原因：复杂的信息无法全球化。'}
+      },
+      formal:{
+        title:{en:'Visual consistency holds across 40+ country adaptations.',zh:'视觉一致性在40+国家改编版本中保持。'},
+        body:{en:'In every country adaptation — South Korea, Mexico, Germany, Australia — the visual language is identical: eyebrows-as-arches, McDonald\'s red/yellow, no product visible, warm tone. A German consumer watching the South Korean version and a South Korean consumer watching the German version should both immediately recognise the same campaign. This is the proof of formal integration at scale.',zh:'在每个国家改编版本中——韩国、墨西哥、德国、澳大利亚——视觉语言完全相同：眉毛作为拱门、麦当劳红/黄色、不露出产品、温暖基调。看到韩国版本的德国消费者和看到德国版本的韩国消费者都应立即认出同一活动。这是规模化形式整合的证明。'}
+      },
+      chrono:{
+        title:{en:'Organic spread: the compounding return of good timing.',zh:'自然扩散：良好时机的复利回报。'},
+        body:{en:'The organic spread phase was not detailed in advance — but it was enabled by the chronological sequence. Seed→Scale→Spread created a cultural moment: once the moment exists, no further media investment is needed to sustain it — the community carries it forward. This is chronological integration\'s ultimate reward: a campaign that outlasts its media budget.',zh:'自然扩散阶段并未事先详细规划——但它由时序顺序实现。播种→扩大→扩散创造了一个文化时刻：一旦时刻形成，无需进一步媒体投资来维持——社区推动其前进。这是时序整合的终极回报：一个超越其媒体预算的活动。'}
+      }
+    }
+  }
+];
+
+let icCurrentDim = 'content';
+let icCurrentPhase = 0;
+
+function icSelectDim(dim){
+  icCurrentDim = dim;
+  document.querySelectorAll('.ic-dim-btn').forEach(b=>b.classList.toggle('active',b.dataset.dim===dim));
+  const d = IC_DIMS[dim];
+  const isZh = document.body.classList.contains('zh');
+  const descEl = document.getElementById('ic-dim-desc');
+  descEl.className = 'ic-dim-desc ' + d.cls;
+  document.getElementById('ic-dim-desc-en').textContent = d.en;
+  document.getElementById('ic-dim-desc-zh').textContent = d.zh;
+  icRenderDetail();
+}
+
+function icScrub(val){
+  icCurrentPhase = parseInt(val);
+  icRenderPhases();
+  icRenderDetail();
+}
+
+function icSelectPhase(idx){
+  icCurrentPhase = idx;
+  document.getElementById('ic-scrubber').value = idx;
+  icRenderPhases();
+  icRenderDetail();
+}
+
+function icRenderPhases(){
+  const bar = document.getElementById('ic-tl-bar');
+  // Clear existing phase nodes (keep progress bar)
+  bar.querySelectorAll('.ic-phase').forEach(el=>el.remove());
+  const prog = document.getElementById('ic-tl-progress');
+
+  IC_PHASES.forEach((phase,i)=>{
+    const el = document.createElement('div');
+    el.className = 'ic-phase' + (i===icCurrentPhase?' active':'') + (i<icCurrentPhase?' visited':'');
+    el.onclick = ()=>icSelectPhase(i);
+    const chTags = phase.channels.slice(0,3).map(c=>`<span class="ic-ch-tag">${c}</span>`).join('');
+    const isZh = document.body.classList.contains('zh');
+    el.innerHTML = `
+      <div class="ic-phase-dot">${phase.emoji}</div>
+      <div class="ic-phase-date">${isZh ? phase.dateZh : phase.date}</div>
+      <div class="ic-phase-label">${isZh ? phase.label.zh : phase.label.en}</div>
+      <div class="ic-phase-channels">${chTags}</div>
+    `;
+    bar.appendChild(el);
+  });
+
+  // Update progress bar width
+  prog.style.width = icCurrentPhase === 0 ? '0%' : (icCurrentPhase / (IC_PHASES.length-1) * 100) + '%';
+}
+
+function icRenderDetail(){
+  const phase = IC_PHASES[icCurrentPhase];
+  const dimData = phase.content[icCurrentDim];
+  const isZh = document.body.classList.contains('zh');
+  const detail = document.getElementById('ic-detail');
+  const dimLabels = {
+    content:{en:'Content Integration',zh:'内容整合'},
+    formal:{en:'Formal Integration',zh:'形式整合'},
+    chrono:{en:'Chronological Integration',zh:'时序整合'}
+  };
+
+  detail.innerHTML = `
+    <div class="ic-detail-phase-label ${icCurrentDim} en-only"${isZh?' style="display:none"':''}>
+      ${dimLabels[icCurrentDim].en} — ${phase.label.en} (${phase.date})
+    </div>
+    <div class="ic-detail-phase-label ${icCurrentDim} zh-only"${!isZh?' style="display:none"':''}>
+      ${dimLabels[icCurrentDim].zh} — ${phase.label.zh}（${phase.dateZh}）
+    </div>
+    <div class="ic-detail-title en-only"${isZh?' style="display:none"':''}>${dimData.title.en}</div>
+    <div class="ic-detail-title zh-only"${!isZh?' style="display:none"':''} style="font-family:'Noto Serif SC',serif${!isZh?';display:none':''}">${dimData.title.zh}</div>
+    <p class="ic-detail-body en-only"${isZh?' style="display:none"':''}>${dimData.body.en}</p>
+    <p class="ic-detail-body-zh zh-only"${!isZh?' style="display:none"':''}>${dimData.body.zh}</p>
+  `;
+}
+
+function icRender(){
+  icRenderPhases();
+  icRenderDetail();
+  // Re-apply dim description language
+  const d = IC_DIMS[icCurrentDim];
+  document.getElementById('ic-dim-desc').className = 'ic-dim-desc ' + d.cls;
+  document.getElementById('ic-dim-desc-en').textContent = d.en;
+  document.getElementById('ic-dim-desc-zh').textContent = d.zh;
+}
+
+window.addEventListener('load', ()=>icRender());
+
+// ── Communication Level Simulator ──
+let csimMode = 'single', csimRunning = false;
+
+function csimSetMode(mode) {
+  csimMode = mode;
+  document.querySelectorAll('.csim-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  document.getElementById('csim-stage-single').classList.toggle('visible', mode === 'single');
+  document.getElementById('csim-stage-multi').classList.toggle('visible', mode === 'multi');
+  csimResetAll();
+}
+
+function csimResetAll() {
+  document.querySelectorAll('.csim-hline,.csim-arr,.csim-row-stub,.csim-brand-conn').forEach(el => el.classList.remove('go'));
+  const vbar = document.getElementById('csim-vbar');
+  if(vbar) vbar.classList.remove('go');
+  document.querySelectorAll('.csim-c').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.csim-mult').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.csim-brand').forEach(el => el.classList.remove('pulse'));
+  ['csim-reach-s','csim-reach-m'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent='–'; });
+  const btn = document.getElementById('csim-sim-btn');
+  if(btn) btn.disabled = false;
+  csimRunning = false;
+}
+
+function csimSetReach(elId, isZh, labelEn, labelZh) {
+  const el = document.getElementById(elId);
+  if(el) el.textContent = isZh ? labelZh : labelEn;
+}
+
+function csimSimulate() {
+  if(csimRunning) return;
+  csimRunning = true;
+  csimResetAll();
+  csimRunning = true;
+  const btn = document.getElementById('csim-sim-btn');
+  btn.disabled = true;
+
+  if(csimMode === 'single') {
+    document.getElementById('csim-brand-s').classList.add('pulse');
+    setTimeout(() => {
+      document.getElementById('csim-sline').classList.add('go');
+      document.getElementById('csim-sarr').classList.add('go');
+    }, 380);
+    document.querySelectorAll('[data-s]').forEach((c, i) => {
+      setTimeout(() => c.classList.add('active'), 880 + i * 140);
+    });
+    const isZh = document.body.classList.contains('zh');
+    setTimeout(() => csimSetReach('csim-reach-s', isZh, 'Direct', '直接触达'), 920);
+    setTimeout(() => { btn.disabled = false; csimRunning = false; }, 2200);
+
+  } else {
+    document.getElementById('csim-brand-m').classList.add('pulse');
+    setTimeout(() => {
+      document.getElementById('csim-bconn').classList.add('go');
+      document.getElementById('csim-vbar').classList.add('go');
+    }, 350);
+    const rows = [
+      {stub:'csim-stub-inf', mult:'csim-mult-inf', line:'csim-mline-inf', arr:'csim-marr-inf', group:'inf', d:550},
+      {stub:'csim-stub-med', mult:'csim-mult-med', line:'csim-mline-med', arr:'csim-marr-med', group:'med', d:820},
+      {stub:'csim-stub-wom', mult:'csim-mult-wom', line:'csim-mline-wom', arr:'csim-marr-wom', group:'wom', d:1090},
+    ];
+    rows.forEach(r => {
+      setTimeout(() => document.getElementById(r.stub).classList.add('go'), r.d);
+      setTimeout(() => document.getElementById(r.mult).classList.add('active'), r.d + 290);
+      setTimeout(() => {
+        document.getElementById(r.line).classList.add('go');
+        document.getElementById(r.arr).classList.add('go');
+      }, r.d + 440);
+      document.querySelectorAll(`[data-group="${r.group}"]`).forEach((c, i) => {
+        setTimeout(() => c.classList.add('active'), r.d + 700 + i * 75);
+      });
+    });
+    const isZh = document.body.classList.contains('zh');
+    setTimeout(() => csimSetReach('csim-reach-m', isZh, 'Amplified', '倍增效应'), 1800);
+    setTimeout(() => { btn.disabled = false; csimRunning = false; }, 3300);
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lecture 1 — What are Brands?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7}
+body.en .zh-only{display:none!important}
+body.zh .en-only{display:none!important}
+
+/* HEADER */
+.header{background:#1A1714;padding:0;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(74,138,40,.28) 0%,transparent 70%);pointer-events:none}
+.header-inner{max-width:860px;margin:0 auto;padding:36px 32px 40px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(245,242,235,.45);text-decoration:none;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;margin-bottom:24px;transition:color .15s}
+.back-link:hover{color:rgba(245,242,235,.8)}
+.lecture-tag{display:inline-block;background:rgba(74,138,40,.22);color:#7EC855;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:18px}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:600;color:#F5F2EB;line-height:1.15;margin-bottom:8px}
+.header-title span{color:#7EC855}
+.header-subtitle{font-family:'Noto Serif SC',serif;font-size:18px;color:rgba(245,242,235,.55);margin-bottom:28px}
+
+/* TOC */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.toc-pill{background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);color:rgba(245,242,235,.6);padding:5px 14px;border-radius:20px;font-size:12px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(74,138,40,.2);border-color:rgba(74,138,40,.4);color:#7EC855}
+
+/* LANG TOGGLE */
+.lang-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 32px;display:flex;justify-content:flex-end;max-width:100%}
+.lang-wrap{max-width:860px;margin:0 auto;width:100%;display:flex;justify-content:flex-end}
+.lang-btn{background:none;border:1px solid var(--border);padding:5px 16px;border-radius:20px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink2);transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:40px 32px 60px}
+
+/* SECTION */
+.section{margin-bottom:52px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,30px);font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:18px}
+.sec-text{color:var(--ink2);line-height:1.8;margin-bottom:12px}
+.sec-text-zh{color:var(--ink2);line-height:2;margin-bottom:12px}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--green);background:var(--card);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;box-shadow:0 2px 8px var(--border2)}
+.callout p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0}
+.callout .callout-zh{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink3);margin-top:8px;font-style:normal}
+
+/* INFO CARDS */
+.card-grid{display:grid;gap:16px;margin:24px 0}
+.card-grid.col2{grid-template-columns:repeat(2,1fr)}
+.card-grid.col3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:600px){.card-grid.col2,.card-grid.col3{grid-template-columns:1fr}}
+
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:0 2px 6px var(--border2)}
+.info-card-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}
+.info-card-label.green{color:var(--green)}
+.info-card-label.accent{color:var(--accent)}
+.info-card ul{padding-left:0;list-style:none}
+.info-card ul li{font-size:14px;color:var(--ink2);padding:4px 0;border-bottom:1px solid var(--border2)}
+.info-card ul li:last-child{border-bottom:none}
+.info-card ul li::before{content:'→ ';color:var(--ink3)}
+
+/* APPROACH CARDS (dimension cards) */
+.approach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+@media(max-width:600px){.approach-grid{grid-template-columns:1fr}}
+.approach-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:0 2px 6px var(--border2)}
+.approach-card-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.approach-card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.approach-card-body{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+/* COMPARISON CARDS */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:560px){.compare-grid{grid-template-columns:1fr}}
+.compare-card{background:var(--card);border-radius:var(--r);padding:22px;box-shadow:0 2px 8px var(--border2)}
+.compare-card.accent-card{border-top:3px solid var(--accent)}
+.compare-card.green-card{border-top:3px solid var(--green)}
+.compare-card-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.compare-card.accent-card .compare-card-label{color:var(--accent)}
+.compare-card.green-card .compare-card-label{color:var(--green)}
+.compare-list{list-style:none;padding:0}
+.compare-list li{font-size:14px;color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;gap:8px}
+.compare-list li:last-child{border-bottom:none}
+.compare-list li::before{content:'·';font-size:18px;line-height:1;flex-shrink:0;color:var(--ink3)}
+
+/* ASSIGNMENT */
+.assignment{background:var(--card);border:1px solid rgba(74,138,40,.25);border-radius:var(--r);padding:28px 28px 24px;margin:40px 0 28px;box-shadow:0 2px 12px var(--border2)}
+.assignment-badge{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.assignment-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.assignment-body{font-size:14px;color:var(--ink2);line-height:1.8}
+.assignment-body-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink3);line-height:2;margin-top:12px}
+
+/* READING */
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:20px}
+.reading-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.reading-content{}
+.reading-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.reading-text{font-size:13px;color:var(--ink3);line-height:1.7}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:1px solid var(--border);margin:0 0 48px}
+
+/* NAV BAR */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body class="en">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <a class="back-link" href="index.html">← Course Overview</a>
+    <div class="lecture-tag">Lecture 01</div>
+    <h1 class="header-title en-only">Introduction — What are <span>Brands</span>?</h1>
+    <h1 class="header-title zh-only" style="font-family:'Noto Serif SC',serif">导论——什么是<span>品牌</span>？</h1>
+    <p class="header-subtitle zh-only">品牌管理基础 · 第一讲</p>
+    <nav class="toc">
+      <a class="toc-pill en-only" href="#s-definition">What is a Brand</a>
+      <a class="toc-pill zh-only" href="#s-definition">品牌定义</a>
+      <a class="toc-pill en-only" href="#s-types">Anything Can Be Branded</a>
+      <a class="toc-pill zh-only" href="#s-types">万物皆可品牌化</a>
+      <a class="toc-pill en-only" href="#s-products">Products vs. Brands</a>
+      <a class="toc-pill zh-only" href="#s-products">产品与品牌</a>
+      <a class="toc-pill en-only" href="#s-strongbrands">What Strong Brands Do</a>
+      <a class="toc-pill zh-only" href="#s-strongbrands">强大品牌的力量</a>
+      <a class="toc-pill en-only" href="#s-assignment">Assignment 1</a>
+      <a class="toc-pill zh-only" href="#s-assignment">作业 1</a>
+    </nav>
+  </div>
+</div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-bar">
+  <div class="lang-wrap">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')" style="margin-left:6px">中文</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- SECTION 1: WHAT IS A BRAND -->
+  <section class="section" id="s-definition">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">What is a Brand?</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">什么是品牌？</h2>
+
+    <p class="sec-text en-only">Brands are everywhere — on every product we buy, every service we use, every institution we interact with. But what exactly is a brand? At its core, a brand is not the logo, the packaging, or the advertising campaign. A brand exists in the mind of the consumer. It is the sum of associations, feelings and expectations that a person connects with a name, symbol, or design.</p>
+    <p class="sec-text en-only">The AMA (American Marketing Association) offers a formal definition: <em>"A brand is a name, term, sign, symbol or design, or a combination of these, intended to identify the goods or services of one seller or group of sellers, and to differentiate them from those of a competitor."</em> More precisely, brands are <em>"images in the minds of stakeholders that assume an identification and differentiation function and shape choice processes"</em> (Esch, 2014). A brand is a set of mental associations held by the consumer which add to the perceived value of a product or service.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌无处不在——存在于我们购买的每一件产品、使用的每一项服务、接触的每一个机构之中。但品牌究竟是什么？从根本上说，品牌不是标志、包装或广告活动，而是存在于消费者心智中的东西。它是一个人与某一名称、符号或设计相关联的印象、情感与期待的总和。</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">美国营销协会（AMA）给出了正式定义："品牌是名称、术语、标志、符号或设计，或其组合，旨在识别一个或一组销售者的商品或服务，并将其与竞争对手区分开来。"更深刻地说，品牌是"存在于利益相关者心智中的形象，承担着识别与差异化功能，并塑造购买决策过程"（Esch，2014）。品牌是消费者持有的一组心理联想，这些联想为产品或服务增加感知价值。</p>
+
+    <div class="callout">
+      <p class="en-only">"Products are made in the factory, but brands are created in the mind." — Walter Landor</p>
+      <p class="callout-zh zh-only" style="font-family:'Noto Serif SC',serif">产品在工厂里制造，但品牌在心智中创造。——沃尔特·兰多</p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2: WHAT CAN BE BRANDED -->
+  <section class="section" id="s-types">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">What Can Be Branded?</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">什么可以被品牌化？</h2>
+
+    <p class="sec-text en-only">The scope of branding extends far beyond consumer products. Virtually anything that creates associations and value in people's minds can function as a brand. The branding of universities is a powerful example: Harvard's brand communicates prestige, intellectual rigour and global network access — and people pay premium prices (via tuition fees) for access to that brand.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌化的范围远超消费品。几乎任何能在人们心中建立联想与价值的事物都可以成为品牌。大学品牌化是一个有力的案例：哈佛的品牌传达了声誉、学术严谨性和全球校友网络——人们为此支付溢价（通过学费）以获得品牌准入。</p>
+
+    <div class="card-grid col2">
+      <div class="info-card">
+        <div class="info-card-label green">Commercial Brands / 商业品牌</div>
+        <ul>
+          <li>Products &amp; Services — Coca-Cola, Apple, Ryanair</li>
+          <li>Retail brands &amp; store brands</li>
+          <li>Luxury goods &amp; fashion houses</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label green">People &amp; Places / 人物与地方</div>
+        <ul>
+          <li>Personal brands — athletes, musicians, actors</li>
+          <li>Country branding — "Germany: Land of Ideas"</li>
+          <li>Regional brands — Champagne, Darjeeling</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label green">Institutions / 机构</div>
+        <ul>
+          <li>Universities — Harvard, MIT, LMU Munich</li>
+          <li>NGOs &amp; political parties</li>
+          <li>Museums &amp; cultural institutions</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label green">Ideas &amp; Entertainment / 理念与娱乐</div>
+        <ul>
+          <li>Movie franchises — Star Wars, Marvel</li>
+          <li>Movements &amp; ideologies</li>
+          <li>Religions and causes</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">产品与服务（可口可乐、苹果、瑞安航空），人物与名人（运动员、音乐家、演员的"个人品牌"），地方与国家（国家品牌："德国——创意之国"，区域品牌如香槟或大吉岭），组织机构（大学、非政府组织、政党），艺术与娱乐（电影系列、博物馆品牌），概念与理念（运动、宗教、意识形态）。</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3: PRODUCTS VS. BRANDS -->
+  <section class="section" id="s-products">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Products vs. Brands</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">产品与品牌</h2>
+
+    <p class="sec-text en-only">There is a fundamental distinction between a product and a brand. A product is what a company makes; a brand is what the customer buys. Many products claim to be brands but are not: they are "me-too" products with poor positioning, poor quality and poor support. What separates true brands from products is the depth and consistency of associations they build.</p>
+    <p class="sec-text en-only">The <strong>Pepsi Challenge of 1975/1983</strong> illustrated this with striking clarity: In blind taste tests, consumers preferred Pepsi over Coca-Cola. But in open tests, with the brand visible, Coke won decisively. The brand — its history, identity, emotional associations — overrode taste perception. Brand value is thus not just functional; it is psychological, cultural, and social. Strong brands justify premium pricing, drive loyalty, and serve as a platform for innovation. A Porsche Cayenne and a VW Touareg share the same platform — yet the Porsche commands a dramatically higher price purely on the basis of brand perception.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">产品与品牌之间存在根本区别。产品是公司制造的东西；品牌是顾客购买的东西。许多产品声称自己是品牌，但实际上只是"跟风产品"——定位模糊、质量平庸、缺乏支撑。将真正品牌与普通产品区分开来的，是它们所构建的联想的深度和一致性。</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">1975/1983年的百事挑战赛清晰地说明了这一点：在盲测中，消费者更偏爱百事可乐而非可口可乐。但在展示品牌标识的开放测试中，可口可乐以绝对优势胜出。品牌——其历史、身份与情感联想——凌驾于口味感知之上。品牌价值因此不仅仅是功能性的，更是心理的、文化的和社会的。保时捷卡宴与大众途锐共用同一平台——但保时捷仅凭品牌感知就能获得远高于对方的价格溢价。</p>
+
+    <div class="compare-grid">
+      <div class="compare-card accent-card">
+        <div class="compare-card-label">Product / 产品</div>
+        <ul class="compare-list">
+          <li>Functional object</li>
+          <li>Generic associations</li>
+          <li>Replaceable</li>
+          <li>Price-sensitive</li>
+        </ul>
+      </div>
+      <div class="compare-card green-card">
+        <div class="compare-card-label">Brand / 品牌</div>
+        <ul class="compare-list">
+          <li>Mental image in consumer's mind</li>
+          <li>Unique emotional associations</li>
+          <li>Loyal following</li>
+          <li>Premium pricing possible</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 4: WHAT STRONG BRANDS DO -->
+  <section class="section" id="s-strongbrands">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">What Strong Brands Can Do</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">强大品牌能做什么</h2>
+
+    <p class="sec-text en-only">A strong brand is one of the most valuable assets a company can possess — often exceeding the value of its physical assets. In 2024, the world's most valuable brands (Apple, Google, Amazon) are worth hundreds of billions of dollars in brand equity alone.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">强大的品牌是企业最有价值的资产之一——其价值往往超过有形资产。2024年，全球最有价值的品牌（苹果、谷歌、亚马逊）仅品牌资产价值就达数千亿美元。</p>
+
+    <div class="card-grid col2">
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 01</div>
+        <div class="approach-card-num zh-only">优势 01</div>
+        <div class="approach-card-title en-only">Premium Pricing</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">溢价定价</div>
+        <div class="approach-card-body en-only">The same basic product (e.g., butter biscuits: Leibniz vs. store-brand) can sell at dramatically different price points when branded effectively.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">同样的基础产品（如黄油饼干：Leibniz与自有品牌）在有效品牌化后可以实现截然不同的价格定位。</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 02</div>
+        <div class="approach-card-num zh-only">优势 02</div>
+        <div class="approach-card-title en-only">Build Loyalty</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">建立忠诚度</div>
+        <div class="approach-card-body en-only">Consumers return repeatedly, reducing customer acquisition costs. Loyal customers are the backbone of long-term brand profitability.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">消费者反复回购，降低客户获取成本。忠实顾客是品牌长期盈利的基础。</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 03</div>
+        <div class="approach-card-num zh-only">优势 03</div>
+        <div class="approach-card-title en-only">New Product Launches</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">促进新产品推出</div>
+        <div class="approach-card-body en-only">A trusted brand name reduces perceived risk for new products, making market entry faster and more cost-effective.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">可信的品牌名称降低新产品的感知风险，使市场进入更快、更具成本效益。</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 04</div>
+        <div class="approach-card-num zh-only">优势 04</div>
+        <div class="approach-card-title en-only">Crisis Resilience</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">危机抵御力</div>
+        <div class="approach-card-body en-only">Strong brands recover faster from reputational damage than weak ones. Brand equity acts as a buffer during crises.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">强大品牌比弱势品牌更快从声誉损害中恢复。品牌资产在危机中起到缓冲作用。</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 05</div>
+        <div class="approach-card-num zh-only">优势 05</div>
+        <div class="approach-card-title en-only">Attract Talent &amp; Partners</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">吸引人才与合作伙伴</div>
+        <div class="approach-card-body en-only">Strong employer brands attract better employees; strong product brands attract better retail placement and distribution partners.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">强大的雇主品牌吸引更优秀的员工；强大的产品品牌获得更好的零售陈列位置和分销合作伙伴。</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Benefit 06</div>
+        <div class="approach-card-num zh-only">优势 06</div>
+        <div class="approach-card-title en-only">Balance Sheet Value</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">资产负债表价值</div>
+        <div class="approach-card-body en-only">Brands are intangible assets that appear on balance sheets as goodwill. Apple, Google, and Amazon brands are valued at hundreds of billions.</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">品牌是以商誉形式出现在资产负债表上的无形资产。苹果、谷歌和亚马逊品牌价值数千亿美元。</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ASSIGNMENT -->
+  <section class="section" id="s-assignment">
+    <div class="assignment">
+      <div class="assignment-badge">Assignment 1</div>
+      <div class="assignment-title en-only">Develop your Brand Brief</div>
+      <div class="assignment-title zh-only" style="font-family:'Noto Serif SC',serif">制定你的品牌简介</div>
+      <p class="assignment-body en-only">Choose a brand you would like to analyse throughout this semester — a product brand, service brand, or personal brand. The brand should be one you find interesting and for which you can find sufficient information. Write a brief brand overview (1–2 slides) covering:</p>
+      <ul class="assignment-body en-only" style="padding-left:20px;margin-top:10px">
+        <li>(1) What is the brand? (name, category, origin)</li>
+        <li>(2) What does it sell / offer?</li>
+        <li>(3) Who are the main target groups?</li>
+        <li>(4) Why did you choose this brand?</li>
+      </ul>
+      <p class="assignment-body-zh zh-only" style="font-family:'Noto Serif SC',serif">选择一个你希望在本学期深入分析的品牌——可以是产品品牌、服务品牌或个人品牌。这个品牌应该让你感兴趣，并且能够找到足够的信息。撰写一份简短的品牌概览（1-2页幻灯片），内容涵盖：</p>
+      <ul class="assignment-body-zh zh-only" style="font-family:'Noto Serif SC',serif;padding-left:20px;margin-top:10px">
+        <li>（1）这是什么品牌？（名称、品类、起源）</li>
+        <li>（2）它销售/提供什么？</li>
+        <li>（3）主要目标群体是谁？</li>
+        <li>（4）你为何选择这个品牌？</li>
+      </ul>
+    </div>
+
+    <!-- READING -->
+    <div class="reading-box">
+      <div class="reading-icon">📖</div>
+      <div class="reading-content">
+        <div class="reading-label">BM-Reader — Lecture #1</div>
+        <p class="reading-text">De Pelsmacker, P., Geuens, M. &amp; Van Den Bergh, J. 2013, <em>Marketing Communications – A European Perspective</em>, 5th edition, Pearson; pp. 51–62 &middot; Esch, F.-R. 2017, <em>Strategie und Technik der Markenführung</em>, 9th edition, Vahlen, pp. 1–22</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a class="nav-btn" href="index.html">← Course Overview</a>
+  <span class="nav-info">Lecture 1 of 10</span>
+  <a class="nav-btn" href="lecture2-brand-identity.html">Next Lecture →</a>
+</div>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-zh').classList.toggle('active',lang==='zh');
+}
+</script>
+</body>
+</html>

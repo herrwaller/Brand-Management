@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 9: Brand Evolution Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* SWOT 2x2 */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:540px){.swot-grid{grid-template-columns:1fr}}
+.swot-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px}
+.swot-card .swot-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+.swot-s .swot-badge{background:rgba(74,138,40,.12);color:var(--green)}
+.swot-w .swot-badge{background:rgba(200,64,32,.10);color:var(--accent)}
+.swot-o .swot-badge{background:rgba(42,95,168,.10);color:#2A5FA8}
+.swot-t .swot-badge{background:rgba(200,112,32,.10);color:#C87020}
+.swot-card ul{list-style:none;padding:0}
+.swot-card ul li{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink2);padding:4px 0;border-bottom:1px solid var(--border2);line-height:1.5}
+.swot-card ul li:last-child{border-bottom:none}
+.swot-card ul li::before{content:'·  ';color:var(--ink3)}
+
+/* Consolidation list */
+.strat-list{list-style:none;padding:0;margin:20px 0}
+.strat-list li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.strat-list li:last-child{border-bottom:none}
+.strat-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--green);opacity:.5;min-width:32px;line-height:1}
+.strat-content h4{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.strat-content p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+.strat-link{display:inline-block;margin-top:7px;font-size:11px;font-weight:600;color:var(--green);text-decoration:none;border:1px solid rgba(74,138,40,.3);padding:3px 10px;border-radius:20px;transition:all .15s}
+.strat-link:hover{background:rgba(74,138,40,.08);border-color:var(--green)}
+
+.assignment-box{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px;margin:44px 0}
+.assignment-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.assignment-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#F5F2EB}
+.assignment-box .sec-text{color:rgba(245,242,235,.8)}
+.assignment-box .sec-text-zh{color:rgba(245,242,235,.6)}
+
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin:32px 0;display:flex;gap:14px;align-items:flex-start}
+.reading-icon{background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.reading-box p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body class="en">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Lecture 9</div>
+    </div>
+    <h1 class="en-only">Brand Evolution Strategies</h1>
+    <h1 class="zh-only">品牌演进战略</h1>
+    <div class="hero-zh en-only">品牌演进战略</div>
+    <div class="toc-pills">
+      <a href="#s-evolution" class="toc-pill en-only">What is Brand Evolution</a>
+      <a href="#s-evolution" class="toc-pill zh-only">什么是品牌演进</a>
+      <a href="#s-swot" class="toc-pill en-only">SWOT Analysis</a>
+      <a href="#s-swot" class="toc-pill zh-only">SWOT分析</a>
+      <a href="#s-consolidation" class="toc-pill en-only">Brand Consolidation</a>
+      <a href="#s-consolidation" class="toc-pill zh-only">品牌整合</a>
+      <a href="#s-expansion" class="toc-pill en-only">Brand Expansion</a>
+      <a href="#s-expansion" class="toc-pill zh-only">品牌扩张</a>
+      <a href="#s-assignment" class="toc-pill en-only">Assignment 9</a>
+      <a href="#s-assignment" class="toc-pill zh-only">作业 9</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- S1: Brand Evolution -->
+  <div class="section" id="s-evolution">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">What is Brand Evolution?</h2>
+    <h2 class="sec-title zh-only">什么是品牌演进？</h2>
+
+    <div class="sec-text en-only">
+      <p>Every brand faces a fundamental strategic question at regular intervals: Where should this brand go next? Brand evolution strategy is a long-term, conditional, and comprehensive action plan that defines the direction in which a brand will develop — whether it will expand or consolidate — over the next two to five years.</p>
+      <p>Unlike brand architecture (which describes the portfolio logic) or brand positioning (which defines the competitive space), brand evolution strategy deals with each brand individually and its future trajectory. Key questions: Should we invest in growing this brand? Should we extend it into new categories? Should we wind it down? Should we migrate it to a different brand name?</p>
+      <p>The strategic decision is informed by an analysis of the brand's internal strengths and external market environment — most commonly structured as a SWOT analysis.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>每个品牌都会定期面临一个根本性的战略问题：这个品牌接下来应该去哪里？品牌演进战略是一个长期的、有条件的、全面的行动计划，定义品牌未来两到五年内的发展方向——是扩张还是整合。</p>
+      <p>与品牌架构（描述组合逻辑）或品牌定位（定义竞争空间）不同，品牌演进战略针对每个品牌单独处理其未来轨迹。关键问题：我们应该投资于发展这个品牌吗？我们应该将其延伸到新品类吗？我们应该逐步缩减它吗？我们应该将其迁移到不同的品牌名称吗？</p>
+      <p>战略决策由对品牌内部优势和外部市场环境的分析提供依据——最常用的结构是SWOT分析。</p>
+    </div>
+  </div>
+
+  <!-- S2: SWOT -->
+  <div class="section" id="s-swot">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">SWOT Analysis for Brands</h2>
+    <h2 class="sec-title zh-only">品牌的SWOT分析</h2>
+
+    <div class="sec-text en-only">
+      <p>SWOT (Strengths, Weaknesses, Opportunities, Threats) is a structured tool for synthesising internal and external analysis and preparing brand decisions. Strengths and Weaknesses are internal factors; Opportunities and Threats are external factors.</p>
+      <p>The Opel case study: Opel faced declining sales, an outdated image, and competitive pressure from Asian manufacturers. After SWOT analysis, the brand launched the "Umparken im Kopf" ("Reparking in the Head") campaign in 2014 — using witty, self-aware messaging to challenge consumer prejudices. The campaign did not show a car for weeks — building curiosity and conversation first. This SWOT-informed decision to invest in brand rehabilitation rather than eliminate Opel proved successful.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>SWOT（优势、劣势、机会、威胁）是综合内部和外部分析并准备品牌决策的结构化工具。优势和劣势是内部因素；机会和威胁是外部因素。</p>
+      <p>欧宝案例研究：欧宝面临销量下降、形象过时和来自亚洲制造商的竞争压力。在SWOT分析后，该品牌于2014年推出了"Umparken im Kopf"（"在脑海中重新停车"）活动——使用机智、自我意识的信息来挑战消费者的偏见。该活动数周内没有展示汽车——首先建立好奇心和对话。这个基于SWOT的投资品牌复兴而非消除欧宝的决定被证明是成功的。</p>
+    </div>
+
+    <div class="swot-grid">
+      <div class="swot-card swot-s">
+        <div class="swot-badge en-only">Strengths</div>
+        <div class="swot-badge zh-only">优势</div>
+        <ul>
+          <li class="en-only">Brand heritage &amp; history</li>
+          <li class="zh-only">品牌传承与历史</li>
+          <li class="en-only">Existing loyal customer base</li>
+          <li class="zh-only">现有忠实消费者群体</li>
+          <li class="en-only">Strong distribution network</li>
+          <li class="zh-only">强大的分销网络</li>
+          <li class="en-only">Unique product competences</li>
+          <li class="zh-only">独特的产品能力</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-w">
+        <div class="swot-badge en-only">Weaknesses</div>
+        <div class="swot-badge zh-only">劣势</div>
+        <ul>
+          <li class="en-only">Outdated brand image</li>
+          <li class="zh-only">过时的品牌形象</li>
+          <li class="en-only">Limited innovation pipeline</li>
+          <li class="zh-only">有限的创新管道</li>
+          <li class="en-only">Regional vs. global reach</li>
+          <li class="zh-only">区域性而非全球性覆盖</li>
+          <li class="en-only">Budget constraints</li>
+          <li class="zh-only">预算限制</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-o">
+        <div class="swot-badge en-only">Opportunities</div>
+        <div class="swot-badge zh-only">机会</div>
+        <ul>
+          <li class="en-only">Growing markets (China, emerging economies)</li>
+          <li class="zh-only">成长中的市场（中国、新兴经济体）</li>
+          <li class="en-only">Sustainability trend</li>
+          <li class="zh-only">可持续发展趋势</li>
+          <li class="en-only">Digital transformation</li>
+          <li class="zh-only">数字化转型</li>
+          <li class="en-only">Category whitespace</li>
+          <li class="zh-only">品类空白</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-t">
+        <div class="swot-badge en-only">Threats</div>
+        <div class="swot-badge zh-only">威胁</div>
+        <ul>
+          <li class="en-only">Competitive disruption</li>
+          <li class="zh-only">竞争性颠覆</li>
+          <li class="en-only">Private label growth</li>
+          <li class="zh-only">自有品牌增长</li>
+          <li class="en-only">Counterfeit risk</li>
+          <li class="zh-only">仿冒风险</li>
+          <li class="en-only">Regulatory changes</li>
+          <li class="zh-only">监管变化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Consolidation -->
+  <div class="section" id="s-consolidation">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Brand Consolidation Strategies</h2>
+    <h2 class="sec-title zh-only">品牌整合战略</h2>
+
+    <div class="sec-text en-only">
+      <p>Brand consolidation strategies are pursued when a brand is declining, underperforming, or redundant in the portfolio. Five types:</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>当品牌在组合中下滑、表现不佳或冗余时，会采用品牌整合策略。五种类型：</p>
+    </div>
+
+    <ul class="strat-list en-only">
+      <li>
+        <div class="strat-num">1</div>
+        <div class="strat-content">
+          <h4>Immediate Elimination</h4>
+          <p>The brand is withdrawn from the market as soon as possible. High short-term costs (contractual obligations, displaced sales), but a clean break.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> GM shut down Pontiac entirely in 2009 during its bankruptcy restructuring — all production, dealer networks, and marketing ceased within months.</p>
+          <a class="strat-link" href="https://www.caranddriver.com/pontiac" target="_blank">→ Pontiac – Car and Driver</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">2</div>
+        <div class="strat-content">
+          <h4>Gradual Retraction</h4>
+          <p>The brand is withdrawn step-by-step — from individual submarkets, reduced distribution, finally eliminated. The existing product may continue under a different brand name.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> GM phased out Oldsmobile market-by-market from 2000 to 2004. Production wound down by region over four years — the final Oldsmobile rolled off the line in April 2004.</p>
+          <a class="strat-link" href="https://www.caranddriver.com/oldsmobile" target="_blank">→ Oldsmobile – Car and Driver</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">3</div>
+        <div class="strat-content">
+          <h4>Brand Migration</h4>
+          <p>The product is retained but the brand name is gradually or immediately replaced by another. The product stays identical — only the name changes, supported by communication that bridges the old name to the new.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Mars renamed Raider to Twix across Europe in 1991 — "Raider heißt jetzt Twix — sonst ändert sich nix." Same bar, new name. A textbook migration with an explicit consumer reassurance message.</p>
+          <a class="strat-link" href="https://www.twix.com" target="_blank">→ Twix official site</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">4</div>
+        <div class="strat-content">
+          <h4>Skimming Strategy</h4>
+          <p>The brand offering remains unchanged, but communication budgets and sales activities are drastically reduced. The brand lives off its loyal customer base — cash cow management.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Kodak maintained its film brand through the digital transition — cutting marketing to near zero while loyal photographers kept buying. Kodachrome was discontinued in 2009 after years of cash-cow management.</p>
+          <a class="strat-link" href="https://www.kodak.com/en/company/page/history" target="_blank">→ Kodak Company History</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">5</div>
+        <div class="strat-content">
+          <h4>Focusing</h4>
+          <p>Reduction of the product range (variants, SKUs) within a brand. Fewer products, stronger consistency. The "paradox of choice" — too many options increase the probability of no purchase at all.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Procter &amp; Gamble reduced its brand portfolio from 170+ brands to 65 "Power Brands" between 2014 and 2017 — concentrating resources on the most profitable names and divesting or discontinuing the rest.</p>
+          <a class="strat-link" href="https://news.pg.com" target="_blank">→ P&amp;G Newsroom</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="strat-list zh-only">
+      <li>
+        <div class="strat-num">1</div>
+        <div class="strat-content">
+          <h4>立即消除</h4>
+          <p>品牌尽快从市场撤出。短期成本高（合同义务、销售转移），但是干净的了断。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>通用汽车在2009年破产重组期间完全停止了庞蒂亚克品牌——所有生产、经销商网络和营销活动在数月内全部终止。</p>
+          <a class="strat-link" href="https://www.caranddriver.com/pontiac" target="_blank">→ 庞蒂亚克 – Car and Driver</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">2</div>
+        <div class="strat-content">
+          <h4>逐步退出</h4>
+          <p>品牌逐步撤出——从各个子市场、减少分销，最终消除。现有产品可能在不同品牌名称下继续存在。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>通用汽车从2000年到2004年逐市场淘汰奥兹莫比尔品牌，生产按地区分阶段停止，最后一辆奥兹莫比尔于2004年4月驶下生产线。</p>
+          <a class="strat-link" href="https://www.caranddriver.com/oldsmobile" target="_blank">→ 奥兹莫比尔 – Car and Driver</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">3</div>
+        <div class="strat-content">
+          <h4>品牌迁移</h4>
+          <p>现有产品保留，但品牌名称逐渐或立即被另一个替换。产品完全不变——只有名称改变，并通过传播沟通将旧名称与新名称衔接。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>玛氏公司1991年将欧洲的Raider更名为Twix——"Raider heißt jetzt Twix — sonst ändert sich nix."（Raider现在叫Twix，其他什么都没变。）同一款产品，新名称，配以明确的消费者安抚信息。</p>
+          <a class="strat-link" href="https://www.twix.com" target="_blank">→ Twix 官网</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">4</div>
+        <div class="strat-content">
+          <h4>榨取策略</h4>
+          <p>品牌产品线保持不变，但传播预算和销售活动大幅削减。品牌依靠忠实消费者群体生存——现金奶牛管理。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>柯达在数字化转型期间维持了胶卷品牌——将营销削减至接近零，同时忠实摄影师继续购买。柯达彩色反转片经过多年现金奶牛管理后，于2009年停产。</p>
+          <a class="strat-link" href="https://www.kodak.com/en/company/page/history" target="_blank">→ 柯达公司历史</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">5</div>
+        <div class="strat-content">
+          <h4>聚焦</h4>
+          <p>减少品牌内的产品线（变体、SKU）。产品更少，一致性更强。"选择的悖论"——太多选择增加了不购买的概率。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>宝洁公司在2014年至2017年间将品牌组合从170多个品牌精简至65个"强势品牌"，将资源集中于最具盈利能力的品牌，并剥离或停止其余品牌。</p>
+          <a class="strat-link" href="https://news.pg.com" target="_blank">→ 宝洁新闻室</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- S4: Expansion -->
+  <div class="section" id="s-expansion">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">Brand Expansion Strategies</h2>
+    <h2 class="sec-title zh-only">品牌扩张战略</h2>
+
+    <div class="sec-text en-only">
+      <p>Brand expansion strategies are pursued when a brand has sufficient equity and market opportunity to grow. Three main directions: geographic expansion, line extension, and category extension.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>当品牌拥有足够的资产和市场机会时，会采用品牌扩张策略。三个主要方向：地理扩张、产品线延伸和品类延伸。</p>
+    </div>
+
+    <ul class="strat-list en-only">
+      <li>
+        <div class="strat-num">1</div>
+        <div class="strat-content">
+          <h4>Geographic Expansion</h4>
+          <p>The brand enters new regional or international markets with its existing product line. Growth without the risk of brand dilution — the core offering stays unchanged, only the market changes. Execution requires adaptation of distribution, pricing, and communication to local conditions.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Starbucks entered China in 1999 with minimal menu changes. Today China is Starbucks' second-largest market with 7,000+ stores and a dedicated Reserve Roastery in Shanghai.</p>
+          <a class="strat-link" href="https://www.starbucks.com.cn/" target="_blank">→ Starbucks China</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">2</div>
+        <div class="strat-content">
+          <h4>Line Extension</h4>
+          <p>A new variety, size, form, or sub-model is introduced within the same product category under the parent brand. The established brand name transfers existing trust and reduces consumer risk for the new item. Risk: proliferation of variants can fragment the portfolio and cannibalise existing sales.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Apple iPhone lineup — every generation ships in Standard, Plus, Pro, and Pro Max variants. Four price tiers within one category, all under the single "iPhone" brand equity.</p>
+          <a class="strat-link" href="https://www.apple.com/iphone/" target="_blank">→ Apple iPhone</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">3</div>
+        <div class="strat-content">
+          <h4>Category Extension</h4>
+          <p>The parent brand name is applied to enter an entirely different product category. Requires a credible "brand fit" — consumers must believe the brand's core competence is transferable. A weak fit creates cognitive dissonance and can dilute the parent brand.</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>Example:</strong> Dyson expanded from vacuum cleaners into premium hair care (Supersonic hair dryer, Airwrap styler). The transfer of its "high-performance engineering" positioning proved credible — Dyson now holds significant hair care market share.</p>
+          <a class="strat-link" href="https://www.dyson.com/hair-care" target="_blank">→ Dyson Hair Care</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num" style="font-size:1.6rem;opacity:.85">✅</div>
+        <div class="strat-content">
+          <h4>Benefits of Brand Extension</h4>
+          <p>Reduced consumer perceived risk (familiar brand lowers uncertainty). Faster retail distribution acceptance. Lower introductory marketing cost. Advertising spillover from the parent brand. Opportunity to revitalise ageing brands by entering growth categories.</p>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num" style="font-size:1.6rem;opacity:.85">⚠️</div>
+        <div class="strat-content">
+          <h4>Risks of Brand Extension</h4>
+          <p>Brand "fuzziness": representing too many categories weakens the core identity. Poor category fit dilutes brand equity. A failed extension generates negative feedback for the parent brand. Over-extension reduces the premium signal — consumers can no longer identify what the brand stands for.</p>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="strat-list zh-only">
+      <li>
+        <div class="strat-num">1</div>
+        <div class="strat-content">
+          <h4>地理扩张</h4>
+          <p>品牌以现有产品线进入新的区域或国际市场。这种增长方式不存在品牌稀释风险——核心产品不变，只是市场发生变化。执行需要针对当地条件调整分销、定价和传播。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>星巴克于1999年进入中国，菜单调整极少。如今中国是星巴克的第二大市场，拥有7,000多家门店，并在上海设有专属臻选烘焙工坊。</p>
+          <a class="strat-link" href="https://www.starbucks.com.cn/" target="_blank">→ 星巴克中国官网</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">2</div>
+        <div class="strat-content">
+          <h4>产品线延伸</h4>
+          <p>在母品牌旗下，在同一产品品类中推出新的变体、尺寸、形式或子型号。已建立的品牌名称将现有信任传递给新产品，降低消费者风险。风险：变体过多可能分散产品组合并蚕食现有销售。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>苹果iPhone产品线——每一代均推出标准版、Plus版、Pro版和Pro Max版。在单一品类下设置四个价格档次，全部依托"iPhone"这一品牌资产。</p>
+          <a class="strat-link" href="https://www.apple.com/iphone/" target="_blank">→ Apple iPhone</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num">3</div>
+        <div class="strat-content">
+          <h4>品类延伸</h4>
+          <p>将母品牌名称应用于进入完全不同的产品品类。需要可信的"品牌契合度"——消费者必须相信品牌的核心能力是可转移的。契合度弱会产生认知失调，并可能稀释母品牌。</p>
+          <p style="margin-top:6px;font-size:13px;color:var(--ink2)"><strong>案例：</strong>戴森从吸尘器扩张至高端美发护理（Supersonic吹风机、Airwrap造型器）。其"高性能工程"定位的转移被证明是可信的——戴森现已在美发护理市场占有重要份额。</p>
+          <a class="strat-link" href="https://www.dyson.com/hair-care" target="_blank">→ Dyson 美发护理</a>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num" style="font-size:1.6rem;opacity:.85">✅</div>
+        <div class="strat-content">
+          <h4>品牌延伸的优势</h4>
+          <p>降低消费者感知风险（熟悉的品牌降低不确定性）。加快零售分销接受速度。降低初期营销成本。从母品牌获得广告溢出效益。有机会通过进入成长性品类为老化品牌注入活力。</p>
+        </div>
+      </li>
+      <li>
+        <div class="strat-num" style="font-size:1.6rem;opacity:.85">⚠️</div>
+        <div class="strat-content">
+          <h4>品牌延伸的风险</h4>
+          <p>品牌"模糊化"：代表过多品类会削弱核心身份。品类契合度差会稀释品牌资产。失败的延伸会对母品牌产生负面反馈。过度延伸会削弱溢价信号——消费者无法再识别品牌的核心主张。</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ASSIGNMENT -->
+  <div class="assignment-box" id="s-assignment">
+    <div class="assignment-badge">Assignment 9</div>
+    <h3 class="en-only">Develop an Evolution Strategy for Your Brand</h3>
+    <h3 class="zh-only">为你的品牌制定演进战略</h3>
+    <div class="sec-text en-only">
+      <p>(1) Conduct a SWOT analysis for your brand.</p>
+      <p>(2) Based on the SWOT, recommend an evolution strategy: Should it consolidate or expand? If consolidate — which type (elimination, skimming, focusing)? If expand — which direction (geographic, line extension, category extension)?</p>
+      <p>(3) Justify your recommendation: How does the strategy fit the brand's current strengths and market opportunities?</p>
+      <p>(4) If applicable: Describe one existing brand extension by your brand and evaluate whether it strengthens or dilutes the parent brand. (3 slides)</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>（1）对你的品牌进行SWOT分析。</p>
+      <p>（2）根据SWOT，为你的品牌推荐一个演进战略：它应该整合还是扩张？如果整合——是哪种类型（消除、榨取、聚焦）？如果扩张——是哪个方向（地理扩张、产品线延伸、品类延伸）？</p>
+      <p>（3）为你的建议提供理由：战略如何与品牌当前的优势和市场机会相匹配？</p>
+      <p>（4）如果适用：描述你品牌的一个现有品牌延伸，并评估它是强化还是稀释了母品牌。（3页幻灯片）</p>
+    </div>
+  </div>
+
+  <!-- READING -->
+  <div class="reading-box">
+    <div class="reading-icon">Read</div>
+    <p>Burmann, C., Meffert, H., Blinda, L. 2013; pp. 185 ff. · Johansson, J.K. &amp; Carlson, K.A. 2015, <em>Contemporary Brand Management</em>, Sage Publications, pp. 138–155</p>
+  </div>
+
+</div>
+
+<nav class="nav-bar">
+  <a href="lecture8-internationalisation.html" class="nav-btn">← Lecture 8</a>
+  <span class="nav-info">LECTURE 9 · BRAND MANAGEMENT</span>
+  <a href="lecture10-final-assignment.html" class="nav-btn">Lecture 10 →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang||(lang==='zh'&&b.textContent.trim()==='中文')));
+}
+</script>
+</body>
+</html>

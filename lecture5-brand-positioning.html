@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 5: Brand Positioning · Interactive Script</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #6abf3c;
+    --green-dark: #4a9020;
+    --green-light: #eaf6e0;
+    --red: #e84c2b;
+    --red-light: #fdeee9;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --muted: #888;
+    --border: #e0e0e0;
+    --bg: #ffffff;
+    --section-bg: #f8f9fa;
+    --font-main: 'Georgia', 'Times New Roman', serif;
+    --font-ui: 'Helvetica Neue', 'Arial', sans-serif;
+    --max: 860px;
+    --radius: 6px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: #1A1714;
+    color: #F5F2EB;
+    padding: 64px 24px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(245,242,235,.03) 0, rgba(245,242,235,.03) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(74,138,40,.18) 0, transparent 65%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .lang-btns {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+  }
+  .lang-btn {
+    background: rgba(245,242,235,.08);
+    border: 1px solid rgba(245,242,235,.2);
+    color: rgba(245,242,235,.7);
+    font-family: 'DM Sans', var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: rgba(245,242,235,.18);
+    color: #F5F2EB;
+    border-color: rgba(245,242,235,.4);
+  }
+  .lec-tag {
+    display: inline-block;
+    font-family: 'DM Sans', var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #4A8A28;
+    background: rgba(74,138,40,.15);
+    border: 1px solid rgba(74,138,40,.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 0;
+  }
+  .hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .hero-back{font-family:'DM Sans',var(--font-ui);font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+  .hero-back:hover{color:rgba(245,242,235,.75)}
+  .hero h1 {
+    font-family: 'Cormorant Garamond', var(--font-main);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    color: #F5F2EB;
+    text-align: left;
+  }
+  .hero h1 em { font-style: italic; color: #F5F2EB; }
+  .hero-zh {
+    font-family: 'Noto Serif SC', var(--font-main);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(245,242,235,.55);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .toc-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .toc-pill {
+    font-family: 'DM Sans', var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(245,242,235,.65);
+    background: rgba(245,242,235,.07);
+    border: 1px solid rgba(245,242,235,.12);
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all .15s;
+  }
+  .toc-pill:hover {
+    background: rgba(245,242,235,.14);
+    color: #F5F2EB;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .content { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  .section {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  .section h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.15;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+  .section h2 em { font-style: italic; color: var(--green-dark); }
+  .section-sub-cn {
+    color: var(--muted);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  p { margin-bottom: 16px; }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 16px;
+  }
+  .callout strong { color: var(--green-dark); }
+  .callout.red {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+  .callout.red strong { color: var(--red); }
+
+  /* ─── BM READER ─── */
+  .bm-reader {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+    font-family: var(--font-ui);
+  }
+  .bm-reader-icon {
+    background: #1a6b4a;
+    color: white;
+    font-weight: 900;
+    font-size: 11px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    min-width: 44px;
+    text-align: center;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+  .bm-reader p { margin: 0; color: var(--mid); }
+  .bm-reader strong { color: var(--dark); }
+
+  /* ─── DEFINITION CARD ─── */
+  .def-card {
+    border: 1.5px solid var(--green);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .def-card h3 {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  .def-card p { margin-bottom: 0; font-size: 16.5px; }
+
+  /* ─── FLOW DIAGRAM ─── */
+  .flow-diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 28px 0;
+    flex-wrap: wrap;
+  }
+  .flow-box {
+    flex: 1;
+    min-width: 130px;
+    padding: 16px 14px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    text-align: center;
+    border-radius: var(--radius);
+  }
+  .flow-box.internal { background: var(--green); color: white; }
+  .flow-box.external { background: #e8e8e8; color: var(--dark); }
+  .flow-box.bridge { background: #c0e0a0; color: var(--dark); }
+  .flow-box strong { display: block; font-size: 15px; margin-bottom: 4px; }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--muted);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ─── TEMPLATE BOX ─── */
+  .template-box {
+    background: var(--dark);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .template-box .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+  }
+  .template-fill { color: var(--green); font-style: italic; }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: var(--font-ui);
+    font-size: 14px;
+  }
+  .compare-table th {
+    background: var(--dark);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .compare-table th:first-child { background: var(--green); }
+  .compare-table th:nth-child(2) { background: #2a2a2a; }
+  .compare-table th:nth-child(3) { background: var(--green-dark); }
+  .compare-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--section-bg); }
+
+  /* ─── POSITIONING MAP (canvas-based) ─── */
+  .map-wrap {
+    position: relative;
+    width: 100%;
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 24px 0;
+    overflow: hidden;
+    user-select: none;
+  }
+  .map-wrap canvas { display: block; width: 100%; cursor: crosshair; }
+  .map-tooltip-box {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    line-height: 1.55;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    pointer-events: none;
+    max-width: 220px;
+    z-index: 30;
+    display: none;
+  }
+  .map-tooltip-box strong { font-size: 13px; display: block; margin-bottom: 3px; }
+
+  /* ─── MAP BUILDER ─── */
+  .builder-map-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+  .builder-map-top {
+    background: var(--section-bg);
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media(max-width:600px){ .builder-map-top { grid-template-columns: 1fr; } }
+  .bmt-group label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 5px;
+  }
+  .bmt-group .axis-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .bmt-group .axis-row input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--dark);
+    background: white;
+  }
+  .bmt-group .axis-row input:focus { outline: none; border-color: var(--green); }
+  .bmt-group .axis-row span {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .builder-map-add {
+    background: var(--section-bg);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .builder-map-add input {
+    flex: 1;
+    min-width: 120px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    background: white;
+    color: var(--dark);
+  }
+  .builder-map-add input:focus { outline: none; border-color: var(--green); }
+  .builder-map-add button {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .builder-map-add button:hover { background: var(--green-dark); }
+  .builder-map-add select {
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    background: white;
+    color: var(--dark);
+    cursor: pointer;
+  }
+  .builder-map-canvas-wrap {
+    position: relative;
+    background: white;
+  }
+  .builder-map-canvas-wrap canvas { display: block; width: 100%; cursor: crosshair; }
+  .builder-map-legend {
+    background: var(--section-bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .legend-item:hover { border-color: var(--red); }
+  .legend-item:hover .legend-del { opacity: 1; }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-del {
+    opacity: 0;
+    color: var(--red);
+    font-size: 14px;
+    line-height: 1;
+    transition: opacity 0.15s;
+    margin-left: 2px;
+  }
+  .builder-map-hint {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--muted);
+    padding: 8px 20px;
+    background: var(--section-bg);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── INTERACTIVE QUIZ ─── */
+  .quiz-container {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .quiz-container h3 {
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+  }
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    transition: border-color 0.15s, background 0.15s;
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--green); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-light); }
+  .quiz-opt.wrong { border-color: var(--red); background: var(--red-light); }
+  .quiz-opt .letter {
+    font-weight: 900;
+    color: var(--green-dark);
+    min-width: 20px;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+  .quiz-feedback {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.good { background: var(--green-light); color: var(--green-dark); }
+  .quiz-feedback.bad { background: var(--red-light); color: #b03520; }
+  .quiz-next {
+    margin-top: 12px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+  }
+  .quiz-next.show { display: inline-block; }
+  .quiz-score {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* ─── STATEMENT BUILDER ─── */
+  .builder {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .builder label {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mid);
+    display: block;
+    margin-bottom: 6px;
+    margin-top: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .builder input, .builder textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--dark);
+    background: white;
+    resize: vertical;
+  }
+  .builder input:focus, .builder textarea:focus {
+    outline: none;
+    border-color: var(--green);
+  }
+  .builder-output {
+    margin-top: 20px;
+    background: var(--dark);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.8;
+    display: none;
+  }
+  .builder-output .fill { color: var(--green); font-style: italic; }
+  .builder-btn {
+    margin-top: 16px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 24px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* ─── STRATEGY CARDS ─── */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .strategy-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-family: var(--font-ui);
+    font-size: 13px;
+  }
+  .strategy-card-head {
+    background: var(--dark);
+    color: white;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .strategy-card-head.green { background: var(--green-dark); }
+  .strategy-card-head.red { background: var(--red); }
+  .strategy-card-body {
+    padding: 14px 16px;
+    background: white;
+    line-height: 1.6;
+  }
+  .strategy-card-body .example {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .strategy-card-body .example strong { color: var(--dark); }
+
+  /* ─── REQUIREMENTS LIST ─── */
+  .req-list {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .req-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  .req-list li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 900;
+    font-family: var(--font-ui);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── ASSIGNMENT ─── */
+  .assignment {
+    background: var(--green);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+  .assignment h3 {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+  .assignment p { margin-bottom: 10px; font-size: 16px; }
+  .assignment ul {
+    padding-left: 20px;
+    font-size: 15px;
+  }
+  .assignment ul li { margin-bottom: 6px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    color: #888;
+    padding: 32px 24px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.8;
+  }
+  footer a { color: var(--green); text-decoration: none; }
+
+  /* ─── LANG TOGGLE ─── */
+  .lang-cn { display: none; }
+  body.cn .lang-en { display: none; }
+  body.cn .lang-cn { display: block; }
+  span.cn { display: none; }
+  body.cn span.cn { display: inline; }
+  body.cn span.en { display: none; }
+
+  @media (max-width: 600px) {
+    .flow-diagram { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); align-self: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('cn')" id="btn-cn">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back lang-en">← Course Overview</a>
+      <a href="index.html" class="hero-back lang-cn">← 课程概览</a>
+      <div class="lec-tag">Lecture 5</div>
+    </div>
+    <h1 class="lang-en">Brand <em>Positioning</em></h1>
+    <h1 class="lang-cn">品牌<em>定位</em></h1>
+    <div class="hero-zh lang-en">品牌定位</div>
+    <div class="toc-pills">
+      <a href="#s-definition" class="toc-pill"><span class="en">Definition</span><span class="cn">定义</span></a>
+      <a href="#s-elements" class="toc-pill"><span class="en">Positioning Elements</span><span class="cn">定位要素</span></a>
+      <a href="#s-map" class="toc-pill"><span class="en">Positioning Maps</span><span class="cn">定位地图</span></a>
+      <a href="#s-quiz" class="toc-pill"><span class="en">Quiz</span><span class="cn">测验</span></a>
+      <a href="#s-strategies" class="toc-pill"><span class="en">Strategies</span><span class="cn">战略</span></a>
+      <a href="#s-builder" class="toc-pill"><span class="en">Statement Builder</span><span class="cn">定位陈述构建器</span></a>
+      <a href="#s-assignment" class="toc-pill"><span class="en">Assignment 5</span><span class="cn">第五次作业</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ═══ SECTION 1: DEFINITION ═══ -->
+  <section class="section" id="s-definition">
+    <div class="section-num lang-en">1 · What is Brand Positioning?</div>
+    <div class="section-num lang-cn">1 · 什么是品牌定位？</div>
+
+    <h2 class="lang-en">Occupying a <em>distinctive place</em> in the mind</h2>
+    <h2 class="lang-cn">在消费者心智中占据<em>独特位置</em></h2>
+    <div class="section-sub-cn lang-cn">在目标消费者的心智中建立品牌的战略性位置</div>
+
+    <div class="lang-en">
+      <p>Brand positioning is the strategic act of defining where a brand lives — not on a shelf, but <strong>in the mind of the consumer</strong>. A strong position means that consumers remember the brand for specific, relevant attributes, whether functional or emotional.</p>
+      <p>Crucially, positioning is not the same as brand identity or brand image. It sits precisely at the intersection of the two: it is the bridge that converts internal identity into an external image.</p>
+    </div>
+    <div class="lang-cn">
+      <p>品牌定位是一种战略行为，定义品牌存在的位置——不是货架上，而是<strong>在消费者的心智中</strong>。强大的定位意味着消费者会因为特定、相关的属性（无论是功能性的还是情感性的）而记住这个品牌。</p>
+      <p>关键在于，定位不等同于品牌识别或品牌形象。它恰好处于两者的交汇点：它是将内部识别转化为外部形象的桥梁。</p>
+    </div>
+
+    <div class="def-card">
+      <h3 class="lang-en">Definition (Johansson &amp; Carlson 2015)</h3>
+      <h3 class="lang-cn">定义（Johansson &amp; Carlson 2015）</h3>
+      <p class="lang-en">"Brand Positioning is the act of <strong>defining a brand's strategy to occupy a distinctive place in the mind</strong> of target consumers."</p>
+      <p class="lang-cn">"品牌定位是<strong>界定品牌战略的行为，旨在目标消费者的心智中占据独特位置</strong>。"</p>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-box internal">
+        <strong class="lang-en">Brand Identity</strong>
+        <strong class="lang-cn">品牌识别</strong>
+        <span class="lang-en">Vision · Values · Style · Origin · Competences · Offering</span>
+        <span class="lang-cn">愿景 · 价值观 · 风格 · 起源 · 能力 · 产品</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box bridge">
+        <strong class="lang-en">Brand Positioning</strong>
+        <strong class="lang-cn">品牌定位</strong>
+        <span class="lang-en">The strategic bridge</span>
+        <span class="lang-cn">战略桥梁</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box external">
+        <strong class="lang-en">Brand Image</strong>
+        <strong class="lang-cn">品牌形象</strong>
+        <span class="lang-en">What consumers perceive &amp; feel</span>
+        <span class="lang-cn">消费者的感知与感受</span>
+      </div>
+    </div>
+
+    <div class="callout lang-en">
+      <strong>In other words:</strong> Brand positioning can be defined as the shaping of a brand's position towards a <strong>desired brand image</strong>. It is always both internal (strategy) and external (perception).
+    </div>
+    <div class="callout lang-cn">
+      <strong>换句话说：</strong>品牌定位可以被定义为将品牌位置塑造成<strong>期望的品牌形象</strong>的过程。它既是内部的（战略），也是外部的（感知）。
+    </div>
+
+    <div class="lang-en">
+      <h3 style="font-size:1.1rem; margin: 24px 0 12px;">Requirements for Strong Positioning</h3>
+      <ul class="req-list">
+        <li>Fits the brand identity — highlights accurate attributes of the brand</li>
+        <li>Is relevant in the market and communication environment</li>
+        <li>Is relevant to (potential) customers</li>
+        <li>Enables differentiation from the competition</li>
+        <li>Can be pursued in the long term</li>
+      </ul>
+      <div class="callout">
+        <strong>Ultimate goal:</strong> A dominance position in the minds of consumers and <strong>maximum differentiation potential</strong> compared to relevant competitors.
+      </div>
+    </div>
+    <div class="lang-cn">
+      <h3 style="font-size:1.1rem; margin: 24px 0 12px;">强定位的要求</h3>
+      <ul class="req-list">
+        <li>符合品牌识别——突出品牌的准确属性</li>
+        <li>与市场和传播环境相关</li>
+        <li>与（潜在）客户相关</li>
+        <li>能够与竞争对手形成差异化</li>
+        <li>可以长期坚持</li>
+      </ul>
+      <div class="callout">
+        <strong>最终目标：</strong>在消费者心智中占据主导地位，与相关竞争对手相比具有<strong>最大的差异化潜力</strong>。
+      </div>
+    </div>
+
+    <div class="bm-reader">
+      <div class="bm-reader-icon">BM-<br>READER</div>
+      <div>
+        <p><strong class="lang-en">Lecture #5 reading</strong><strong class="lang-cn">第五讲阅读材料</strong></p>
+        <p class="lang-en">Johansson &amp; Carlson, 2015, pp. 50–64 · Esch, 2018, p. 91 · Burmann et al., 2015, p. 147ff.</p>
+        <p class="lang-cn">Johansson &amp; Carlson, 2015, 第50–64页 · Esch, 2018, 第91页 · Burmann等, 2015, 第147页起</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2: POSITIONING ELEMENTS ═══ -->
+  <section class="section" id="s-elements">
+    <div class="section-num lang-en">2 · Positioning Elements</div>
+    <div class="section-num lang-cn">2 · 定位要素</div>
+
+    <h2 class="lang-en">Value Proposition, Statement &amp; <em>Mantra</em></h2>
+    <h2 class="lang-cn">价值主张、定位陈述与<em>品牌口号</em></h2>
+    <div class="section-sub-cn lang-cn">从内部价值到外部沟通的三个层次</div>
+
+    <div class="lang-en">
+      <p>Positioning is communicated at three levels of specificity: the full <strong>value proposition</strong>, the focused <strong>positioning statement</strong>, and the memorable <strong>slogan or mantra</strong>.</p>
+    </div>
+    <div class="lang-cn">
+      <p>定位通过三个具体层次进行传达：完整的<strong>价值主张</strong>、聚焦的<strong>定位陈述</strong>以及令人难忘的<strong>口号或品牌宣言</strong>。</p>
+    </div>
+
+    <!-- Value Proposition -->
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-en">① Value Proposition</h3>
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-cn">① 价值主张</h3>
+    <div class="lang-en">
+      <p>A value proposition is a statement that expresses <em>all outcomes ("benefits") a customer experiences</em> from using a branded product or service. Benefits can be both:</p>
+      <ul class="req-list">
+        <li><strong>Functional</strong> — results of product or service features (e.g. a car's fuel efficiency)</li>
+        <li><strong>Emotional</strong> — positive feelings experienced when engaging with the product (e.g. pride when driving a BMW)</li>
+      </ul>
+      <p>All benefits should explain how the brand makes up for the <strong>cost</strong> of the product or service — the customer's "pain."</p>
+    </div>
+    <div class="lang-cn">
+      <p>价值主张是一种陈述，表达<em>客户从使用品牌产品或服务中获得的所有结果（"利益"）</em>。利益可以是：</p>
+      <ul class="req-list">
+        <li><strong>功能性</strong>——产品或服务特性带来的结果（例如汽车的燃油效率）</li>
+        <li><strong>情感性</strong>——与产品互动时体验到的积极感受（例如驾驶宝马时的自豪感）</li>
+      </ul>
+      <p>所有利益都应该解释品牌如何弥补产品或服务的<strong>成本</strong>——客户的"痛点"。</p>
+    </div>
+
+    <!-- Positioning Statement -->
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-en">② Positioning Statement</h3>
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-cn">② 定位陈述</h3>
+    <div class="lang-en">
+      <p>The positioning statement captures the desired brand position by drawing on the most relevant aspects of the value proposition. It follows a standard template:</p>
+    </div>
+    <div class="lang-cn">
+      <p>定位陈述通过提取价值主张中最相关的方面来捕捉期望的品牌位置。它遵循一个标准模板：</p>
+    </div>
+
+    <div class="template-box">
+      <div class="label lang-en">Standard Template</div>
+      <div class="label lang-cn">标准模板</div>
+      <p class="lang-en">Our brand is positioned towards <span class="template-fill">[target segment]</span> and offers a <span class="template-fill">[product or service]</span> that is superior in terms of <span class="template-fill">[points of distinction relative to the competition]</span>.</p>
+      <p class="lang-cn">我们的品牌面向<span class="template-fill">[目标细分市场]</span>，提供在<span class="template-fill">[相对竞争对手的差异化优势]</span>方面具有优越性的<span class="template-fill">[产品或服务]</span>。</p>
+    </div>
+
+    <div class="callout lang-en">
+      <strong>BMW Example:</strong> "BMW's position is aimed towards the driver who values performance in a luxurious car that is superior to other luxurious cars in terms of handling, driving comfort and acceleration."
+    </div>
+    <div class="callout lang-cn">
+      <strong>宝马案例：</strong>"宝马的定位面向重视豪华车性能的驾驶者，在操控性、驾乘舒适性和加速性方面优于其他豪华车。"
+    </div>
+
+    <!-- Slogans vs Mantras -->
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-en">③ Slogans vs. Mantras</h3>
+    <h3 style="font-size:1.15rem; margin: 28px 0 10px;" class="lang-cn">③ 口号与品牌宣言</h3>
+    <div class="lang-en">
+      <p>Positioning statements are frequently further condensed. But there are two distinct condensed forms for different audiences:</p>
+    </div>
+    <div class="lang-cn">
+      <p>定位陈述通常会进一步凝练。但针对不同受众，有两种不同的凝练形式：</p>
+    </div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th><span class="en">Brand</span><span class="cn">品牌</span></th>
+          <th><span class="en">Slogan (for customers)</span><span class="cn">口号（面向客户）</span></th>
+          <th><span class="en">Mantra (for employees)</span><span class="cn">宣言（面向员工）</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="en">BMW</span><span class="cn">宝马</span></td>
+          <td><em><span class="en">The ultimate driving machine</span><span class="cn">终极驾驶机器</span></em></td>
+          <td><span class="en">Superior driving experience</span><span class="cn">卓越驾驶体验</span></td>
+        </tr>
+        <tr>
+          <td><span class="en">Nike</span><span class="cn">耐克</span></td>
+          <td><em><span class="en">Just do it.</span><span class="cn">只管去做</span></em></td>
+          <td><span class="en">Authentic athletic performance</span><span class="cn">真实的运动表现</span></td>
+        </tr>
+        <tr>
+          <td><span class="en">Disney</span><span class="cn">迪士尼</span></td>
+          <td><em><span class="en">Where dreams come true</span><span class="cn">梦想成真之地</span></em></td>
+          <td><span class="en">Fun family entertainment</span><span class="cn">有趣的家庭娱乐</span></td>
+        </tr>
+        <tr>
+          <td><span class="en">Apple</span><span class="cn">苹果</span></td>
+          <td><em><span class="en">Think different.</span><span class="cn">不同凡想</span></em></td>
+          <td><span class="en">Empowering creative people</span><span class="cn">赋能创意人群</span></td>
+        </tr>
+        <tr>
+          <td><span class="en">Xiaomi</span><span class="cn">小米</span></td>
+          <td><em><span class="en">Innovation for everyone</span><span class="cn">创新普及大众</span></em></td>
+          <td><span class="en">Make quality tech accessible</span><span class="cn">让优质科技触手可及</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout lang-en">
+      <strong>Key insight:</strong> While <strong>slogans</strong> are aimed at customers and communicate the core benefit/promise, <strong>mantras</strong> remind <em>employees</em> what the brand is about. Nike's "Authentic Athletic Performance" — coined by Scott Bedbury in the late 1980s — kept the brand on track, differentiated it from Reebok, and inspired employees. That's a great mantra.
+    </div>
+    <div class="callout lang-cn">
+      <strong>核心洞察：</strong>虽然<strong>口号</strong>面向客户并传达核心利益/承诺，但<strong>品牌宣言</strong>提醒<em>员工</em>品牌的本质。耐克的"真实的运动表现"——由Scott Bedbury在20世纪80年代末创造——使品牌保持正轨，与锐步区别开来，并激励了员工。这就是一个优秀的品牌宣言。
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 3: POSITIONING MAPS ═══ -->
+  <section class="section" id="s-map">
+    <div class="section-num lang-en">3 · Positioning Maps</div>
+    <div class="section-num lang-cn">3 · 定位地图</div>
+
+    <h2 class="lang-en">Making the <em>invisible visible</em></h2>
+    <h2 class="lang-cn">让<em>无形变有形</em></h2>
+    <div class="section-sub-cn lang-cn">将品牌在消费者心智中的位置可视化</div>
+
+    <div class="lang-en">
+      <p>A positioning map is a <strong>mental map of consumers' minds</strong> — a visual tool showing where competing brands are located based on how consumers score them on relevant attributes. It allows managers to see where they stand, where their competitors are, and where white spaces (unoccupied positions) might exist.</p>
+      <p>Positioning activities begin by identifying the relevant attributes for the product or service category. These attributes may include both <strong>functional and emotional</strong> characteristics.</p>
+    </div>
+    <div class="lang-cn">
+      <p>定位地图是<strong>消费者心智的可视化工具</strong>——显示竞争品牌根据消费者对相关属性的评分所处的位置。它让管理者了解自己所处的位置、竞争对手的位置，以及可能存在的空白空间（未被占据的位置）。</p>
+      <p>定位活动从识别产品或服务类别的相关属性开始。这些属性可以包括<strong>功能性和情感性</strong>特征。</p>
+    </div>
+
+    <h3 style="font-size:1.1rem; margin: 24px 0 12px;" class="lang-en">How to build a positioning map — 5 steps</h3>
+    <h3 style="font-size:1.1rem; margin: 24px 0 12px;" class="lang-cn">如何构建定位地图——5个步骤</h3>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-card-head">① <span class="lang-en">Choose competitors</span><span class="lang-cn">选择竞争对手</span></div>
+        <div class="strategy-card-body lang-en">Identify the market and the relevant competing brands your brand will be compared with.</div>
+        <div class="strategy-card-body lang-cn">识别市场以及与您的品牌进行比较的相关竞争品牌。</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head">② <span class="lang-en">Identify attributes</span><span class="lang-cn">识别属性</span></div>
+        <div class="strategy-card-body lang-en">Through primary or secondary research, gather the relevant attributes, usage occasions and target group descriptions.</div>
+        <div class="strategy-card-body lang-cn">通过初级或次级研究，收集相关属性、使用场合和目标群体描述。</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head">③ <span class="lang-en">Score perceptions</span><span class="lang-cn">评分感知</span></div>
+        <div class="strategy-card-body lang-en">Collect consumer perceptions by asking respondents to score each brand on each attribute (e.g. Likert scales).</div>
+        <div class="strategy-card-body lang-cn">通过要求受访者对每个品牌的每个属性进行评分（如李克特量表）来收集消费者感知。</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head">④ <span class="lang-en">Plot the map</span><span class="lang-cn">绘制地图</span></div>
+        <div class="strategy-card-body lang-en">Place brands and target group clusters in the map according to the averaged scores. Brands close together compete for the same consumers.</div>
+        <div class="strategy-card-body lang-cn">根据平均分数将品牌和目标群体集群放置在地图中。相邻的品牌争夺相同的消费者。</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head green">⑤ <span class="lang-en">Identify spaces</span><span class="lang-cn">识别空间</span></div>
+        <div class="strategy-card-body lang-en">Use the map to identify your current position, your ideal position, gaps, and possible repositioning moves.</div>
+        <div class="strategy-card-body lang-cn">使用地图识别您当前的位置、理想位置、差距和可能的重新定位举措。</div>
+      </div>
+    </div>
+
+    <!-- Canvas-based Interactive Map: Coffee brands -->
+    <h3 style="font-size:1.1rem; margin: 28px 0 8px;" class="lang-en">Interactive Example: Coffee Brands</h3>
+    <h3 style="font-size:1.1rem; margin: 28px 0 8px;" class="lang-cn">互动案例：咖啡品牌</h3>
+    <p class="lang-en" style="font-size:15px; color:var(--muted); margin-bottom:12px;">Hover over any brand dot to see how consumers perceive it. Axes: <strong>Affordable ↔ Premium</strong> · <strong>Functional ↔ Lifestyle</strong>.</p>
+    <p class="lang-cn" style="font-size:15px; color:var(--muted); margin-bottom:12px;">将鼠标悬停在品牌点上查看感知描述。坐标轴：<strong>经济实惠 ↔ 高端</strong> · <strong>功能性 ↔ 生活方式</strong>。</p>
+
+    <div class="map-wrap" id="demo-map-wrap">
+      <canvas id="demo-map-canvas"></canvas>
+      <div class="map-tooltip-box" id="demo-tooltip"></div>
+    </div>
+
+    <div class="callout lang-en">
+      <strong>Three factors when selecting your target position:</strong> (1) <em>Company/Brand</em> — How would the brand like to see itself? (2) <em>Target Group</em> — What do customers want today and in the future? (3) <em>Competition</em> — How are competitors currently positioned?
+    </div>
+    <div class="callout lang-cn">
+      <strong>选择目标定位时的三个因素：</strong>(1) <em>公司/品牌</em>——品牌希望如何看待自己？(2) <em>目标群体</em>——客户今天和未来想要什么？(3) <em>竞争</em>——竞争对手目前如何定位？
+    </div>
+
+    <!-- ─── MAP BUILDER ─── -->
+    <h3 style="font-size:1.15rem; margin: 40px 0 10px;" class="lang-en">🗺 Build Your Own Positioning Map</h3>
+    <h3 style="font-size:1.15rem; margin: 40px 0 10px;" class="lang-cn">🗺 构建你自己的定位地图</h3>
+    <p class="lang-en" style="font-size:15px; color:var(--muted); margin-bottom:16px;">Name your axes, add brands by typing a name and clicking on the canvas to place them. Click a legend item to remove it.</p>
+    <p class="lang-cn" style="font-size:15px; color:var(--muted); margin-bottom:16px;">命名你的坐标轴，输入品牌名称后点击画布放置。点击图例中的品牌条目可将其删除。</p>
+
+    <div class="builder-map-wrap">
+      <!-- Axis label inputs -->
+      <div class="builder-map-top">
+        <div class="bmt-group">
+          <label class="lang-en">Horizontal axis</label>
+          <label class="lang-cn">水平轴</label>
+          <div class="axis-row">
+            <input type="text" id="bm-x-left" placeholder="Left label" value="Low Price">
+            <span>↔</span>
+            <input type="text" id="bm-x-right" placeholder="Right label" value="High Price">
+          </div>
+        </div>
+        <div class="bmt-group">
+          <label class="lang-en">Vertical axis</label>
+          <label class="lang-cn">垂直轴</label>
+          <div class="axis-row">
+            <input type="text" id="bm-y-bottom" placeholder="Bottom label" value="Functional">
+            <span>↕</span>
+            <input type="text" id="bm-y-top" placeholder="Top label" value="Lifestyle">
+          </div>
+        </div>
+      </div>
+      <!-- Brand add row -->
+      <div class="builder-map-add">
+        <input type="text" id="bm-brand-name" placeholder="Brand name…" maxlength="30" style="max-width:200px;" onkeydown="if(event.key==='Enter') startPlacing()">
+        <select id="bm-brand-color">
+          <option value="#6abf3c">● Green</option>
+          <option value="#e84c2b">● Red</option>
+          <option value="#2b7be8">● Blue</option>
+          <option value="#e8922b">● Orange</option>
+          <option value="#9b27e8">● Purple</option>
+          <option value="#1a1a1a">● Black</option>
+        </select>
+        <button onclick="startPlacing()" id="bm-place-btn">
+          <span class="lang-en">+ Place on map</span>
+          <span class="lang-cn">+ 放置到地图</span>
+        </button>
+        <button onclick="clearBuilderMap()" style="background:var(--mid);">
+          <span class="lang-en">Clear all</span>
+          <span class="lang-cn">清除全部</span>
+        </button>
+      </div>
+      <!-- Canvas -->
+      <div class="builder-map-canvas-wrap" id="builder-map-canvas-wrap">
+        <canvas id="builder-map-canvas"></canvas>
+      </div>
+      <!-- Legend -->
+      <div class="builder-map-legend" id="builder-legend">
+        <span style="color:var(--muted); font-size:12px;" class="lang-en">Brands will appear here —</span>
+        <span style="color:var(--muted); font-size:12px;" class="lang-cn">品牌将显示在这里 —</span>
+      </div>
+      <div class="builder-map-hint lang-en">💡 Type a brand name → click "+ Place on map" → click anywhere on the canvas to place it. Hover a dot to see the name. Click a legend item to delete it.</div>
+      <div class="builder-map-hint lang-cn">💡 输入品牌名称 → 点击"+ 放置到地图" → 点击画布上的任意位置放置。将鼠标悬停在点上查看名称。点击图例条目删除。</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 4: QUIZ ═══ -->
+  <section class="section" id="s-quiz">
+    <div class="section-num lang-en">4 · Knowledge Check</div>
+    <div class="section-num lang-cn">4 · 知识检测</div>
+
+    <h2 class="lang-en">Test your <em>understanding</em></h2>
+    <h2 class="lang-cn">检验你的<em>理解</em></h2>
+    <div class="section-sub-cn lang-cn">关于品牌定位的核心概念测验</div>
+
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-score" id="quiz-score-display"></div>
+      <h3 id="quiz-question" class="lang-en"></h3>
+      <h3 id="quiz-question-cn" class="lang-cn"></h3>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <button class="quiz-next" id="quiz-next" onclick="nextQuestion()">
+        <span class="lang-en">Next question →</span>
+        <span class="lang-cn">下一题 →</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 5: STRATEGIES ═══ -->
+  <section class="section" id="s-strategies">
+    <div class="section-num lang-en">5 · Positioning Strategies</div>
+    <div class="section-num lang-cn">5 · 定位战略</div>
+
+    <h2 class="lang-en">Moving the brand — <em>when and how</em></h2>
+    <h2 class="lang-cn">移动品牌——<em>何时及如何</em></h2>
+    <div class="section-sub-cn lang-cn">品牌动态化与重新定位的战略选项</div>
+
+    <div class="lang-en">
+      <p><strong>Brand dynamisation</strong> is used to adapt the brand to current developments and changes in the environment. The relevance of these adjustments has increased due to shorter product life cycles, growing competition, and changes in the communications landscape.</p>
+      <p>The aim of any positioning strategy is to reduce the perceived distance between the <strong>target group's ideal position</strong> and the current position of the brand.</p>
+    </div>
+    <div class="lang-cn">
+      <p><strong>品牌动态化</strong>用于使品牌适应当前的发展和环境变化。由于产品生命周期缩短、竞争加剧以及传播格局变化，这些调整的重要性日益增加。</p>
+      <p>任何定位战略的目标都是缩小<strong>目标群体理想位置</strong>与品牌当前位置之间的感知距离。</p>
+    </div>
+
+    <h3 style="font-size:1.1rem; margin:28px 0 12px;" class="lang-en">The Strategic Options</h3>
+    <h3 style="font-size:1.1rem; margin:28px 0 12px;" class="lang-cn">战略选项</h3>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-card-head">
+          <span class="lang-en">① Maintaining the Position</span>
+          <span class="lang-cn">① 维持现有定位</span>
+        </div>
+        <div class="strategy-card-body">
+          <p class="lang-en">Brand strategy generally corresponds to the ideal position of the target group. Minor marketing adjustments may be made here and there.</p>
+          <p class="lang-cn">品牌战略通常符合目标群体的理想位置。可能会进行一些小的营销调整。</p>
+          <div class="example"><strong class="lang-en">Example:</strong><strong class="lang-cn">案例：</strong> <span class="lang-en">Rolex has maintained its "timeless luxury precision" positioning for decades, making only incremental product updates.</span><span class="lang-cn">劳力士数十年来一直保持其"永恒奢华精准"的定位，仅进行渐进式产品更新。</span></div>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head green">
+          <span class="lang-en">② Adaptive Strategy</span>
+          <span class="lang-cn">② 适应性战略</span>
+        </div>
+        <div class="strategy-card-body">
+          <p class="lang-en">The brand adapts its strategy to changing customer needs — repositioning within the existing space.</p>
+          <p class="lang-cn">品牌将其战略调整以适应不断变化的客户需求——在现有空间内重新定位。</p>
+          <div class="example"><strong class="lang-en">Example:</strong><strong class="lang-cn">案例：</strong> <span class="lang-en">McDonald's went green in 2009, added healthier menu items and pledged sustainable packaging — adapting to health-conscious consumer trends.</span><span class="lang-cn">麦当劳于2009年走向绿色，增加了更健康的菜单项目并承诺使用可持续包装——适应了注重健康的消费趋势。</span></div>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head">
+          <span class="lang-en">③ Influencing Strategy</span>
+          <span class="lang-cn">③ 影响性战略</span>
+        </div>
+        <div class="strategy-card-body">
+          <p class="lang-en">Rather than adapting to customer needs, the brand <em>influences</em> what customers want — shifting the ideal position closer to the brand. Long-term and costly.</p>
+          <p class="lang-cn">品牌不是适应客户需求，而是<em>影响</em>客户想要什么——将理想位置转移到更接近品牌。长期且成本高昂。</p>
+          <div class="example"><strong class="lang-en">Example:</strong><strong class="lang-cn">案例：</strong> <span class="lang-en">Nespresso created an entirely new consumer habit: making premium espresso at home instead of only at cafés.</span><span class="lang-cn">Nespresso创造了一种全新的消费习惯：在家制作高端浓缩咖啡，而不仅仅是在咖啡馆。</span></div>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head green">
+          <span class="lang-en">④ Extension Strategy</span>
+          <span class="lang-cn">④ 延伸战略</span>
+        </div>
+        <div class="strategy-card-body">
+          <p class="lang-en">The brand extends its offer profile with a new, relevant characteristic — moving into a new positioning space while keeping the core.</p>
+          <p class="lang-cn">品牌通过新的相关特征扩展其产品配置——在保留核心的同时进入新的定位空间。</p>
+          <div class="example"><strong class="lang-en">Example:</strong><strong class="lang-cn">案例：</strong> <span class="lang-en">Apple: from "Apple Computer Inc." to "Apple Inc." — extended from computers into music, phones, watches, payments.</span><span class="lang-cn">苹果：从"苹果电脑公司"到"苹果公司"——从电脑延伸到音乐、手机、手表、支付。</span></div>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-card-head red">
+          <span class="lang-en">⑤ New Positioning Strategy</span>
+          <span class="lang-cn">⑤ 新定位战略</span>
+        </div>
+        <div class="strategy-card-body">
+          <p class="lang-en">The brand's current position is too far from the target group's ideal — major investment is needed to develop a completely new brand image.</p>
+          <p class="lang-cn">品牌当前的位置与目标群体的理想位置相差太远——需要大量投资来建立全新的品牌形象。</p>
+          <div class="example"><strong class="lang-en">Example:</strong><strong class="lang-cn">案例：</strong> <span class="lang-en">Jaguar (2024): went fully electric, dropped the leaping cat, rebranded with an entirely new visual identity targeting a new, younger audience.</span><span class="lang-cn">捷豹（2024年）：完全转型电动化，放弃了跃豹标志，以全新视觉形象重塑品牌，面向更年轻的新受众。</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout lang-en">
+      <strong>ANTA's multi-brand strategy</strong> is a real-world example of the <em>extension + new positioning</em> approach: The core ANTA brand targets mainstream Chinese sports enthusiasts at value prices, while its acquired brands (FILA, Salomon, Arc'teryx, Wilson) cover premium and international segments — all under one corporate umbrella.
+    </div>
+    <div class="callout lang-cn">
+      <strong>安踏的多品牌战略</strong>是<em>延伸+新定位</em>方法的现实案例：核心安踏品牌以实惠价格面向中国主流运动爱好者，而其收购的品牌（FILA、萨洛蒙、始祖鸟、威尔逊）覆盖高端和国际细分市场——均在一个企业伞下。
+    </div>
+
+    <!-- New example: BYD vs Tesla repositioning -->
+    <h3 style="font-size:1.1rem; margin:28px 0 12px;" class="lang-en">New Example: BYD's Repositioning Journey</h3>
+    <h3 style="font-size:1.1rem; margin:28px 0 12px;" class="lang-cn">新案例：比亚迪的重新定位之路</h3>
+
+    <div class="lang-en">
+      <p>BYD (Build Your Dreams) provides an instructive case study in deliberate repositioning from an affordable mass-market brand to a technology and quality leader:</p>
+    </div>
+    <div class="lang-cn">
+      <p>比亚迪（Build Your Dreams）提供了一个有益的案例研究，展示了从实惠大众品牌到技术和质量领导者的有意识的重新定位：</p>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-box internal">
+        <strong class="lang-en">2003–2015: Old Position</strong>
+        <strong class="lang-cn">2003–2015: 旧定位</strong>
+        <span class="lang-en">Cheap Chinese cars. Value player. Seen as low-quality imitation.</span>
+        <span class="lang-cn">廉价中国车。性价比玩家。被视为低质量仿制品。</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box bridge">
+        <strong class="lang-en">Strategy: Extension + New</strong>
+        <strong class="lang-cn">战略：延伸+新定位</strong>
+        <span class="lang-en">Blade Battery, Seal model, Yangwang luxury sub-brand, F1 sponsorship</span>
+        <span class="lang-cn">刀片电池、海豹车型、仰望豪华子品牌、F1赞助</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box external">
+        <strong class="lang-en">2023+: New Position</strong>
+        <strong class="lang-cn">2023+: 新定位</strong>
+        <span class="lang-en">World's largest EV maker. Technology leader. Safety innovator. Global competitor to Tesla.</span>
+        <span class="lang-cn">全球最大电动车制造商。技术领导者。安全创新者。特斯拉的全球竞争对手。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 6: STATEMENT BUILDER ═══ -->
+  <section class="section" id="s-builder">
+    <div class="section-num lang-en">6 · Positioning Statement Builder</div>
+    <div class="section-num lang-cn">6 · 定位陈述构建器</div>
+
+    <h2 class="lang-en">Build your own <em>positioning statement</em></h2>
+    <h2 class="lang-cn">构建你自己的<em>定位陈述</em></h2>
+    <div class="section-sub-cn lang-cn">使用标准模板为你的品牌生成定位陈述</div>
+
+    <div class="lang-en"><p>Use the standard template below to build a positioning statement for your brand. Fill in the fields and press "Generate" to see the result.</p></div>
+    <div class="lang-cn"><p>使用下面的标准模板为你的品牌构建定位陈述。填写字段并按"生成"查看结果。</p></div>
+
+    <div class="builder">
+      <label class="lang-en">Your brand name</label>
+      <label class="lang-cn">你的品牌名称</label>
+      <input type="text" id="b-brand" placeholder="e.g. Xiaomi / 小米">
+
+      <label class="lang-en">Target segment</label>
+      <label class="lang-cn">目标细分市场</label>
+      <input type="text" id="b-segment" placeholder="e.g. tech-savvy young adults seeking value / 寻求性价比的年轻科技爱好者">
+
+      <label class="lang-en">Product or service category</label>
+      <label class="lang-cn">产品或服务类别</label>
+      <input type="text" id="b-product" placeholder="e.g. smartphones / 智能手机">
+
+      <label class="lang-en">Points of distinction (superior in terms of...)</label>
+      <label class="lang-cn">差异化优势（在哪些方面具有优越性）</label>
+      <input type="text" id="b-distinction" placeholder="e.g. value for money, ecosystem integration / 性价比、生态系统整合">
+
+      <button class="builder-btn" onclick="generateStatement()">
+        <span class="lang-en">Generate positioning statement →</span>
+        <span class="lang-cn">生成定位陈述 →</span>
+      </button>
+
+      <div class="builder-output" id="builder-output">
+        <div style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#999; margin-bottom:8px;" class="lang-en">Your Positioning Statement</div>
+        <div style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#999; margin-bottom:8px;" class="lang-cn">你的定位陈述</div>
+        <div id="builder-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ASSIGNMENT 5 ═══ -->
+  <div class="assignment" id="s-assignment">
+    <h3 class="lang-en">ASSIGNMENT 5</h3>
+    <h3 class="lang-cn">第五次作业</h3>
+    <p class="lang-en"><strong>This assignment has two parts:</strong></p>
+    <p class="lang-cn"><strong>本次作业包含两个部分：</strong></p>
+    <ul>
+      <li class="lang-en"><strong>Part 1:</strong> Write a positioning statement for your brand using the standard template: <em>"Our brand is positioned towards [target segment] and offers a [product or service] that is superior in terms of [points of distinction]."</em></li>
+      <li class="lang-en"><strong>Part 2:</strong> Design and conduct a small survey (note down the questions). Then place your brand in a positioning map with three of its main competitors. Choose two relevant attribute pairs as your axes.</li>
+      <li class="lang-cn"><strong>第一部分：</strong>使用标准模板为你的品牌撰写定位陈述：<em>"我们的品牌面向[目标细分市场]，提供在[差异化优势]方面具有优越性的[产品或服务]。"</em></li>
+      <li class="lang-cn"><strong>第二部分：</strong>设计并实施一个小型调查（记录问题）。然后将你的品牌与其三个主要竞争对手一起放置在定位地图中。选择两对相关属性作为你的坐标轴。</li>
+    </ul>
+    <p style="margin-top:12px; font-size:14px; opacity:0.85;" class="lang-en">📖 Reading: Chernev, A., 2015. Strategic Brand Management. Cerebellum Press, Chicago, pp. 58–64</p>
+    <p style="margin-top:12px; font-size:14px; opacity:0.85;" class="lang-cn">📖 阅读材料：Chernev, A., 2015. Strategic Brand Management. Cerebellum Press, 芝加哥, 第58–64页</p>
+  </div>
+
+</div><!-- /content -->
+
+<div style="background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:0">
+  <a href="lecture4-brands-and-people.html" style="color:rgba(245,242,235,.6);text-decoration:none;font-size:13px">← Lecture 4</a>
+  <span style="font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em">Lecture 5 of 10</span>
+  <a href="lecture6-market-conditions.html" style="color:rgba(245,242,235,.6);text-decoration:none;font-size:13px">Lecture 6 →</a>
+</div>
+
+<footer>
+  <p>Brand Management Basics · Lecture #5 · Brand Positioning<br>
+  品牌管理基础 · 第五讲 · 品牌定位</p>
+  <p style="margin-top:8px;">Prof. Dr. Stefan Waller · Brand University of Applied Sciences · <a href="/cdn-cgi/l/email-protection#9ae9eefffcfbf4b4edfbf6f6ffe8daf8e8fbf4feb7eff4f3ecffe8e9f3eee3b4feff"><span class="__cf_email__" data-cfemail="aad9decfcccbc484ddcbc6c6cfd8eac8d8cbc4ce87dfc4c3dccfd8d9c3ded384cecf">[email&#160;protected]</span></a></p>
+  <p style="margin-top:8px; font-size:12px;">References: Johansson &amp; Carlson 2015 · Esch 2018 · Burmann et al. 2015 · Chernev 2015 · Teaching use only · 仅供教学使用</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── LANGUAGE TOGGLE ───
+function setLang(lang) {
+  document.body.classList.toggle('cn', lang === 'cn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  demoMap.render();
+  builderMap.render();
+}
+
+// ════════════════════════════════════════════
+// CANVAS MAP UTILITY
+// ════════════════════════════════════════════
+class PositioningMap {
+  constructor(canvasId, wrapId, opts = {}) {
+    this.canvas = document.getElementById(canvasId);
+    this.wrap = document.getElementById(wrapId);
+    this.ctx = this.canvas.getContext('2d');
+    this.opts = opts;
+    this.brands = opts.brands || [];
+    this.PAD = 52; // padding for labels
+    this.dpr = window.devicePixelRatio || 1;
+    this._resize();
+    window.addEventListener('resize', () => { this._resize(); this.render(); });
+    this.canvas.addEventListener('mousemove', (e) => this._onMove(e));
+    this.canvas.addEventListener('mouseleave', () => this._hideTooltip());
+    if (opts.tooltip) this.tooltipEl = document.getElementById(opts.tooltip);
+  }
+
+  _resize() {
+    const w = this.wrap.clientWidth;
+    const h = Math.round(w * 0.72);
+    this.canvas.width = w * this.dpr;
+    this.canvas.height = h * this.dpr;
+    this.canvas.style.width = w + 'px';
+    this.canvas.style.height = h + 'px';
+    this.ctx.scale(this.dpr, this.dpr);
+    this.W = w; this.H = h;
+    this.render();
+  }
+
+  _plotArea() {
+    return {
+      x: this.PAD, y: this.PAD,
+      w: this.W - this.PAD * 2,
+      h: this.H - this.PAD * 2
+    };
+  }
+
+  // Convert 0–1 brand coords to canvas px
+  _toCanvas(bx, by) {
+    const a = this._plotArea();
+    return { x: a.x + bx * a.w, y: a.y + (1 - by) * a.h };
+  }
+
+  render() {
+    const ctx = this.ctx;
+    const { W, H, PAD } = this;
+    const a = this._plotArea();
+    const isCN = document.body.classList.contains('cn');
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Background quadrant fills
+    const qColors = ['#f9f9f9','#f0f7ea','#f0f7ea','#f9f9f9'];
+    [[0,0],[1,0],[0,1],[1,1]].forEach(([qx,qy], i) => {
+      ctx.fillStyle = i === 1 || i === 2 ? '#f0f7ea' : '#f9f9f9';
+      ctx.fillRect(a.x + qx * a.w/2, a.y + qy * a.h/2, a.w/2, a.h/2);
+    });
+
+    // Grid lines (faint)
+    ctx.strokeStyle = '#e5e5e5';
+    ctx.lineWidth = 1;
+    for (let i = 1; i < 4; i++) {
+      ctx.beginPath();
+      ctx.moveTo(a.x + (i/4)*a.w, a.y);
+      ctx.lineTo(a.x + (i/4)*a.w, a.y + a.h);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y + (i/4)*a.h);
+      ctx.lineTo(a.x + a.w, a.y + (i/4)*a.h);
+      ctx.stroke();
+    }
+
+    // Main axes
+    const cx = a.x + a.w / 2, cy = a.y + a.h / 2;
+    ctx.strokeStyle = '#bbb';
+    ctx.lineWidth = 1.5;
+    // horizontal
+    ctx.beginPath(); ctx.moveTo(a.x - 4, cy); ctx.lineTo(a.x + a.w + 4, cy); ctx.stroke();
+    // vertical
+    ctx.beginPath(); ctx.moveTo(cx, a.y - 4); ctx.lineTo(cx, a.y + a.h + 4); ctx.stroke();
+
+    // Arrowheads
+    const arr = (x, y, dir) => {
+      ctx.fillStyle = '#bbb';
+      ctx.beginPath();
+      if (dir === 'right') { ctx.moveTo(x,y-4); ctx.lineTo(x+8,y); ctx.lineTo(x,y+4); }
+      if (dir === 'left')  { ctx.moveTo(x,y-4); ctx.lineTo(x-8,y); ctx.lineTo(x,y+4); }
+      if (dir === 'up')    { ctx.moveTo(x-4,y); ctx.lineTo(x,y-8); ctx.lineTo(x+4,y); }
+      if (dir === 'down')  { ctx.moveTo(x-4,y); ctx.lineTo(x,y+8); ctx.lineTo(x+4,y); }
+      ctx.fill();
+    };
+    arr(a.x + a.w + 4, cy, 'right');
+    arr(a.x - 4, cy, 'left');
+    arr(cx, a.y - 4, 'up');
+    arr(cx, a.y + a.h + 4, 'down');
+
+    // Axis labels
+    ctx.fillStyle = '#777';
+    ctx.font = `700 12px 'Helvetica Neue', Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.letterSpacing = '0px';
+
+    const labels = this.opts.labels || {};
+    const top    = (isCN && labels.topCN)    ? labels.topCN    : (labels.top    || '▲ Top');
+    const bottom = (isCN && labels.bottomCN) ? labels.bottomCN : (labels.bottom || '▼ Bottom');
+    const left   = (isCN && labels.leftCN)   ? labels.leftCN   : (labels.left   || '◀ Left');
+    const right  = (isCN && labels.rightCN)  ? labels.rightCN  : (labels.right  || 'Right ▶');
+
+    ctx.fillText(top,    cx,        a.y - 14);
+    ctx.fillText(bottom, cx,        a.y + a.h + 28);
+    ctx.textAlign = 'right';
+    ctx.fillText(left,   a.x - 10, cy + 4);
+    ctx.textAlign = 'left';
+    ctx.fillText(right,  a.x + a.w + 10, cy + 4);
+
+    // Brand dots + labels
+    this.brands.forEach(b => {
+      const p = this._toCanvas(b.x, b.y);
+      const r = b.r || 7;
+      // Glow ring
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2);
+      ctx.fillStyle = b.color + '33';
+      ctx.fill();
+      // Dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = b.color || '#6abf3c';
+      ctx.fill();
+      // Label
+      ctx.font = `700 11px 'Helvetica Neue', Arial, sans-serif`;
+      ctx.fillStyle = '#222';
+      ctx.textAlign = 'center';
+      const label = (isCN && b.nameCN) ? b.nameCN : b.name;
+      ctx.fillText(label, p.x, p.y + r + 14);
+    });
+  }
+
+  _getBrandAt(mx, my) {
+    const a = this._plotArea();
+    for (const b of this.brands) {
+      const p = this._toCanvas(b.x, b.y);
+      const dist = Math.hypot(mx - p.x, my - p.y);
+      if (dist < 18) return { brand: b, px: p.x, py: p.y };
+    }
+    return null;
+  }
+
+  _onMove(e) {
+    if (!this.tooltipEl) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const hit = this._getBrandAt(mx, my);
+    if (hit) {
+      const isCN = document.body.classList.contains('cn');
+      const b = hit.brand;
+      const name = (isCN && b.nameCN) ? b.nameCN : b.name;
+      const desc = (isCN && b.descCN) ? b.descCN : (b.desc || '');
+      this.tooltipEl.innerHTML = `<strong>${name}</strong>${desc ? '<br>' + desc : ''}`;
+      this.tooltipEl.style.display = 'block';
+      // Position tooltip relative to wrap
+      const wrapRect = this.wrap.getBoundingClientRect();
+      const scaleX = this.W / rect.width;
+      const scaleY = this.H / rect.height;
+      let tx = hit.px / scaleX + wrapRect.left - this.wrap.getBoundingClientRect().left;
+      let ty = hit.py / scaleY + (wrapRect.top - this.wrap.getBoundingClientRect().top);
+      const tw = this.tooltipEl.offsetWidth;
+      tx = Math.min(tx - tw/2, this.W - tw - 8);
+      tx = Math.max(tx, 8);
+      this.tooltipEl.style.left = tx + 'px';
+      this.tooltipEl.style.top  = Math.max(8, ty - this.tooltipEl.offsetHeight - 14) + 'px';
+      this.canvas.style.cursor = 'pointer';
+    } else {
+      this._hideTooltip();
+      this.canvas.style.cursor = 'crosshair';
+    }
+  }
+
+  _hideTooltip() {
+    if (this.tooltipEl) this.tooltipEl.style.display = 'none';
+  }
+}
+
+// ════════════════════════════════════════════
+// DEMO MAP — coffee brands
+// ════════════════════════════════════════════
+const demoMap = new PositioningMap('demo-map-canvas', 'demo-map-wrap', {
+  tooltip: 'demo-tooltip',
+  labels: {
+    top: 'Lifestyle / Experiential', topCN: '生活方式 / 体验型',
+    bottom: 'Functional / Everyday', bottomCN: '功能性 / 日常',
+    left: 'Affordable', leftCN: '经济实惠',
+    right: 'Premium', rightCN: '高端'
+  },
+  brands: [
+    { name:'Starbucks', nameCN:'星巴克', x:0.78, y:0.80,
+      color:'#6abf3c',
+      desc:'Premium price · high lifestyle value. The "third place" concept.',
+      descCN:'高价格·高生活方式价值。"第三空间"概念。时尚、有追求的象征。' },
+    { name:'Blue Bottle', nameCN:'蓝瓶咖啡', x:0.90, y:0.92,
+      color:'#2b7be8',
+      desc:'Ultra-premium specialty coffee. Strong craft & lifestyle positioning.',
+      descCN:'超高端精品咖啡。强烈的手工与生活方式定位。吸引自由知识分子。' },
+    { name:'Nespresso', nameCN:'Nespresso', x:0.83, y:0.58,
+      color:'#9b27e8',
+      desc:'Premium home coffee. Combines aspirations with daily convenience. Created a new consumer habit.',
+      descCN:'高端家用咖啡。将追求与便利结合。开创了家用高端咖啡习惯。' },
+    { name:'Lavazza', nameCN:'拉瓦萨', x:0.65, y:0.62,
+      color:'#e8922b',
+      desc:'Italian heritage. Mid-to-premium. Balances quality with cultural lifestyle appeal.',
+      descCN:'意大利传统。中高端。平衡品质与文化生活方式吸引力。' },
+    { name:'Manner ☕', nameCN:'Manner咖啡', x:0.62, y:0.84,
+      color:'#6abf3c',
+      desc:'Chinese third-wave specialty. Lifestyle at accessible prices. Very popular with urban youth.',
+      descCN:'中国第三波精品咖啡。亲民价格的生活方式定位。深受都市年轻人欢迎。' },
+    { name:'McCafé', nameCN:'麦咖啡', x:0.28, y:0.58,
+      color:'#e8922b',
+      desc:'Affordable, accessible. Extension strategy: McDonald\'s moved into lifestyle coffee territory.',
+      descCN:'经济实惠。延伸战略：麦当劳进入生活方式咖啡领域。' },
+    { name:'Nescafé', nameCN:'雀巢咖啡', x:0.18, y:0.22,
+      color:'#2b7be8',
+      desc:'Highly functional, everyday, affordable. World\'s largest coffee brand by volume.',
+      descCN:'高度功能性，日常，经济实惠。按销量计全球最大的咖啡品牌。' },
+    { name:'Luckin ☕', nameCN:'瑞幸咖啡', x:0.45, y:0.30,
+      color:'#e84c2b',
+      desc:'China-specific: affordable + tech-driven convenience. App-only model. Competes on value AND quality.',
+      descCN:'中国特色：实惠+科技便利。纯App模式颠覆市场。性价比与品质双管齐下。' },
+  ]
+});
+
+// ════════════════════════════════════════════
+// BUILDER MAP
+// ════════════════════════════════════════════
+class BuilderMap extends PositioningMap {
+  constructor(canvasId, wrapId) {
+    super(canvasId, wrapId, { brands: [] });
+    this.placing = false;
+    this.pendingName = '';
+    this.pendingColor = '#6abf3c';
+    this.canvas.addEventListener('click', (e) => this._onClick(e));
+    this.canvas.addEventListener('mousemove', (e) => this._onMoveBuilder(e));
+    this._readLabels();
+    ['bm-x-left','bm-x-right','bm-y-bottom','bm-y-top'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        this._readLabels(); this.render();
+      });
+    });
+  }
+
+  _readLabels() {
+    this.opts.labels = {
+      left:   document.getElementById('bm-x-left').value  || 'Left',
+      right:  document.getElementById('bm-x-right').value || 'Right',
+      bottom: document.getElementById('bm-y-bottom').value|| 'Bottom',
+      top:    document.getElementById('bm-y-top').value   || 'Top',
+    };
+  }
+
+  startPlacing(name, color) {
+    if (!name.trim()) return;
+    this.placing = true;
+    this.pendingName = name.trim();
+    this.pendingColor = color;
+    this.canvas.style.cursor = 'crosshair';
+    this.canvas.title = 'Click to place ' + name;
+  }
+
+  _onClick(e) {
+    if (!this.placing) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (this.W / rect.width);
+    const my = (e.clientY - rect.top)  * (this.H / rect.height);
+    const a = this._plotArea();
+    const bx = Math.max(0.02, Math.min(0.98, (mx - a.x) / a.w));
+    const by = Math.max(0.02, Math.min(0.98, 1 - (my - a.y) / a.h));
+    this.brands.push({ name: this.pendingName, x: bx, y: by, color: this.pendingColor, r: 7 });
+    this.placing = false;
+    this.canvas.style.cursor = 'crosshair';
+    this.canvas.title = '';
+    this.render();
+    this._updateLegend();
+  }
+
+  _onMoveBuilder(e) {
+    if (this.placing) {
+      this.canvas.style.cursor = 'crosshair';
+      return;
+    }
+    const rect = this.canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (this.W / rect.width);
+    const my = (e.clientY - rect.top)  * (this.H / rect.height);
+    const hit = this._getBrandAt(mx, my);
+    this.canvas.style.cursor = hit ? 'pointer' : 'crosshair';
+    // Show name near cursor when hovering a dot
+    if (hit) {
+      this.canvas.title = hit.brand.name;
+    } else {
+      this.canvas.title = this.placing ? ('Click to place ' + this.pendingName) : '';
+    }
+  }
+
+  removeBrand(idx) {
+    this.brands.splice(idx, 1);
+    this.render();
+    this._updateLegend();
+  }
+
+  clearAll() {
+    this.brands = [];
+    this.render();
+    this._updateLegend();
+  }
+
+  _updateLegend() {
+    const leg = document.getElementById('builder-legend');
+    if (this.brands.length === 0) {
+      leg.innerHTML = `
+        <span style="color:var(--muted); font-size:12px;" class="lang-en">Brands will appear here —</span>
+        <span style="color:var(--muted); font-size:12px;" class="lang-cn">品牌将显示在这里 —</span>`;
+      return;
+    }
+    leg.innerHTML = this.brands.map((b, i) => `
+      <span class="legend-item" onclick="builderMap.removeBrand(${i})" title="Click to remove">
+        <span class="legend-dot" style="background:${b.color}"></span>
+        <span>${b.name}</span>
+        <span class="legend-del">×</span>
+      </span>`).join('');
+  }
+}
+
+const builderMap = new BuilderMap('builder-map-canvas', 'builder-map-canvas-wrap');
+
+function startPlacing() {
+  const name  = document.getElementById('bm-brand-name').value;
+  const color = document.getElementById('bm-brand-color').value;
+  if (!name.trim()) {
+    document.getElementById('bm-brand-name').focus();
+    return;
+  }
+  builderMap.startPlacing(name, color);
+  document.getElementById('bm-brand-name').value = '';
+}
+
+function clearBuilderMap() { builderMap.clearAll(); }
+
+// ─── QUIZ DATA ───
+const questions = [
+  {
+    en: "Which of the following best describes the purpose of a positioning statement?",
+    cn: "以下哪项最能描述定位陈述的目的？",
+    options: {
+      en: [
+        "To describe the internal values and vision of the brand team",
+        "To capture the desired brand position, specifying target segment and points of distinction",
+        "To list all product features available to consumers",
+        "To set the price strategy for a product launch"
+      ],
+      cn: [
+        "描述品牌团队的内部价值观和愿景",
+        "捕捉期望的品牌位置，指定目标细分市场和差异化优势",
+        "列出消费者可获得的所有产品特性",
+        "为产品上市设定价格战略"
+      ]
+    },
+    correct: 1,
+    feedback: {
+      en: "✅ Correct! A positioning statement follows the template: 'Our brand is positioned towards [target segment] and offers a [product or service] that is superior in terms of [points of distinction].' It captures the desired brand position.",
+      cn: "✅ 正确！定位陈述遵循模板：'我们的品牌面向[目标细分市场]，提供在[差异化优势]方面具有优越性的[产品或服务]。'它捕捉期望的品牌位置。"
+    }
+  },
+  {
+    en: "What is the key difference between a brand SLOGAN and a brand MANTRA?",
+    cn: "品牌口号和品牌宣言之间的关键区别是什么？",
+    options: {
+      en: [
+        "Slogans are longer and more detailed than mantras",
+        "Slogans are aimed at customers; mantras remind employees what the brand is about",
+        "Mantras are used in advertising; slogans are for internal use only",
+        "There is no meaningful difference — they are interchangeable"
+      ],
+      cn: [
+        "口号比宣言更长、更详细",
+        "口号面向客户；宣言提醒员工品牌的本质",
+        "宣言用于广告；口号仅供内部使用",
+        "没有实质性区别——它们可以互换"
+      ]
+    },
+    correct: 1,
+    feedback: {
+      en: "✅ Correct! Slogans communicate the core promise to customers (e.g. Nike: 'Just do it.'). Mantras focus employees on the essence of the brand (e.g. Nike: 'Authentic Athletic Performance').",
+      cn: "✅ 正确！口号向客户传达核心承诺（例如耐克：'Just do it.'）。宣言让员工专注于品牌的本质（例如耐克：'真实的运动表现'）。"
+    }
+  },
+  {
+    en: "Nespresso created a new consumer habit of making premium espresso at home instead of only at cafés. This is an example of which positioning strategy?",
+    cn: "Nespresso创造了在家制作高端浓缩咖啡的新消费习惯，而不仅仅是在咖啡馆。这是哪种定位战略的案例？",
+    options: {
+      en: [
+        "Adaptive strategy",
+        "Extension strategy",
+        "Influencing strategy",
+        "Maintaining the position"
+      ],
+      cn: [
+        "适应性战略",
+        "延伸战略",
+        "影响性战略",
+        "维持现有定位"
+      ]
+    },
+    correct: 2,
+    feedback: {
+      en: "✅ Correct! An influencing strategy shifts what customers want — moving their ideal position closer to the brand's offering. Nespresso didn't adapt to existing habits; it created a new one. This is costly and long-term.",
+      cn: "✅ 正确！影响性战略改变客户的想法——将其理想位置转移到更接近品牌产品。Nespresso没有适应现有习惯；它创造了一种新习惯。这需要长期投入和高成本。"
+    }
+  },
+  {
+    en: "Apple changed its name from 'Apple Computer Inc.' to 'Apple Inc.' and expanded into music, phones, watches and payments. What positioning strategy does this represent?",
+    cn: "苹果将名称从'苹果电脑公司'改为'苹果公司'，并扩展到音乐、手机、手表和支付领域。这代表哪种定位战略？",
+    options: {
+      en: [
+        "Adaptive strategy — adapting to customer demand for smartphones",
+        "Extension strategy — expanding the brand into new product categories",
+        "Maintaining the position — keeping the same positioning",
+        "Influencing strategy — changing what consumers want"
+      ],
+      cn: [
+        "适应性战略——适应消费者对智能手机的需求",
+        "延伸战略——将品牌扩展到新的产品类别",
+        "维持现有定位——保持相同的定位",
+        "影响性战略——改变消费者的想法"
+      ]
+    },
+    correct: 1,
+    feedback: {
+      en: "✅ Correct! Extension strategy means extending the offer profile into a new positioning space. Apple kept its core positioning ('think different', empowering creativity) but extended the brand into entirely new categories.",
+      cn: "✅ 正确！延伸战略意味着将产品配置扩展到新的定位空间。苹果保留了其核心定位（'不同凡想'，赋能创造力），但将品牌延伸到全新的类别。"
+    }
+  },
+  {
+    en: "Which of the following is NOT one of the requirements for strong brand positioning (according to Esch)?",
+    cn: "以下哪项不是强品牌定位的要求之一（根据Esch）？",
+    options: {
+      en: [
+        "Fits the brand identity",
+        "Is relevant to customers",
+        "Is as cheap as possible to communicate",
+        "Enables differentiation from the competition"
+      ],
+      cn: [
+        "符合品牌识别",
+        "与客户相关",
+        "传播成本尽可能低",
+        "能够与竞争对手形成差异化"
+      ]
+    },
+    correct: 2,
+    feedback: {
+      en: "✅ Correct! The five requirements are: fits brand identity, relevant in the market environment, relevant to customers, enables differentiation, and can be pursued long-term. Cost of communication is NOT one of them.",
+      cn: "✅ 正确！五项要求是：符合品牌识别、与市场环境相关、与客户相关、能够形成差异化以及可以长期坚持。传播成本不在其中。"
+    }
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = false;
+const isCN = () => document.body.classList.contains('cn');
+
+function renderQuestion() {
+  if (currentQ >= questions.length) {
+    document.getElementById('quiz').innerHTML = `
+      <div style="text-align:center; padding:20px;">
+        <div style="font-size:48px; margin-bottom:12px;">🎓</div>
+        <div style="font-family:var(--font-ui); font-size:22px; font-weight:700; color:var(--green-dark);">${score}/${questions.length}</div>
+        <div style="font-family:var(--font-ui); font-size:15px; color:var(--muted); margin-top:6px;" class="lang-en">Quiz complete! ${score >= 4 ? 'Excellent work.' : score >= 3 ? 'Good effort.' : 'Review the material and try again.'}</div>
+        <div style="font-family:var(--font-ui); font-size:15px; color:var(--muted); margin-top:6px;" class="lang-cn">测验完成！${score >= 4 ? '出色的表现。' : score >= 3 ? '努力了！' : '复习材料后再试一次。'}</div>
+        <button class="builder-btn" style="margin-top:20px;" onclick="restartQuiz()">
+          <span class="lang-en">Try again</span><span class="lang-cn">再试一次</span>
+        </button>
+      </div>`;
+    return;
+  }
+  const q = questions[currentQ];
+  answered = false;
+  document.getElementById('quiz-score-display').textContent =
+    `${currentQ + 1} / ${questions.length}`;
+  document.getElementById('quiz-question').textContent = q.en;
+  document.getElementById('quiz-question-cn').textContent = q.cn;
+  const letters = ['A','B','C','D'];
+  const optDiv = document.getElementById('quiz-options');
+  optDiv.innerHTML = q.options.en.map((opt, i) => `
+    <button class="quiz-opt" onclick="checkAnswer(${i})">
+      <span class="letter">${letters[i]}</span>
+      <span>
+        <span class="lang-en">${opt}</span>
+        <span class="lang-cn">${q.options.cn[i]}</span>
+      </span>
+    </button>`).join('');
+  document.getElementById('quiz-feedback').className = 'quiz-feedback';
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('quiz-next').className = 'quiz-next';
+}
+
+function checkAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts[idx].classList.add(idx === q.correct ? 'correct' : 'wrong');
+  if (idx === q.correct) { opts[q.correct].classList.add('correct'); score++; }
+  else opts[q.correct].classList.add('correct');
+  const fb = document.getElementById('quiz-feedback');
+  fb.textContent = isCN() ? q.feedback.cn : q.feedback.en;
+  fb.className = 'quiz-feedback show ' + (idx === q.correct ? 'good' : 'bad');
+  document.getElementById('quiz-next').className = 'quiz-next show';
+}
+
+function nextQuestion() {
+  currentQ++;
+  renderQuestion();
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0;
+  document.getElementById('quiz').innerHTML = `
+    <div class="quiz-score" id="quiz-score-display"></div>
+    <h3 id="quiz-question" class="lang-en"></h3>
+    <h3 id="quiz-question-cn" class="lang-cn"></h3>
+    <div class="quiz-options" id="quiz-options"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <button class="quiz-next" id="quiz-next" onclick="nextQuestion()">
+      <span class="lang-en">Next question →</span>
+      <span class="lang-cn">下一题 →</span>
+    </button>`;
+  renderQuestion();
+}
+
+// ─── STATEMENT BUILDER ───
+function generateStatement() {
+  const brand = document.getElementById('b-brand').value.trim() || 'Our brand';
+  const segment = document.getElementById('b-segment').value.trim() || '[target segment]';
+  const product = document.getElementById('b-product').value.trim() || '[product or service]';
+  const distinction = document.getElementById('b-distinction').value.trim() || '[points of distinction]';
+  const out = document.getElementById('builder-output');
+  const res = document.getElementById('builder-result');
+  res.innerHTML = `<span style="color:var(--green);font-weight:600">${brand}</span> is positioned towards <span style="color:var(--green);font-style:italic">${segment}</span> and offers a <span style="color:var(--green);font-style:italic">${product}</span> that is superior in terms of <span style="color:var(--green);font-style:italic">${distinction}</span>.`;
+  out.style.display = 'block';
+}
+
+// ─── INIT ───
+renderQuestion();
+</script>
+</body>
+</html>

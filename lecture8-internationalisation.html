@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 8: Brand Internationalisation Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* Adapt cards */
+.adapt-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:680px){.adapt-grid{grid-template-columns:1fr}}
+.adapt-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+.adapt-card .adapt-num{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:700;color:var(--green);opacity:.4;line-height:1;margin-bottom:8px}
+.adapt-card h4{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
+.adapt-card p{font-size:13.5px;color:var(--ink3);line-height:1.65;margin:0}
+
+.assignment-box{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px;margin:44px 0}
+.assignment-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.assignment-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#F5F2EB}
+.assignment-box .sec-text{color:rgba(245,242,235,.8)}
+.assignment-box .sec-text-zh{color:rgba(245,242,235,.6)}
+
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin:32px 0;display:flex;gap:14px;align-items:flex-start}
+.reading-icon{background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.reading-box p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+
+/* ── PESTEL EXPLORER ── */
+.pestel-case-banner{background:#1A1714;border-radius:var(--r);padding:18px 22px;margin:24px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pestel-case-logo{font-size:28px;flex-shrink:0}
+.pestel-case-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#F5F2EB}
+.pestel-case-sub{font-size:11.5px;color:rgba(245,242,235,.45);font-family:'DM Sans',sans-serif;margin-top:2px}
+.pestel-case-badge{margin-left:auto;background:rgba(74,138,40,.25);color:#7EC855;border:1px solid rgba(74,138,40,.4);font-size:10.5px;font-family:'DM Sans',sans-serif;font-weight:600;padding:4px 12px;border-radius:12px;white-space:nowrap;letter-spacing:.04em}
+
+.pestel-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:24px 0 0}
+@media(max-width:580px){.pestel-grid{grid-template-columns:repeat(3,1fr)}}
+.pestel-tile{border-radius:var(--r);padding:18px 8px 14px;text-align:center;cursor:pointer;transition:all .18s;border:2px solid transparent;background:var(--card);user-select:none}
+.pestel-tile:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(26,23,20,.08)}
+.pt-letter{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;line-height:1;display:block;margin-bottom:5px}
+.pt-name{font-size:9px;font-family:'DM Sans',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--ink3);display:block}
+/* Per-letter colours */
+.pestel-tile[data-p="P"]{border-color:rgba(42,95,168,.18)}.pestel-tile[data-p="P"] .pt-letter{color:#2A5FA8}
+.pestel-tile[data-p="E1"]{border-color:rgba(74,138,40,.18)}.pestel-tile[data-p="E1"] .pt-letter{color:#4A8A28}
+.pestel-tile[data-p="S"]{border-color:rgba(200,122,16,.18)}.pestel-tile[data-p="S"] .pt-letter{color:#C87A10}
+.pestel-tile[data-p="T"]{border-color:rgba(123,79,168,.18)}.pestel-tile[data-p="T"] .pt-letter{color:#7B4FA8}
+.pestel-tile[data-p="E2"]{border-color:rgba(26,138,122,.18)}.pestel-tile[data-p="E2"] .pt-letter{color:#1A8A7A}
+.pestel-tile[data-p="L"]{border-color:rgba(200,64,32,.18)}.pestel-tile[data-p="L"] .pt-letter{color:#C84020}
+/* Active states */
+.pestel-tile.active[data-p="P"]{background:#2A5FA8;border-color:#2A5FA8}
+.pestel-tile.active[data-p="E1"]{background:#4A8A28;border-color:#4A8A28}
+.pestel-tile.active[data-p="S"]{background:#C87A10;border-color:#C87A10}
+.pestel-tile.active[data-p="T"]{background:#7B4FA8;border-color:#7B4FA8}
+.pestel-tile.active[data-p="E2"]{background:#1A8A7A;border-color:#1A8A7A}
+.pestel-tile.active[data-p="L"]{background:#C84020;border-color:#C84020}
+.pestel-tile.active .pt-letter,.pestel-tile.active .pt-name{color:#fff}
+
+/* Detail panel */
+.pestel-detail{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;margin-top:12px;min-height:140px;transition:opacity .15s}
+.pestel-detail-hdr{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.pestel-detail-badge{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;padding:6px 16px;border-radius:8px;line-height:1;flex-shrink:0}
+.pestel-detail-dim{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.pestel-detail-sub{font-size:11px;color:var(--ink3);font-family:'DM Sans',sans-serif;margin-top:2px}
+.pestel-pts{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.pestel-pts li{display:flex;gap:10px;font-size:14px;color:var(--ink2);line-height:1.7}
+.pestel-pts li::before{content:'→';font-weight:700;flex-shrink:0;margin-top:1px}
+.pestel-pts-zh{list-style:none;padding:0;margin:10px 0 0;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.pestel-pts-zh li{display:flex;gap:10px;font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);line-height:1.85}
+.pestel-pts-zh li::before{content:'→';font-weight:700;flex-shrink:0;color:var(--ink3);margin-top:1px}
+.pestel-placeholder{text-align:center;color:var(--ink3);font-size:14px;padding:36px 0;font-style:italic;font-family:'DM Sans',sans-serif}
+
+/* Expansion slider scrubber thumb */
+#exp-scrubber::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#4A8A28;border:3px solid #fff;box-shadow:0 1px 6px rgba(74,138,40,.4);cursor:pointer;transition:transform .1s}
+#exp-scrubber::-webkit-slider-thumb:hover{transform:scale(1.15)}
+#exp-scrubber::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#4A8A28;border:3px solid #fff;cursor:pointer}
+/* Ningbo pulse */
+@keyframes expPulse{0%{r:10;opacity:.6}100%{r:28;opacity:0}}
+</style>
+</head>
+<body class="en">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Lecture 8</div>
+    </div>
+    <h1 class="en-only">Brand Internationalisation Strategies</h1>
+    <h1 class="zh-only">品牌国际化战略</h1>
+    <div class="hero-zh en-only">品牌国际化战略</div>
+    <div class="toc-pills">
+      <a href="#s-why" class="toc-pill en-only">Why Go International</a>
+      <a href="#s-why" class="toc-pill zh-only">为何国际化</a>
+      <a href="#s-expansion" class="toc-pill en-only">Expansion Stages</a>
+      <a href="#s-expansion" class="toc-pill zh-only">扩张阶段</a>
+      <a href="#s-pestel" class="toc-pill en-only">PESTEL Analysis</a>
+      <a href="#s-pestel" class="toc-pill zh-only">PESTEL分析</a>
+      <a href="#s-counterfeits" class="toc-pill en-only">Counterfeits</a>
+      <a href="#s-counterfeits" class="toc-pill zh-only">仿冒品</a>
+      <a href="#s-standardise" class="toc-pill en-only">Standardise or Adapt</a>
+      <a href="#s-standardise" class="toc-pill zh-only">标准化或适应</a>
+      <a href="#s-adaptation" class="toc-pill en-only">Three Adaptation Areas</a>
+      <a href="#s-adaptation" class="toc-pill zh-only">三个适应领域</a>
+      <a href="#s-assignment" class="toc-pill en-only">Assignment 8</a>
+      <a href="#s-assignment" class="toc-pill zh-only">作业 8</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- S1: Why Go International -->
+  <div class="section" id="s-why">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">Why Go International?</h2>
+    <h2 class="sec-title zh-only">为何国际化？</h2>
+
+    <div class="sec-text en-only">
+      <p>In the digital era, going international is no longer optional for growing brands — it often happens before companies plan for it. Orders arrive from foreign markets via e-commerce, and brands find themselves with international audiences before they have an international strategy.</p>
+      <p>Once foreign sales account for a significant share of revenues, deliberate brand management becomes essential. Beyond revenue growth, internationalisation involves complex strategic challenges: How do we protect our brand in new markets? Should we standardise our approach or adapt to local preferences? How do we navigate cultural, legal, and competitive differences?</p>
+      <p>The overarching tension is between the efficiency of standardisation (one consistent brand globally) and the effectiveness of localisation (a brand adapted to resonate with local consumers). Neither extreme works for most brands — most effective strategies are adaptive hybrids.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>在数字时代，国际化对于成长中的品牌来说不再是可选项——它往往在企业计划之前就已发生。通过电子商务，来自海外市场的订单不期而至，品牌在制定国际化战略之前就已拥有了国际受众。</p>
+      <p>一旦海外销售占收入的重要份额，有意识的品牌管理就变得至关重要。除了收入增长，国际化还涉及复杂的战略挑战：我们如何在新市场保护我们的品牌？我们应该标准化我们的方式还是适应当地偏好？我们如何应对文化、法律和竞争差异？</p>
+      <p>首要张力在于标准化的效率（全球一致的品牌）与本地化的有效性（适应与当地消费者产生共鸣的品牌）之间。对于大多数品牌来说，两个极端都行不通——最有效的战略是自适应混合策略。</p>
+    </div>
+
+    <div class="callout">
+      <div class="en-only"><strong>PESTLE Analysis:</strong> Political, Economic, Social, Technological, Legal, Environmental — the macro-environmental factors a brand must assess before entering any new market.</div>
+      <div class="callout-zh zh-only"><strong>PESTLE分析：</strong>政治、经济、社会、技术、法律、环境——品牌进入任何新市场前必须评估的宏观环境因素。</div>
+    </div>
+  </div>
+
+  <!-- S2: Expansion Stages -->
+  <div class="section" id="s-expansion">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">From Local to Global</h2>
+    <h2 class="sec-title zh-only">从本土到全球</h2>
+
+    <div class="sec-text en-only">
+      <p>Internationalisation rarely happens in one leap. Brands typically expand in concentric stages — first to nearby markets with similar languages or legal systems, then to culturally adjacent regions, and finally to distant global markets. Each expansion stage multiplies complexity: more languages, more regulations, more competitors, more cultural distance from the brand's origin.</p>
+      <p>The slider below traces one hypothetical expansion path for a brand headquartered in <strong>Ningbo, China</strong> — a major manufacturing and export hub — showing how geographic reach, market complexity, and brand adaptation requirements change at each stage.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>国际化很少在一步内完成。品牌通常以同心圆的阶段扩张——首先进入语言或法律体系相似的邻近市场，然后是文化相近的地区，最后才是遥远的全球市场。每个扩张阶段都会倍增复杂性：更多语言、更多法规、更多竞争对手、与品牌起源地更大的文化距离。</p>
+      <p>下方的滑块追踪了一个总部位于<strong>中国宁波</strong>的品牌（主要制造业和出口枢纽）的假设扩张路径，展示地理覆盖、市场复杂性和品牌适应要求如何在每个阶段发生变化。</p>
+    </div>
+
+    <!-- Expansion Stage Slider -->
+    <div id="exp-wrap" style="margin:28px 0">
+      <!-- Map area -->
+      <div id="exp-map-outer" style="position:relative;border-radius:var(--r);overflow:hidden;background:#0f1a26;height:400px;margin-bottom:0">
+        <svg id="exp-map-svg" viewBox="0 0 860 400" style="width:100%;height:100%;display:block">
+
+          <!-- Background -->
+          <rect width="860" height="400" fill="#0f1a26"/>
+
+          <!-- Subtle static grid rings -->
+          <circle cx="430" cy="200" r="65"  fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+          <circle cx="430" cy="200" r="130" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+          <circle cx="430" cy="200" r="200" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+          <circle cx="430" cy="200" r="275" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+
+          <!-- Reach fill -->
+          <circle id="exp-fill" cx="430" cy="200" r="0" fill="rgba(74,138,40,.07)" style="transition:r .5s ease"/>
+
+          <!-- Animated dashed rings -->
+          <circle id="exp-ring-1" cx="430" cy="200" r="0" fill="none" stroke="#4A8A28" stroke-width="1.5" stroke-dasharray="6,4" opacity=".7" style="transition:r .5s ease"/>
+          <circle id="exp-ring-2" cx="430" cy="200" r="0" fill="none" stroke="#4A8A28" stroke-width="1.5" stroke-dasharray="6,4" opacity=".5" style="transition:r .5s ease"/>
+          <circle id="exp-ring-3" cx="430" cy="200" r="0" fill="none" stroke="#4A8A28" stroke-width="1.5" stroke-dasharray="6,4" opacity=".35" style="transition:r .5s ease"/>
+          <circle id="exp-ring-4" cx="430" cy="200" r="0" fill="none" stroke="#4A8A28" stroke-width="1.5" stroke-dasharray="6,4" opacity=".22" style="transition:r .5s ease"/>
+
+          <!-- Ring zone labels (right-side, at each ring's equator) -->
+          <text class="exp-ring-lbl" data-stage="1" x="499" y="196" font-size="8.5" fill="rgba(74,138,40,.0)" font-family="DM Sans,sans-serif" text-anchor="start" style="transition:fill .4s">China</text>
+          <text class="exp-ring-lbl" data-stage="2" x="564" y="196" font-size="8.5" fill="rgba(74,138,40,.0)" font-family="DM Sans,sans-serif" text-anchor="start" style="transition:fill .4s">East Asia</text>
+          <text class="exp-ring-lbl" data-stage="3" x="634" y="196" font-size="8.5" fill="rgba(74,138,40,.0)" font-family="DM Sans,sans-serif" text-anchor="start" style="transition:fill .4s">APAC</text>
+          <text class="exp-ring-lbl" data-stage="4" x="709" y="196" font-size="8.5" fill="rgba(74,138,40,.0)" font-family="DM Sans,sans-serif" text-anchor="start" style="transition:fill .4s">Global</text>
+
+          <!-- Cities by stage, each in a <g> for easy show/hide -->
+
+          <!-- Stage 1: China domestic (r ≈ 65) -->
+          <g data-stage="1" style="opacity:0;transition:opacity .5s">
+            <circle cx="400" cy="136" r="2.5" fill="#7EC855"/>
+            <text x="406" y="140" font-size="9.5" fill="rgba(245,242,235,.8)" font-family="DM Sans,sans-serif">Beijing</text>
+            <circle cx="488" cy="162" r="2.5" fill="#7EC855"/>
+            <text x="494" y="166" font-size="9.5" fill="rgba(245,242,235,.8)" font-family="DM Sans,sans-serif">Shanghai</text>
+            <circle cx="393" cy="256" r="2.5" fill="#7EC855"/>
+            <text x="399" y="260" font-size="9.5" fill="rgba(245,242,235,.8)" font-family="DM Sans,sans-serif">Shenzhen</text>
+          </g>
+
+          <!-- Stage 2: East Asia (r ≈ 120–135) -->
+          <g data-stage="2" style="opacity:0;transition:opacity .5s">
+            <circle cx="476" cy="78" r="2.5" fill="#7EC855"/>
+            <text x="482" y="82" font-size="9.5" fill="rgba(245,242,235,.75)" font-family="DM Sans,sans-serif">Seoul</text>
+            <circle cx="549" cy="130" r="2.5" fill="#7EC855"/>
+            <text x="555" y="134" font-size="9.5" fill="rgba(245,242,235,.75)" font-family="DM Sans,sans-serif">Tokyo</text>
+            <circle cx="551" cy="192" r="2.5" fill="#7EC855"/>
+            <text x="557" y="196" font-size="9.5" fill="rgba(245,242,235,.75)" font-family="DM Sans,sans-serif">Taipei</text>
+            <circle cx="506" cy="296" r="2.5" fill="#7EC855"/>
+            <text x="512" y="300" font-size="9.5" fill="rgba(245,242,235,.75)" font-family="DM Sans,sans-serif">Hong Kong</text>
+            <circle cx="461" cy="328" r="2.5" fill="#7EC855"/>
+            <text x="467" y="332" font-size="9.5" fill="rgba(245,242,235,.75)" font-family="DM Sans,sans-serif">Singapore</text>
+          </g>
+
+          <!-- Stage 3: APAC + Middle East (r ≈ 180–205) -->
+          <g data-stage="3" style="opacity:0;transition:opacity .5s">
+            <circle cx="601" cy="312" r="2.5" fill="#7EC855"/>
+            <text x="607" y="316" font-size="9.5" fill="rgba(245,242,235,.7)" font-family="DM Sans,sans-serif">Sydney</text>
+            <circle cx="520" cy="368" r="2.5" fill="#7EC855"/>
+            <text x="526" y="372" font-size="9.5" fill="rgba(245,242,235,.7)" font-family="DM Sans,sans-serif">Bangkok</text>
+            <circle cx="249" cy="198" r="2.5" fill="#7EC855"/>
+            <text x="255" y="202" font-size="9.5" fill="rgba(245,242,235,.7)" font-family="DM Sans,sans-serif">Dubai</text>
+            <circle cx="256" cy="252" r="2.5" fill="#7EC855"/>
+            <text x="262" y="256" font-size="9.5" fill="rgba(245,242,235,.7)" font-family="DM Sans,sans-serif">Mumbai</text>
+          </g>
+
+          <!-- Stage 4: Europe + Americas (r ≈ 235–275) -->
+          <g data-stage="4" style="opacity:0;transition:opacity .5s">
+            <circle cx="212" cy="107" r="3" fill="#FFD700"/>
+            <text x="218" y="111" font-size="9.5" fill="rgba(255,215,0,.9)" font-family="DM Sans,sans-serif" font-weight="600">Berlin</text>
+            <circle cx="183" cy="136" r="2.5" fill="#7EC855"/>
+            <text x="189" y="140" font-size="9.5" fill="rgba(245,242,235,.65)" font-family="DM Sans,sans-serif">London</text>
+            <circle cx="192" cy="160" r="2.5" fill="#7EC855"/>
+            <text x="198" y="164" font-size="9.5" fill="rgba(245,242,235,.65)" font-family="DM Sans,sans-serif">Paris</text>
+            <circle cx="155" cy="200" r="2.5" fill="#7EC855"/>
+            <text x="161" y="204" font-size="9.5" fill="rgba(245,242,235,.65)" font-family="DM Sans,sans-serif">New York</text>
+            <circle cx="178" cy="332" r="2.5" fill="#7EC855"/>
+            <text x="184" y="336" font-size="9.5" fill="rgba(245,242,235,.65)" font-family="DM Sans,sans-serif">São Paulo</text>
+          </g>
+
+          <!-- Ningbo center (always visible) -->
+          <circle cx="430" cy="200" r="18" fill="rgba(74,138,40,.1)"/>
+          <circle cx="430" cy="200" r="18" fill="none" stroke="rgba(74,138,40,.18)" stroke-width="1"/>
+          <circle id="exp-pulse" cx="430" cy="200" r="10" fill="none" stroke="rgba(74,138,40,.6)" stroke-width="1.5" style="animation:expPulse 2.2s ease-out infinite"/>
+          <circle cx="430" cy="200" r="5.5" fill="#4A8A28"/>
+          <text x="439" y="195" font-size="9" fill="rgba(245,242,235,.9)" font-family="DM Sans,sans-serif" font-weight="700">宁波</text>
+          <text x="439" y="207" font-size="8.5" fill="rgba(245,242,235,.5)" font-family="DM Sans,sans-serif">Ningbo</text>
+        </svg>
+
+        <!-- Stage overlay label -->
+        <div id="exp-stage-label" style="position:absolute;top:12px;left:16px;background:rgba(26,23,20,.75);border-radius:8px;padding:8px 14px;backdrop-filter:blur(4px)">
+          <div id="exp-stage-name" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#F5F2EB"></div>
+          <div id="exp-stage-sub" style="font-size:11px;color:rgba(245,242,235,.5);font-family:'DM Sans',sans-serif;margin-top:2px"></div>
+        </div>
+      </div>
+
+      <!-- Scrubber -->
+      <div style="padding:0 8px;margin-top:16px">
+        <input type="range" min="0" max="3" step="1" value="0" id="exp-scrubber"
+          style="width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--bg3);outline:none;cursor:pointer"
+          oninput="expScrub(this.value)">
+        <div style="display:flex;justify-content:space-between;margin-top:8px">
+          <span class="en-only" style="font-size:10px;color:var(--ink3);font-family:'DM Sans',sans-serif">Local</span>
+          <span class="zh-only" style="font-size:10px;color:var(--ink3);font-family:'Noto Serif SC',serif">本土</span>
+          <span class="en-only" style="font-size:10px;color:var(--ink3);font-family:'DM Sans',sans-serif">Regional</span>
+          <span class="zh-only" style="font-size:10px;color:var(--ink3);font-family:'Noto Serif SC',serif">区域</span>
+          <span class="en-only" style="font-size:10px;color:var(--ink3);font-family:'DM Sans',sans-serif">Multi-regional</span>
+          <span class="zh-only" style="font-size:10px;color:var(--ink3);font-family:'Noto Serif SC',serif">多区域</span>
+          <span class="en-only" style="font-size:10px;color:var(--ink3);font-family:'DM Sans',sans-serif">Global</span>
+          <span class="zh-only" style="font-size:10px;color:var(--ink3);font-family:'Noto Serif SC',serif">全球</span>
+        </div>
+      </div>
+
+      <!-- Stage detail card -->
+      <div id="exp-detail" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- S3: PESTEL Analysis -->
+  <div class="section" id="s-pestel">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">PESTEL Analysis</h2>
+    <h2 class="sec-title zh-only">PESTEL分析</h2>
+
+    <div class="sec-text en-only">
+      <p>Before entering a new market, a brand must map the macro-environmental forces that will shape its opportunity. PESTEL analysis structures this scan across six dimensions — Political, Economic, Social, Technological, Environmental, Legal — turning an overwhelming complexity into a manageable strategic framework.</p>
+      <p>The case study below applies a full PESTEL to a scenario that is strategically plausible but not yet real: <strong>Xiaomi Car (小米汽车) entering the German market</strong>. Xiaomi launched its SU7 electric sedan in China in 2024 but has not entered Europe. Germany — Europe's largest car market and home to BMW, Mercedes-Benz, and Volkswagen — represents the ultimate test for any foreign automotive brand.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>在进入新市场之前，品牌必须梳理将影响其机会的宏观环境力量。PESTEL分析将这种扫描结构化为六个维度——政治、经济、社会、技术、环境、法律——将压倒性的复杂性转化为可管理的战略框架。</p>
+      <p>下方的案例研究将完整的PESTEL应用于一个战略上可行但尚未实现的场景：<strong>小米汽车进入德国市场</strong>。小米于2024年在中国推出SU7电动轿车，但尚未进入欧洲。德国——欧洲最大汽车市场，宝马、奔驰和大众的故乡——对任何外国汽车品牌来说都是终极考验。</p>
+    </div>
+
+    <!-- Case banner -->
+    <div class="pestel-case-banner">
+      <div class="pestel-case-logo">🚗</div>
+      <div>
+        <div class="pestel-case-title en-only">Xiaomi Car (小米汽车) → German Market</div>
+        <div class="pestel-case-title zh-only">小米汽车 → 德国市场</div>
+        <div class="pestel-case-sub en-only">SU7 Electric Sedan · Hypothetical European Market Entry · 2025–2026</div>
+        <div class="pestel-case-sub zh-only">SU7电动轿车 · 假设性欧洲市场进入 · 2025–2026</div>
+      </div>
+      <div class="pestel-case-badge en-only">Not yet in Germany</div>
+      <div class="pestel-case-badge zh-only">尚未进入德国</div>
+    </div>
+
+    <!-- PESTEL tiles -->
+    <div class="pestel-grid">
+      <div class="pestel-tile" data-p="P" onclick="pestelSelect('P')">
+        <span class="pt-letter">P</span>
+        <span class="pt-name en-only">Political</span>
+        <span class="pt-name zh-only">政治</span>
+      </div>
+      <div class="pestel-tile" data-p="E1" onclick="pestelSelect('E1')">
+        <span class="pt-letter">E</span>
+        <span class="pt-name en-only">Economic</span>
+        <span class="pt-name zh-only">经济</span>
+      </div>
+      <div class="pestel-tile" data-p="S" onclick="pestelSelect('S')">
+        <span class="pt-letter">S</span>
+        <span class="pt-name en-only">Social</span>
+        <span class="pt-name zh-only">社会</span>
+      </div>
+      <div class="pestel-tile" data-p="T" onclick="pestelSelect('T')">
+        <span class="pt-letter">T</span>
+        <span class="pt-name en-only">Technological</span>
+        <span class="pt-name zh-only">技术</span>
+      </div>
+      <div class="pestel-tile" data-p="E2" onclick="pestelSelect('E2')">
+        <span class="pt-letter">E</span>
+        <span class="pt-name en-only">Environmental</span>
+        <span class="pt-name zh-only">环境</span>
+      </div>
+      <div class="pestel-tile" data-p="L" onclick="pestelSelect('L')">
+        <span class="pt-letter">L</span>
+        <span class="pt-name en-only">Legal</span>
+        <span class="pt-name zh-only">法律</span>
+      </div>
+    </div>
+
+    <div class="pestel-detail" id="pestel-detail">
+      <div class="pestel-placeholder en-only">← Select a dimension to explore the analysis</div>
+      <div class="pestel-placeholder zh-only">← 点击维度查看分析内容</div>
+    </div>
+  </div>
+
+  <!-- S4: Counterfeits -->
+  <div class="section" id="s-counterfeits">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">Counterfeits</h2>
+    <h2 class="sec-title zh-only">仿冒品</h2>
+
+    <div class="sec-text en-only">
+      <p>Global losses due to counterfeiting exceed $20 billion annually. Counterfeits — fake products designed to mislead consumers into believing they are authentic — operate at all levels of the economy and in virtually all product categories. They are not simply a nuisance; they erode brand equity, undermine quality control, and can cause physical harm (fake pharmaceuticals, fraudulent safety equipment).</p>
+      <p>Particularly in China, counterfeiting was historically systemic — brands such as Boy London found their products already being counterfeited before they officially entered the Chinese market.</p>
+      <p>Strategies to combat counterfeits: "Search &amp; Destroy" — hiring private investigation agencies to track down fakes. Technical encoding — unique micro-signatures in fabrics, materials, or packaging (e.g., Levi's micro-weave patterns). Legal action — though complex and slow in cross-border contexts. Digital authentication — QR codes, blockchain-based provenance tracking.</p>
+      <p>The best long-term protection is a brand that is so deeply associated with quality, craftsmanship, and authenticity that consumers can distinguish the real product from imitations — and are motivated to do so.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>全球每年因仿冒品造成的损失超过200亿美元。仿冒品——设计用来误导消费者相信其为正品的假冒产品——在经济的各个层面和几乎所有产品品类中运作。它们不仅仅是麻烦；它们侵蚀品牌资产、破坏质量控制，并可能造成人身伤害（假冒药品、欺诈性安全设备）。</p>
+      <p>特别是在中国，仿冒在历史上是系统性的——像Boy London这样的品牌发现其产品在正式进入中国市场之前就已经被仿冒。</p>
+      <p>打击仿冒品的策略："搜索与销毁"——雇用私人调查机构追踪假货。技术编码——织物、材料或包装中的独特微签名（如李维斯微织纹）。法律行动——尽管在跨境背景下复杂而缓慢。数字认证——二维码、基于区块链的溯源追踪。</p>
+      <p>最好的长期保护是一个与质量、工艺和真实性如此深度关联的品牌，使消费者能够区分真品与仿品——并有动力这样做。</p>
+    </div>
+  </div>
+
+  <!-- S5: Standardise or Adapt -->
+  <div class="section" id="s-standardise">
+    <div class="sec-label en-only">Section 5</div>
+    <div class="sec-label zh-only">第五节</div>
+    <h2 class="sec-title en-only">Standardise or Adapt?</h2>
+    <h2 class="sec-title zh-only">标准化还是适应？</h2>
+
+    <div class="sec-text en-only">
+      <p>The fundamental strategic question in internationalisation is whether to standardise brand elements across all markets or adapt them to local conditions.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>国际化中的基本战略问题是在所有市场标准化品牌要素还是适应当地条件。</p>
+    </div>
+
+    <!-- Case study cards -->
+    <div class="adapt-grid" style="grid-template-columns:1fr 1fr;margin:20px 0 28px">
+
+      <!-- Standardised -->
+      <div class="adapt-card" style="border-top:3px solid #2A5FA8;display:flex;flex-direction:column;gap:12px">
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2A5FA8;margin-bottom:6px">
+            <span class="en-only">Standardised Approach</span>
+            <span class="zh-only">标准化方法</span>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--ink);margin-bottom:4px">
+            <span class="en-only">📱 Apple — "Shot on iPhone"</span>
+            <span class="zh-only">📱 苹果 — "用iPhone拍摄"</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--ink3);margin-bottom:10px">
+            <span class="en-only">2015 → ongoing · 70+ countries · identical creative</span>
+            <span class="zh-only">2015年至今 · 70+国家 · 相同创意</span>
+          </div>
+          <p style="font-size:13.5px;color:var(--ink2);line-height:1.7;margin:0" class="en-only">The same user-generated photographs appear on billboards in Tokyo, New York, Berlin, and São Paulo — no translated tagline, no market-specific messaging. Only the photographer's home city changes. The creative concept, visual style, and brand promise are identical worldwide.</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink2);line-height:1.8;margin:0" class="zh-only">相同的用户拍摄照片出现在东京、纽约、柏林和圣保罗的广告牌上——无翻译标语，无特定市场信息。只有摄影师的所在城市不同。创意概念、视觉风格和品牌承诺在全球完全一致。</p>
+        </div>
+        <div style="margin-top:auto">
+          <div style="font-size:11.5px;color:var(--ink3);margin-bottom:6px" class="en-only">
+            ✓ Cost efficiency &nbsp;·&nbsp; ✓ Consistent global identity<br>✗ May miss local resonance
+          </div>
+          <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-bottom:6px" class="zh-only">
+            ✓ 成本效益 &nbsp;·&nbsp; ✓ 一致的全球身份<br>✗ 可能错过本地共鸣
+          </div>
+          <a href="https://www.apple.com/newsroom/2019/02/apple-highlights-best-photos-shot-on-iphone-around-the-world/" target="_blank" rel="noopener" style="display:inline-block;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;color:#2A5FA8;background:rgba(42,95,168,.08);border:1px solid rgba(42,95,168,.25);padding:5px 12px;border-radius:20px;text-decoration:none;transition:background .15s">
+            <span class="en-only">↗ Apple Newsroom</span>
+            <span class="zh-only">↗ 苹果新闻室</span>
+          </a>
+          <a href="https://thebrandhopper.com/2024/01/07/a-case-study-on-apples-shot-on-iphone-brand-campaign/" target="_blank" rel="noopener" style="display:inline-block;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;color:var(--ink3);background:var(--bg2);border:1px solid var(--border);padding:5px 12px;border-radius:20px;text-decoration:none;margin-left:6px;transition:background .15s">
+            <span class="en-only">↗ Case Study</span>
+            <span class="zh-only">↗ 案例分析</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Local Adaptation -->
+      <div class="adapt-card" style="border-top:3px solid var(--accent);display:flex;flex-direction:column;gap:12px">
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">
+            <span class="en-only">Local Adaptation Approach</span>
+            <span class="zh-only">本地适应方法</span>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--ink);margin-bottom:4px">
+            <span class="en-only">🍔 McDonald's India — McAloo Tikki</span>
+            <span class="zh-only">🍔 印度麦当劳 — 麦阿鲁提基</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--ink3);margin-bottom:10px">
+            <span class="en-only">1996 → present · India · full product reinvention</span>
+            <span class="zh-only">1996年至今 · 印度 · 全面产品再造</span>
+          </div>
+          <p style="font-size:13.5px;color:var(--ink2);line-height:1.7;margin:0" class="en-only">India's Hindu majority does not eat beef; roughly 40% of the population is vegetarian. McDonald's replaced its signature beef patties with spiced potato-and-pea patties, created a fully separate vegetarian menu, and reframed its value proposition around Indian taste preferences. The golden arches stayed — almost everything else changed.</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:12.5px;color:var(--ink2);line-height:1.8;margin:0" class="zh-only">印度印度教大多数人不吃牛肉；约40%的人口是素食者。麦当劳将其标志性牛肉饼换成了香料土豆豌豆饼，创建了完全独立的素食菜单，并围绕印度口味偏好重新定位其价值主张。金色拱门保留了——几乎其他一切都变了。</p>
+        </div>
+        <div style="margin-top:auto">
+          <div style="font-size:11.5px;color:var(--ink3);margin-bottom:6px" class="en-only">
+            ✓ High local relevance &nbsp;·&nbsp; ✓ Cultural fit<br>✗ Higher cost, fragmentation risk
+          </div>
+          <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-bottom:6px" class="zh-only">
+            ✓ 高度本地相关性 &nbsp;·&nbsp; ✓ 文化契合<br>✗ 成本更高，碎片化风险
+          </div>
+          <a href="https://www.mcdonaldsindia.com/trulyindianburger/" target="_blank" rel="noopener" style="display:inline-block;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;color:var(--accent);background:rgba(200,64,32,.08);border:1px solid rgba(200,64,32,.25);padding:5px 12px;border-radius:20px;text-decoration:none;transition:background .15s">
+            <span class="en-only">↗ McDonald's India</span>
+            <span class="zh-only">↗ 印度麦当劳官网</span>
+          </a>
+          <a href="https://mcdonaldsblog.in/2024/09/highly-favoured-highly-flavoured-thats-our-beloved-mcaloo-tikki-burger-for-you/" target="_blank" rel="noopener" style="display:inline-block;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;color:var(--ink3);background:var(--bg2);border:1px solid var(--border);padding:5px 12px;border-radius:20px;text-decoration:none;margin-left:6px;transition:background .15s">
+            <span class="en-only">↗ Brand Story</span>
+            <span class="zh-only">↗ 品牌故事</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-text en-only">
+      <p>In practice, the <strong>"glocal"</strong> approach dominates among successful international brands: standardise the brand core (identity, values, visual system) but adapt the execution (messaging, product variants, media channels, local references). McDonald's is the classic example: the yellow arches and "I'm lovin' it" are global; the menu varies dramatically by market (McArabia, McSpicy in Asia, Teriyaki Burger in Japan).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>在实践中，<strong>"全球本土化"</strong>方法在成功的国际品牌中占主导地位：标准化品牌核心（识别、价值观、视觉系统）但调整执行（信息、产品变体、媒体渠道、本地参考）。麦当劳是经典案例：黄色拱门和"我就喜欢"是全球性的；菜单因市场而大相径庭（麦阿拉伯、麦辣在亚洲、照烧汉堡在日本）。</p>
+    </div>
+  </div>
+
+  <!-- S6: Three Adaptation Areas -->
+  <div class="section" id="s-adaptation">
+    <div class="sec-label en-only">Section 6</div>
+    <div class="sec-label zh-only">第六节</div>
+    <h2 class="sec-title en-only">Three Adaptation Areas</h2>
+    <h2 class="sec-title zh-only">三个适应领域</h2>
+
+    <div class="sec-text en-only">
+      <p>When entering new markets, brands may need to adapt across three main areas. Famous name failures include "Nothing sucks like an Electrolux" (unfortunate American slang), "Gros Mec" for McDonald's Big Mac in France (meant "Big Pimp"), and Orange telecom's slogan in Northern Ireland (where "Orange" implied Protestant/loyalist associations). In China, Western brands create Mandarin transliterations that must be phonetically similar AND carry positive connotations: Coca-Cola → 可口可乐 (Kěkǒu Kělè = "delicious happiness").</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>进入新市场时，品牌可能需要在三个主要领域进行调整。著名的名称失败案例包括："Nothing sucks like an Electrolux"（不幸的美式俚语）、麦当劳Big Mac在法国称为"Gros Mec"（在法语俚语中意为"大皮条客"），以及橙色电信在北爱尔兰的口号（"橙色"暗示新教/保皇派联想）。在中国，西方品牌创建普通话音译，必须在音韵上相似并带有积极内涵：Coca-Cola → 可口可乐（Kěkǒu Kělè = "美味的幸福"）。</p>
+    </div>
+
+    <div class="adapt-grid">
+      <div class="adapt-card">
+        <div class="adapt-num">01</div>
+        <h4 class="en-only">Name &amp; Logo Adaptation</h4>
+        <h4 class="zh-only">名称与标志适应</h4>
+        <p class="en-only">The brand name and logo must be trademark-free and carry acceptable, ideally positive connotations in the local language and culture.</p>
+        <p class="zh-only">品牌名称和标志必须（商标上）可用，并在当地语言和文化中具有可接受的、理想上是积极的内涵。</p>
+      </div>
+      <div class="adapt-card">
+        <div class="adapt-num">02</div>
+        <h4 class="en-only">Product Adaptation</h4>
+        <h4 class="zh-only">产品适应</h4>
+        <p class="en-only">Local tastes, incomes, infrastructure, and regulations may force product changes. VW Terramont: a supersized SUV developed exclusively for China.</p>
+        <p class="zh-only">当地口味、收入、基础设施和法规可能迫使产品变更。大众途锐：一款专为中国开发的超大型SUV。</p>
+      </div>
+      <div class="adapt-card">
+        <div class="adapt-num">03</div>
+        <h4 class="en-only">Communication Adaptation</h4>
+        <h4 class="zh-only">传播适应</h4>
+        <p class="en-only">Language and cultural differences almost always require communication adaptation, even when the brand strategy is standardised.</p>
+        <p class="zh-only">语言和文化差异几乎总是需要传播适应，即使品牌战略是标准化的。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSIGNMENT -->
+  <div class="assignment-box" id="s-assignment">
+    <div class="assignment-badge">Assignment 8</div>
+    <h3 class="en-only">Analyse Your Brand's International Strategy</h3>
+    <h3 class="zh-only">分析你的品牌国际化战略</h3>
+    <div class="sec-text en-only">
+      <p>(1) Is your brand international? If so, in which markets is it active? If not, which markets would be logical next steps and why?</p>
+      <p>(2) Conduct a brief PESTLE analysis for one international market where your brand operates or could operate.</p>
+      <p>(3) Assess the brand's approach: Does it standardise or adapt its name, product, and communication in different markets? Give specific examples.</p>
+      <p>(4) Identify one cultural or linguistic adaptation challenge the brand has faced or could face (2–3 slides).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>（1）你的品牌是国际性的吗？如果是，它在哪些市场活跃？如果不是，哪些市场是合乎逻辑的下一步，为什么？</p>
+      <p>（2）对你的品牌运营或可能运营的一个国际市场进行简要的PESTLE分析。</p>
+      <p>（3）评估品牌的方法：它是否在不同市场标准化或调整其名称、产品和传播？举出具体例子。</p>
+      <p>（4）找出品牌已面对或可能面对的一个文化或语言适应挑战（2-3页幻灯片）。</p>
+    </div>
+  </div>
+
+  <!-- READING -->
+  <div class="reading-box">
+    <div class="reading-icon">Read</div>
+    <p>Johansson, J.K. &amp; Carlson, K.A. 2015, <em>Contemporary Brand Management</em>, Sage Publications, pp. 163–180 · De Pelsmacker, P. et al. 2013, <em>Marketing Communications</em>, Pearson, pp. 10–14</p>
+  </div>
+
+</div>
+
+<nav class="nav-bar">
+  <a href="lecture7-marketing-mix.html" class="nav-btn">← Lecture 7</a>
+  <span class="nav-info">LECTURE 8 · BRAND MANAGEMENT</span>
+  <a href="lecture9-brand-evolution.html" class="nav-btn">Lecture 9 →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang||(lang==='zh'&&b.textContent.trim()==='中文')));
+  if(typeof expScrub==='function') expScrub(document.getElementById('exp-scrubber').value);
+  if(typeof pestelCurrent!=='undefined' && pestelCurrent) pestelSelect(pestelCurrent);
+}
+
+// ── PESTEL Explorer ──
+const PESTEL_DATA = {
+  P: {
+    color:'#2A5FA8', letter:'P',
+    name:{en:'Political',zh:'政治'},
+    points:{
+      en:[
+        'EU imposed additional tariffs of <strong>17–38% on Chinese EVs</strong> in 2024 — Xiaomi falls under the ~21% "other" rate, on top of the standard 10% import duty, significantly raising landed cost.',
+        'The <strong>EU Foreign Subsidies Regulation</strong> may trigger an investigation into state support received by Xiaomi Automotive, adding regulatory uncertainty to any European launch.',
+        'Germany\'s automotive lobby (VDA) actively resists unregulated Chinese market access. Geopolitical EU–China tensions affect regulatory goodwill and political will to fast-track approvals.'
+      ],
+      zh:[
+        '欧盟2024年对中国电动车加征<strong>17–38%附加关税</strong>——小米适用约21%"其他"税率，叠加标准10%关税，大幅推高到岸成本。',
+        '<strong>欧盟《外国补贴条例》</strong>可能对小米汽车获得国家补贴展开调查，为欧洲市场发布增添监管不确定性。',
+        '德国汽车工业协会（VDA）积极抵制中国品牌无序进入市场。欧中地缘政治紧张影响监管氛围与审批推进的政治意愿。'
+      ]
+    }
+  },
+  E1: {
+    color:'#4A8A28', letter:'E',
+    name:{en:'Economic',zh:'经济'},
+    points:{
+      en:[
+        'Germany <strong>ended its EV purchase subsidy (Umweltbonus) abruptly in December 2023</strong>, removing a key consumer price incentive and making the market more price-sensitive at a higher absolute level.',
+        'Xiaomi SU7\'s base price in China (~€28,000) would rise to <strong>~€38,000+ after tariffs</strong>, placing it in direct competition with Tesla Model 3, VW ID.4, and BMW i3 — without the established trust premium.',
+        'Germany is <strong>Europe\'s largest car market</strong> (~2.8M new registrations in 2024) — the revenue opportunity is enormous, but so is competitive intensity from deeply rooted domestic brands.'
+      ],
+      zh:[
+        '德国<strong>于2023年12月突然终止电动车补贴（Umweltbonus）</strong>，消除了关键消费者价格激励，使市场在更高绝对价位上更加价格敏感。',
+        '小米SU7在中国的基础价格（约2.8万欧元）加征关税后将升至<strong>约3.8万欧元以上</strong>，与特斯拉Model 3、大众ID.4和宝马i3直接竞争，但缺乏既有的品牌信任溢价。',
+        '德国是<strong>欧洲最大汽车市场</strong>（2024年约280万辆新车注册）——收入机会巨大，但来自深根本土品牌的竞争强度同样极高。'
+      ]
+    }
+  },
+  S: {
+    color:'#C87A10', letter:'S',
+    name:{en:'Social',zh:'社会'},
+    points:{
+      en:[
+        'German consumers associate Chinese brands with <strong>affordable electronics, not safety-critical vehicles</strong> — a fundamental perception gap Xiaomi must actively bridge through brand strategy and Euro NCAP crash test results.',
+        'Xiaomi\'s <strong>strong recognition among Germans aged 18–35</strong> via smartphones and smart home products provides a consumer base open to a brand transfer — unlike, say, BYD, which has no prior German brand footprint.',
+        '<strong>Trade unions (IG Metall, 2.2M members)</strong> publicly oppose Chinese automotive expansion, creating sustained negative media framing risk and potential political pressure on dealerships and fleet buyers.'
+      ],
+      zh:[
+        '德国消费者将中国品牌与<strong>廉价电子产品而非安全关键型车辆</strong>联系在一起——这是小米必须通过品牌战略和欧洲NCAP碰撞测试结果积极弥合的根本性认知落差。',
+        '小米<strong>在18–35岁德国消费者中通过智能手机和智能家居产品建立的强劲认知度</strong>，为品牌迁移提供了基础——这一点优于毫无德国品牌足迹的比亚迪。',
+        '<strong>工会（IG Metall，220万成员）</strong>公开反对中国汽车扩张，造成持续的负面媒体框架风险，以及对经销商和车队采购方的潜在政治压力。'
+      ]
+    }
+  },
+  T: {
+    color:'#7B4FA8', letter:'T',
+    name:{en:'Technological',zh:'技术'},
+    points:{
+      en:[
+        'Xiaomi SU7\'s specs are genuinely competitive: <strong>800V ultra-fast charging, 50-inch HUD, LIDAR + camera fusion, and full HyperOS vehicle-phone-home ecosystem</strong> integration — technically on par with or ahead of German premium EVs.',
+        'EU <strong>Whole Vehicle Type Approval (WVTA)</strong> requires 12–18 months of certification testing covering crash safety, cybersecurity, and emissions — a significant time-to-market barrier before a single car can be sold.',
+        '<strong>GDPR and the EU Cyber Resilience Act</strong> mandate strict data localisation standards for connected vehicles; Xiaomi\'s platform must route all European user data through EU-based servers, requiring costly infrastructure adaptation.'
+      ],
+      zh:[
+        '小米SU7的规格真正具有竞争力：<strong>800V超快充电、50英寸抬头显示、激光雷达+摄像头融合，以及完整的HyperOS车机-手机-家居生态</strong>整合——技术上与德国高端电动车持平或领先。',
+        '欧盟<strong>整车型式认证（WVTA）</strong>需要12–18个月的认证测试，涵盖碰撞安全、网络安全和排放——在任何一辆车销售之前，这是重大的市场准入时间壁垒。',
+        '<strong>GDPR和欧盟《网络韧性法案》</strong>对联网车辆规定了严格的数据本地化标准；小米平台必须将所有欧洲用户数据路由至欧盟境内服务器，需要昂贵的基础设施改造。'
+      ]
+    }
+  },
+  E2: {
+    color:'#1A8A7A', letter:'E',
+    name:{en:'Environmental',zh:'环境'},
+    points:{
+      en:[
+        'Germany\'s 2045 climate neutrality target and the <strong>EU\'s 2035 ban on new ICE vehicles</strong> create a structural, long-term tailwind for any EV brand — Xiaomi\'s product is perfectly aligned with the direction of regulation.',
+        'The <strong>EU Battery Regulation (2023)</strong> requires full lifecycle carbon footprint disclosure and responsible raw material sourcing; Xiaomi\'s CATL battery supply chain faces scrutiny on cobalt sourcing and manufacturing emissions.',
+        'German consumers and B2B fleet buyers increasingly apply <strong>lifecycle thinking</strong> to procurement — Xiaomi must transparently communicate the full environmental impact from mining to manufacturing to end-of-life recycling.'
+      ],
+      zh:[
+        '德国2045年气候中和目标和<strong>欧盟2035年新燃油车禁售令</strong>为任何电动车品牌创造了结构性长期顺风——小米的产品与监管方向完全契合。',
+        '<strong>欧盟《电池法规》（2023年）</strong>要求完整的生命周期碳足迹披露和负责任的原材料采购；小米的宁德时代电池供应链在钴采购和制造排放方面面临审查。',
+        '德国消费者和B2B车队采购商越来越多地将<strong>全生命周期思维</strong>应用于采购决策——小米必须透明地沟通从采矿、制造到报废回收的完整环境影响。'
+      ]
+    }
+  },
+  L: {
+    color:'#C84020', letter:'L',
+    name:{en:'Legal',zh:'法律'},
+    points:{
+      en:[
+        'Xiaomi must obtain <strong>EU Whole Vehicle Type Approval (WVTA)</strong> — a comprehensive certification covering crashworthiness, cybersecurity standards, and emissions under UNECE regulations; no shortcuts are possible.',
+        '<strong>GDPR compliance</strong> is mandatory for all connected vehicle data collection and processing, with potential penalties of up to 4% of global annual turnover for violations — a significant financial exposure.',
+        '<strong>German product liability law (Produkthaftungsgesetz)</strong> is among Europe\'s strictest — extensive recall obligations, warranty requirements, and strict liability for defects make the legal cost of quality failures very high.'
+      ],
+      zh:[
+        '小米必须获得<strong>欧盟整车型式认证（WVTA）</strong>——这是依据联合国欧洲经济委员会法规，覆盖碰撞安全、网络安全标准和排放的全面认证；不存在捷径。',
+        '<strong>GDPR合规</strong>对所有联网车辆数据收集和处理均为强制要求，违规最高可处全球年营业额4%的罚款——这是重大的财务风险敞口。',
+        '<strong>德国《产品责任法》</strong>是欧洲最严格的法律之一——广泛的召回义务、保修要求和质量缺陷的严格责任，使质量失败的法律成本极高。'
+      ]
+    }
+  }
+};
+
+let pestelCurrent = null;
+function pestelSelect(key) {
+  pestelCurrent = key;
+  document.querySelectorAll('.pestel-tile').forEach(t => t.classList.toggle('active', t.dataset.p === key));
+  const d = PESTEL_DATA[key];
+  const isZh = document.body.classList.contains('zh');
+  const ptsEn = d.points.en.map(p=>`<li>${p}</li>`).join('');
+  const ptsZh = d.points.zh.map(p=>`<li>${p}</li>`).join('');
+  document.getElementById('pestel-detail').innerHTML = `
+    <div class="pestel-detail-hdr">
+      <div class="pestel-detail-badge" style="background:${d.color}">${d.letter}</div>
+      <div>
+        <div class="pestel-detail-dim en-only" style="color:${d.color}${isZh?';display:none':''}">${d.name.en}</div>
+        <div class="pestel-detail-dim zh-only" style="color:${d.color};font-family:'Noto Serif SC',serif${!isZh?';display:none':''}">${d.name.zh}</div>
+        <div class="pestel-detail-sub en-only"${isZh?' style="display:none"':''}>Xiaomi Car → German Market</div>
+        <div class="pestel-detail-sub zh-only"${!isZh?' style="display:none"':''}>小米汽车 → 德国市场</div>
+      </div>
+    </div>
+    <ul class="pestel-pts en-only"${isZh?' style="display:none"':''}>${ptsEn}</ul>
+    <ul class="pestel-pts-zh zh-only"${!isZh?' style="display:none"':''}>${ptsZh}</ul>
+  `;
+}
+
+// ── Expansion Stage Slider ──
+const EXP_STAGES = [
+  {
+    radius: 55, citiesFrom: 0,
+    name:{en:'Local — Domestic China',zh:'本土 — 中国国内市场'},
+    sub:{en:'Home market only · Brand origin established',zh:'仅本土市场 · 建立品牌起源'},
+    detail:{
+      en:'The brand is fully domestic. All operations, marketing, and distribution are within China. The brand identity is formed in the home market culture — language, aesthetics, consumer expectations. Brand management is relatively simple: one market, one language, one regulatory environment. Xiaomi Car\'s SU7 launched in China in March 2024, initially in major cities (Beijing, Shanghai, Guangzhou).',
+      zh:'品牌完全立足国内。所有运营、营销和分销均在中国境内进行。品牌识别在母国市场文化中形成——语言、审美、消费者预期。品牌管理相对简单：一个市场、一种语言、一个监管环境。小米SU7于2024年3月在中国发布，最初在北京、上海、广州等主要城市上市。'
+    }
+  },
+  {
+    radius: 130, citiesFrom: 0,
+    name:{en:'Regional — East Asia',zh:'区域 — 东亚'},
+    sub:{en:'Culturally adjacent markets · Limited adaptation',zh:'文化相近市场 · 有限适应'},
+    detail:{
+      en:'The first international expansion targets culturally and geographically close markets — Japan, South Korea, Hong Kong, Singapore, Taiwan. These markets share Confucian value systems, high smartphone penetration, and familiarity with Chinese tech brands. Brand adaptation is limited but not zero: Japanese consumers expect exceptional build quality and after-sales service; Singaporean regulations differ from mainland China. Xiaomi\'s consumer electronics are already strong in this region, providing brand recognition transfer.',
+      zh:'首次国际扩张瞄准文化和地理上接近的市场——日本、韩国、香港、新加坡、台湾。这些市场共享儒家价值体系、高智能手机渗透率和对中国科技品牌的熟悉度。品牌适应有限但非零：日本消费者期望卓越的制造质量和售后服务；新加坡法规与中国大陆不同。小米消费电子在该地区已强势存在，为品牌认知迁移提供了基础。'
+    }
+  },
+  {
+    radius: 220, citiesFrom: 3,
+    name:{en:'Multi-regional — APAC + Middle East',zh:'多区域 — 亚太及中东'},
+    sub:{en:'Diverse regulations · Significant adaptation required',zh:'法规多样化 · 需要显著适应'},
+    detail:{
+      en:'Expansion to Australia, South-East Asia, and the Gulf states introduces high regulatory diversity and cultural distance. Australia has strict vehicle standards (ADR compliance); Gulf markets require right-hand drive variants or specific Arabic interfaces. Distribution infrastructure must be built from scratch: dealership networks, service centres, parts logistics. The brand must navigate significantly different consumer expectations — from budget-sensitive Indonesian buyers to status-driven Gulf premium consumers. This stage tests whether brand management can scale across genuinely different contexts.',
+      zh:'扩张至澳大利亚、东南亚和海湾国家带来了高度的监管多样性和文化距离。澳大利亚有严格的车辆标准（ADR合规）；海湾市场需要右舵版本或特定阿拉伯语界面。分销基础设施必须从头建立：经销商网络、服务中心、零部件物流。品牌必须应对迥异的消费者期望——从价格敏感的印尼买家到注重地位的海湾高端消费者。这一阶段考验品牌管理能否在真正不同的背景下规模化。'
+    }
+  },
+  {
+    radius: 340, citiesFrom: 5,
+    name:{en:'Global — Europe + Americas',zh:'全球 — 欧洲与美洲'},
+    sub:{en:'Maximum complexity · Full PESTEL assessment required',zh:'最高复杂度 · 需要完整PESTEL评估'},
+    detail:{
+      en:'Entering Europe and North America is the highest-complexity stage. Germany — home of BMW, Mercedes-Benz, and Volkswagen — is the most demanding automotive market in the world. Brand perception gaps are largest, regulatory requirements (WVTA, GDPR, emissions standards) are most stringent, and competitive intensity is highest. The full PESTEL analysis in Section 3 maps exactly these forces for Xiaomi Car entering Germany. This stage requires the most investment, the longest lead time, and the deepest brand adaptation — but success here signals global brand credibility.',
+      zh:'进入欧洲和北美是复杂度最高的阶段。德国——宝马、奔驰和大众的故乡——是全球最苛刻的汽车市场。品牌认知差距最大，监管要求（WVTA、GDPR、排放标准）最严格，竞争强度最高。第三节的完整PESTEL分析正是梳理了小米汽车进入德国时面临的这些力量。这一阶段需要最大投入、最长准备时间和最深度的品牌适应——但在此取得成功将标志着全球品牌公信力。'
+    }
+  }
+];
+
+function expScrub(val){
+  const v = parseInt(val);
+  const stage = EXP_STAGES[v];
+  const isZh = document.body.classList.contains('zh');
+  // Scrubber fill track
+  document.getElementById('exp-scrubber').style.background =
+    `linear-gradient(to right,#4A8A28 0%,#4A8A28 ${v/3*100}%,var(--bg3) ${v/3*100}%,var(--bg3) 100%)`;
+  // Ring radii (matching SVG viewBox 860×400, center 430,200)
+  const radii = [65, 130, 200, 275];
+  for(let i=0;i<4;i++){
+    document.getElementById('exp-ring-'+(i+1)).setAttribute('r', i<=v ? radii[i] : 0);
+  }
+  document.getElementById('exp-fill').setAttribute('r', radii[v]);
+  // City groups: stages 1..v+1 visible
+  document.querySelectorAll('#exp-map-svg [data-stage]').forEach(el=>{
+    const s = parseInt(el.getAttribute('data-stage'));
+    if(el.tagName === 'g' || el.nodeName === 'g'){
+      el.style.opacity = s <= v+1 ? 1 : 0;
+    } else {
+      // ring labels (text elements)
+      el.setAttribute('fill', s <= v+1 ? 'rgba(74,138,40,.55)' : 'rgba(74,138,40,.0)');
+    }
+  });
+  // Stage label overlay
+  document.getElementById('exp-stage-name').textContent = isZh ? stage.name.zh : stage.name.en;
+  document.getElementById('exp-stage-sub').textContent = isZh ? stage.sub.zh : stage.sub.en;
+  // Detail card
+  document.getElementById('exp-detail').innerHTML = `
+    <p class="en-only" style="font-size:14px;color:var(--ink2);line-height:1.8${isZh?';display:none':''}">${stage.detail.en}</p>
+    <p class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2);line-height:1.9${!isZh?';display:none':''}">${stage.detail.zh}</p>
+  `;
+}
+
+window.addEventListener('load', ()=>{
+  expScrub(0);
+  // Style the scrubber thumb
+  const s = document.getElementById('exp-scrubber');
+  if(s) s.style.setProperty('--thumb','#4A8A28');
+});
+</script>
+</body>
+</html>

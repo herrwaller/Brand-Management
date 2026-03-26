@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 6: Market &amp; Communication Conditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+/* HERO */
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+/* PAGE */
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* SECTION */
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+/* CALLOUT */
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}}
+.approach-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px}
+.approach-card h4{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.approach-card p{font-size:14.5px;color:var(--ink2);line-height:1.7;margin:0}
+
+/* ASSIGNMENT */
+.assignment-box{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px;margin:44px 0}
+.assignment-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.assignment-box h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#F5F2EB}
+.assignment-box .sec-text{color:rgba(245,242,235,.8)}
+.assignment-box .sec-text-zh{color:rgba(245,242,235,.6)}
+
+/* READING */
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin:32px 0;display:flex;gap:14px;align-items:flex-start}
+.reading-icon{background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.reading-box p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+
+/* NAV BAR */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+
+/* ── USP BUILDER ── */
+.usp-builder{margin:32px 0 8px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.usp-builder-header{background:#1A1714;padding:14px 22px;display:flex;align-items:center;gap:12px}
+.usp-builder-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#F5F2EB}
+.usp-builder-title-zh{font-family:'Noto Serif SC',serif;font-size:1rem;color:rgba(245,242,235,.55);margin-left:4px}
+.usp-builder-body{padding:22px}
+.usp-preset-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;align-items:center}
+.usp-preset-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-right:4px}
+.usp-preset-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12.5px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink2);transition:all .15s;white-space:nowrap}
+.usp-preset-btn:hover,.usp-preset-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+.usp-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:560px){.usp-fields{grid-template-columns:1fr}}
+.usp-field{display:flex;flex-direction:column;gap:6px}
+.usp-field.full{grid-column:1/-1}
+.usp-field label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.usp-field label span{font-weight:400;color:var(--ink3);text-transform:none;letter-spacing:0}
+.usp-input{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);width:100%;transition:border-color .15s;outline:none}
+.usp-input:focus{border-color:var(--green)}
+.usp-input::placeholder{color:var(--ink3)}
+.usp-chips-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.usp-chip{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:3px 10px;font-size:11.5px;color:var(--ink3);cursor:pointer;transition:all .12s;white-space:nowrap}
+.usp-chip:hover{background:rgba(74,138,40,.1);border-color:rgba(74,138,40,.3);color:var(--green)}
+.usp-enhanced-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.usp-enhanced-grid{grid-template-columns:1fr}}
+.usp-output{margin-top:20px;border-top:1px solid var(--border);padding-top:20px}
+.usp-output-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.usp-statement{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.75;color:var(--ink2);min-height:48px;font-style:italic}
+.usp-statement .usp-hl{color:var(--ink);font-weight:600;font-style:normal}
+.usp-statement .usp-hl-green{color:var(--green);font-weight:600;font-style:normal}
+.usp-statement-zh{font-family:'Noto Serif SC',serif;font-size:0.95rem;color:var(--ink3);line-height:1.9;margin-top:8px;min-height:32px}
+.usp-empty{color:var(--ink3);font-size:13.5px;font-style:normal;font-family:'DM Sans',sans-serif}
+.usp-reset-btn{background:none;border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink3);transition:all .15s;margin-top:16px}
+.usp-reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── OVERLOAD STATS ── */
+.overload-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+@media(max-width:580px){.overload-stats{grid-template-columns:1fr 1fr}}
+.ostat{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;text-align:center}
+.ostat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:6px}
+.ostat-label{font-size:12px;color:var(--ink3);line-height:1.4}
+.ostat-label-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);line-height:1.5;margin-top:4px}
+
+.channel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}
+@media(max-width:560px){.channel-grid{grid-template-columns:1fr}}
+.channel-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.ch-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.ch-name{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+.ch-stat{font-size:13px;color:var(--accent);font-weight:600;margin-bottom:3px}
+.ch-desc{font-size:12.5px;color:var(--ink3);line-height:1.5}
+.ch-desc-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px}
+
+.ad-format-bar{margin:28px 0}
+.ad-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.ad-label{width:160px;flex-shrink:0;font-size:13px;color:var(--ink2)}
+.ad-bar-wrap{flex:1;background:var(--bg3);border-radius:4px;height:22px;overflow:hidden;position:relative}
+.ad-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:600;color:#fff;transition:width .8s ease}
+.ad-val{font-size:12px;color:var(--ink3);width:40px;text-align:right;flex-shrink:0}
+
+/* ── MASLOW PYRAMID ── */
+.maslow-wrap{margin:32px 0}
+.maslow-instruction{font-size:13.5px;color:var(--ink3);margin-bottom:20px;padding:12px 16px;background:var(--bg2);border-radius:8px;border:1px solid var(--border)}
+.maslow-instruction-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-top:6px}
+.maslow-layout{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.maslow-pyramid{flex:1;min-width:280px}
+.maslow-level{display:flex;flex-direction:column;align-items:center;margin-bottom:4px;cursor:pointer;transition:transform .1s}
+.maslow-level:hover{transform:scale(1.01)}
+.maslow-bar{border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 12px;text-align:center;transition:all .2s;position:relative;border:2px solid transparent}
+.maslow-bar.hover-active{border-color:rgba(74,138,40,.5);box-shadow:0 2px 16px rgba(74,138,40,.2)}
+.maslow-bar.drop-target{border-color:var(--green)!important;box-shadow:0 0 0 3px rgba(74,138,40,.2)!important}
+.maslow-level-num{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px}
+.maslow-level-name{font-size:13px;font-weight:600;color:#fff;line-height:1.2}
+.maslow-level-name-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:rgba(255,255,255,.7);margin-top:2px}
+.maslow-level-badge{font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;font-style:italic}
+.maslow-drops{position:absolute;right:-4px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;max-width:120px}
+.maslow-drop-tag{font-size:10px;background:rgba(255,255,255,.18);color:#fff;border-radius:4px;padding:2px 7px;white-space:nowrap;animation:popIn .2s ease;font-weight:500}
+.maslow-drop-tag.correct{background:rgba(74,138,40,.75);color:#fff}
+.maslow-drop-tag.close{background:rgba(200,122,16,.7);color:#fff}
+.maslow-drop-tag.wrong{background:rgba(200,64,32,.75);color:#fff}
+@keyframes popIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.maslow-result.correct{border-color:rgba(74,138,40,.4);background:rgba(74,138,40,.06)}
+.maslow-result.close{border-color:rgba(200,122,16,.4);background:rgba(200,122,16,.06)}
+.maslow-result.wrong{border-color:rgba(200,64,32,.35);background:rgba(200,64,32,.05)}
+.maslow-result-verdict{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.maslow-result-verdict.correct{color:var(--green)}
+.maslow-result-verdict.close{color:#C87A10}
+.maslow-result-verdict.wrong{color:var(--accent)}
+
+.maslow-sidebar{width:220px;flex-shrink:0}
+@media(max-width:600px){.maslow-sidebar{width:100%}}
+.maslow-sidebar-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.maslow-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.maslow-chip{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:6px 12px;font-size:12.5px;color:var(--ink2);cursor:grab;user-select:none;transition:all .15s;white-space:nowrap}
+.maslow-chip:hover{border-color:var(--green);color:var(--ink);background:rgba(74,138,40,.06)}
+.maslow-chip.placed{opacity:.4;cursor:default;pointer-events:none}
+.maslow-chip.dragging{opacity:.5;transform:scale(1.05)}
+.maslow-reset-btn{background:none;border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink3);transition:all .15s}
+.maslow-reset-btn:hover{border-color:var(--accent);color:var(--accent)}
+.maslow-result{margin-top:16px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--ink2);line-height:1.6;display:none}
+.maslow-result-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-top:6px}
+
+/* ── CONSUMER CONFUSION COMPARISON ── */
+.confusion-compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+@media(max-width:640px){.confusion-compare{grid-template-columns:1fr}}
+.confusion-side{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.confusion-side-header{padding:14px 18px 12px;display:flex;align-items:center;gap:10px}
+.confusion-side-header.simple{background:rgba(74,138,40,.08);border-bottom:2px solid var(--green)}
+.confusion-side-header.complex{background:rgba(200,64,32,.07);border-bottom:2px solid var(--accent)}
+.confusion-brand-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink)}
+.confusion-strategy-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:10px;margin-left:auto;white-space:nowrap}
+.confusion-strategy-badge.simple{background:rgba(74,138,40,.15);color:var(--green)}
+.confusion-strategy-badge.complex{background:rgba(200,64,32,.12);color:var(--accent)}
+.confusion-body{padding:16px 18px}
+.confusion-lines-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.confusion-lines{display:flex;flex-direction:column;gap:6px}
+.confusion-line{border-radius:7px;padding:7px 12px;font-size:12.5px}
+.confusion-line.simple{background:rgba(74,138,40,.07);border:1px solid rgba(74,138,40,.18);color:var(--ink2)}
+.confusion-line.complex{background:rgba(200,64,32,.06);border:1px solid rgba(200,64,32,.15);color:var(--ink2)}
+.confusion-line-name{font-weight:600;color:var(--ink);font-size:13px}
+.confusion-line-count{font-size:11px;color:var(--ink3);margin-top:1px}
+.confusion-verdict{margin-top:14px;padding:10px 14px;border-radius:8px;font-size:13px;line-height:1.5}
+.confusion-verdict.simple{background:rgba(74,138,40,.08);color:var(--ink2);border-left:3px solid var(--green)}
+.confusion-verdict.complex{background:rgba(200,64,32,.07);color:var(--ink2);border-left:3px solid var(--accent)}
+.confusion-verdict-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);margin-top:6px}
+.confusion-sku-bar{margin-top:12px}
+.confusion-sku-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.confusion-sku-track{background:var(--bg3);border-radius:4px;height:18px;overflow:hidden}
+.confusion-sku-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:700;color:#fff}
+</style>
+</head>
+<body class="en">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Lecture 6</div>
+    </div>
+    <h1 class="en-only">Market &amp; Communication Conditions</h1>
+    <h1 class="zh-only">市场与传播环境</h1>
+    <div class="hero-zh en-only">市场与传播环境</div>
+    <div class="toc-pills">
+      <a href="#s-overload" class="toc-pill en-only">Information Overload</a>
+      <a href="#s-overload" class="toc-pill zh-only">信息过载</a>
+      <a href="#s-benefits" class="toc-pill en-only">Maslow &amp; Benefit Dimensions</a>
+      <a href="#s-benefits" class="toc-pill zh-only">马斯洛与利益维度</a>
+      <a href="#s-usp" class="toc-pill en-only">USP Builder</a>
+      <a href="#s-usp" class="toc-pill zh-only">USP构建工具</a>
+      <a href="#s-confusion" class="toc-pill en-only">Consumer Confusion</a>
+      <a href="#s-confusion" class="toc-pill zh-only">消费者混乱</a>
+      <a href="#s-assignment" class="toc-pill en-only">Assignment 6</a>
+      <a href="#s-assignment" class="toc-pill zh-only">作业 6</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="page">
+
+  <!-- S1: Information Overload -->
+  <div class="section" id="s-overload">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">Information Overload</h2>
+    <h2 class="sec-title zh-only">信息过载</h2>
+
+    <div class="sec-text en-only">
+      <p>Modern consumers are exposed to an estimated <strong>10,000–13,000 commercial messages per day</strong> — across TV, social media, search, email, podcasts, streaming pre-rolls, out-of-home, and packaging. This is roughly double the exposure of two decades ago, driven almost entirely by the explosion of digital and social media channels. Yet our cognitive capacity to process information has not changed.</p>
+      <p>Information overload occurs when the volume of incoming signals exceeds our ability to meaningfully process them. For brands, the consequences are severe: consumers unconsciously filter out advertising (selective perception), too many choices produce decision paralysis (the "paradox of choice"), and marketing scepticism rises as trust in commercial messages erodes.</p>
+      <p>The mobile and social media era has dramatically accelerated this. The average user unlocks their smartphone <strong>96 times per day</strong>. On TikTok, the average video watching window is just <strong>7 seconds</strong> before a user swipes away. Instagram feeds refresh every few seconds. Attention — not reach — has become the scarce resource brands compete for.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>现代消费者每天暴露在约<strong>10,000至13,000条商业信息</strong>中——来自电视、社交媒体、搜索引擎、电子邮件、播客、流媒体前贴片广告、户外广告及产品包装。这一数字是二十年前的两倍左右，几乎完全由数字和社交媒体渠道的爆炸式增长所推动，而我们的认知处理能力却未曾改变。</p>
+      <p>信息过载发生在接收信号的数量超出我们有效处理能力的时候。对品牌而言，后果严峻：消费者无意识地过滤广告（选择性感知），过多选择导致决策瘫痪（"选择的悖论"），营销怀疑主义随着对商业信息信任的侵蚀而上升。</p>
+      <p>移动和社交媒体时代急剧加速了这一进程。普通用户每天解锁智能手机<strong>96次</strong>。在TikTok上，用户在滑走之前的平均视频观看窗口仅为<strong>7秒</strong>。Instagram信息流每隔几秒就会刷新。注意力——而非触达率——已成为品牌争夺的稀缺资源。</p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="overload-stats">
+      <div class="ostat">
+        <div class="ostat-num">13k</div>
+        <div class="ostat-label en-only">commercial messages<br>per day (est.)</div>
+        <div class="ostat-label-zh zh-only">每日商业信息估算量</div>
+      </div>
+      <div class="ostat">
+        <div class="ostat-num">1–2%</div>
+        <div class="ostat-label en-only">of messages achieve<br>measurable reach</div>
+        <div class="ostat-label-zh zh-only">实现可测量触达的信息比例</div>
+      </div>
+      <div class="ostat">
+        <div class="ostat-num">96×</div>
+        <div class="ostat-label en-only">smartphone unlocks<br>per day (avg.)</div>
+        <div class="ostat-label-zh zh-only">每日平均解锁手机次数</div>
+      </div>
+      <div class="ostat">
+        <div class="ostat-num">7 s</div>
+        <div class="ostat-label en-only">avg. TikTok attention<br>span before swipe</div>
+        <div class="ostat-label-zh zh-only">TikTok平均滑走前停留时间</div>
+      </div>
+      <div class="ostat">
+        <div class="ostat-num">147</div>
+        <div class="ostat-label en-only">min/day avg. social<br>media use globally</div>
+        <div class="ostat-label-zh zh-only">全球每日平均社媒使用时长（分钟）</div>
+      </div>
+      <div class="ostat">
+        <div class="ostat-num">2.4×</div>
+        <div class="ostat-label en-only">attention gap: best vs.<br>worst ad format</div>
+        <div class="ostat-label-zh zh-only">最佳与最差广告格式注意力差距</div>
+      </div>
+    </div>
+
+    <!-- Channel breakdown -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="en-only">Where the Overload Comes From</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="zh-only">过载从何而来</h3>
+
+    <div class="channel-grid">
+      <div class="channel-card">
+        <div class="ch-icon">📱</div>
+        <div>
+          <div class="ch-name">Social Media</div>
+          <div class="ch-stat en-only">~2,000–3,000 ads/day per user</div>
+          <div class="ch-stat zh-only">每用户每日约2,000–3,000条广告</div>
+          <div class="ch-desc en-only">Facebook, Instagram, TikTok, YouTube — algorithmic feeds maximise engagement, not well-being. The scroll is designed to be infinite. Native advertising blurs the line between content and commercial message.</div>
+          <div class="ch-desc-zh zh-only">Facebook、Instagram、TikTok、YouTube的算法信息流以最大化参与度为目标。无限滚动的设计，原生广告模糊了内容与商业信息之间的界限。</div>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="ch-icon">🔍</div>
+        <div>
+          <div class="ch-name">Search &amp; Display</div>
+          <div class="ch-stat en-only">Google shows 3–4 paid ads per search</div>
+          <div class="ch-stat zh-only">每次搜索显示3-4条付费广告</div>
+          <div class="ch-desc en-only">Search ads appear at the very moment of intent, making them harder to ignore. Display retargeting follows users across websites, creating the "stalker ad" effect that erodes brand trust.</div>
+          <div class="ch-desc-zh zh-only">搜索广告在用户产生意图的关键时刻出现，难以忽视。展示广告重定向跨网站追踪用户，产生侵蚀品牌信任的"跟踪广告"效应。</div>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="ch-icon">📺</div>
+        <div>
+          <div class="ch-name">Streaming &amp; Video</div>
+          <div class="ch-stat en-only">Pre-roll ads: highest forced recall</div>
+          <div class="ch-stat zh-only">前贴片广告：强制性记忆效果最佳</div>
+          <div class="ch-desc en-only">YouTube, Netflix (ad tier), and Spotify combine forced pre-roll ads with branded content. Eye-tracking studies show forced-view formats achieve up to 2.4× better recall than banner ads.</div>
+          <div class="ch-desc-zh zh-only">YouTube、Netflix（广告版）和Spotify将强制前贴片广告与品牌内容相结合。眼动研究显示，强制浏览格式比横幅广告的记忆效果高达2.4倍。</div>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="ch-icon">📧</div>
+        <div>
+          <div class="ch-name">Email &amp; Push Notifications</div>
+          <div class="ch-stat en-only">~330 billion emails sent per day globally</div>
+          <div class="ch-stat zh-only">全球每日发送约3,300亿封电子邮件</div>
+          <div class="ch-desc en-only">Email open rates have fallen below 20% across most industries. Push notifications are increasingly disabled by users. Permission-based communication has become a competitive advantage.</div>
+          <div class="ch-desc-zh zh-only">大多数行业的电子邮件打开率已降至20%以下。用户越来越多地禁用推送通知。基于许可的沟通已成为竞争优势。</div>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="ch-icon">🏙️</div>
+        <div>
+          <div class="ch-name">Out-of-Home &amp; Retail</div>
+          <div class="ch-stat en-only">Digital OOH grew 12% in 2024</div>
+          <div class="ch-stat zh-only">2024年数字户外广告增长12%</div>
+          <div class="ch-desc en-only">Digital billboards, transport advertising, and in-store screens add to ambient exposure. Programmatic DOOH can now target audiences in real time by location and weather — adding precision but also noise.</div>
+          <div class="ch-desc-zh zh-only">数字广告牌、交通广告和店内屏幕增加了环境曝光。程序化数字户外广告可按位置和天气实时定向受众，提升精准度的同时也增加了噪音。</div>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="ch-icon">🎙️</div>
+        <div>
+          <div class="ch-name">Podcasts &amp; Audio</div>
+          <div class="ch-stat en-only">Host-read ads: ~70% recall rate</div>
+          <div class="ch-stat zh-only">主播口播广告：约70%的记忆率</div>
+          <div class="ch-desc en-only">Podcast advertising has grown explosively since 2018. Host-read ads achieve unusually high recall because listeners trust the host's voice. But as ad loads increase, listener fatigue follows.</div>
+          <div class="ch-desc-zh zh-only">播客广告自2018年以来爆炸式增长。由于听众信任主播的声音，主播口播广告记忆率异常高。但随着广告密度增加，听众疲劳随之而来。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad format attention bar chart -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:32px 0 16px" class="en-only">Ad Format Attention Index (Eye-Tracking Studies)</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:32px 0 16px" class="zh-only">广告格式注意力指数（眼动追踪研究）</h3>
+
+    <div class="ad-format-bar">
+      <div class="ad-row">
+        <div class="ad-label en-only">Forced video (pre-roll)</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">强制视频（前贴片）</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:100%;background:#4A8A28">100</div></div>
+        <div class="ad-val">100</div>
+      </div>
+      <div class="ad-row">
+        <div class="ad-label en-only">In-feed social video</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">信息流社交视频</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:78%;background:#6aaa40">78</div></div>
+        <div class="ad-val">78</div>
+      </div>
+      <div class="ad-row">
+        <div class="ad-label en-only">Podcast host-read</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">播客主播口播</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:70%;background:#7ab848">70</div></div>
+        <div class="ad-val">70</div>
+      </div>
+      <div class="ad-row">
+        <div class="ad-label en-only">Search (text ad)</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">搜索（文字广告）</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:58%;background:#a8c840">58</div></div>
+        <div class="ad-val">58</div>
+      </div>
+      <div class="ad-row">
+        <div class="ad-label en-only">Sponsored content</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">赞助内容</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:52%;background:#c8b820">52</div></div>
+        <div class="ad-val">52</div>
+      </div>
+      <div class="ad-row">
+        <div class="ad-label en-only">Display / banner</div>
+        <div class="ad-label zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px">展示/横幅广告</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:42%;background:#c88020">42</div></div>
+        <div class="ad-val">42</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      <div class="en-only">"In the attention economy, the scarcest resource is no longer money or reach — it is the willingness to pay attention. Brands that earn attention through relevance and distinctiveness outperform those that simply buy exposure." <em>— Jenni Romaniuk, Ehrenberg-Bass Institute</em></div>
+      <div class="callout-zh zh-only">在注意力经济中，最稀缺的资源不再是金钱或触达率，而是愿意付出注意力的意愿。通过相关性和独特性赢得注意力的品牌，其表现优于那些单纯购买曝光的品牌。（Jenni Romaniuk，Ehrenberg-Bass研究所）</div>
+    </div>
+  </div>
+
+  <!-- S2: Benefit Dimensions & Maslow -->
+  <div class="section" id="s-benefits">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">Benefit Dimensions &amp; Maslow's Hierarchy</h2>
+    <h2 class="sec-title zh-only">利益维度与马斯洛需求层次</h2>
+
+    <div class="sec-text en-only">
+      <p>To understand why consumers choose branded products over generic alternatives, we must understand what benefits they are actually buying. The benefit structure of a brand can be mapped against Maslow's Hierarchy of Needs — a psychological model that organises human motivation into five levels, from survival to self-actualisation.</p>
+      <p>At the base, <strong>physiological needs</strong> are met by unbranded basics — food, water, shelter. No brand premium is possible here. <strong>Safety needs</strong> create opportunities for brands that communicate security and reliability: Volvo safety systems, Allianz insurance, food certifications. <strong>Social/belonging needs</strong> drive tribal brand strategies — Harley-Davidson (a community identity), Nike, football clubs. <strong>Esteem needs</strong> power luxury and status brands: Porsche, Rolex, Louis Vuitton are status signals, not merely transport or timekeeping devices. <strong>Self-actualisation</strong> at the peak drives brands linked to self-expression, creativity, and unique experience.</p>
+      <p>Every branded product also combines <strong>basic benefits</strong> (the functional core every category product must provide) with <strong>enhanced benefits</strong> (value-adding features that go beyond the generic). These together form the Unique Selling Proposition (USP).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>要理解消费者为何选择品牌产品而非通用替代品，我们必须理解他们实际购买的是什么利益。品牌的利益结构可以与马斯洛需求层次理论对应——这一心理学模型将人类动机从生存到自我实现组织成五个层次。</p>
+      <p>最底层的<strong>生理需求</strong>由无品牌基础商品满足——食物、水、住所，此处无法产生品牌溢价。<strong>安全需求</strong>为传达安全与可靠性的品牌创造机会：沃尔沃安全系统、安联保险、食品认证。<strong>社交/归属需求</strong>驱动部落式品牌战略——哈雷戴维森（一种社群身份认同）、耐克、足球俱乐部。<strong>尊重需求</strong>支撑奢侈品和地位品牌：保时捷、劳力士、路易威登是地位信号，而非单纯的交通工具或计时器。顶端的<strong>自我实现</strong>驱动与自我表达、创造力和独特体验相关的品牌。</p>
+      <p>每个品牌产品还将<strong>基础利益</strong>（品类中每款产品都必须提供的功能核心）与<strong>增强利益</strong>（超越通用版本的附加价值特性）相结合，共同构成独特销售主张（USP）。</p>
+    </div>
+
+    <!-- Interactive Maslow Pyramid -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:32px 0 6px" class="en-only">Interactive: Place Products on the Pyramid</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:32px 0 6px" class="zh-only">互动：将产品放置到金字塔上</h3>
+
+    <div class="maslow-wrap">
+      <div class="maslow-instruction">
+        <span class="en-only">Drag a product chip onto the pyramid level where it primarily satisfies a need. A product can address multiple levels — place it where its <em>core brand positioning</em> sits.</span>
+        <div class="maslow-instruction-zh zh-only">将产品标签拖拽到金字塔对应层级，选择它主要满足的需求层次。产品可能涉及多个层次——请将其放置在其<em>核心品牌定位</em>所在的层级。</div>
+      </div>
+
+      <div class="maslow-layout">
+        <!-- Pyramid -->
+        <div class="maslow-pyramid" id="maslow-pyramid">
+          <!-- Level 5 -->
+          <div class="maslow-level" id="ml-5">
+            <div class="maslow-bar" id="mb-5" style="width:44%;background:linear-gradient(135deg,#7A40A8,#5A2888);min-height:56px"
+                 ondragover="mlDragOver(event,5)" ondrop="mlDrop(event,5)" ondragleave="mlDragLeave(5)">
+              <div class="maslow-level-num">Level 5</div>
+              <div class="maslow-level-name en-only">Self-Actualisation</div>
+              <div class="maslow-level-name zh-only">自我实现</div>
+              <div class="maslow-level-badge en-only">creativity · fulfilment</div>
+              <div class="maslow-level-badge zh-only">创造力 · 自我实现</div>
+            </div>
+            <div class="maslow-drops" id="md-5"></div>
+          </div>
+          <!-- Level 4 -->
+          <div class="maslow-level" id="ml-4">
+            <div class="maslow-bar" id="mb-4" style="width:58%;background:linear-gradient(135deg,#1A5FA8,#0E3E78);min-height:56px"
+                 ondragover="mlDragOver(event,4)" ondrop="mlDrop(event,4)" ondragleave="mlDragLeave(4)">
+              <div class="maslow-level-num">Level 4</div>
+              <div class="maslow-level-name en-only">Esteem &amp; Status</div>
+              <div class="maslow-level-name zh-only">尊重与地位</div>
+              <div class="maslow-level-badge en-only">prestige · recognition</div>
+              <div class="maslow-level-badge zh-only">声望 · 认可</div>
+            </div>
+            <div class="maslow-drops" id="md-4"></div>
+          </div>
+          <!-- Level 3 -->
+          <div class="maslow-level" id="ml-3">
+            <div class="maslow-bar" id="mb-3" style="width:72%;background:linear-gradient(135deg,#4A8A28,#2E6010);min-height:56px"
+                 ondragover="mlDragOver(event,3)" ondrop="mlDrop(event,3)" ondragleave="mlDragLeave(3)">
+              <div class="maslow-level-num">Level 3</div>
+              <div class="maslow-level-name en-only">Social &amp; Belonging</div>
+              <div class="maslow-level-name zh-only">社交与归属</div>
+              <div class="maslow-level-badge en-only">community · identity</div>
+              <div class="maslow-level-badge zh-only">社群 · 身份认同</div>
+            </div>
+            <div class="maslow-drops" id="md-3"></div>
+          </div>
+          <!-- Level 2 -->
+          <div class="maslow-level" id="ml-2">
+            <div class="maslow-bar" id="mb-2" style="width:86%;background:linear-gradient(135deg,#C87A10,#8A4A00);min-height:56px"
+                 ondragover="mlDragOver(event,2)" ondrop="mlDrop(event,2)" ondragleave="mlDragLeave(2)">
+              <div class="maslow-level-num">Level 2</div>
+              <div class="maslow-level-name en-only">Safety &amp; Security</div>
+              <div class="maslow-level-name zh-only">安全与保障</div>
+              <div class="maslow-level-badge en-only">reliability · protection</div>
+              <div class="maslow-level-badge zh-only">可靠性 · 保护</div>
+            </div>
+            <div class="maslow-drops" id="md-2"></div>
+          </div>
+          <!-- Level 1 -->
+          <div class="maslow-level" id="ml-1">
+            <div class="maslow-bar" id="mb-1" style="width:100%;background:linear-gradient(135deg,#C84020,#8A2010);min-height:56px"
+                 ondragover="mlDragOver(event,1)" ondrop="mlDrop(event,1)" ondragleave="mlDragLeave(1)">
+              <div class="maslow-level-num">Level 1</div>
+              <div class="maslow-level-name en-only">Physiological Needs</div>
+              <div class="maslow-level-name zh-only">生理需求</div>
+              <div class="maslow-level-badge en-only">food · water · shelter</div>
+              <div class="maslow-level-badge zh-only">食物 · 水 · 住所</div>
+            </div>
+            <div class="maslow-drops" id="md-1"></div>
+          </div>
+        </div>
+
+        <!-- Sidebar: chip bank + reset -->
+        <div class="maslow-sidebar">
+          <div class="maslow-sidebar-title en-only">Product &amp; Brand Cards</div>
+          <div class="maslow-sidebar-title zh-only">产品与品牌卡片</div>
+          <div class="maslow-sidebar-title en-only" style="margin-top:0">Global Brands</div>
+          <div class="maslow-sidebar-title zh-only" style="margin-top:0">全球品牌</div>
+          <div class="maslow-chips" id="maslow-chips">
+            <div class="maslow-chip" draggable="true" data-id="fineart" ondragstart="mlDragStart(event,'fineart')" onclick="mlTap('fineart')">Fine Art</div>
+            <div class="maslow-chip" draggable="true" data-id="leica" ondragstart="mlDragStart(event,'leica')" onclick="mlTap('leica')">Leica</div>
+            <div class="maslow-chip" draggable="true" data-id="rolex" ondragstart="mlDragStart(event,'rolex')" onclick="mlTap('rolex')">Rolex</div>
+            <div class="maslow-chip" draggable="true" data-id="lv" ondragstart="mlDragStart(event,'lv')" onclick="mlTap('lv')">Louis Vuitton</div>
+            <div class="maslow-chip" draggable="true" data-id="porsche" ondragstart="mlDragStart(event,'porsche')" onclick="mlTap('porsche')">Porsche</div>
+            <div class="maslow-chip" draggable="true" data-id="hdavidson" ondragstart="mlDragStart(event,'hdavidson')" onclick="mlTap('hdavidson')">Harley-Davidson</div>
+            <div class="maslow-chip" draggable="true" data-id="nike" ondragstart="mlDragStart(event,'nike')" onclick="mlTap('nike')">Nike</div>
+            <div class="maslow-chip" draggable="true" data-id="redbull" ondragstart="mlDragStart(event,'redbull')" onclick="mlTap('redbull')">Red Bull</div>
+            <div class="maslow-chip" draggable="true" data-id="volvo" ondragstart="mlDragStart(event,'volvo')" onclick="mlTap('volvo')">Volvo</div>
+            <div class="maslow-chip" draggable="true" data-id="allianz" ondragstart="mlDragStart(event,'allianz')" onclick="mlTap('allianz')">Allianz</div>
+            <div class="maslow-chip" draggable="true" data-id="mcdonalds" ondragstart="mlDragStart(event,'mcdonalds')" onclick="mlTap('mcdonalds')">McDonald's</div>
+            <div class="maslow-chip" draggable="true" data-id="aldi" ondragstart="mlDragStart(event,'aldi')" onclick="mlTap('aldi')">Aldi</div>
+          </div>
+          <div class="maslow-sidebar-title en-only" style="margin-top:14px">Chinese Brands 中国品牌</div>
+          <div class="maslow-sidebar-title zh-only" style="margin-top:14px">中国品牌</div>
+          <div class="maslow-chips" id="maslow-chips-cn">
+            <div class="maslow-chip" draggable="true" data-id="dji" ondragstart="mlDragStart(event,'dji')" onclick="mlTap('dji')">DJI 大疆</div>
+            <div class="maslow-chip" draggable="true" data-id="moutai" ondragstart="mlDragStart(event,'moutai')" onclick="mlTap('moutai')">Moutai 茅台</div>
+            <div class="maslow-chip" draggable="true" data-id="lining" ondragstart="mlDragStart(event,'lining')" onclick="mlTap('lining')">Li-Ning 李宁</div>
+            <div class="maslow-chip" draggable="true" data-id="pingan" ondragstart="mlDragStart(event,'pingan')" onclick="mlTap('pingan')">Ping An 平安</div>
+            <div class="maslow-chip" draggable="true" data-id="meituan" ondragstart="mlDragStart(event,'meituan')" onclick="mlTap('meituan')">Meituan 美团</div>
+          </div>
+          <button class="maslow-reset-btn" onclick="mlReset()">
+            <span class="en-only">↺ Reset</span>
+            <span class="zh-only">↺ 重置</span>
+          </button>
+          <div class="maslow-result" id="maslow-result">
+            <strong id="maslow-result-brand"></strong>
+            <div id="maslow-result-text"></div>
+            <div id="maslow-result-zh" class="maslow-result-zh"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="approach-card">
+        <h4 class="en-only">Basic Benefits</h4>
+        <h4 class="zh-only">基础利益</h4>
+        <p class="en-only">The functional core that any product in this category must provide. Necessary but not sufficient for brand differentiation. Example (Leibniz Butterkeks): a butter biscuit.</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:13.5px">品类中任何产品必须提供的功能核心，是品牌差异化的必要但不充分条件。示例（Leibniz黄油饼干）：一块黄油饼干。</p>
+      </div>
+      <div class="approach-card">
+        <h4 class="en-only">Enhanced Benefits</h4>
+        <h4 class="zh-only">增强利益</h4>
+        <p class="en-only">Additional features, emotional associations, heritage, or design that elevate the product above generic alternatives and justify premium pricing. Example: tradition, distinctive tooth design, "the original".</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:13.5px">使产品超越通用替代品并证明溢价定价合理的附加特征、情感联想、传承或设计。示例：传统、独特的齿形设计、"正宗原版"。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USP BUILDER -->
+  <div class="section" id="s-usp" style="padding-top:44px">
+    <div class="sec-label en-only">Interactive Tool</div>
+    <div class="sec-label zh-only">互动工具</div>
+    <h2 class="sec-title en-only">USP Builder</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">USP构建工具</h2>
+    <p class="sec-text en-only" style="margin-bottom:0">Select a product category, fill in your brand's basic and enhanced benefits, and watch your Unique Selling Proposition assemble in real time. The USP is the specific combination of what your product <em>must</em> do (basic) and what it <em>uniquely</em> adds (enhanced) — the argument for why a rational consumer should pay a premium.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif;margin-bottom:0">选择产品品类，填写品牌的基础利益和增强利益，实时观察独特销售主张的形成。USP是产品<em>必须</em>提供的（基础）与<em>独特</em>添加的（增强）的特定组合——即消费者为何应支付溢价的理由。</p>
+
+    <div class="usp-builder">
+      <div class="usp-builder-header">
+        <span class="usp-builder-title en-only">Build Your USP</span>
+        <span class="usp-builder-title zh-only">构建你的USP</span>
+        <span class="usp-builder-title-zh en-only">独特销售主张</span>
+      </div>
+      <div class="usp-builder-body">
+
+        <!-- Category presets -->
+        <div class="usp-preset-row">
+          <span class="usp-preset-label en-only">Category:</span>
+          <span class="usp-preset-label zh-only">品类：</span>
+          <button class="usp-preset-btn" data-cat="coffee" onclick="uspPreset('coffee')"><span class="en-only">Coffee</span><span class="zh-only">咖啡</span></button>
+          <button class="usp-preset-btn" data-cat="smartphone" onclick="uspPreset('smartphone')"><span class="en-only">Smartphone</span><span class="zh-only">智能手机</span></button>
+          <button class="usp-preset-btn" data-cat="shoes" onclick="uspPreset('shoes')"><span class="en-only">Running Shoes</span><span class="zh-only">跑鞋</span></button>
+          <button class="usp-preset-btn" data-cat="chocolate" onclick="uspPreset('chocolate')"><span class="en-only">Chocolate</span><span class="zh-only">巧克力</span></button>
+          <button class="usp-preset-btn" data-cat="beer" onclick="uspPreset('beer')"><span class="en-only">Beer</span><span class="zh-only">啤酒</span></button>
+          <button class="usp-preset-btn" data-cat="insurance" onclick="uspPreset('insurance')"><span class="en-only">Insurance</span><span class="zh-only">保险</span></button>
+          <button class="usp-preset-btn" data-cat="custom" onclick="uspPreset('custom')"><span class="en-only">✏ Custom</span><span class="zh-only">✏ 自定义</span></button>
+        </div>
+
+        <!-- Row 1: Brand + Category label -->
+        <div class="usp-fields">
+          <div class="usp-field">
+            <label class="en-only">Brand Name</label>
+            <label class="zh-only">品牌名称</label>
+            <input class="usp-input" id="usp-brand" placeholder="e.g. Nespresso" oninput="uspUpdate()">
+          </div>
+          <div class="usp-field">
+            <label class="en-only">Product Category <span>(what is it?)</span></label>
+            <label class="zh-only">产品品类</label>
+            <input class="usp-input" id="usp-cat-label" placeholder="e.g. premium espresso system" oninput="uspUpdate()">
+          </div>
+        </div>
+
+        <!-- Basic benefit -->
+        <div class="usp-fields">
+          <div class="usp-field full">
+            <label class="en-only">Basic Benefit <span>— what must every product in this category provide?</span></label>
+            <label class="zh-only">基础利益 <span style="font-weight:400;text-transform:none;letter-spacing:0">— 该品类所有产品必须提供什么？</span></label>
+            <input class="usp-input" id="usp-basic" placeholder="e.g. hot caffeinated beverage" oninput="uspUpdate()">
+            <div class="usp-chips-row" id="usp-chips-basic"></div>
+          </div>
+        </div>
+
+        <!-- Enhanced benefits -->
+        <div class="usp-fields">
+          <div class="usp-field full">
+            <label class="en-only">Enhanced Benefits <span>— what does YOUR brand add? (pick up to 3)</span></label>
+            <label class="zh-only">增强利益 <span style="font-weight:400;text-transform:none;letter-spacing:0">— 你的品牌额外提供什么？（最多选3项）</span></label>
+            <div class="usp-enhanced-grid">
+              <input class="usp-input" id="usp-e1" placeholder="Enhanced benefit 1" oninput="uspUpdate()">
+              <input class="usp-input" id="usp-e2" placeholder="Enhanced benefit 2 (optional)" oninput="uspUpdate()">
+              <input class="usp-input" id="usp-e3" placeholder="Enhanced benefit 3 (optional)" oninput="uspUpdate()">
+              <div></div>
+            </div>
+            <div class="usp-chips-row" id="usp-chips-enhanced"></div>
+          </div>
+        </div>
+
+        <!-- Target group -->
+        <div class="usp-fields">
+          <div class="usp-field full">
+            <label class="en-only">Target Group <span>— who is this brand for?</span></label>
+            <label class="zh-only">目标群体 <span style="font-weight:400;text-transform:none;letter-spacing:0">— 这个品牌面向谁？</span></label>
+            <input class="usp-input" id="usp-target" placeholder="e.g. quality-conscious coffee lovers" oninput="uspUpdate()">
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="usp-output">
+          <div class="usp-output-label en-only">Your USP Statement</div>
+          <div class="usp-output-label zh-only">你的USP声明</div>
+          <div class="usp-statement en-only" id="usp-out-en"><span class="usp-empty">Fill in the fields above — your USP will appear here.</span></div>
+          <div class="usp-statement-zh zh-only" id="usp-out-zh"><span class="usp-empty">填写上方字段，你的USP将在此处生成。</span></div>
+        </div>
+
+        <button class="usp-reset-btn" onclick="uspReset()">
+          <span class="en-only">↺ Reset</span>
+          <span class="zh-only">↺ 重置</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Consumer Confusion -->
+  <div class="section" id="s-confusion">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Consumer Confusion</h2>
+    <h2 class="sec-title zh-only">消费者混乱</h2>
+
+    <div class="sec-text en-only">
+      <p>As product ranges proliferate and marketing messages multiply, consumers increasingly experience confusion — a state of cognitive overload and misperception in the marketplace. <strong>Brand confusion</strong> occurs when consumers cannot distinguish between similar brands. <strong>Programme confusion</strong> arises when there are too many variants of a product (e.g., 40 varieties of ketchup). <strong>Information confusion</strong> occurs when product information is unclear, contradictory, or overwhelming. <strong>Similarity confusion</strong> happens when packaging, naming, or design is so similar that differentiation becomes impossible.</p>
+      <p>For brands, consumer confusion is a double failure: it undermines purchase decisions and erodes trust. The strategic response is radical simplification — fewer SKUs, clearer naming systems, stronger visual identity. Apple's return to growth in 1997 began with Steve Jobs eliminating 340 of 350 products. Samsung, by contrast, sells hundreds of smartphone models across overlapping series — a strategy that maximises shelf coverage but generates significant consumer confusion.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>随着产品线激增和营销信息倍增，消费者日益体验到混乱——市场中认知超载和误判的状态。<strong>品牌混乱</strong>发生在消费者无法区分相似品牌时。<strong>产品线混乱</strong>出现在产品变体过多时（例如40种番茄酱）。<strong>信息混乱</strong>发生在产品信息不清晰、相互矛盾或令人不堪重负时。<strong>相似性混乱</strong>发生在包装、命名或设计极为相似、差异化无从实现时。</p>
+      <p>对品牌而言，消费者混乱是双重失败：它损害购买决策并侵蚀信任。战略应对是彻底简化——更少的SKU、更清晰的命名体系、更强的视觉识别。苹果1997年的复苏始于史蒂夫·乔布斯在350款产品中保留10款，削减其余340款。相比之下，三星在重叠系列中销售数百款智能手机型号——这一策略最大化了货架覆盖率，却造成了严重的消费者混乱。</p>
+    </div>
+
+    <!-- Apple vs Samsung comparison -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="en-only">Simple vs. Complex: Apple vs. Samsung</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="zh-only">简洁与复杂：苹果 vs. 三星</h3>
+
+    <div class="confusion-compare">
+      <!-- Apple -->
+      <div class="confusion-side">
+        <div class="confusion-side-header simple">
+          <div>
+            <div class="confusion-brand-name">Apple iPhone</div>
+            <div style="font-size:12px;color:var(--ink3);margin-top:2px" class="en-only">2024 smartphone lineup</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-top:2px" class="zh-only">2024年智能手机产品线</div>
+          </div>
+          <span class="confusion-strategy-badge simple en-only">Radical Simplicity</span>
+          <span class="confusion-strategy-badge simple zh-only">极简主义</span>
+        </div>
+        <div class="confusion-body">
+          <div class="confusion-lines-title en-only">Active product lines</div>
+          <div class="confusion-lines-title zh-only">在售产品系列</div>
+          <div class="confusion-lines">
+            <div class="confusion-line simple">
+              <div class="confusion-line-name">iPhone 16 Pro Max</div>
+              <div class="confusion-line-count en-only">Flagship · 6.9" · highest specs</div>
+              <div class="confusion-line-count zh-only">旗舰 · 6.9英寸 · 最高配置</div>
+            </div>
+            <div class="confusion-line simple">
+              <div class="confusion-line-name">iPhone 16 Pro</div>
+              <div class="confusion-line-count en-only">Pro tier · 6.3" · professional features</div>
+              <div class="confusion-line-count zh-only">专业版 · 6.3英寸 · 专业功能</div>
+            </div>
+            <div class="confusion-line simple">
+              <div class="confusion-line-name">iPhone 16 Plus</div>
+              <div class="confusion-line-count en-only">Large screen · standard tier</div>
+              <div class="confusion-line-count zh-only">大屏 · 标准版</div>
+            </div>
+            <div class="confusion-line simple">
+              <div class="confusion-line-name">iPhone 16</div>
+              <div class="confusion-line-count en-only">Standard · 6.1" · mainstream</div>
+              <div class="confusion-line-count zh-only">标准版 · 6.1英寸 · 主流</div>
+            </div>
+            <div class="confusion-line simple">
+              <div class="confusion-line-name">iPhone SE (4th gen)</div>
+              <div class="confusion-line-count en-only">Entry-level · affordable access</div>
+              <div class="confusion-line-count zh-only">入门级 · 亲民价格</div>
+            </div>
+          </div>
+          <div class="confusion-sku-bar" style="margin-top:14px">
+            <div class="confusion-sku-label en-only">SKU count (active models)</div>
+            <div class="confusion-sku-label zh-only">在售型号数量</div>
+            <div class="confusion-sku-track">
+              <div class="confusion-sku-fill" style="width:8%;background:var(--green)">5</div>
+            </div>
+          </div>
+          <div class="confusion-verdict simple">
+            <span class="en-only"><strong>Result:</strong> Every product has a clear name, clear role, and clear price step. A consumer can understand the full lineup in under 30 seconds. Confusion is structurally impossible.</span>
+            <span class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:13px"><strong>结果：</strong>每款产品都有清晰的名称、角色和价格阶梯。消费者可在30秒内理解完整产品线，从结构上消除了混乱的可能性。</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Samsung -->
+      <div class="confusion-side">
+        <div class="confusion-side-header complex">
+          <div>
+            <div class="confusion-brand-name">Samsung Galaxy</div>
+            <div style="font-size:12px;color:var(--ink3);margin-top:2px" class="en-only">2024 smartphone lineup (selection)</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-top:2px" class="zh-only">2024年智能手机产品线（部分）</div>
+          </div>
+          <span class="confusion-strategy-badge complex en-only">Full Spectrum</span>
+          <span class="confusion-strategy-badge complex zh-only">全系覆盖</span>
+        </div>
+        <div class="confusion-body">
+          <div class="confusion-lines-title en-only">Active product lines (simplified)</div>
+          <div class="confusion-lines-title zh-only">在售产品系列（简化版）</div>
+          <div class="confusion-lines">
+            <div class="confusion-line complex">
+              <div class="confusion-line-name">Galaxy S24 series</div>
+              <div class="confusion-line-count en-only">S24 · S24+ · S24 Ultra · FE → 4 models</div>
+              <div class="confusion-line-count zh-only">S24 · S24+ · S24 Ultra · FE → 4款</div>
+            </div>
+            <div class="confusion-line complex">
+              <div class="confusion-line-name">Galaxy Z Fold / Flip</div>
+              <div class="confusion-line-count en-only">Z Fold 6 · Z Flip 6 · older gens still sold → 4+ models</div>
+              <div class="confusion-line-count zh-only">Z Fold 6 · Z Flip 6 · 旧代型号仍在销售 → 4+款</div>
+            </div>
+            <div class="confusion-line complex">
+              <div class="confusion-line-name">Galaxy A series</div>
+              <div class="confusion-line-count en-only">A05 · A15 · A25 · A35 · A55 · A73 → 6+ models</div>
+              <div class="confusion-line-count zh-only">A05·A15·A25·A35·A55·A73 → 6+款</div>
+            </div>
+            <div class="confusion-line complex">
+              <div class="confusion-line-name">Galaxy M &amp; F series</div>
+              <div class="confusion-line-count en-only">Emerging market budget range → 8+ models</div>
+              <div class="confusion-line-count zh-only">新兴市场经济型产品线 → 8+款</div>
+            </div>
+            <div class="confusion-line complex">
+              <div class="confusion-line-name">Galaxy XCover / others</div>
+              <div class="confusion-line-count en-only">Rugged, enterprise, special purpose → 3+ models</div>
+              <div class="confusion-line-count zh-only">三防、企业及特殊用途 → 3+款</div>
+            </div>
+          </div>
+          <div class="confusion-sku-bar" style="margin-top:14px">
+            <div class="confusion-sku-label en-only">SKU count (active models, excl. regional)</div>
+            <div class="confusion-sku-label zh-only">在售型号数量（不含地区专属）</div>
+            <div class="confusion-sku-track">
+              <div class="confusion-sku-fill" style="width:85%;background:var(--accent)">~50+</div>
+            </div>
+          </div>
+          <div class="confusion-verdict complex">
+            <span class="en-only"><strong>Result:</strong> Many consumers cannot reliably distinguish between Galaxy A35 and A55, or S24 and S24 FE. Overlapping specs, similar names, and varying regional availability generate persistent brand confusion and decision paralysis at point of sale.</span>
+            <span class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:13px"><strong>结果：</strong>许多消费者无法可靠区分Galaxy A35与A55，或S24与S24 FE。重叠的规格、相似的名称和不同地区的供货差异，在销售点产生持续的品牌混乱和决策瘫痪。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      <div class="en-only">"In 1997 Apple had 350 products. When Steve Jobs returned, he cut it to 10. <em>That</em> was the beginning of the turnaround. Simplicity is not a design choice. It is a brand strategy." <em>— Ken Segall, author of <em>Insanely Simple</em></em></div>
+      <div class="callout-zh zh-only">1997年苹果有350款产品。史蒂夫·乔布斯回归后将其削减至10款。那才是转型的开始。简洁不是一种设计选择，而是一种品牌战略。（Ken Segall，《疯狂简洁》作者）</div>
+    </div>
+
+    <div class="sec-text en-only" style="margin-top:24px">
+      <p><strong>Strategic takeaway:</strong> Portfolio complexity is a short-term commercial temptation — more variants means more shelf space and more addressable segments. But complexity compounds consumer confusion, inflates supply chain costs, and dilutes brand clarity. The most valuable brands in the world — Apple, Rolex, Hermès — all share one structural feature: a rigorously edited product range.</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:24px;font-family:'Noto Serif SC',serif;font-size:14.5px;line-height:1.9;color:var(--ink2)">
+      <p><strong>战略启示：</strong>产品组合的复杂性是短期商业诱惑——更多变体意味着更多货架空间和更多可触达细分市场。但复杂性会加剧消费者混乱、推高供应链成本并稀释品牌清晰度。全球最有价值的品牌——苹果、劳力士、爱马仕——都有一个共同的结构特征：经过严格筛选的产品范围。</p>
+    </div>
+  </div>
+
+  <!-- ASSIGNMENT -->
+  <div class="assignment-box" id="s-assignment">
+    <div class="assignment-badge">Assignment 6</div>
+    <h3 class="en-only">Analyse Your Brand's Market Conditions</h3>
+    <h3 class="zh-only">分析你的品牌市场环境</h3>
+    <div class="sec-text en-only">
+      <p>(1) <strong>Information overload:</strong> Identify two communication channels your brand uses. For each channel, describe the level of clutter and how the brand attempts to cut through it (design, storytelling, frequency).</p>
+      <p>(2) <strong>Maslow mapping:</strong> On which level(s) of Maslow's hierarchy does your brand primarily operate? What basic benefit does it offer, and what enhanced benefits differentiate it from generic alternatives?</p>
+      <p>(3) <strong>Consumer confusion analysis:</strong> How complex is your brand's product range? Does its naming/portfolio structure create clarity or confusion? Compare it briefly to a competitor. Present your analysis (2–3 slides).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>（1）<strong>信息过载：</strong>识别你的品牌使用的两个传播渠道。针对每个渠道，描述竞争杂乱程度以及品牌如何尝试突破（设计、故事叙述、频率）。</p>
+      <p>（2）<strong>马斯洛定位：</strong>你的品牌主要在马斯洛层次的哪个层级运营？它提供什么基础利益，又有哪些增强利益使其区别于通用替代品？</p>
+      <p>（3）<strong>消费者混乱分析：</strong>你的品牌产品线有多复杂？其命名/产品组合结构是否创造了清晰度还是造成了混乱？与竞争对手进行简短比较。展示你的分析（2-3页幻灯片）。</p>
+    </div>
+  </div>
+
+  <!-- READING -->
+  <div class="reading-box">
+    <div class="reading-icon">Read</div>
+    <p>Esch, F.-R. et al. 2014 · Homburg, C. 2017, <em>Marketingmanagement</em>, pp. 25 ff. · Romaniuk, J. &amp; Sharp, B. 2022, <em>How Brands Grow, Part 2</em> · Schwartz, B. 2004, <em>The Paradox of Choice</em></p>
+  </div>
+
+</div><!-- /page -->
+
+<!-- NAV BAR -->
+<nav class="nav-bar">
+  <a href="lecture5-brand-positioning.html" class="nav-btn">← Lecture 5</a>
+  <span class="nav-info">LECTURE 6 · BRAND MANAGEMENT</span>
+  <a href="lecture7-marketing-mix.html" class="nav-btn">Lecture 7 →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-zh').classList.toggle('active', lang==='zh');
+  mlRefreshLabels();
+}
+
+/* ═══════════════════════════════════════
+   MASLOW DRAG & DROP
+   ═══════════════════════════════════════ */
+// Correct level + explanation (shown on correct placement)
+// wrongHint: shown when placed incorrectly (points to right level + why)
+const ML_DATA = {
+  fineart: {
+    level: 5,
+    en: "Correct. Fine Art is the clearest example of Self-Actualisation. It exists outside market logic — it is created and consumed to express identity, explore meaning, and realise human potential. It satisfies no physiological or social need; it is pure inner fulfilment.",
+    zh: "正确。纯艺术是自我实现最清晰的例证。它超越市场逻辑——为表达身份、探索意义、实现人类潜能而创作与欣赏，不满足任何生理或社交需求，是纯粹的内在满足。",
+    wrongHint: { en: "Fine Art belongs at Level 5 (Self-Actualisation). It is not a commercial brand at all — it addresses the deepest human need: meaning, expression, and personal fulfilment. It has no functional or social utility beyond the experience itself.", zh: "纯艺术属于第5层（自我实现）。它根本不是商业品牌——它满足人类最深层的需求：意义、表达与个人实现，除体验本身之外，不具备任何功能或社交效用。" }
+  },
+  leica: {
+    level: 5,
+    en: "Correct. Leica is positioned at Self-Actualisation. It is not a mass-market camera brand — it is a tool for creative expression and artistic vision. Its marketing foregrounds photographers as artists, not consumers. Owning a Leica signals a commitment to the craft of seeing.",
+    zh: "正确。徕卡定位于自我实现层次。它不是大众市场相机品牌，而是创意表达与艺术视野的工具。其营销将摄影师塑造为艺术家，而非消费者。拥有徕卡意味着对摄影艺术的承诺。",
+    wrongHint: { en: "Leica belongs at Level 5 (Self-Actualisation). Unlike mass-market cameras, Leica is sold as an instrument of artistic vision and creative mastery — its buyers are primarily motivated by self-expression and craft, not safety or social belonging.", zh: "徕卡属于第5层（自我实现）。与大众市场相机不同，徕卡作为艺术视野与创意精通的工具销售——其买家主要由自我表达和技艺驱动，而非安全感或社交归属。" }
+  },
+  rolex: {
+    level: 4,
+    en: "Correct. Rolex is the textbook Esteem brand. Its functional value (accurate timekeeping) is almost irrelevant — every €20 watch keeps time. A Rolex is bought to signal achievement, success, and social standing. It is a wearable status symbol.",
+    zh: "正确。劳力士是教科书级的尊重品牌。其功能价值（精准计时）几乎无关紧要——每块20欧元的手表都能计时。购买劳力士是为了彰显成就、成功和社会地位，是可穿戴的身份象征。",
+    wrongHint: { en: "Rolex belongs at Level 4 (Esteem). It is a pure status signal — bought to communicate achievement and social standing, not to meet a physiological need or join a community.", zh: "劳力士属于第4层（尊重）。它是纯粹的地位信号——用于传达成就和社会地位，而非满足生理需求或融入某个社群。" }
+  },
+  lv: {
+    level: 4,
+    en: "Correct. Louis Vuitton operates at the Esteem level — its LV monogram is one of the world's most recognised status signals. The product communicates wealth, taste, and social standing. Functional quality is expected but never the reason for purchase.",
+    zh: "正确。路易威登在尊重层次运营——其LV字母组合是全球最知名的地位信号之一。产品传递财富、品味和社会地位，功能品质是前提但从不是购买理由。",
+    wrongHint: { en: "Louis Vuitton belongs at Level 4 (Esteem). The LV monogram is a social status signal — it communicates affluence and taste to others. This is not about self-actualisation or personal fulfilment, but about how others perceive you.", zh: "路易威登属于第4层（尊重）。LV字母组合是社会地位信号——向他人传递富裕与品味。这不关乎自我实现或个人满足，而是关乎他人如何看待你。" }
+  },
+  porsche: {
+    level: 4,
+    en: "Correct. Porsche is primarily an Esteem brand — a Porsche in the driveway communicates success, taste, and social achievement. Its motorsport heritage adds authenticity, but the purchase motivation for the vast majority of buyers is status and reward, not driving performance per se.",
+    zh: "正确。保时捷主要是尊重品牌——车道上的保时捷传递成功、品味与社会成就。其赛车传承增添了真实感，但绝大多数买家的购买动机是地位和奖励，而非驾驶性能本身。",
+    wrongHint: { en: "Porsche belongs at Level 4 (Esteem). It is a reward and status symbol — buyers signal success to themselves and others. Performance is the rational justification; esteem is the real motivation.", zh: "保时捷属于第4层（尊重）。它是奖励和地位象征——买家向自己和他人彰显成功。性能是理性理由，尊重才是真正的动机。" }
+  },
+  hdavidson: {
+    level: 3,
+    en: "Correct. Harley-Davidson is the canonical Social/Belonging brand. The H.O.G. (Harley Owners Group) with 1M+ members is one of the world's largest brand communities. Buying a Harley means joining a tribe with a shared identity, lifestyle, and values.",
+    zh: "正确。哈雷戴维森是典范性的社交/归属品牌。拥有100多万成员的H.O.G.（哈雷车主群体）是全球最大的品牌社区之一。购买哈雷意味着加入一个具有共同身份、生活方式和价值观的部落。",
+    wrongHint: { en: "Harley-Davidson belongs at Level 3 (Social/Belonging). The product is almost secondary — people buy a Harley to belong to the community of Harley riders, not primarily for transport or status display.", zh: "哈雷戴维森属于第3层（社交/归属）。产品本身几乎是次要的——人们购买哈雷是为了融入哈雷骑手社区，而非主要为了交通或地位展示。" }
+  },
+  nike: {
+    level: 3,
+    en: "Correct. Nike sits at the Social/Belonging level. 'Just Do It' is a tribal identity statement — it recruits consumers into a community of athletes and achievers. Wearing Nike signals membership in that aspirational group, not individual self-actualisation.",
+    zh: "正确。耐克位于社交/归属层次。'Just Do It'是一种部落身份宣言——它将消费者招募进运动员和成就者的社群。穿耐克意味着成为这个有抱负群体的一员，而非个人自我实现。",
+    wrongHint: { en: "Nike belongs at Level 3 (Social/Belonging). Its brand power comes from community and tribal identity — the aspiration to belong to a group of people who 'just do it'. The shoe is functional at Level 1; the brand operates at Level 3.", zh: "耐克属于第3层（社交/归属）。其品牌力量来自社群和部落身份——渴望成为'勇敢去做'那群人的一员。鞋子在第1层具有功能性，但品牌在第3层运营。" }
+  },
+  redbull: {
+    level: 3,
+    en: "Correct. Red Bull is a Social/Belonging brand. Its sponsorship of extreme sports, F1, esports, and music creates a tribe: Red Bull consumers identify as high-energy, risk-taking individuals set apart from the mainstream. The drink gives you wings — the brand gives you an identity.",
+    zh: "正确。红牛是社交/归属品牌。其对极限运动、F1、电竞和音乐的赞助创造了一个部落：红牛消费者将自己认同为有别于主流的高能量、敢于冒险的个体。饮料给你翅膀——品牌给你身份。",
+    wrongHint: { en: "Red Bull belongs at Level 3 (Social/Belonging). The energy drink market is physiologically commoditised — Red Bull's premium is entirely built on tribal identity and lifestyle association, not on the drink's unique functional properties.", zh: "红牛属于第3层（社交/归属）。能量饮料市场在生理层面已商品化——红牛的溢价完全建立在部落身份和生活方式联想上，而非饮料独特的功能特性。" }
+  },
+  volvo: {
+    level: 2,
+    en: "Correct. Volvo is positioned squarely at the Safety level. Its entire brand identity — engineering, advertising, product naming (e.g. 'City Safety') — is built around protection. Safety is not a feature for Volvo; it is the brand.",
+    zh: "正确。沃尔沃的定位明确聚焦于安全层次。其整个品牌形象——工程、广告、产品命名（如'城市安全'）——围绕保护构建。安全对沃尔沃而言不是一项功能，它就是品牌本身。",
+    wrongHint: { en: "Volvo belongs at Level 2 (Safety). Volvo invented the three-point seatbelt and gave the patent away for free — its brand identity is entirely built around engineering safety as a core human value, not status or social belonging.", zh: "沃尔沃属于第2层（安全）。沃尔沃发明了三点式安全带并免费公开专利——其品牌形象完全围绕将工程安全作为核心人类价值观构建，而非地位或社交归属。" }
+  },
+  allianz: {
+    level: 2,
+    en: "Correct. Allianz is the textbook Safety brand. Insurance by definition exists to address the fear of loss and the need for protection. Allianz's positioning — trust, stability, peace of mind — maps directly and exclusively onto Level 2.",
+    zh: "正确。安联是教科书级的安全品牌。保险从本质上就是为了应对对损失的恐惧和对保护的需求而存在。安联的定位——信任、稳定、内心平静——直接且专一地对应第2层。",
+    wrongHint: { en: "Allianz belongs at Level 2 (Safety). Insurance is the purest Safety-level product category — it exists entirely to manage risk and protect against loss. There is no esteem or belonging dimension to buying insurance.", zh: "安联属于第2层（安全）。保险是最纯粹的安全层次产品品类——它完全为管理风险和防范损失而存在，购买保险不涉及任何尊重或归属维度。" }
+  },
+  mcdonalds: {
+    level: 1,
+    en: "Correct. McDonald's is anchored to Physiological needs — hunger and convenience. Its brand is built around speed, consistency, and affordability. The 'I'm lovin' it' campaign adds emotional colour, but the core need addressed is physiological.",
+    zh: "正确。麦当劳锚定于生理需求——饥饿与便利。其品牌围绕速度、一致性和实惠价格构建。'I'm lovin' it'活动增添了情感色彩，但满足的核心需求仍属生理需求。",
+    wrongHint: { en: "McDonald's belongs at Level 1 (Physiological). Despite its advertising suggesting happiness and community, McDonald's primary brand equity is speed, price, and consistent hunger satisfaction — the most basic of physiological needs.", zh: "麦当劳属于第1层（生理需求）。尽管广告暗示快乐与社群，但麦当劳的核心品牌资产是速度、价格和稳定的果腹满足——最基本的生理需求。" }
+  },
+  aldi: {
+    level: 1,
+    en: "Correct. Aldi operates at the Physiological level with a value proposition of maximum quality at the lowest possible price. Its brand identity is built on efficiency and no-frills reliability — it deliberately avoids aspiring to higher Maslow levels.",
+    zh: "正确。奥乐齐在生理需求层次运营，以最低价格提供最大品质为价值主张。其品牌形象建立在效率和朴实可靠性上——它刻意避免追求更高的马斯洛层次。",
+    wrongHint: { en: "Aldi belongs at Level 1 (Physiological). Its entire brand strategy is built around removing everything beyond the physiological core — no loyalty cards, minimal store design, own-label products. The value is in the basics, delivered cheaply.", zh: "奥乐齐属于第1层（生理需求）。其整个品牌战略围绕去除生理核心之外的一切——没有积分卡、极简店铺设计、自有品牌产品。价值在于以低廉价格提供基本需求。" }
+  },
+
+  // ── CHINESE BRANDS ──
+  meituan: {
+    level: 1,
+    en: "Correct. Meituan (美团) is a Physiological needs brand in its purest form — it delivers food on demand to satisfy hunger. As China's dominant food delivery and local services super-app, its core value proposition is speed and convenience in meeting the most fundamental human need.",
+    zh: "正确。美团是最纯粹的生理需求品牌——按需配送食物以解决饥饿。作为中国主导的外卖与本地生活服务超级应用，其核心价值主张是以速度和便利满足人类最基本的需求。",
+    wrongHint: { en: "Meituan belongs at Level 1 (Physiological). Food delivery is the on-demand solution to hunger — the most basic physiological need. Meituan's brand is built on instant gratification of a biological requirement, not on status, belonging, or self-expression.", zh: "美团属于第1层（生理需求）。外卖是按需解决饥饿的方案——最基本的生理需求。美团的品牌建立在即时满足生物性需求上，而非地位、归属感或自我表达。" }
+  },
+  pingan: {
+    level: 2,
+    en: "Correct. Ping An (平安) — whose name literally means 'peace and safety' — is positioned entirely at the Safety level. China's largest insurer built its brand promise directly into its name: the aspiration to protect individuals, families, and businesses against uncertainty and loss.",
+    zh: "正确。平安——其名字字面意思即'平静与安全'——完全定位于安全层次。中国最大的保险公司将品牌承诺直接嵌入其名称中：保护个人、家庭和企业免受不确定性和损失的愿景。",
+    wrongHint: { en: "Ping An belongs at Level 2 (Safety). Its name literally means 'peace and safety' in Chinese — the brand is built entirely around the promise of protection, security, and peace of mind against financial and personal risk.", zh: "平安属于第2层（安全）。其名字字面意思就是'平静与安全'——品牌完全围绕在金融和个人风险方面提供保护、安全感和内心平静的承诺构建。" }
+  },
+  lining: {
+    level: 3,
+    en: "Correct. Li-Ning (李宁) operates at the Social/Belonging level through Chinese national identity and cultural pride. Named after the 1984 Olympic gymnast, its 'Everything is Possible' positioning taps into a powerful community: Chinese consumers who express patriotism and cultural confidence through sportswear — the 'guochao' (国潮) wave.",
+    zh: "正确。李宁通过中国民族身份认同和文化自豪感在社交/归属层次运营。以1984年奥运体操运动员命名，其'一切皆有可能'定位触动了一个强大的社群：通过运动服装表达爱国主义和文化自信的中国消费者——即'国潮'浪潮。",
+    wrongHint: { en: "Li-Ning belongs at Level 3 (Social/Belonging). The 'guochao' (国潮) movement transformed Li-Ning from a domestic sports brand into a tribal identity for a generation of Chinese consumers proud of their cultural heritage — belonging to a community of confident, patriotic youth.", zh: "李宁属于第3层（社交/归属）。'国潮'运动将李宁从国内运动品牌转变为一代为文化传承感到自豪的中国消费者的部落身份认同——融入一个自信、爱国的年轻人社群。" }
+  },
+  moutai: {
+    level: 4,
+    en: "Correct. Moutai (茅台) is the quintessential Esteem brand in Chinese business culture. A bottle of Moutai at a banquet signals power, wealth, and respect. It is the ritual gift for officials and executives — its price (often ¥2,000–3,000+ per bottle) functions as a deliberate, visible status signal. Moutai is not drunk; it is displayed.",
+    zh: "正确。茅台是中国商业文化中典范性的尊重品牌。宴席上一瓶茅台彰显权势、财富与尊重，是馈赠官员和高管的礼仪性礼品——其价格（通常每瓶2,000至3,000元以上）是刻意为之的可见地位信号。茅台不只是用来喝的，更是用来展示的。",
+    wrongHint: { en: "Moutai belongs at Level 4 (Esteem). In Chinese business culture, gifting a bottle of Moutai communicates status, power, and respect more powerfully than almost any other consumer product. Its high price is a feature, not a drawback — it amplifies the status signal.", zh: "茅台属于第4层（尊重）。在中国商业文化中，赠送一瓶茅台所传递的地位、权力和尊重信号几乎超越其他任何消费品。其高价是一种特性而非缺陷——它放大了地位信号。" }
+  },
+  dji: {
+    level: 5,
+    en: "Correct. DJI (大疆) is positioned at Self-Actualisation — it is a tool for creative expression and artistic vision. Its drones and cameras are marketed to filmmakers, photographers, and creators who use technology to realise their artistic potential. DJI's tagline 'The Future of Possible' frames the product as an instrument of human creative expansion, not a consumer gadget.",
+    zh: "正确。大疆定位于自我实现层次——它是创意表达与艺术视野的工具。其无人机和相机面向使用技术实现艺术潜能的电影制作者、摄影师和创作者营销。大疆的口号'未来无所不能'将产品定位为人类创意扩展的工具，而非消费电子产品。",
+    wrongHint: { en: "DJI belongs at Level 5 (Self-Actualisation). Unlike typical tech brands, DJI is not sold on safety or social belonging — it is sold as a creative instrument that enables people to see the world differently and express their artistic vision. The brand addresses the need for creative mastery and self-expression.", zh: "大疆属于第5层（自我实现）。与典型科技品牌不同，大疆不以安全感或社交归属感销售——它作为创意工具销售，使人们能够以不同视角看待世界并表达艺术视野，满足创意精通和自我表达的需求。" }
+  }
+};
+
+const mlPlacements = {}; // id -> level
+
+function mlDragStart(event, id){
+  event.dataTransfer.setData('text/plain', id);
+  document.querySelector(`[data-id="${id}"]`).classList.add('dragging');
+}
+
+function mlDragOver(event, level){
+  event.preventDefault();
+  document.getElementById('mb-' + level).classList.add('drop-target');
+}
+
+function mlDragLeave(level){
+  document.getElementById('mb-' + level).classList.remove('drop-target');
+}
+
+function mlDrop(event, level){
+  event.preventDefault();
+  document.getElementById('mb-' + level).classList.remove('drop-target');
+  const id = event.dataTransfer.getData('text/plain');
+  mlPlace(id, level);
+}
+
+// Touch/click fallback for mobile
+let mlTapPending = null;
+function mlTap(id){
+  if(mlPlacements[id]) return; // already placed
+  // Toggle select state for tap-to-place
+  if(mlTapPending === id){
+    mlTapPending = null;
+    document.querySelector(`[data-id="${id}"]`).style.border = '';
+    return;
+  }
+  if(mlTapPending){
+    document.querySelector(`[data-id="${mlTapPending}"]`).style.border = '';
+  }
+  mlTapPending = id;
+  document.querySelector(`[data-id="${id}"]`).style.border = '1.5px solid var(--green)';
+  // Show instruction
+  showMaslowResult(id);
+}
+
+document.addEventListener('click', function(e){
+  if(mlTapPending && e.target.closest('.maslow-level') && !e.target.closest('.maslow-chips')){
+    const lvl = e.target.closest('.maslow-level');
+    if(lvl){
+      const level = parseInt(lvl.id.replace('ml-',''));
+      mlPlace(mlTapPending, level);
+      mlTapPending = null;
+    }
+  }
+});
+
+const ML_LEVEL_NAMES = {
+  en: {1:'Physiological', 2:'Safety', 3:'Social / Belonging', 4:'Esteem', 5:'Self-Actualisation'},
+  zh: {1:'生理需求', 2:'安全', 3:'社交/归属', 4:'尊重', 5:'自我实现'}
+};
+
+function mlPlace(id, level){
+  if(mlPlacements[id]) return;
+  mlPlacements[id] = level;
+
+  const d = ML_DATA[id];
+  const correct = d.level;
+  const diff = Math.abs(level - correct);
+  const state = diff === 0 ? 'correct' : diff === 1 ? 'close' : 'wrong';
+
+  // Disable chip with state colour
+  const chip = document.querySelector(`[data-id="${id}"]`);
+  if(chip){
+    chip.classList.add('placed');
+    chip.style.border = '';
+  }
+
+  // Add colour-coded tag to pyramid level
+  const dropContainer = document.getElementById('md-' + level);
+  if(dropContainer){
+    const tag = document.createElement('div');
+    tag.className = 'maslow-drop-tag ' + state;
+    const icon = state==='correct' ? '✓ ' : state==='close' ? '~ ' : '✗ ';
+    tag.textContent = icon + (chip ? chip.textContent : id);
+    dropContainer.appendChild(tag);
+  }
+
+  showMaslowResult(id, state, level);
+}
+
+function showMaslowResult(id, state, placedLevel){
+  const d = ML_DATA[id];
+  if(!d) return;
+  const isZh = document.body.classList.contains('zh');
+  const chip = document.querySelector(`[data-id="${id}"]`);
+  const result = document.getElementById('maslow-result');
+
+  const verdictLabels = {
+    correct: { en:'✓ Correct placement', zh:'✓ 放置正确' },
+    close:   { en:'~ Close — but not quite right', zh:'~ 接近——但不完全正确' },
+    wrong:   { en:'✗ Wrong level', zh:'✗ 层级错误' }
+  };
+
+  // Build the explanation text
+  let bodyEn, bodyZh;
+  if(state === 'correct'){
+    bodyEn = d.en;
+    bodyZh = d.zh;
+  } else {
+    const correctName = ML_LEVEL_NAMES.en[d.level];
+    const correctNameZh = ML_LEVEL_NAMES.zh[d.level];
+    const placedName = ML_LEVEL_NAMES.en[placedLevel];
+    const placedNameZh = ML_LEVEL_NAMES.zh[placedLevel];
+    const hint = d.wrongHint || { en: d.en, zh: d.zh };
+    if(state === 'close'){
+      bodyEn = `You placed this at Level ${placedLevel} (${placedName}), but the primary level is Level ${d.level} (${correctName}). ${hint.en}`;
+      bodyZh = `你将其放置于第${placedLevel}层（${placedNameZh}），但主要层级是第${d.level}层（${correctNameZh}）。${hint.zh}`;
+    } else {
+      bodyEn = `This belongs at Level ${d.level} (${correctName}), not Level ${placedLevel} (${placedName}). ${hint.en}`;
+      bodyZh = `这属于第${d.level}层（${correctNameZh}），而非第${placedLevel}层（${placedNameZh}）。${hint.zh}`;
+    }
+  }
+
+  result.className = 'maslow-result ' + state;
+  result.innerHTML =
+    `<div class="maslow-result-verdict ${state} en-only"${isZh?' style="display:none"':''}>${verdictLabels[state].en}</div>`+
+    `<div class="maslow-result-verdict ${state} zh-only"${!isZh?' style="display:none"':''}>${verdictLabels[state].zh}</div>`+
+    `<strong>${chip ? chip.textContent : id}</strong>`+
+    `<div id="maslow-result-text" class="en-only"${isZh?' style="display:none"':''} style="margin-top:6px">${bodyEn}</div>`+
+    `<div id="maslow-result-zh" class="maslow-result-zh zh-only"${!isZh?' style="display:none"':''}>${bodyZh}</div>`;
+  result.style.display = 'block';
+}
+
+function mlRefreshLabels(){
+  const isZh = document.body.classList.contains('zh');
+  // Re-apply en/zh visibility inside dynamically built result panel
+  document.querySelectorAll('.maslow-result .en-only').forEach(el=>el.style.display=isZh?'none':'');
+  document.querySelectorAll('.maslow-result .zh-only').forEach(el=>el.style.display=isZh?'':'none');
+}
+
+/* ═══════════════════════════════════════
+   USP BUILDER
+   ═══════════════════════════════════════ */
+const USP_PRESETS = {
+  coffee: {
+    cat:  { en:'premium espresso system', zh:'高端浓缩咖啡系统' },
+    basic:{ en:'hot caffeinated beverage', zh:'热咖啡因饮品' },
+    enhanced: {
+      en:['single-origin beans','sustainable sourcing','barista craftsmanship','ritual calm','distinctive roast profile','capsule convenience'],
+      zh:['单一产地咖啡豆','可持续采购','咖啡师工艺','仪式感与宁静','独特烘焙风味','胶囊便利性']
+    },
+    target:{ en:'quality-conscious coffee lovers', zh:'注重品质的咖啡爱好者' }
+  },
+  smartphone: {
+    cat:  { en:'smartphone', zh:'智能手机' },
+    basic:{ en:'mobile communication device', zh:'移动通信设备' },
+    enhanced: {
+      en:['camera quality','ecosystem integration','premium design','long battery life','status signal','AI features'],
+      zh:['相机质量','生态系统整合','高端设计','超长续航','地位象征','AI功能']
+    },
+    target:{ en:'tech-forward consumers who value design and performance', zh:'注重设计与性能的科技前沿消费者' }
+  },
+  shoes: {
+    cat:  { en:'running shoe', zh:'跑鞋' },
+    basic:{ en:'footwear for running', zh:'跑步用鞋' },
+    enhanced: {
+      en:['responsive cushioning','athlete endorsement','runner community identity','performance tracking','visible bold design'],
+      zh:['响应式缓震','运动员代言','跑者社群身份','运动表现追踪','醒目大胆的设计']
+    },
+    target:{ en:'serious runners and fitness enthusiasts', zh:'专业跑者和健身爱好者' }
+  },
+  chocolate: {
+    cat:  { en:'chocolate confection', zh:'巧克力糖果' },
+    basic:{ en:'sweet chocolate product', zh:'甜味巧克力产品' },
+    enhanced: {
+      en:['premium cocoa origin','heritage recipe','gifting ritual','luxury packaging','childhood nostalgia'],
+      zh:['优质可可产地','传承配方','赠礼仪式','奢华包装','童年怀旧']
+    },
+    target:{ en:'gift buyers and chocolate connoisseurs', zh:'购礼者与巧克力鉴赏家' }
+  },
+  beer: {
+    cat:  { en:'beer', zh:'啤酒' },
+    basic:{ en:'alcoholic malt beverage', zh:'含酒精麦芽饮料' },
+    enhanced: {
+      en:['regional heritage','craft brewing process','distinctive taste','social occasion ritual','authentic origin story'],
+      zh:['地域传承','精酿工艺','独特口感','社交场合仪式','真实品牌起源故事']
+    },
+    target:{ en:'beer enthusiasts and social drinkers', zh:'啤酒爱好者和社交饮酒者' }
+  },
+  insurance: {
+    cat:  { en:'insurance product', zh:'保险产品' },
+    basic:{ en:'financial protection against risk', zh:'财务风险保障' },
+    enhanced: {
+      en:['trusted long-term reputation','fast digital claims','personalised coverage','expert advisory','transparent pricing'],
+      zh:['可信赖的长期声誉','快速数字理赔','个性化保障方案','专业顾问服务','透明定价']
+    },
+    target:{ en:'families and small business owners', zh:'家庭和小企业主' }
+  },
+  custom: {
+    cat:  { en:'', zh:'' },
+    basic:{ en:'', zh:'' },
+    enhanced:{ en:[], zh:[] },
+    target:{ en:'', zh:'' }
+  }
+};
+
+let uspCurrentCat = null;
+
+function uspPreset(cat){
+  uspCurrentCat = cat;
+  const isZh = document.body.classList.contains('zh');
+  const p = USP_PRESETS[cat];
+
+  // Highlight active button
+  document.querySelectorAll('.usp-preset-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.cat===cat);
+  });
+
+  if(cat === 'custom'){
+    // Clear fields, let user type freely
+    ['usp-cat-label','usp-basic','usp-e1','usp-e2','usp-e3','usp-target'].forEach(id=>{
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('usp-chips-basic').innerHTML = '';
+    document.getElementById('usp-chips-enhanced').innerHTML = '';
+    uspUpdate();
+    return;
+  }
+
+  // Pre-fill fields
+  document.getElementById('usp-cat-label').value = isZh ? p.cat.zh : p.cat.en;
+  document.getElementById('usp-basic').value    = isZh ? p.basic.zh : p.basic.en;
+  document.getElementById('usp-target').value   = isZh ? p.target.zh : p.target.en;
+  // Clear enhanced fields
+  document.getElementById('usp-e1').value = '';
+  document.getElementById('usp-e2').value = '';
+  document.getElementById('usp-e3').value = '';
+
+  // Render suggestion chips
+  const chips = isZh ? p.enhanced.zh : p.enhanced.en;
+  renderUspChips('usp-chips-enhanced', chips, 'enhanced');
+  document.getElementById('usp-chips-basic').innerHTML = '';
+
+  uspUpdate();
+}
+
+function renderUspChips(containerId, chips, type){
+  const c = document.getElementById(containerId);
+  c.innerHTML = '';
+  chips.forEach(chip=>{
+    const el = document.createElement('span');
+    el.className = 'usp-chip';
+    el.textContent = chip;
+    el.onclick = ()=> uspInsertChip(chip, type);
+    c.appendChild(el);
+  });
+}
+
+function uspInsertChip(text, type){
+  if(type === 'enhanced'){
+    // Fill the first empty enhanced field
+    for(const id of ['usp-e1','usp-e2','usp-e3']){
+      const el = document.getElementById(id);
+      if(!el.value.trim()){ el.value = text; break; }
+    }
+  } else {
+    document.getElementById('usp-basic').value = text;
+  }
+  uspUpdate();
+}
+
+function uspUpdate(){
+  const isZh = document.body.classList.contains('zh');
+  const brand    = document.getElementById('usp-brand').value.trim();
+  const catLabel = document.getElementById('usp-cat-label').value.trim();
+  const basic    = document.getElementById('usp-basic').value.trim();
+  const e1       = document.getElementById('usp-e1').value.trim();
+  const e2       = document.getElementById('usp-e2').value.trim();
+  const e3       = document.getElementById('usp-e3').value.trim();
+  const target   = document.getElementById('usp-target').value.trim();
+
+  const enhanced = [e1, e2, e3].filter(Boolean);
+
+  const outEn = document.getElementById('usp-out-en');
+  const outZh = document.getElementById('usp-out-zh');
+
+  if(!brand && !basic && !enhanced.length){
+    outEn.innerHTML = '<span class="usp-empty">Fill in the fields above — your USP will appear here.</span>';
+    outZh.innerHTML = '<span class="usp-empty">填写上方字段，你的USP将在此处生成。</span>';
+    return;
+  }
+
+  const B = brand  ? `<span class="usp-hl">${brand}</span>` : '<span class="usp-hl">[Brand]</span>';
+  const C = catLabel ? `<span class="usp-hl">${catLabel}</span>` : '[product]';
+  const BASIC = basic ? `<span class="usp-hl-green">${basic}</span>` : '[basic benefit]';
+  const T = target ? `<span class="usp-hl-green">${target}</span>` : '[target group]';
+
+  let enhPart = '';
+  if(enhanced.length === 1){
+    enhPart = `<span class="usp-hl-green">${enhanced[0]}</span>`;
+  } else if(enhanced.length === 2){
+    enhPart = `<span class="usp-hl-green">${enhanced[0]}</span> and <span class="usp-hl-green">${enhanced[1]}</span>`;
+  } else if(enhanced.length >= 3){
+    enhPart = `<span class="usp-hl-green">${enhanced[0]}</span>, <span class="usp-hl-green">${enhanced[1]}</span>, and <span class="usp-hl-green">${enhanced[2]}</span>`;
+  }
+
+  let stmtEn = `${B} is a ${C} that provides ${BASIC}`;
+  if(enhPart) stmtEn += ` — and goes beyond the generic by adding ${enhPart}`;
+  if(target)  stmtEn += ` — making it the clear choice for ${T}`;
+  stmtEn += '.';
+  outEn.innerHTML = stmtEn;
+
+  // Chinese version
+  const BZ  = brand    ? `<span class="usp-hl">${brand}</span>`    : '<span class="usp-hl">[品牌]</span>';
+  const CZ  = catLabel ? `<span class="usp-hl">${catLabel}</span>` : '[产品]';
+  const BASICZ = basic  ? `<span class="usp-hl-green">${basic}</span>` : '[基础利益]';
+  const TZ  = target   ? `<span class="usp-hl-green">${target}</span>` : '[目标群体]';
+
+  let enhZh = '';
+  if(enhanced.length >= 1) enhZh = enhanced.map(e=>`<span class="usp-hl-green">${e}</span>`).join('、');
+
+  let stmtZh = `${BZ}是一款${CZ}，提供${BASICZ}`;
+  if(enhZh) stmtZh += `——并通过${enhZh}超越同类产品`;
+  if(target) stmtZh += `——是${TZ}的首选`;
+  stmtZh += '。';
+  outZh.innerHTML = stmtZh;
+}
+
+function uspReset(){
+  ['usp-brand','usp-cat-label','usp-basic','usp-e1','usp-e2','usp-e3','usp-target'].forEach(id=>{
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('usp-chips-basic').innerHTML = '';
+  document.getElementById('usp-chips-enhanced').innerHTML = '';
+  document.querySelectorAll('.usp-preset-btn').forEach(b=>b.classList.remove('active'));
+  uspCurrentCat = null;
+  uspUpdate();
+}
+
+function mlReset(){
+  Object.keys(mlPlacements).forEach(k => delete mlPlacements[k]);
+  document.querySelectorAll('.maslow-chip, .maslow-chips-cn .maslow-chip').forEach(c=>{
+    c.classList.remove('placed','dragging');
+    c.style.border = '';
+  });
+  [1,2,3,4,5].forEach(l=>{
+    const d = document.getElementById('md-'+l);
+    if(d) d.innerHTML = '';
+  });
+  const r = document.getElementById('maslow-result');
+  r.style.display = 'none';
+  r.className = 'maslow-result';
+  r.innerHTML = '';
+  mlTapPending = null;
+}
+</script>
+</body>
+</html>

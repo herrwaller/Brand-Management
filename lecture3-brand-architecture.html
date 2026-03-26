@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lecture 3 — Brand Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7}
+body.en .zh-only{display:none!important}
+body.zh .en-only{display:none!important}
+
+/* HEADER */
+.header{background:#1A1714;padding:0;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(74,138,40,.28) 0%,transparent 70%);pointer-events:none}
+.header-inner{max-width:860px;margin:0 auto;padding:36px 32px 40px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(245,242,235,.45);text-decoration:none;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;margin-bottom:24px;transition:color .15s}
+.back-link:hover{color:rgba(245,242,235,.8)}
+.lecture-tag{display:inline-block;background:rgba(74,138,40,.22);color:#7EC855;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:18px}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:600;color:#F5F2EB;line-height:1.15;margin-bottom:8px}
+.header-title span{color:#7EC855}
+.header-subtitle{font-family:'Noto Serif SC',serif;font-size:18px;color:rgba(245,242,235,.55);margin-bottom:28px}
+
+/* TOC */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.toc-pill{background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);color:rgba(245,242,235,.6);padding:5px 14px;border-radius:20px;font-size:12px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(74,138,40,.2);border-color:rgba(74,138,40,.4);color:#7EC855}
+
+/* LANG TOGGLE */
+.lang-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 32px;display:flex;justify-content:flex-end}
+.lang-wrap{max-width:860px;margin:0 auto;width:100%;display:flex;justify-content:flex-end}
+.lang-btn{background:none;border:1px solid var(--border);padding:5px 16px;border-radius:20px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink2);transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:40px 32px 60px}
+
+/* SECTION */
+.section{margin-bottom:52px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,30px);font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:18px}
+.sec-text{color:var(--ink2);line-height:1.8;margin-bottom:12px}
+.sec-text-zh{color:var(--ink2);line-height:2;margin-bottom:12px}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--green);background:var(--card);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;box-shadow:0 2px 8px var(--border2)}
+.callout p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0}
+.callout .callout-zh{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink3);margin-top:8px;font-style:normal}
+
+/* BRAND TYPE CARDS */
+.brand-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+@media(max-width:640px){.brand-type-grid{grid-template-columns:1fr}}
+.brand-type-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 18px;box-shadow:0 2px 8px var(--border2)}
+.brand-type-num{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.brand-type-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.brand-type-sub{font-size:11px;color:var(--ink3);margin-bottom:10px}
+.brand-type-body{font-size:13px;color:var(--ink2);line-height:1.65}
+.brand-type-examples{margin-top:10px;font-size:12px;font-weight:600;color:var(--green)}
+
+/* LUXURY CHARACTERISTICS */
+.luxury-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
+@media(max-width:540px){.luxury-grid{grid-template-columns:1fr}}
+.luxury-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:0 2px 6px var(--border2);display:flex;gap:14px;align-items:flex-start}
+.luxury-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.luxury-content{}
+.luxury-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.luxury-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* ARCHITECTURE STRATEGY GRID 2x2 */
+.strategy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+@media(max-width:580px){.strategy-grid{grid-template-columns:1fr}}
+.strategy-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:0 2px 8px var(--border2);position:relative}
+.strategy-num{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.strategy-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.strategy-title-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink3);margin-bottom:10px}
+.strategy-body{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-bottom:12px}
+.strategy-meta{display:flex;gap:8px;flex-wrap:wrap}
+.strategy-tag{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500}
+.strategy-tag.pro{background:rgba(74,138,40,.12);color:var(--green)}
+.strategy-tag.con{background:rgba(200,64,32,.10);color:var(--accent)}
+
+/* ROLES CARDS */
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+@media(max-width:640px){.roles-grid{grid-template-columns:1fr}}
+.role-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 18px;box-shadow:0 2px 8px var(--border2)}
+.role-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:12px;margin-bottom:10px}
+.role-badge.flagship{background:rgba(74,138,40,.15);color:var(--green)}
+.role-badge.flanker{background:rgba(200,64,32,.12);color:var(--accent)}
+.role-badge.cashcow{background:rgba(26,23,20,.08);color:var(--ink3)}
+.role-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.role-desc{font-size:13px;color:var(--ink2);line-height:1.65}
+
+/* APPROACH CARDS general */
+.card-grid{display:grid;gap:16px;margin:24px 0}
+.card-grid.col2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:600px){.card-grid.col2{grid-template-columns:1fr}}
+.approach-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:0 2px 6px var(--border2)}
+.approach-card-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.approach-card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.approach-card-body{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+/* ASSIGNMENT */
+.assignment{background:var(--card);border:1px solid rgba(74,138,40,.25);border-radius:var(--r);padding:28px 28px 24px;margin:40px 0 28px;box-shadow:0 2px 12px var(--border2)}
+.assignment-badge{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.assignment-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.assignment-body{font-size:14px;color:var(--ink2);line-height:1.8}
+.assignment-body-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink3);line-height:2;margin-top:12px}
+
+/* READING */
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:20px}
+.reading-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.reading-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.reading-text{font-size:13px;color:var(--ink3);line-height:1.7}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:1px solid var(--border);margin:0 0 48px}
+
+/* NAV BAR */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+
+/* ── BRAND ARCHITECTURE EXPLORER ── */
+.ba-explorer{margin:0 0 16px}
+.ba-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.ba-tab{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:7px 18px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink2);transition:all .15s;font-weight:500}
+.ba-tab.active,.ba-tab:hover{background:var(--green);border-color:var(--green);color:#fff}
+.ba-info-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 20px;margin-bottom:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ba-type-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.ba-type-badge.branded-house{background:rgba(74,138,40,.15);color:var(--green)}
+.ba-type-badge.house-of-brands{background:rgba(200,64,32,.12);color:var(--accent)}
+.ba-type-badge.endorsed{background:rgba(42,95,168,.12);color:#2A5FA8}
+.ba-type-badge.individual{background:rgba(122,64,168,.12);color:#7A40A8}
+.ba-info-desc{font-size:13px;color:var(--ink2);line-height:1.6;flex:1;min-width:200px}
+.ba-tree-wrap{position:relative}
+.ba-tree{position:relative;padding:8px 0 8px;overflow:visible}
+.ba-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible}
+.ba-row{display:flex;justify-content:center;gap:12px;position:relative;z-index:2;margin:10px 0}
+.ba-row.ba-row-2{align-items:flex-start;gap:4px}
+.ba-lbl{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);opacity:.6;text-align:center;margin-bottom:6px}
+.ba-node{border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;position:relative;user-select:none}
+.ba-node.corp{background:#1A1714;color:#F5F2EB;padding:16px 28px;min-width:220px;border:2px solid rgba(74,138,40,.3)}
+.ba-node.corp:hover,.ba-node.corp.sel{border-color:var(--green);box-shadow:0 4px 20px rgba(74,138,40,.3)}
+.ba-node.corp .ba-node-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#F5F2EB;display:block}
+.ba-node.corp .ba-node-sub{font-size:11px;color:rgba(245,242,235,.45);display:block;margin-top:3px;letter-spacing:.04em}
+.ba-node.umbrella{background:var(--card);border:2px solid var(--border);padding:12px 14px;min-width:130px;flex:1;max-width:180px}
+.ba-node.umbrella:hover,.ba-node.umbrella.sel{border-color:var(--green);background:rgba(74,138,40,.06);box-shadow:0 2px 14px rgba(74,138,40,.18)}
+.ba-node.umbrella .ba-node-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--ink);display:block}
+.ba-node.umbrella .ba-node-sub{font-size:11px;color:var(--ink3);display:block;margin-top:2px}
+.ba-prod-group{display:flex;flex-direction:column;gap:5px;flex:1;max-width:180px}
+.ba-node.product{background:var(--bg2);border:1px solid var(--border);padding:7px 10px;border-radius:8px;font-size:12px;color:var(--ink2);max-width:none}
+.ba-node.product:hover,.ba-node.product.sel{border-color:var(--green);background:rgba(74,138,40,.06);color:var(--ink)}
+.ba-node .ba-node-name{font-weight:500}
+.ba-detail{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;margin-top:22px;transition:opacity .2s;min-height:72px}
+.ba-detail-type{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.ba-detail-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.ba-detail-desc{font-size:13.5px;color:var(--ink2);line-height:1.75;margin-bottom:0}
+.ba-detail-desc-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);line-height:2;margin-top:8px;margin-bottom:0}
+.ba-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px;padding:12px 18px;background:var(--bg2);border-radius:var(--r);border:1px solid var(--border2)}
+.ba-legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink3)}
+.ba-legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.ba-legend-dot.corp{background:#1A1714}
+.ba-legend-dot.umbrella{background:var(--card);border:2px solid var(--green)}
+.ba-legend-dot.product{background:var(--bg2);border:1px solid var(--border)}
+@media(max-width:620px){.ba-node.corp{min-width:160px}.ba-node.umbrella{min-width:80px;padding:10px 8px;font-size:14px}.ba-prod-group{max-width:110px}.ba-tab{padding:6px 12px;font-size:12px}}
+</style>
+</head>
+<body class="en">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <a class="back-link" href="index.html">← Course Overview</a>
+    <div class="lecture-tag">Lecture 03</div>
+    <h1 class="header-title en-only">Brand <span>Architecture</span></h1>
+    <h1 class="header-title zh-only" style="font-family:'Noto Serif SC',serif">品牌<span>架构</span></h1>
+    <p class="header-subtitle zh-only">品牌管理基础 · 第三讲</p>
+    <nav class="toc">
+      <a class="toc-pill en-only" href="#s-types">Brand Types</a>
+      <a class="toc-pill zh-only" href="#s-types">品牌类型</a>
+      <a class="toc-pill en-only" href="#s-luxury">Luxury Brands</a>
+      <a class="toc-pill zh-only" href="#s-luxury">奢侈品牌</a>
+      <a class="toc-pill en-only" href="#s-strategies">Architecture Strategies</a>
+      <a class="toc-pill zh-only" href="#s-strategies">架构战略</a>
+      <a class="toc-pill en-only" href="#s-brandedhouse">Branded House</a>
+      <a class="toc-pill zh-only" href="#s-brandedhouse">品牌之家</a>
+      <a class="toc-pill en-only" href="#s-houseofbrands">House of Brands</a>
+      <a class="toc-pill zh-only" href="#s-houseofbrands">品牌之屋</a>
+      <a class="toc-pill en-only" href="#s-roles">Strategic Brand Roles</a>
+      <a class="toc-pill zh-only" href="#s-roles">战略品牌角色</a>
+      <a class="toc-pill en-only" href="#s-explorer">Architecture Explorer</a>
+      <a class="toc-pill zh-only" href="#s-explorer">架构可视化</a>
+      <a class="toc-pill en-only" href="#s-assignment">Assignment 3</a>
+      <a class="toc-pill zh-only" href="#s-assignment">作业 3</a>
+    </nav>
+  </div>
+</div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-bar">
+  <div class="lang-wrap">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')" style="margin-left:6px">中文</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- SECTION 1: THREE BRAND TYPES -->
+  <section class="section" id="s-types">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">Three Basic Brand Types</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">三种基本品牌类型</h2>
+
+    <p class="sec-text en-only">Before discussing how to organise multiple brands within a portfolio, it is essential to understand the basic types of brands that exist in the market. Three fundamental brand types can be distinguished by ownership, quality promise, and market positioning.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">在讨论如何在品牌组合中组织多个品牌之前，必须先了解市场中存在的基本品牌类型。根据所有权、质量承诺和市场定位，可以区分三种基本品牌类型。</p>
+
+    <div class="brand-type-grid">
+      <div class="brand-type-card">
+        <div class="brand-type-num">Type 01</div>
+        <div class="brand-type-title en-only">National Brands</div>
+        <div class="brand-type-title zh-only" style="font-family:'Noto Serif SC',serif">全国品牌</div>
+        <div class="brand-type-sub en-only">Manufacturers' Brands / 制造商品牌</div>
+        <div class="brand-type-body en-only">Branded products of the producing company, sold under a brand name created, owned and promoted by the manufacturer. These carry the highest quality aspiration and are the most heavily marketed.</div>
+        <div class="brand-type-body zh-only" style="font-family:'Noto Serif SC',serif">生产公司旗下的品牌产品，以制造商创建、拥有并推广的品牌名称出售。这类品牌具有最高的质量追求，也是营销力度最大的。</div>
+        <div class="brand-type-examples">Nivea · Coca-Cola · Apple</div>
+      </div>
+
+      <div class="brand-type-card">
+        <div class="brand-type-num">Type 02</div>
+        <div class="brand-type-title en-only">Store Brands</div>
+        <div class="brand-type-title zh-only" style="font-family:'Noto Serif SC',serif">自有品牌</div>
+        <div class="brand-type-sub en-only">Private Label Brands / 私人标签品牌</div>
+        <div class="brand-type-body en-only">Products bearing the brand name of the retailer, not the manufacturer. Quality has risen significantly — in some categories matching or exceeding national brands. Available only in the stores of the respective retail chain.</div>
+        <div class="brand-type-body zh-only" style="font-family:'Noto Serif SC',serif">贴有零售商而非制造商品牌名称的产品。近几十年来质量已大幅提升——在某些品类中甚至与全国品牌相当或超过。仅在相应零售连锁店内有售。</div>
+        <div class="brand-type-examples">Aldi own-brands · REWE Bio · Tesco Finest</div>
+      </div>
+
+      <div class="brand-type-card">
+        <div class="brand-type-num">Type 03</div>
+        <div class="brand-type-title en-only">No-Names</div>
+        <div class="brand-type-title zh-only" style="font-family:'Noto Serif SC',serif">无品牌</div>
+        <div class="brand-type-sub en-only">Generic Brands / 通用品牌</div>
+        <div class="brand-type-body en-only">Unbranded or minimally branded products with low price and fluctuating quality. These attract purely price-sensitive consumers and invest nothing in brand building.</div>
+        <div class="brand-type-body zh-only" style="font-family:'Noto Serif SC',serif">无品牌或弱品牌化的产品，价格低廉，质量参差不齐。这类产品只吸引纯粹价格敏感的消费者，不投入任何品牌建设。</div>
+        <div class="brand-type-examples" style="color:var(--ink3)">Generic supermarket items</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p class="en-only">"Pseudo brands are not brands. They are manufacturer's labels. They are 'me-toos' and have poor positioning, poor quality and poor support." — Director of Marketing, Tesco</p>
+      <p class="callout-zh zh-only" style="font-family:'Noto Serif SC',serif">"伪品牌不是品牌。它们只是制造商的标签——跟风产品，定位模糊、质量低劣、缺乏支撑。" ——乐购营销总监</p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2: LUXURY BRANDS -->
+  <section class="section" id="s-luxury">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">Luxury Brands</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">奢侈品牌</h2>
+
+    <p class="sec-text en-only">Luxury brands occupy a special position in brand management theory and practice. They are not simply premium-priced products — they operate on a fundamentally different logic: desire created through scarcity, heritage, and social aspiration. According to Kapferer (2008), luxury brands exploit a fundamental social mechanism: <em>"desire born of imitating a model"</em> — the desire to emulate the habits of the very wealthy.</p>
+    <p class="sec-text en-only">The price-perception graph for luxury is the inverse of standard demand curves — higher prices can actually increase desirability. This is the <strong>Veblen effect</strong>: making a luxury item more expensive signals exclusivity, which in turn heightens its appeal to aspirational consumers.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">奢侈品牌在品牌管理理论与实践中占据特殊地位。它们不仅仅是高价产品——它们遵循根本不同的逻辑：通过稀缺性、传承和社会抱负创造渴望。根据Kapferer（2008）的观点，奢侈品牌利用了一种基本社会机制："对标杆的模仿所产生的渴望"——渴望效仿极富阶层的生活方式。</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">奢侈品的价格-感知曲线与标准需求曲线相反——更高的价格反而可以增加吸引力。这就是<strong>凡勃伦效应</strong>：将奢侈品定价更高传递出排他性信号，进而提升其对渴望型消费者的吸引力。</p>
+
+    <div class="luxury-grid">
+      <div class="luxury-card">
+        <div class="luxury-icon">🏛️</div>
+        <div class="luxury-content">
+          <div class="luxury-label en-only">Heritage &amp; Provenance</div>
+          <div class="luxury-label zh-only">传承与来源</div>
+          <div class="luxury-desc en-only">A genuine story of origin and craftsmanship. Luxury cannot be invented overnight — it must be earned over generations.</div>
+          <div class="luxury-desc zh-only" style="font-family:'Noto Serif SC',serif">真实的起源故事和工艺传承。奢侈品不能一蹴而就——必须经过几代人的积累。</div>
+        </div>
+      </div>
+      <div class="luxury-card">
+        <div class="luxury-icon">🔒</div>
+        <div class="luxury-content">
+          <div class="luxury-label en-only">Controlled Distribution</div>
+          <div class="luxury-label zh-only">受控分销</div>
+          <div class="luxury-desc en-only">Luxury avoids mass availability. Where and how a product is sold is as important as the product itself.</div>
+          <div class="luxury-desc zh-only" style="font-family:'Noto Serif SC',serif">奢侈品避免大众化供应。产品在哪里销售以及如何销售与产品本身同等重要。</div>
+        </div>
+      </div>
+      <div class="luxury-card">
+        <div class="luxury-icon">📐</div>
+        <div class="luxury-content">
+          <div class="luxury-label en-only">Anti-Laws of Marketing</div>
+          <div class="luxury-label zh-only">反营销法则</div>
+          <div class="luxury-desc en-only">Luxury brands can legitimately ignore normal marketing rules — they can be scarce, expensive, and exclusive by design.</div>
+          <div class="luxury-desc zh-only" style="font-family:'Noto Serif SC',serif">奢侈品牌可以合理地忽略正常营销规则——它们可以在设计上做到稀缺、昂贵和排他。</div>
+        </div>
+      </div>
+      <div class="luxury-card">
+        <div class="luxury-icon">🏆</div>
+        <div class="luxury-content">
+          <div class="luxury-label en-only">Aspirational Quality</div>
+          <div class="luxury-label zh-only">渴望品质</div>
+          <div class="luxury-desc en-only">The luxury brand must be perceived as the best in its category — not just expensive, but genuinely excellent.</div>
+          <div class="luxury-desc zh-only" style="font-family:'Noto Serif SC',serif">奢侈品牌必须被视为其品类中的最佳——不仅仅是昂贵，而是真正卓越。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3: ARCHITECTURE STRATEGIES -->
+  <section class="section" id="s-strategies">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Brand Architecture Strategies</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌架构战略</h2>
+
+    <p class="sec-text en-only">Brand architecture strategy defines both the breadth (which products share a brand name) and depth (how many variations of a brand name exist) of a brand portfolio. It answers three fundamental questions: (1) Which brand names, logos, symbols should we apply to our products? (2) Which different products or services should share the same brand name? (3) How many variations of that brand name should we employ?</p>
+    <p class="sec-text en-only">Brand architecture serves two core purposes: <strong>(a) Clarify brand awareness</strong> — improve consumer understanding of the similarities and differences between individual products; and <strong>(b) Improve brand image</strong> — maximise transfer of brand equity between the corporate brand and individual products.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌架构战略定义了品牌组合的广度（哪些产品共用品牌名称）和深度（存在多少品牌名称的变体）。它回答了三个根本性问题：（1）我们应该对产品使用哪些品牌名称、标志和符号？（2）哪些不同的产品或服务应该共用同一品牌名称？（3）我们应该使用多少个品牌名称的变体？</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌架构有两个核心目的：<strong>（a）明确品牌认知</strong>——改善消费者对各个产品之间异同的理解；<strong>（b）提升品牌形象</strong>——最大化企业品牌与各个产品之间的品牌资产转移。</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 4: BRANDED HOUSE & HOUSE OF BRANDS (four strategy cards) -->
+  <section class="section" id="s-brandedhouse">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">The Four Architecture Strategies</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">四种架构战略</h2>
+
+    <div class="strategy-grid" id="s-houseofbrands">
+
+      <div class="strategy-card">
+        <div class="strategy-num">Strategy 01</div>
+        <div class="strategy-title en-only">Individual Brand Strategy</div>
+        <div class="strategy-title zh-only" style="font-family:'Noto Serif SC',serif">单一品牌战略</div>
+        <div class="strategy-body en-only">One brand = one product = one promise. Ferrero does this: Nutella, Kinder, Raffaello are each completely independent brands with their own identity, personality and target audience.</div>
+        <div class="strategy-body zh-only" style="font-family:'Noto Serif SC',serif">一个品牌=一个产品=一个承诺。费列罗采用此策略：Nutella、健达、拉菲尔各自是拥有独立身份、个性和目标受众的完全独立品牌。</div>
+        <div class="strategy-meta">
+          <span class="strategy-tag pro en-only">+ Clear product profiling</span>
+          <span class="strategy-tag pro zh-only">+ 清晰的产品定位</span>
+          <span class="strategy-tag con en-only">− Full marketing budget per brand</span>
+          <span class="strategy-tag con zh-only">− 每个品牌需要完整营销预算</span>
+        </div>
+      </div>
+
+      <div class="strategy-card">
+        <div class="strategy-num">Strategy 02</div>
+        <div class="strategy-title en-only">Corporate Brand Strategy</div>
+        <div class="strategy-title zh-only" style="font-family:'Noto Serif SC',serif">企业品牌战略</div>
+        <div class="strategy-title en-only" style="font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink3);font-weight:400;margin-top:-2px;margin-bottom:8px">Branded House</div>
+        <div class="strategy-body en-only">One brand name covers all products. Apple does this: iPhone, iPad, Mac, Apple Watch — all carry the same brand. The corporate brand becomes the primary equity vehicle.</div>
+        <div class="strategy-body zh-only" style="font-family:'Noto Serif SC',serif">一个品牌名称涵盖所有产品。苹果采用此策略：iPhone、iPad、Mac、Apple Watch——均使用同一品牌。企业品牌成为主要的资产载体。</div>
+        <div class="strategy-meta">
+          <span class="strategy-tag pro en-only">+ Shared marketing budget</span>
+          <span class="strategy-tag pro zh-only">+ 共享营销预算</span>
+          <span class="strategy-tag con en-only">− Hard to profile individuals</span>
+          <span class="strategy-tag con zh-only">− 难以凸显单品特色</span>
+        </div>
+      </div>
+
+      <div class="strategy-card">
+        <div class="strategy-num">Strategy 03</div>
+        <div class="strategy-title en-only">Umbrella Brand Strategy</div>
+        <div class="strategy-title zh-only" style="font-family:'Noto Serif SC',serif">伞形品牌战略</div>
+        <div class="strategy-title en-only" style="font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink3);font-weight:400;margin-top:-2px;margin-bottom:8px">House of Brands</div>
+        <div class="strategy-body en-only">An umbrella stands for a product group or philosophy. P&amp;G is the archetype: Pampers, Ariel, Gillette are separate brands under P&amp;G's corporate umbrella. Each brand targets different segments.</div>
+        <div class="strategy-body zh-only" style="font-family:'Noto Serif SC',serif">伞形品牌代表产品群或理念。宝洁是典型：帮宝适、碧浪、吉列是P&G企业伞下的独立品牌。每个品牌针对不同细分市场。</div>
+        <div class="strategy-meta">
+          <span class="strategy-tag pro en-only">+ Per-product-line philosophy</span>
+          <span class="strategy-tag pro zh-only">+ 每条产品线各有理念</span>
+          <span class="strategy-tag con en-only">− Risk of brand dilution</span>
+          <span class="strategy-tag con zh-only">− 品牌稀释风险</span>
+        </div>
+      </div>
+
+      <div class="strategy-card">
+        <div class="strategy-num">Strategy 04</div>
+        <div class="strategy-title en-only">Endorsed Brand Strategy</div>
+        <div class="strategy-title zh-only" style="font-family:'Noto Serif SC',serif">背书品牌战略</div>
+        <div class="strategy-body en-only">Two brand names: one endorser, one product brand. Examples: Kellogg's Cornflakes, Nestlé KitKat. The endorser provides credibility; the product brand provides distinctiveness. Combines advantages and risks of both approaches.</div>
+        <div class="strategy-body zh-only" style="font-family:'Noto Serif SC',serif">两个品牌名称：一个背书者，一个产品品牌。例：家乐氏玉米片、雀巢奇巧。背书者提供可信度；产品品牌提供独特性。兼具两种方法的优势与风险。</div>
+        <div class="strategy-meta">
+          <span class="strategy-tag pro en-only">+ Best of both worlds</span>
+          <span class="strategy-tag pro zh-only">+ 兼顾两者优势</span>
+          <span class="strategy-tag con en-only">− Complex brand management</span>
+          <span class="strategy-tag con zh-only">− 品牌管理复杂</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 5: STRATEGIC BRAND ROLES -->
+  <section class="section" id="s-roles">
+    <div class="sec-label en-only">Section 5</div>
+    <div class="sec-label zh-only">第五节</div>
+    <h2 class="sec-title en-only">Strategic Brand Roles</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">战略品牌角色</h2>
+
+    <p class="sec-text en-only">Within a brand portfolio, individual brands are not equally important — they play different strategic roles. Understanding these roles prevents cannibalisation, clarifies budget allocation, and ensures the portfolio addresses all relevant market segments. Using Henkel's detergent portfolio as a case study:</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">在品牌组合中，各个品牌的重要性并不相同——它们扮演不同的战略角色。理解这些角色可以防止相互蚕食，明确预算分配，并确保品牌组合覆盖所有相关市场细分。以汉高洗涤剂组合为案例：</p>
+
+    <div class="roles-grid">
+      <div class="role-card">
+        <span class="role-badge flagship en-only">Flagship Brand</span>
+        <span class="role-badge flagship zh-only">旗舰品牌</span>
+        <div class="role-brand">Persil</div>
+        <div class="role-desc en-only">Highest quality, premium price, heavy advertising investment. Defines the standard for the category. The brand the company is most proud of and most willing to invest in.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">最高质量、溢价定价、大量广告投入。定义品类标准。公司最引以为豪、最愿意投资的品牌。</div>
+      </div>
+
+      <div class="role-card">
+        <span class="role-badge flanker en-only">Flanker / Fighter Brand</span>
+        <span class="role-badge flanker zh-only">侧翼/战斗品牌</span>
+        <div class="role-brand">Spee</div>
+        <div class="role-desc en-only">Positioned as "value for money". Its role is to compete with private labels and protect the flagship brand's market share without cannibalising the premium offering.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">定位为"性价比"。其作用是与自有品牌竞争，保护旗舰品牌的市场份额，同时不蚕食高端产品。</div>
+      </div>
+
+      <div class="role-card">
+        <span class="role-badge cashcow en-only">Cash Cow Brand</span>
+        <span class="role-badge cashcow zh-only">现金奶牛品牌</span>
+        <div class="role-brand">Weisser Riese</div>
+        <div class="role-desc en-only">Minimal advertising, loyal customer base, high profitability, low growth. Generates margin that funds investment in the flagship and flanker brands.</div>
+        <div class="role-desc zh-only" style="font-family:'Noto Serif SC',serif">广告最少、拥有忠实消费群体、利润率高、增长缓慢。产生利润，为旗舰品牌和侧翼品牌的投入提供资金。</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- BRAND ARCHITECTURE EXPLORER -->
+  <section class="section" id="s-explorer">
+    <div class="sec-label en-only">Interactive Tool</div>
+    <div class="sec-label zh-only">互动工具</div>
+    <h2 class="sec-title en-only">Brand Architecture Explorer</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌架构可视化探索</h2>
+    <p class="sec-text en-only">Select a company below to see how its brand architecture unfolds across three levels: the corporate brand, product lines or category brands, and individual products. Click any node to explore its role and positioning.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">选择下方公司，探索其品牌架构如何跨越三个层次展开：企业品牌、产品线或品类品牌，以及单个产品。点击任意节点，深入了解其角色和定位。</p>
+
+    <div class="ba-explorer">
+      <!-- Company selector tabs -->
+      <div class="ba-tabs">
+        <button class="ba-tab active" data-key="apple" onclick="baSelect('apple')">Apple</button>
+        <button class="ba-tab" data-key="pg" onclick="baSelect('pg')">P&amp;G</button>
+        <button class="ba-tab" data-key="nestle" onclick="baSelect('nestle')">Nestlé</button>
+        <button class="ba-tab" data-key="ferrero" onclick="baSelect('ferrero')">Ferrero</button>
+      </div>
+
+      <!-- Architecture type + description -->
+      <div class="ba-info-bar">
+        <span class="ba-type-badge branded-house" id="ba-type-badge">Branded House</span>
+        <p class="ba-info-desc" id="ba-info-desc"></p>
+      </div>
+
+      <!-- Tree visualization -->
+      <div class="ba-tree-wrap">
+        <div class="ba-tree" id="ba-tree">
+          <svg class="ba-svg" id="ba-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+          <!-- Level 0: Corporate Brand -->
+          <div class="ba-lbl en-only">Corporate Brand</div>
+          <div class="ba-lbl zh-only" style="display:none">企业品牌</div>
+          <div class="ba-row ba-row-0">
+            <div class="ba-node corp" id="ba-corp-node" onclick="baClickCorp()">
+              <span class="ba-node-name" id="ba-corp-name">Apple Inc.</span>
+              <span class="ba-node-sub" id="ba-corp-sub">Technology Corporation</span>
+            </div>
+          </div>
+
+          <!-- Level 1: Umbrella / Category Brands -->
+          <div class="ba-lbl en-only" style="margin-top:38px">Product Lines / Category Brands</div>
+          <div class="ba-lbl zh-only" style="display:none;margin-top:38px">产品线 / 品类品牌</div>
+          <div class="ba-row ba-row-1" id="ba-umbrella-row"></div>
+
+          <!-- Level 2: Products -->
+          <div class="ba-lbl en-only" style="margin-top:38px">Products</div>
+          <div class="ba-lbl zh-only" style="display:none;margin-top:38px">产品</div>
+          <div class="ba-row ba-row-2" id="ba-product-row"></div>
+        </div>
+      </div>
+
+      <!-- Detail panel -->
+      <div class="ba-detail" id="ba-detail">
+        <p class="ba-detail-desc en-only">Click any node in the chart above to explore its role and positioning.</p>
+        <p class="ba-detail-desc zh-only">点击上方图表中的任意节点，了解其角色和定位。</p>
+      </div>
+
+      <!-- Legend -->
+      <div class="ba-legend">
+        <div class="ba-legend-item"><div class="ba-legend-dot corp"></div><span class="en-only">Corporate Brand</span><span class="zh-only">企业品牌</span></div>
+        <div class="ba-legend-item"><div class="ba-legend-dot umbrella"></div><span class="en-only">Product Line / Category Brand</span><span class="zh-only">产品线 / 品类品牌</span></div>
+        <div class="ba-legend-item"><div class="ba-legend-dot product"></div><span class="en-only">Individual Product</span><span class="zh-only">单个产品</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ASSIGNMENT -->
+  <section class="section" id="s-assignment">
+    <div class="assignment">
+      <div class="assignment-badge">Assignment 3</div>
+      <div class="assignment-title en-only">Analyse Your Brand's Architecture</div>
+      <div class="assignment-title zh-only" style="font-family:'Noto Serif SC',serif">分析你的品牌架构</div>
+      <p class="assignment-body en-only">Investigate the brand architecture of the company that owns your chosen brand.</p>
+      <ul class="assignment-body en-only" style="padding-left:20px;margin-top:10px">
+        <li>(1) <strong>Classify your brand:</strong> Is it a national brand, store brand, or no-name? Is it a luxury brand?</li>
+        <li>(2) <strong>Identify the architecture strategy:</strong> Does the parent company use an individual, corporate, umbrella, or endorsed brand strategy — or a hybrid? Justify your answer with examples.</li>
+        <li>(3) <strong>Identify the brand's strategic role:</strong> Is it a flagship, flanker, or cash cow brand in its portfolio?</li>
+        <li>(4) <strong>Visualise the brand hierarchy</strong> (2–3 slides).</li>
+      </ul>
+      <p class="assignment-body-zh zh-only" style="font-family:'Noto Serif SC',serif">调查拥有你所选品牌的公司的品牌架构。</p>
+      <ul class="assignment-body-zh zh-only" style="font-family:'Noto Serif SC',serif;padding-left:20px;margin-top:10px">
+        <li>（1）<strong>分类你的品牌：</strong>它是全国品牌、自有品牌还是无品牌？是奢侈品牌吗？</li>
+        <li>（2）<strong>识别架构战略：</strong>母公司使用的是单一品牌、企业品牌、伞形品牌还是背书品牌战略——或者混合策略？用示例证明你的答案。</li>
+        <li>（3）<strong>确定品牌的战略角色：</strong>在其组合中，它是旗舰品牌、侧翼品牌还是现金奶牛品牌？</li>
+        <li>（4）<strong>将品牌层级可视化</strong>（2-3页幻灯片）。</li>
+      </ul>
+    </div>
+
+    <!-- READING -->
+    <div class="reading-box">
+      <div class="reading-icon">📖</div>
+      <div class="reading-content">
+        <div class="reading-label">BM-Reader — Lecture #3</div>
+        <p class="reading-text">Burmann, C. &amp; Meffert, H. 2013; pp. 164 ff. &middot; Kapferer, J. 2008, <em>The new strategic brand management</em>, 4th edition, Kogan, pp. 96–120</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a class="nav-btn" href="lecture2-brand-identity.html">← Previous Lecture</a>
+  <span class="nav-info">Lecture 3 of 10</span>
+  <a class="nav-btn" href="lecture4-brands-and-people.html">Next Lecture →</a>
+</div>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-zh').classList.toggle('active',lang==='zh');
+  // Refresh level labels visibility
+  document.querySelectorAll('.ba-lbl').forEach(el=>{
+    if(el.classList.contains('en-only')) el.style.display = lang==='zh'?'none':'';
+    if(el.classList.contains('zh-only')) el.style.display = lang==='en'?'none':'';
+  });
+  // Re-render explorer with new language
+  if(typeof baCurrentKey!=='undefined') baSelect(baCurrentKey, true);
+}
+
+/* ═══════════════════════════════════════
+   BRAND ARCHITECTURE EXPLORER DATA
+   ═══════════════════════════════════════ */
+const BA_DATA = {
+  apple:{
+    name:'Apple Inc.',nameSub:{en:'Technology Corporation',zh:'科技集团'},
+    type:'branded-house',typeLabel:{en:'Branded House',zh:'品牌之家'},
+    typeDesc:{
+      en:'Apple uses a single master brand across all products. Every product — from iPhone to Mac to Apple Watch — carries the Apple name, creating massive synergies and a unified global brand image.',
+      zh:'Apple采用单一主品牌策略。从iPhone到Mac到Apple Watch，每款产品都冠以Apple品牌，形成强大的协同效应和统一的全球品牌形象。'
+    },
+    corpDesc:{
+      en:'Apple is the world\'s most valuable brand. Its Branded House strategy means every product reinforces the same brand promise: premium quality, seamless design, and ecosystem integration.',
+      zh:'Apple是全球最有价值的品牌。其"品牌之家"策略意味着每款产品都强化同一品牌承诺：卓越品质、无缝设计与生态系统整合。'
+    },
+    categories:[
+      {name:'iPhone',sub:{en:'Smartphone Line',zh:'智能手机系列'},
+       desc:{en:'Apple\'s flagship smartphone line, representing over 50% of revenues. Combines hardware, software, and services in a tightly integrated ecosystem. The iPhone alone redefined an entire industry.',zh:'Apple旗舰智能手机产品线，占营收的50%以上。将硬件、软件和服务紧密整合于一个生态系统，iPhone彻底重新定义了整个行业。'},
+       products:[
+         {name:'iPhone 15 Pro',desc:{en:'Flagship with titanium design, Action Button, and ProMotion display. Targets professional users and brand advocates.',zh:'钛金属设计、动作按钮与ProMotion屏幕的旗舰型号，面向专业用户和品牌忠实追随者。'}},
+         {name:'iPhone 15',desc:{en:'The mainstream model combining flagship features with a more accessible price. Drives volume and market share.',zh:'主流型号，将旗舰功能与更亲民的价格相结合，推动销量和市场份额增长。'}},
+         {name:'iPhone SE',desc:{en:'Entry-level model in a compact form factor. Lowers the barrier to the Apple ecosystem for price-sensitive consumers.',zh:'紧凑型入门级型号，降低了价格敏感型消费者进入Apple生态系统的门槛。'}}
+       ]
+      },
+      {name:'Mac',sub:{en:'Personal Computers',zh:'个人电脑'},
+       desc:{en:'Apple\'s personal computer line, powered by Apple Silicon (M-series chips). Covers both consumer (MacBook Air, iMac) and professional (MacBook Pro, Mac Studio, Mac Pro) segments.',zh:'Apple个人电脑产品线，由苹果自研Apple Silicon（M系列芯片）驱动，覆盖消费级（MacBook Air、iMac）和专业级（MacBook Pro、Mac Studio、Mac Pro）两大细分市场。'},
+       products:[
+         {name:'MacBook Pro',desc:{en:'Professional laptop with M-series chip. Targets creative professionals and developers requiring maximum performance.',zh:'搭载M系列芯片的专业笔记本，面向需要极致性能的创意专业人士和开发者。'}},
+         {name:'MacBook Air',desc:{en:'Ultra-thin, fanless consumer laptop. The world\'s best-selling laptop, designed for everyday use and portability.',zh:'超薄无风扇消费级笔记本，全球最畅销笔记本，专为日常使用和便携性设计。'}},
+         {name:'iMac',desc:{en:'All-in-one desktop computer combining display and computer in one elegant unit. Design icon since 1998.',zh:'集显示器与电脑于一体的一体式台式电脑，自1998年以来一直是设计标志。'}}
+       ]
+      },
+      {name:'iPad',sub:{en:'Tablet Computers',zh:'平板电脑'},
+       desc:{en:'Apple\'s tablet line spanning education, creativity, and professional markets. The iPad created the modern tablet category. With Apple Pencil and Magic Keyboard, it bridges tablet and laptop use cases.',zh:'Apple平板电脑产品线，覆盖教育、创意和专业市场。iPad开创了现代平板品类，配合Apple Pencil和妙控键盘，融合了平板和笔记本的使用场景。'},
+       products:[
+         {name:'iPad Pro',desc:{en:'Professional tablet with M-series chip and OLED display. Targets creative professionals who need desktop-class performance on the go.',zh:'搭载M系列芯片和OLED屏幕的专业平板，面向需要随时使用桌面级性能的创意专业人士。'}},
+         {name:'iPad Air',desc:{en:'Mid-range tablet balancing performance and price. Apple\'s most popular tablet model for power users and students.',zh:'兼顾性能与价格的中端平板，是Apple面向高级用户和学生最受欢迎的平板型号。'}},
+         {name:'iPad mini',desc:{en:'Compact 8.3" tablet optimized for one-handed use and portability. Popular in healthcare and field service applications.',zh:'8.3英寸紧凑型平板，专为单手使用和便携性优化，在医疗和现场服务应用中广受青睐。'}}
+       ]
+      }
+    ]
+  },
+  pg:{
+    name:'Procter & Gamble',nameSub:{en:'Consumer Goods Conglomerate',zh:'消费品集团'},
+    type:'house-of-brands',typeLabel:{en:'House of Brands',zh:'品牌之屋'},
+    typeDesc:{
+      en:'P&G manages 65+ individual consumer brands that stand alone — each with its own name, personality, and positioning. The P&G corporate brand is largely invisible to end consumers.',
+      zh:'P&G管理超过65个独立消费品牌，每个品牌都有自己的名称、个性和定位。P&G企业品牌对终端消费者基本不可见。'
+    },
+    corpDesc:{
+      en:'Procter & Gamble is a House of Brands — its corporate name rarely appears on packaging. This strategy allows maximum flexibility: each brand can target a different segment without the others being affected by association.',
+      zh:'宝洁公司采用"品牌之屋"策略——企业名称几乎不出现在产品包装上。这一策略提供了最大灵活性：每个品牌可针对不同细分市场，互不影响。'
+    },
+    categories:[
+      {name:'Tide',sub:{en:'Laundry Care',zh:'衣物护理'},
+       desc:{en:'Tide is P&G\'s flagship laundry brand with over 70 years of history. It operates with its own marketing, packaging, and brand identity. No P&G logo appears on packaging — consumers know Tide, not P&G.',zh:'Tide是P&G旗下历史超过70年的旗舰洗衣品牌，拥有独立的营销、包装和品牌形象。包装上不显示P&G标志——消费者认识Tide，而非P&G。'},
+       products:[
+         {name:'Tide Original',desc:{en:'Classic liquid laundry detergent. The market leader in the US since its launch in 1946, positioned on superior cleaning power.',zh:'经典液体洗衣液。自1946年上市以来一直是美国市场领导者，以卓越的清洁能力为定位。'}},
+         {name:'Tide Pods',desc:{en:'Concentrated detergent in single-dose pods. A major innovation that simplified laundry and commanded a price premium.',zh:'单剂量胶囊浓缩洗衣剂，简化洗衣程序的重大创新，获得溢价空间。'}},
+         {name:'Tide Free & Gentle',desc:{en:'Fragrance- and dye-free formula targeting sensitive skin. Extends the Tide franchise into a health-conscious segment.',zh:'无香精无染料配方，面向敏感肌肤人群，将Tide品牌延伸至注重健康的细分市场。'}}
+       ]
+      },
+      {name:'Pampers',sub:{en:'Baby Care',zh:'婴儿护理'},
+       desc:{en:'Pampers is the world\'s best-selling diaper brand. As a House of Brands member, it is completely separate from P&G in consumer perception. Its brand personality is built around "Golden Sleep" and infant development.',zh:'Pampers是全球最畅销的纸尿裤品牌。作为品牌之屋的成员，它在消费者认知中与P&G完全独立，品牌个性围绕"黄金睡眠"和婴儿成长构建。'},
+       products:[
+         {name:'Baby Dry',desc:{en:'Core overnight-protection diapers. P&G\'s volume driver in the diaper category, positioned on up-to-12-hours dryness.',zh:'核心夜间防漏纸尿裤，P&G尿布品类的走量主力，以长达12小时干爽为卖点。'}},
+         {name:'Swaddlers',desc:{en:'Newborn-specialized diapers with extra softness and the iconic wetness indicator. The #1 choice in US hospitals.',zh:'新生儿专用尿布，具有超柔软触感和标志性湿度指示条，是美国医院的首选品牌。'}},
+         {name:'Pants',desc:{en:'Training pants for active toddlers learning to walk and use the toilet. A growth segment as diaper-pant hybrids expand globally.',zh:'适合学步期幼儿的训练裤，随着尿布裤混合产品在全球扩张而成为快速增长的细分品类。'}}
+       ]
+      },
+      {name:'Gillette',sub:{en:'Male Grooming',zh:'男士护理'},
+       desc:{en:'Gillette ("The Best a Man Can Get") is P&G\'s leading male grooming brand, acquired in 2005. It retains a fully independent brand identity and competes directly against private labels and Unilever\'s brands.',zh:'Gillette（"男人的选择"）是P&G于2005年收购的领先男士护理品牌，保持完全独立的品牌形象，直接与自有品牌和联合利华品牌竞争。'},
+       products:[
+         {name:'Fusion5 ProGlide',desc:{en:'5-blade razor with FlexBall technology. The premium flagship driving both margin and brand equity in the shaving category.',zh:'配备FlexBall技术的五刃剃须刀，是剃须品类中兼顾利润和品牌资产的高端旗舰产品。'}},
+         {name:'Mach3',desc:{en:'Classic 3-blade razor — still the world\'s best-selling razor model. Targets value-conscious consumers who want reliable quality.',zh:'经典三刃剃须刀，至今仍是全球最畅销的剃须刀型号，面向追求可靠品质的价格敏感型消费者。'}},
+         {name:'Venus',desc:{en:'Women\'s razor sub-brand under the Gillette umbrella. Targets female consumers with tailored designs and campaigns.',zh:'Gillette旗下女性剃须刀子品牌，通过专属设计和营销活动面向女性消费者。'}}
+       ]
+      }
+    ]
+  },
+  nestle:{
+    name:'Nestlé S.A.',nameSub:{en:'Food & Beverage Group',zh:'食品饮料集团'},
+    type:'endorsed',typeLabel:{en:'Endorsed Brands',zh:'背书品牌'},
+    typeDesc:{
+      en:'Nestlé uses an endorsed brand strategy: individual product brands (KitKat, Nespresso, Maggi) carry their own identity but are visibly backed by the Nestlé name as a quality endorsement.',
+      zh:'雀巢采用背书品牌策略：各产品品牌（KitKat、Nespresso、Maggi）保持独立形象，但由雀巢企业名称显性背书，以彰显品质保证。'
+    },
+    corpDesc:{
+      en:'Nestlé uses its corporate brand as a trust endorser across its portfolio. The Nestlé name appears on packaging alongside the product brand name, signalling quality and safety — especially valuable in food and health categories.',
+      zh:'雀巢将企业品牌作为信任背书工具，其品牌名称与产品品牌名称共同出现在包装上，传递品质与安全信号——在食品和健康品类中尤为重要。'
+    },
+    categories:[
+      {name:'KitKat',sub:{en:'Confectionery',zh:'糖果零食'},
+       desc:{en:'One of the world\'s most recognized chocolate brands, endorsed by Nestlé. The global tagline "Have a Break, Have a KitKat" is consistent while local flavour variants (especially in Japan) drive massive brand relevance.',zh:'全球最知名的巧克力品牌之一，由雀巢背书。"休息一下，来片奇巧"的全球统一口号，加之本土口味创新（尤其在日本），极大提升了品牌关联度。'},
+       products:[
+         {name:'KitKat 4-Finger',desc:{en:'The classic format — 4 individual wafer fingers in milk chocolate. The original and volume-driving SKU sold in 100+ countries.',zh:'经典格式——四根独立牛奶巧克力威化棒，是在100多个国家销售的原创走量单品。'}},
+         {name:'KitKat Chunky',desc:{en:'Thicker single-finger format launched to recruit younger, male consumers. A flanker that extended the brand into a new snacking occasion.',zh:'较厚的单指格式，旨在吸引年轻男性消费者，是将品牌延伸至全新零食场景的侧翼产品。'}},
+         {name:'KitKat Dark',desc:{en:'Dark chocolate variant targeting premium, health-conscious adult consumers. Trades on dark chocolate\'s positioning as a more sophisticated indulgence.',zh:'黑巧克力变体，面向高端、注重健康的成年消费者，借助黑巧克力更精致、更克制的享乐定位。'}}
+       ]
+      },
+      {name:'Nespresso',sub:{en:'Premium Coffee System',zh:'高端咖啡系统'},
+       desc:{en:'Nespresso operates as a premium, near-luxury sub-brand of Nestlé. The Nestlé endorsement provides foundational trust, but Nespresso maintains a distinct, upscale identity with its own boutiques and George Clooney ambassador campaigns.',zh:'Nespresso作为雀巢旗下高端、近乎奢侈品的子品牌运营。雀巢背书提供基础信任，但Nespresso通过专属精品店和乔治·克鲁尼代言活动，维持独特的高端品牌形象。'},
+       products:[
+         {name:'Original Line',desc:{en:'The classic espresso capsule system that launched the category. Over 30 coffee varieties in a proprietary capsule format.',zh:'开创品类的经典意式浓缩胶囊系统，提供超过30种专属胶囊格式咖啡。'}},
+         {name:'Vertuo Line',desc:{en:'Larger cup formats using centrifusion technology. Targets American-style coffee drinkers who prefer bigger, milk-based drinks.',zh:'采用离心融合技术的大杯格式，面向偏好美式咖啡和牛奶咖啡的消费者。'}},
+         {name:'Nespresso Pro',desc:{en:'Professional / B2B system for offices and hospitality. Extends the premium positioning into a new channel without diluting the consumer brand.',zh:'面向办公室和酒店业的专业/B2B系统，在不稀释消费者品牌形象的前提下，将高端定位延伸至新渠道。'}}
+       ]
+      },
+      {name:'Maggi',sub:{en:'Culinary & Sauces',zh:'烹饪与酱料'},
+       desc:{en:'Maggi is a culinary heritage brand within Nestlé\'s portfolio, known for instant noodles, bouillon cubes, and sauces. Endorsed by Nestlé, it plays a key role in emerging markets — especially South and Southeast Asia.',zh:'Maggi是雀巢旗下具有悠久传承的烹饪品牌，以方便面、高汤块和酱料著称，由雀巢背书，在新兴市场——尤其是南亚和东南亚——发挥重要作用。'},
+       products:[
+         {name:'Maggi Noodles',desc:{en:'Instant noodles — iconic in South Asia, Africa, and Southeast Asia. Among the first foods billions of consumers experience as children.',zh:'方便面，在南亚、非洲和东南亚极具代表性，是数十亿消费者儿时最早接触的食品之一。'}},
+         {name:'Maggi Bouillon',desc:{en:'Stock cubes and granulated seasoning. A pantry staple across Africa and Asia, used in home cooking to add depth and umami.',zh:'高汤块和颗粒调味料，是非洲和亚洲厨房的必备品，用于家常烹饪以增添鲜味和层次感。'}},
+         {name:'Maggi Sauce',desc:{en:'Liquid seasoning sauce — a complex, umami-rich condiment used across South and Southeast Asian cuisines.',zh:'液体调味酱——口感丰富、鲜味浓郁的调味品，广泛用于南亚和东南亚菜系。'}}
+       ]
+      }
+    ]
+  },
+  ferrero:{
+    name:'Ferrero Group',nameSub:{en:'Confectionery & Snacking',zh:'糖果与零食集团'},
+    type:'individual',typeLabel:{en:'Individual Brands',zh:'单一品牌'},
+    typeDesc:{
+      en:'Ferrero manages several major brands (Nutella, Ferrero Rocher, Kinder) each with a fully independent identity. The Ferrero corporate name is rarely prominent on packaging.',
+      zh:'费列罗管理多个主要品牌（能多益、费列罗巧克力、健达），每个品牌均有完全独立的形象。费列罗企业名称在包装上鲜少突显。'
+    },
+    corpDesc:{
+      en:'The Ferrero Group follows an Individual Brand strategy: Nutella, Kinder, and Ferrero Rocher each have their own distinct brand world. Most consumers enjoy these products without knowing they all come from the same company.',
+      zh:'费列罗集团采用单一品牌策略：能多益、健达和费列罗巧克力各有其独立的品牌世界。大多数消费者在享用这些产品时，并不知晓它们均出自同一家公司。'
+    },
+    categories:[
+      {name:'Nutella',sub:{en:'Sweet Spreads',zh:'甜味涂抹酱'},
+       desc:{en:'Nutella is one of the world\'s most emotionally resonant food brands. It operates as a completely standalone brand — most consumers don\'t know it belongs to Ferrero. Its positioning is rooted in family warmth, childhood, and breakfast rituals.',zh:'能多益是全球情感共鸣最强的食品品牌之一，作为完全独立的品牌运营——大多数消费者不知道它属于费列罗。其定位植根于家庭温情、童年记忆和早餐仪式。'},
+       products:[
+         {name:'Nutella Classic',desc:{en:'The original hazelnut spread. Sold in 160+ countries, with the recipe and jar design largely unchanged since 1964.',zh:'经典榛子酱，销往160多个国家，配方和罐装设计自1964年以来基本保持不变。'}},
+         {name:'Nutella B-ready',desc:{en:'A wafer bar with Nutella filling — Nutella\'s first non-jar format. Enters the on-the-go snacking occasion without cannibalising the jar.',zh:'含能多益馅料的威化棒，是能多益首款非罐装格式，在不蚕食罐装产品的前提下进入便携零食场景。'}},
+         {name:'Nutella Biscuits',desc:{en:'Shortbread biscuits filled with Nutella. A more recent line extension that expands the brand into the biscuit category.',zh:'填有能多益的酥饼，是近年推出的产品线延伸，将品牌拓展至饼干品类。'}}
+       ]
+      },
+      {name:'Ferrero Rocher',sub:{en:'Premium Gifting',zh:'高端礼品'},
+       desc:{en:'Ferrero Rocher is Ferrero\'s premium gifting brand. Unlike Nutella, it actually carries the Ferrero family name, creating a visible connection to the corporate brand — and a premium halo for both.',zh:'费列罗巧克力是费列罗旗下的高端礼品品牌。与能多益不同，它使用了费列罗家族名称，与企业品牌建立了清晰关联，为双方都创造了高端光环效应。'},
+       products:[
+         {name:'Rocher Classic',desc:{en:'The gold-wrapped hazelnut chocolate — the iconic gifting product. Associated with golden luxury, social occasions, and gifting rituals worldwide.',zh:'金箔包装的榛子巧克力——标志性礼品产品，与金色奢华、社交场合和全球赠礼仪式紧密相连。'}},
+         {name:'Raffaello',desc:{en:'White coconut and almond praline — a softer, lighter alternative within the same premium gifting occasion.',zh:'白色椰子杏仁果仁糖，在同一高端礼品场景中提供更清新、更轻盈的选择。'}},
+         {name:'Rondnoir',desc:{en:'Dark chocolate variant of the Rocher format targeting adult fine-chocolate lovers who prefer darker, more intense flavours.',zh:'Rocher格式的黑巧克力变体，面向偏好更浓郁、更强烈口感的成年精品巧克力爱好者。'}}
+       ]
+      },
+      {name:'Kinder',sub:{en:"Children's Confectionery",zh:'儿童糖果'},
+       desc:{en:"Kinder is Ferrero's children's confectionery brand built on the insight that children deserve quality chocolate — not just sugar. It acts as an umbrella brand itself, with several sub-products all carrying the Kinder name.",zh:'健达是费列罗旗下儿童糖果品牌，基于"孩子值得享用优质巧克力，而非仅仅是糖"的消费洞察。它本身就是一个伞形品牌，旗下多款子产品均冠以"Kinder"名称。'},
+       products:[
+         {name:'Kinder Surprise',desc:{en:'Chocolate egg with a toy inside — globally iconic since 1974. The toy drives collectability and emotional bonding far beyond the chocolate itself.',zh:'内含玩具的巧克力蛋，自1974年起在全球享有盛誉。玩具带来的收藏乐趣和情感纽带远超巧克力本身。'}},
+         {name:'Kinder Bueno',desc:{en:'Wafer bar with hazelnut cream and dark chocolate coating — the most premium product in the Kinder range, increasingly targeting young adults beyond children.',zh:'含榛子奶油和黑巧克力涂层的威化棒，是Kinder系列中最高端的产品，目标受众日益扩展至青年成人群体。'}},
+         {name:'Kinder Joy',desc:{en:'An egg-shaped product split in two halves: a creamy sweet and a toy. Developed as an alternative to Kinder Surprise in countries where embedded toys in food are restricted.',zh:'蛋形产品，分为两半：一半是奶油甜品，另一半是玩具，专为食品内嵌玩具受限的国家开发，以替代健达奇趣蛋。'}}
+       ]
+      }
+    ]
+  }
+};
+
+let baCurrentKey = 'apple';
+
+function baSelect(key, langOnly){
+  if(!langOnly) baCurrentKey = key;
+  const d = BA_DATA[baCurrentKey];
+  const isZh = document.body.classList.contains('zh');
+
+  // Update tabs
+  document.querySelectorAll('.ba-tab').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.key===baCurrentKey);
+  });
+
+  // Info bar
+  const badge = document.getElementById('ba-type-badge');
+  badge.textContent = isZh ? d.typeLabel.zh : d.typeLabel.en;
+  badge.className = 'ba-type-badge ' + d.type;
+  document.getElementById('ba-info-desc').textContent = isZh ? d.typeDesc.zh : d.typeDesc.en;
+
+  // Corporate node
+  document.getElementById('ba-corp-name').textContent = d.name;
+  document.getElementById('ba-corp-sub').textContent = isZh ? d.nameSub.zh : d.nameSub.en;
+  document.getElementById('ba-corp-node').classList.remove('sel');
+
+  // Umbrella nodes
+  const umbRow = document.getElementById('ba-umbrella-row');
+  umbRow.innerHTML = '';
+  d.categories.forEach((cat,i)=>{
+    const node = document.createElement('div');
+    node.className = 'ba-node umbrella';
+    node.dataset.idx = i;
+    node.onclick = ()=>baClick('umbrella',i);
+    node.innerHTML = `<span class="ba-node-name">${cat.name}</span><span class="ba-node-sub">${isZh?cat.sub.zh:cat.sub.en}</span>`;
+    umbRow.appendChild(node);
+  });
+
+  // Product groups
+  const prodRow = document.getElementById('ba-product-row');
+  prodRow.innerHTML = '';
+  d.categories.forEach((cat,i)=>{
+    const group = document.createElement('div');
+    group.className = 'ba-prod-group';
+    group.dataset.group = i;
+    cat.products.forEach((prod,j)=>{
+      const node = document.createElement('div');
+      node.className = 'ba-node product';
+      node.onclick = ()=>baClick('product',i,j);
+      node.innerHTML = `<span class="ba-node-name">${prod.name}</span>`;
+      group.appendChild(node);
+    });
+    prodRow.appendChild(group);
+  });
+
+  // Reset detail
+  document.getElementById('ba-detail').innerHTML =
+    `<p class="ba-detail-desc en-only"${isZh?' style="display:none"':''}>Click any node in the chart above to explore its role and positioning.</p>`+
+    `<p class="ba-detail-desc zh-only"${!isZh?' style="display:none"':''}>点击上方图表中的任意节点，了解其角色和定位。</p>`;
+
+  setTimeout(baDrawLines, 60);
+}
+
+function baClick(type, idx, subIdx){
+  const d = BA_DATA[baCurrentKey];
+  const isZh = document.body.classList.contains('zh');
+
+  // Clear selection
+  document.querySelectorAll('.ba-node').forEach(n=>n.classList.remove('sel'));
+
+  let nameEn, descEn, descZh, typeLabel;
+
+  if(type==='corp'){
+    document.getElementById('ba-corp-node').classList.add('sel');
+    nameEn = d.name; typeLabel = 'Corporate Brand';
+    descEn = d.corpDesc.en; descZh = d.corpDesc.zh;
+  } else if(type==='umbrella'){
+    const nodes = document.querySelectorAll('#ba-umbrella-row .ba-node');
+    nodes[idx]?.classList.add('sel');
+    document.querySelectorAll(`#ba-product-row .ba-prod-group[data-group="${idx}"] .ba-node`).forEach(n=>n.classList.add('sel'));
+    const cat = d.categories[idx];
+    nameEn = cat.name; typeLabel = 'Product Line / Category Brand';
+    descEn = cat.desc.en; descZh = cat.desc.zh;
+  } else {
+    document.querySelectorAll('#ba-umbrella-row .ba-node')[idx]?.classList.add('sel');
+    const group = document.querySelector(`#ba-product-row .ba-prod-group[data-group="${idx}"]`);
+    if(group) group.querySelectorAll('.ba-node')[subIdx]?.classList.add('sel');
+    const prod = d.categories[idx].products[subIdx];
+    nameEn = prod.name; typeLabel = 'Product Variant';
+    descEn = prod.desc.en; descZh = prod.desc.zh;
+  }
+
+  document.getElementById('ba-detail').innerHTML =
+    `<div class="ba-detail-type">${typeLabel}</div>`+
+    `<div class="ba-detail-name">${nameEn}</div>`+
+    `<p class="ba-detail-desc en-only"${isZh?' style="display:none"':''}>${descEn}</p>`+
+    `<p class="ba-detail-desc-zh zh-only"${!isZh?' style="display:none"':''}>${descZh}</p>`;
+}
+
+function baClickCorp(){
+  baClick('corp');
+}
+
+function baDrawLines(){
+  const svg = document.getElementById('ba-svg');
+  const tree = document.getElementById('ba-tree');
+  if(!svg||!tree) return;
+  svg.innerHTML='';
+  const tR = tree.getBoundingClientRect();
+  svg.setAttribute('width', tR.width);
+  svg.setAttribute('height', tR.height);
+
+  const addPath = (d, opacity)=>{
+    const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',d); p.setAttribute('stroke','#4A8A28');
+    p.setAttribute('stroke-width','1.5'); p.setAttribute('fill','none');
+    p.setAttribute('stroke-opacity', opacity||0.35);
+    svg.appendChild(p);
+  };
+
+  const midX = el=>{const r=el.getBoundingClientRect(); return r.left+r.width/2-tR.left;};
+  const botY = el=>{const r=el.getBoundingClientRect(); return r.bottom-tR.top;};
+  const topY = el=>{const r=el.getBoundingClientRect(); return r.top-tR.top;};
+
+  const corpEl = document.getElementById('ba-corp-node');
+  if(!corpEl) return;
+  const cx=midX(corpEl), cy=botY(corpEl);
+
+  const umbEls = [...document.querySelectorAll('#ba-umbrella-row .ba-node')];
+  if(!umbEls.length) return;
+
+  const umbX = umbEls.map(midX);
+  const umbTop = topY(umbEls[0]);
+  const midCU = cy+(umbTop-cy)*0.5;
+
+  // Stem from corp down
+  addPath(`M${cx},${cy} L${cx},${midCU}`);
+  // Horizontal bar
+  const minUX=Math.min(...umbX), maxUX=Math.max(...umbX);
+  if(umbX.length>1) addPath(`M${minUX},${midCU} L${maxUX},${midCU}`);
+  // Legs to umbrella nodes
+  umbX.forEach(x=>addPath(`M${x},${midCU} L${x},${umbTop}`));
+
+  // Umbrella to products
+  const prodGroups = [...document.querySelectorAll('#ba-product-row .ba-prod-group')];
+  prodGroups.forEach((grp,i)=>{
+    const umbBot = botY(umbEls[i]);
+    const prods = [...grp.querySelectorAll('.ba-node')];
+    if(!prods.length) return;
+    const pX=prods.map(midX), pTop=topY(prods[0]);
+    const midUP = umbBot+(pTop-umbBot)*0.5;
+    addPath(`M${umbX[i]},${umbBot} L${umbX[i]},${midUP}`, 0.2);
+    const minPX=Math.min(...pX), maxPX=Math.max(...pX);
+    if(pX.length>1) addPath(`M${minPX},${midUP} L${maxPX},${midUP}`, 0.2);
+    pX.forEach(x=>addPath(`M${x},${midUP} L${x},${pTop}`, 0.2));
+  });
+}
+
+// Init on load
+window.addEventListener('load', ()=>baSelect('apple'));
+window.addEventListener('resize', ()=>setTimeout(baDrawLines,60));
+</script>
+</body>
+</html>

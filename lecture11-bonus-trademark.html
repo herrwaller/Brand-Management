@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonus Lecture 11: Trademark Protection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;--blue:#2A5FA8;--amber:#C87A10;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout.accent{border-left-color:var(--accent)}
+.callout.blue{border-left-color:var(--blue)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* Mark type cards */
+.mark-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:560px){.mark-grid{grid-template-columns:1fr}}
+.mark-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;position:relative;overflow:hidden}
+.mark-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.mark-card.tm::before{background:var(--blue)}
+.mark-card.cm::before{background:var(--green)}
+.mark-card.sm::before{background:var(--amber)}
+.mark-card.cert::before{background:var(--accent)}
+.mark-badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:10px}
+.mark-card.tm .mark-badge{background:rgba(42,95,168,.1);color:var(--blue)}
+.mark-card.cm .mark-badge{background:rgba(74,138,40,.1);color:var(--green)}
+.mark-card.sm .mark-badge{background:rgba(200,122,16,.1);color:var(--amber)}
+.mark-card.cert .mark-badge{background:rgba(200,64,32,.08);color:var(--accent)}
+.mark-card h4{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.mark-card p{font-size:13px;color:var(--ink3);line-height:1.6;margin:0}
+
+/* Strength spectrum */
+.strength-list{list-style:none;padding:0;margin:20px 0}
+.strength-list li{display:flex;gap:0;margin-bottom:10px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+.strength-bar{width:6px;flex-shrink:0}
+.strength-body{padding:16px 20px;flex:1;background:var(--card)}
+.strength-rank{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.strength-body h4{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.strength-body p{font-size:13px;color:var(--ink3);line-height:1.6;margin:0}
+.strength-body .example{font-size:12px;color:var(--ink3);font-style:italic;margin-top:5px;padding-top:5px;border-top:1px solid var(--border2)}
+
+/* USA / China benefits list */
+.benefit-list{list-style:none;padding:0;margin:16px 0}
+.benefit-list li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2);font-size:14px;color:var(--ink2);line-height:1.55;align-items:flex-start}
+.benefit-list li:last-child{border-bottom:none}
+.benefit-list li::before{content:'→';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* China checklist */
+.check-list{list-style:none;padding:0;margin:16px 0}
+.check-list li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2);font-size:14px;color:var(--ink2);align-items:flex-start}
+.check-list li:last-child{border-bottom:none}
+.check-num{background:var(--ink);color:#F5F2EB;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px}
+
+/* USA vs China comparison */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:560px){.compare-grid{grid-template-columns:1fr}}
+.compare-card{border-radius:var(--r);padding:22px 24px}
+.compare-card.usa{background:rgba(42,95,168,.07);border:1px solid rgba(42,95,168,.2)}
+.compare-card.cn{background:rgba(200,64,32,.06);border:1px solid rgba(200,64,32,.18)}
+.compare-card h4{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.compare-card.usa h4{color:var(--blue)}
+.compare-card.cn h4{color:var(--accent)}
+.compare-item{font-size:13.5px;color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--border2);line-height:1.5}
+.compare-item:last-child{border-bottom:none}
+.compare-item strong{color:var(--ink);font-weight:600}
+
+/* Reference link pill */
+.ref-link{display:inline-block;margin:4px 6px 4px 0;font-size:11.5px;font-weight:600;color:var(--green);text-decoration:none;border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;transition:all .15s}
+.ref-link:hover{background:rgba(74,138,40,.08);border-color:var(--green)}
+.ref-link.blue{color:var(--blue);border-color:rgba(42,95,168,.3)}
+.ref-link.blue:hover{background:rgba(42,95,168,.07);border-color:var(--blue)}
+.ref-links{margin-top:16px}
+
+/* Case study cards */
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:560px){.case-grid{grid-template-columns:1fr}}
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.case-card.starbucks::before{background:var(--green)}
+.case-card.boylondon::before{background:var(--ink)}
+.case-year{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.case-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.case-card p{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
+.case-lesson{font-size:12px;color:var(--ink3);background:var(--bg2);border-radius:6px;padding:8px 12px;margin-top:8px;line-height:1.5}
+
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin:32px 0;display:flex;gap:14px;align-items:flex-start}
+.reading-icon{background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.reading-box p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ink3);margin:0;line-height:1.6}
+
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body class="en">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Bonus · Lecture 11</div>
+    </div>
+    <h1 class="en-only">Trademark Protection</h1>
+    <h1 class="zh-only">商标保护</h1>
+    <div class="hero-zh en-only">商标保护 · 美国与中国</div>
+    <div class="toc-pills">
+      <a href="#s-definition" class="toc-pill en-only">What is a Trademark?</a>
+      <a href="#s-definition" class="toc-pill zh-only">什么是商标？</a>
+      <a href="#s-spectrum" class="toc-pill en-only">Strength Spectrum</a>
+      <a href="#s-spectrum" class="toc-pill zh-only">保护强度</a>
+      <a href="#s-usa" class="toc-pill en-only">USA</a>
+      <a href="#s-usa" class="toc-pill zh-only">美国</a>
+      <a href="#s-china" class="toc-pill en-only">China</a>
+      <a href="#s-china" class="toc-pill zh-only">中国</a>
+      <a href="#s-china" class="toc-pill en-only">Case Studies</a>
+      <a href="#s-china" class="toc-pill zh-only">案例研究</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- S1: What is a Trademark -->
+  <div class="section" id="s-definition">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">What is a Trademark?</h2>
+    <h2 class="sec-title zh-only">什么是商标？</h2>
+
+    <div class="sec-text en-only">
+      <p>A trademark is a word, symbol, design, or combination thereof that <strong>distinguishes the goods or services of one party from those of others</strong>. Trademark law does not protect the product itself — it protects the signal that identifies who made it.</p>
+      <p>The law recognises four main types of marks, each protecting a different kind of commercial identifier.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>商标是一个词语、符号、图案或其组合，用于<strong>将一方的商品或服务与其他人的商品或服务区分开来</strong>。商标法不保护产品本身——它保护的是标识制造者身份的信号。</p>
+      <p>法律认可四种主要类型的标志，每种保护不同类型的商业标识符。</p>
+    </div>
+
+    <div class="mark-grid">
+      <div class="mark-card tm">
+        <div class="mark-badge en-only">Trademark ®</div>
+        <div class="mark-badge zh-only">商标 ®</div>
+        <h4 class="en-only">Trademark</h4>
+        <h4 class="zh-only">商标</h4>
+        <p class="en-only">Identifies the commercial origin of goods. Can be a word, logo, shape, colour, or sound. Example: the Nike swoosh, or the shape of a Coca-Cola bottle.</p>
+        <p class="zh-only">标识商品的商业来源。可以是文字、标志、形状、颜色或声音。例如：耐克的勾形标志，或可口可乐瓶的形状。</p>
+      </div>
+      <div class="mark-card cm">
+        <div class="mark-badge en-only">Collective Mark</div>
+        <div class="mark-badge zh-only">集体商标</div>
+        <h4 class="en-only">Collective Mark</h4>
+        <h4 class="zh-only">集体商标</h4>
+        <p class="en-only">Used by members of a collective organisation — an association, cooperative, or union — to indicate membership and shared standards. Example: "CPA" for certified public accountants.</p>
+        <p class="zh-only">由集体组织（协会、合作社或工会）成员使用，表明会员资格和共同标准。例如：注册会计师的"CPA"标志。</p>
+      </div>
+      <div class="mark-card sm">
+        <div class="mark-badge en-only">Service Mark ℠</div>
+        <div class="mark-badge zh-only">服务标志 ℠</div>
+        <h4 class="en-only">Service Mark</h4>
+        <h4 class="zh-only">服务标志</h4>
+        <p class="en-only">Functions identically to a trademark, but identifies services rather than physical goods. Example: "FedEx" for delivery services, "McKinsey" for consulting.</p>
+        <p class="zh-only">功能与商标相同，但标识的是服务而非实物商品。例如：快递服务的"FedEx"，咨询服务的"麦肯锡"。</p>
+      </div>
+      <div class="mark-card cert">
+        <div class="mark-badge en-only">Certification Mark</div>
+        <div class="mark-badge zh-only">认证标志</div>
+        <h4 class="en-only">Certification Mark</h4>
+        <h4 class="zh-only">认证标志</h4>
+        <p class="en-only">Certifies that goods or services meet specific standards of origin, quality, or characteristics. Example: "Woolmark" for pure new wool; "EU Organic" for certified produce.</p>
+        <p class="zh-only">证明商品或服务符合特定的产地、质量或特性标准。例如：纯羊毛的"羊毛标志"；经认证农产品的"欧盟有机认证"。</p>
+      </div>
+    </div>
+
+    <div class="callout en-only">
+      <strong>Physical use requirement:</strong> To own a mark it must be used physically — on the goods, on packaging, at point-of-sale, on invoices or shipping documents, or in catalogs and websites. <strong>No use = No ownership.</strong> You cannot simply register an idea and sit on it.
+    </div>
+    <div class="callout zh-only">
+      <strong>实际使用要求：</strong>要拥有商标，必须实际使用——在商品上、在包装上、在销售终端、在发票或运输单据上，或在目录和网站中。<strong>不使用 = 无所有权。</strong>你不能仅仅注册一个创意然后搁置不用。
+    </div>
+  </div>
+
+  <!-- S2: Strength Spectrum -->
+  <div class="section" id="s-spectrum">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">The Trademark Strength Spectrum</h2>
+    <h2 class="sec-title zh-only">商标保护强度</h2>
+
+    <div class="sec-text en-only">
+      <p>Not all trademarks are equally protectable. Courts recognise five categories of distinctiveness — from the strongest protection to names that cannot be protected at all. The more distinctive the mark, the broader the legal protection it receives.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>并非所有商标都同样受到保护。法院认定五种显著性类别——从最强保护到根本无法保护的名称。商标越具有显著性，获得的法律保护范围就越广。</p>
+    </div>
+
+    <ul class="strength-list">
+      <li>
+        <div class="strength-bar" style="background:#4A8A28"></div>
+        <div class="strength-body">
+          <div class="strength-rank" style="color:#4A8A28">Strongest · 最强</div>
+          <h4 class="en-only">① Coined / Fantasy Names</h4>
+          <h4 class="zh-only">① 杜撰/幻想名称</h4>
+          <p class="en-only">Invented words with no prior meaning in any language. Entitled to the widest scope of protection — even phonetically similar names are likely to be held infringing.</p>
+          <p class="zh-only">在任何语言中均无先前含义的发明词语。享有最广泛的保护范围——即使是发音相似的名称也可能被认定为侵权。</p>
+          <div class="example en-only">Examples: KODAK, OREO — variants like MODAK, DODAK or DOREO for similar goods will be held infringing.</div>
+          <div class="example zh-only">例如：KODAK、OREO——类似MODAK、DODAK或DOREO的变体用于类似商品将被认定为侵权。</div>
+        </div>
+      </li>
+      <li>
+        <div class="strength-bar" style="background:#2A5FA8"></div>
+        <div class="strength-body">
+          <div class="strength-rank" style="color:#2A5FA8">Very Strong · 非常强</div>
+          <h4 class="en-only">② Arbitrary Names</h4>
+          <h4 class="zh-only">② 任意名称</h4>
+          <p class="en-only">Real words with no logical connection to the product. The word itself exists, but its use for this product is unrelated — which creates strong distinctiveness.</p>
+          <p class="zh-only">真实存在的词语，但与产品没有逻辑关联。该词本身存在，但其用于该产品是无关联的——这创造了强烈的显著性。</p>
+          <div class="example en-only">Examples: APPLE for computers, SHELL for oil products, SUN for software — all arbitrary choices with no descriptive link to the product.</div>
+          <div class="example zh-only">例如：计算机的APPLE，石油产品的SHELL，软件的SUN——都是与产品无描述性关联的任意选择。</div>
+        </div>
+      </li>
+      <li>
+        <div class="strength-bar" style="background:#C87A10"></div>
+        <div class="strength-body">
+          <div class="strength-rank" style="color:#C87A10">Moderate · 中等</div>
+          <h4 class="en-only">③ Suggestive Names</h4>
+          <h4 class="zh-only">③ 暗示性名称</h4>
+          <p class="en-only">Words that hint at a product quality or characteristic without directly describing it. Requires consumer imagination to make the connection. Weaker than coined/arbitrary — similar names may not infringe.</p>
+          <p class="zh-only">暗示产品质量或特征但不直接描述的词语。需要消费者的想象才能建立联系。比杜撰/任意名称更弱——类似名称可能不构成侵权。</p>
+          <div class="example en-only">Examples: MILKY WAY (chocolate), COPPERTONE (sunscreen) — "CREAMY WAY" or "BRONZETONE" might be held non-infringing.</div>
+          <div class="example zh-only">例如：MILKY WAY（巧克力），COPPERTONE（防晒霜）——"CREAMY WAY"或"BRONZETONE"可能被认定为不侵权。</div>
+        </div>
+      </li>
+      <li>
+        <div class="strength-bar" style="background:#C84020"></div>
+        <div class="strength-body">
+          <div class="strength-rank" style="color:#C84020">Weak initially · 初期较弱</div>
+          <h4 class="en-only">④ Descriptive Names &amp; Surnames</h4>
+          <h4 class="zh-only">④ 描述性名称与姓氏</h4>
+          <p class="en-only">Words that describe a product feature or characteristic, geographic origin, or surnames. Not protected immediately — protection is acquired only when the name gains <em>secondary meaning</em> through sustained use, so consumers associate it with a single source.</p>
+          <p class="zh-only">描述产品特征或特性、地理来源的词语，或姓氏。不立即受保护——只有当名称通过持续使用获得<em>第二含义</em>后才受保护，即消费者将其与单一来源联系起来。</p>
+          <div class="example en-only">Examples: TASTEE BREAD, SUPERIOR WATERBEDS, FORD for cars, WATERMAN for pens, SOUTHWEST for airline services — none protected on first use; all acquired distinctiveness over time.</div>
+          <div class="example zh-only">例如：TASTEE BREAD、SUPERIOR WATERBEDS、汽车的FORD、钢笔的WATERMAN——首次使用时均未受保护；均随时间积累了显著性。</div>
+        </div>
+      </li>
+      <li>
+        <div class="strength-bar" style="background:#aaa"></div>
+        <div class="strength-body">
+          <div class="strength-rank" style="color:#888">Not protectable · 不可保护</div>
+          <h4 class="en-only">⑤ Generic Names</h4>
+          <h4 class="zh-only">⑤ 通用名称</h4>
+          <p class="en-only">The common name for a product category. Cannot serve as a trademark. Cannot acquire distinctiveness — it is simply part of the language. Brands can also <em>lose</em> protection by becoming generic through widespread use.</p>
+          <p class="zh-only">产品类别的通用名称。不能作为商标。不能获得显著性——它只是语言的一部分。品牌也可能因被广泛使用而变成通用词，从而<em>失去</em>保护。</p>
+          <div class="example en-only">Example: ASPIRIN was once Bayer's registered trademark. Through widespread generic use it lost protection in many countries and became the common name for the medicine.</div>
+          <div class="example zh-only">例如：ASPIRIN（阿司匹林）曾是拜耳公司的注册商标。由于被广泛通用使用，它在许多国家失去了保护，成为该药物的通用名称。</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="callout en-only">
+      <strong>Own name as a mark:</strong> You may use your own name in business, but there is no general right to use your own name if it conflicts with an existing mark — even if it is genuinely your own name. There is no point in changing your name to "Johnny Walker" if you plan to sell whisky.
+    </div>
+    <div class="callout zh-only">
+      <strong>以自己的名字作为商标：</strong>您可以在商业中使用自己的名字，但如果它与现有商标冲突，则没有使用自己名字的普遍权利——即使它确实是您自己的名字。如果你打算卖威士忌，改名为"约翰尼·沃克"是没有意义的。
+    </div>
+  </div>
+
+  <!-- S3: USA -->
+  <div class="section" id="s-usa">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Trademark Protection in the USA</h2>
+    <h2 class="sec-title zh-only">美国的商标保护</h2>
+
+    <div class="sec-text en-only">
+      <p>The United States operates a <strong>first-to-use</strong> system: rights in a trademark are acquired through actual use in commerce, not through filing paperwork. The party who first uses a mark in connection with specific goods or services is the owner.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>美国实行<strong>先使用</strong>制度：商标权通过在商业中实际使用获得，而非通过申请文件获得。最先将商标用于特定商品或服务的一方即为权利人。</p>
+    </div>
+
+    <div class="callout blue en-only">
+      <strong>Key principle:</strong> You can sue for infringement of an unregistered mark. Registration ® is not legally required — but it makes enforcement far easier and unlocks significant legal benefits.
+    </div>
+    <div class="callout blue zh-only">
+      <strong>核心原则：</strong>您可以就未注册商标的侵权行为提起诉讼。法律上不要求注册®——但注册使维权容易得多，并解锁了重要的法律利益。
+    </div>
+
+    <div class="sec-text en-only"><p style="margin-top:8px"><strong>Benefits of Federal Registration:</strong></p></div>
+    <div class="sec-text-zh zh-only"><p style="margin-top:8px"><strong>联邦注册的好处：</strong></p></div>
+
+    <ul class="benefit-list en-only">
+      <li>Prima facie evidence of exclusive right to use the mark nationwide</li>
+      <li>Constructive use everywhere in the USA, as of the filing date</li>
+      <li>Starts the 5-year clock to "incontestability" — the mark becomes nearly unassailable</li>
+      <li>U.S. Customs Service will assist against infringing imports</li>
+      <li>Others will find the mark in searches and won't adopt a similar one (cheap policing)</li>
+      <li>By filing an application, you can reserve a mark based on <em>intended use</em> before actual launch</li>
+    </ul>
+    <ul class="benefit-list zh-only">
+      <li>商标在全国范围内独占使用权的初步证据</li>
+      <li>自申请日起在美国全境享有推定使用权</li>
+      <li>启动5年"不可争议性"倒计时——商标变得几乎无懈可击</li>
+      <li>美国海关将协助打击侵权进口商品</li>
+      <li>他人在检索中能发现该商标，不会采用类似标志（低成本监控）</li>
+      <li>通过提交申请，可以基于<em>意图使用</em>在实际推出前预留商标</li>
+    </ul>
+
+    <div class="sec-text en-only"><p style="margin-top:16px"><strong>What is infringement?</strong> Use of a mark in commerce in such a manner — considering the goods or services involved — as to create a <em>likelihood of confusion</em> among purchasers. Classic example: SIEMENS vs. SIEMEINZ — confusingly similar in appearance and sound.</p>
+    <p style="margin-top:10px"><strong>What is NOT infringement?</strong> Fair use to describe. Using a descriptive term in good faith to describe your own goods or services is not infringement — even if that term is someone else's registered mark.</p>
+    <p style="margin-top:10px"><strong>Duration:</strong> A trademark right lasts as long as the mark is used in commerce — provided it does not become generic and does not lose its character as a single-source indicator.</p>
+    </div>
+    <div class="sec-text-zh zh-only"><p style="margin-top:16px"><strong>什么是侵权？</strong>在商业中以某种方式使用商标——考虑到所涉及的商品或服务——在购买者中造成<em>混淆可能性</em>。经典案例：SIEMENS vs. SIEMEINZ——外观和声音上容易混淆。</p>
+    <p style="margin-top:10px"><strong>什么不构成侵权？</strong>描述性合理使用。以善意使用描述性术语来描述自己的商品或服务不构成侵权——即使该术语是他人的注册商标。</p>
+    <p style="margin-top:10px"><strong>有效期：</strong>商标权在商标被用于商业期间持续有效——前提是它不变成通用词，且不失去其作为单一来源标识符的特征。</p>
+    </div>
+
+    <div class="ref-links">
+      <a class="ref-link blue" href="https://www.uspto.gov/trademarks/basics" target="_blank">→ USPTO Trademark Basics</a>
+      <span class="en-only" style="font-size:12px;color:var(--ink3)">(VPN may be required from China)</span>
+      <span class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3)">（中国访问可能需要VPN）</span>
+    </div>
+  </div>
+
+  <!-- S4: China -->
+  <div class="section" id="s-china">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">Trademark Protection in China</h2>
+    <h2 class="sec-title zh-only">中国的商标保护</h2>
+
+    <div class="sec-text en-only">
+      <p>China operates a <strong>first-to-file</strong> system — the opposite of the USA. The first party to register a mark with the Chinese Trademark Office (CTMO) gains legal protection, regardless of who first used the mark. This creates a significant risk for foreign brands: <strong>register your trademark in China before entering the market.</strong></p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>中国实行<strong>先申请</strong>制度——与美国相反。最先向中国商标局（CTMO）注册商标的一方获得法律保护，无论谁最先使用该商标。这对外国品牌构成重大风险：<strong>在进入中国市场之前先注册你的商标。</strong></p>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card usa">
+        <h4>🇺🇸 USA — First to Use</h4>
+        <div class="compare-item"><strong>Rights begin:</strong> First use in commerce</div>
+        <div class="compare-item"><strong>Registration:</strong> Not required, but recommended</div>
+        <div class="compare-item"><strong>Duration:</strong> As long as mark is used</div>
+        <div class="compare-item"><strong>Unregistered rights:</strong> Enforceable</div>
+        <div class="compare-item"><strong>Foreign marks:</strong> Protected if used in US commerce</div>
+      </div>
+      <div class="compare-card cn">
+        <h4>🇨🇳 China — First to File</h4>
+        <div class="compare-item"><strong>Rights begin:</strong> Filing date at CTMO</div>
+        <div class="compare-item"><strong>Registration:</strong> Essential — file before market entry</div>
+        <div class="compare-item"><strong>Duration:</strong> 10 years, renewable</div>
+        <div class="compare-item"><strong>Unregistered rights:</strong> Generally not enforceable</div>
+        <div class="compare-item"><strong>Foreign marks:</strong> Not protected unless registered in China</div>
+      </div>
+    </div>
+
+    <div class="sec-text en-only"><p><strong>Conditions for filing a trademark in China:</strong></p></div>
+    <div class="sec-text-zh zh-only"><p><strong>在中国申请商标的条件：</strong></p></div>
+
+    <ul class="check-list en-only">
+      <li><span class="check-num">1</span><span><strong>Legal</strong> — not contrary to public order, morality, or prohibited signs</span></li>
+      <li><span class="check-num">2</span><span><strong>Distinctive</strong> — capable of distinguishing your goods/services from others</span></li>
+      <li><span class="check-num">3</span><span><strong>Not Generic</strong> — you cannot file an apple logo for selling apples; you cannot file ASPIRIN for aspirin</span></li>
+      <li><span class="check-num">4</span><span><strong>Available</strong> — not already registered by another party. Check the CTMO database at <a href="https://chinatrademarkoffice.com" target="_blank" style="color:var(--green)">chinatrademarkoffice.com</a></span></li>
+    </ul>
+    <ul class="check-list zh-only">
+      <li><span class="check-num">1</span><span><strong>合法</strong> — 不违反公共秩序、道德或禁止性标志</span></li>
+      <li><span class="check-num">2</span><span><strong>具有显著性</strong> — 能够将你的商品/服务与他人区分开来</span></li>
+      <li><span class="check-num">3</span><span><strong>非通用名称</strong> — 不能为销售苹果申请苹果标志；不能为阿司匹林申请ASPIRIN</span></li>
+      <li><span class="check-num">4</span><span><strong>可用</strong> — 尚未被他人注册。在 <a href="https://chinatrademarkoffice.com" target="_blank" style="color:var(--green)">chinatrademarkoffice.com</a> 查询CTMO数据库</span></li>
+    </ul>
+
+    <div class="sec-text en-only">
+      <p style="margin-top:24px"><strong>Usage requirement:</strong> A registered trademark must be used within <strong>3 years</strong> of registration — otherwise it can be cancelled. You cannot register and sit on a mark indefinitely.</p>
+      <p style="margin-top:10px"><strong>Validity:</strong> 10 years, renewable for successive 10-year periods. Renewal must be applied for within 6 months before expiry.</p>
+      <p style="margin-top:10px"><strong>Registration agent:</strong> Foreign companies are required to file through a registered Chinese trademark agent. A good agent also monitors for conflicting new applications and handles renewals.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p style="margin-top:24px"><strong>使用要求：</strong>注册商标必须在注册后<strong>3年</strong>内使用——否则可能被撤销。你不能无限期地注册却不使用商标。</p>
+      <p style="margin-top:10px"><strong>有效期：</strong>10年，可续展，每次续展10年。续展申请必须在到期前6个月内提出。</p>
+      <p style="margin-top:10px"><strong>注册代理人：</strong>外国公司须通过注册中国商标代理机构申请。好的代理人还会监控冲突的新申请并处理续展事宜。</p>
+    </div>
+
+    <div class="callout en-only" style="margin-top:8px">
+      <strong>Well-known mark status:</strong> In specific circumstances, a brand may apply for "well-known" status in infringement or opposition cases. There is no official registry — recognition is made case-by-case by administrative or judicial authorities. L'Oréal and Gillette hold this status in China. Louis Vuitton's claim was not recognised.
+    </div>
+    <div class="callout zh-only" style="margin-top:8px">
+      <strong>驰名商标地位：</strong>在特定情况下，品牌可在侵权或异议案件中申请"驰名商标"地位。没有官方名册——由行政或司法机关逐案认定。欧莱雅和吉列在中国持有这一地位。路易威登的申请未获认可。
+    </div>
+
+    <div class="sec-text en-only">
+      <p style="margin-top:20px"><strong>Product and service classes:</strong> Trademarks are registered within one or more of 45 international product/service classes. China uniquely subdivides these into <em>sub-classes</em> — the exclusive right only extends to the registered sub-classes. Best practice: register all sub-classes that are relevant or marginally related to your business, even if you are not currently active in them.</p>
+      <p style="margin-top:10px"><strong>Register in Chinese characters:</strong> A registration in Roman characters does not automatically protect against a Chinese character version of the same mark. Always register a Chinese version of your foreign trademark — this is separate registration that must be applied for explicitly.</p>
+      <p style="margin-top:10px"><strong>Enforcement:</strong> Complaints about trademark infringement can be lodged with the local trademark bureau of the <em>Administration for Industry and Commerce (AIC)</em> at the level where the infringement occurs (manufacture, sale, storage, etc.).</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p style="margin-top:20px"><strong>产品和服务类别：</strong>商标在45个国际产品/服务类别中的一个或多个类别内注册。中国独特地将这些类别进一步细分为<em>子类</em>——独占权仅延伸至已注册的子类。最佳做法：注册所有与你的业务相关或略有关联的子类，即使你目前尚未在这些子类中开展业务。</p>
+      <p style="margin-top:10px"><strong>注册中文商标：</strong>以罗马字母注册并不自动保护相同商标的中文字符版本。务必注册你外国商标的中文版本——这是需要明确申请的独立注册。</p>
+      <p style="margin-top:10px"><strong>执法：</strong>商标侵权投诉可向侵权行为发生地（生产、销售、存储等）的地方<em>工商行政管理局（AIC）</em>商标局提出。</p>
+    </div>
+
+    <div class="ref-links">
+      <a class="ref-link" href="https://english.cnipa.gov.cn" target="_blank">→ CNIPA Official (China)</a>
+    </div>
+
+    <!-- Case Studies -->
+    <div class="sec-label en-only" style="margin-top:44px">Case Studies · China</div>
+    <div class="sec-label zh-only" style="margin-top:44px">案例研究 · 中国</div>
+    <h3 class="en-only" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:6px;margin-top:10px">What happens when you don't register first</h3>
+    <h3 class="zh-only" style="font-family:'Noto Serif SC',serif;font-size:1.2rem;font-weight:600;margin-bottom:6px;margin-top:10px">不提前注册的后果</h3>
+
+    <div class="case-grid">
+      <div class="case-card starbucks">
+        <div class="case-year">China · 1999 – 2006</div>
+        <h4>Starbucks vs. Shanghai Xingbake</h4>
+        <p class="en-only">Starbucks entered China in 1999 but had not yet secured the Chinese phonetic transliteration of its name — 星巴克 (Xīngbākè). A Shanghai company registered "上海星巴克咖啡" and opened cafes under that name. Starbucks sued. In January 2006, the Shanghai No. 2 Intermediate People's Court ruled in Starbucks' favour — ordering the local company to stop using the name and pay 500,000 RMB in damages. Starbucks won because the court recognised it as a well-known international mark. Smaller brands without that recognition would likely have lost.</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif">星巴克1999年进入中国，但尚未注册其中文音译名"星巴克"。上海一家公司注册了"上海星巴克咖啡"并以该名称开设咖啡馆。星巴克提起诉讼。2006年1月，上海第二中级人民法院判决星巴克胜诉——责令该公司停止使用该名称并赔偿50万元人民币。星巴克胜诉是因为法院认定其为知名国际品牌。缺乏该认知度的较小品牌很可能会败诉。</p>
+        <div class="case-lesson en-only">⚠ Lesson: Even a global brand nearly lost its Chinese name. Register your Chinese transliteration before entering the market.</div>
+        <div class="case-lesson zh-only" style="font-family:'Noto Serif SC',serif">⚠ 教训：即使是全球品牌也险些失去其中文名称。在进入市场之前注册你的中文音译名。</div>
+        <div style="margin-top:12px">
+          <a class="ref-link" href="http://www.chinadaily.com.cn/english/doc/2006-01/02/content_508672.htm" target="_blank">→ China Daily: Court Ruling</a>
+        </div>
+      </div>
+
+      <div class="case-card boylondon">
+        <div class="case-year">China · resolved 2017 – 2018</div>
+        <h4>Boy London vs. Chinese Trademark Squatters</h4>
+        <p class="en-only">Boy London, the iconic UK streetwear brand founded in 1976, gained massive popularity in China through K-pop celebrity endorsements. Chinese trademark squatters registered the Boy London name and eagle logo across multiple product classes before the original brand had done so. Years of legal proceedings followed. In 2017, Boy London (via Anglo Franchise) won at the Beijing High People's Court. The victory was formally announced in early 2018. In the meantime, consumers in China had been buying counterfeit "Boy London" products from the squatter — at the expense of the legitimate brand's reputation.</p>
+        <p class="zh-only" style="font-family:'Noto Serif SC',serif">Boy London是1976年创立的英国标志性街头品牌，通过K-pop明星代言在中国大受欢迎。中国商标抢注者在原品牌之前，跨多个商品类别注册了Boy London名称和鹰标志。随后经历了多年法律程序。2017年，Boy London（通过Anglo Franchise）在北京市高级人民法院胜诉，并于2018年初正式宣布胜利。与此同时，中国消费者一直在购买抢注者生产的假冒"Boy London"产品——损害了正牌品牌的声誉。</p>
+        <div class="case-lesson en-only">⚠ Lesson: Fame without registration is an invitation for squatters. The first-to-file system gives legal ownership to whoever files first — regardless of who created the brand.</div>
+        <div class="case-lesson zh-only" style="font-family:'Noto Serif SC',serif">⚠ 教训：有名气却无注册是对抢注者的邀请。先申请制度将法律所有权赋予最先申请的人——无论是谁创立了该品牌。</div>
+        <div style="margin-top:12px">
+          <a class="ref-link" href="https://www.scmp.com/lifestyle/fashion-beauty/article/3007775/how-uk-streetwear-brand-boy-london-beat-chinas-copycats" target="_blank">→ SCMP: Boy London's China Battle</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reading-box">
+    <div class="reading-icon">Source</div>
+    <p>Guide to Trademark Protection in China. China IPR Helpdesk, 2013 · Johansson, J.K. &amp; Carlson, K.A. 2015, <em>Contemporary Brand Management</em>, Sage Publications</p>
+  </div>
+
+</div>
+
+<nav class="nav-bar">
+  <a href="lecture10-final-assignment.html" class="nav-btn">← Lecture 10</a>
+  <span class="nav-info">BONUS LECTURE 11 · BRAND MANAGEMENT</span>
+  <a href="index.html" class="nav-btn">Course Overview →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang||(lang==='zh'&&b.textContent.trim()==='中文')));
+}
+</script>
+</body>
+</html>

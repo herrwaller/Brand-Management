@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 10: Final Assignment &amp; Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75}
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+
+.hero{background:#1A1714;color:#F5F2EB;padding:64px 24px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(245,242,235,.03) 0,rgba(245,242,235,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(74,138,40,.18) 0,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.lang-btns{position:absolute;top:0;right:0;display:flex;gap:8px}
+.lang-btn{background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.2);color:rgba(245,242,235,.7);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:rgba(245,242,235,.18);color:#F5F2EB;border-color:rgba(245,242,235,.4)}
+.lec-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:rgba(74,138,40,.15);border:1px solid rgba(74,138,40,.3);padding:4px 12px;border-radius:20px;margin-bottom:0}
+.hero-nav{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.hero-back{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,242,235,.4);text-decoration:none;transition:color .15s}
+.hero-back:hover{color:rgba(245,242,235,.75)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:8px}
+.hero-zh{font-family:'Noto Serif SC',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(245,242,235,.55);margin-bottom:28px;font-weight:400}
+.toc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc-pill{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(245,242,235,.65);background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);padding:5px 14px;border-radius:20px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(245,242,235,.14);color:#F5F2EB}
+
+.page{max-width:860px;margin:0 auto;padding:0 24px}
+.section{padding:56px 0 44px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:600;line-height:1.15;color:var(--ink);margin-bottom:20px}
+.sec-text{color:var(--ink2);font-size:15.5px;line-height:1.8}
+.sec-text-zh{font-family:'Noto Serif SC',serif;color:var(--ink2);font-size:14.5px;line-height:1.9}
+.sec-text p,.sec-text-zh p{margin-bottom:14px}
+
+.callout{background:var(--card);border-left:3px solid var(--green);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--ink2);box-shadow:0 2px 8px rgba(26,23,20,.05)}
+.callout-zh{font-family:'Noto Serif SC',serif;font-size:13.5px;color:var(--ink3);margin-top:8px}
+
+/* Journey timeline */
+.journey-list{list-style:none;padding:0;margin:20px 0}
+.journey-list li{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.journey-list li:last-child{border-bottom:none}
+.journey-lec{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--green);min-width:80px;line-height:1.3;padding-top:2px}
+.journey-list p{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink3);margin:0;line-height:1.6}
+
+/* Slide cards */
+.slides-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:600px){.slides-grid{grid-template-columns:1fr}}
+.slide-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;position:relative}
+.slide-num{position:absolute;top:16px;right:18px;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--ink);opacity:.08;line-height:1}
+.slide-card h4{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.slide-card p{font-size:13.5px;color:var(--ink2);line-height:1.65;margin:0}
+
+/* Grading table */
+.grade-table{width:100%;border-collapse:collapse;margin:20px 0;font-family:'DM Sans',sans-serif;font-size:14px}
+.grade-table th{background:var(--ink);color:#F5F2EB;padding:12px 16px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.06em}
+.grade-table td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--ink2)}
+.grade-table tr:last-child td{border-bottom:none}
+.grade-table tr:nth-child(even) td{background:var(--bg2)}
+.grade-pct{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--green)}
+
+/* Tip cards */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:600px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{border-radius:var(--r);padding:20px 22px}
+.tip-card.do{background:rgba(74,138,40,.08);border:1px solid rgba(74,138,40,.2)}
+.tip-card.dont{background:rgba(200,64,32,.06);border:1px solid rgba(200,64,32,.15)}
+.tip-card h4{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.tip-card.do h4{color:var(--green)}
+.tip-card.dont h4{color:var(--accent)}
+.tip-card ul{list-style:none;padding:0}
+.tip-card ul li{font-size:13.5px;color:var(--ink2);padding:4px 0;border-bottom:1px solid var(--border2);line-height:1.5}
+.tip-card ul li:last-child{border-bottom:none}
+
+/* Final callout — accent style */
+.callout-final{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:28px 32px;margin:40px 0;text-align:center}
+.callout-final p{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;font-style:italic;line-height:1.6;color:rgba(245,242,235,.9);margin:0}
+.callout-final .zh{font-family:'Noto Serif SC',serif;font-size:1rem;color:rgba(245,242,235,.55);margin-top:12px}
+
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body class="en">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
+    </div>
+    <div class="hero-nav">
+      <a href="index.html" class="hero-back en-only">← Course Overview</a>
+      <a href="index.html" class="hero-back zh-only">← 课程概览</a>
+      <div class="lec-tag">Lecture 10</div>
+    </div>
+    <h1 class="en-only">Final Assignment &amp; Workshop</h1>
+    <h1 class="zh-only">期末作业与工作坊</h1>
+    <div class="hero-zh en-only">期末作业与工作坊</div>
+    <div class="toc-pills">
+      <a href="#s-journey" class="toc-pill en-only">Course Summary</a>
+      <a href="#s-journey" class="toc-pill zh-only">课程总结</a>
+      <a href="#s-brief" class="toc-pill en-only">Final Project Brief</a>
+      <a href="#s-brief" class="toc-pill zh-only">期末项目说明</a>
+      <a href="#s-guidelines" class="toc-pill en-only">Presentation Guidelines</a>
+      <a href="#s-guidelines" class="toc-pill zh-only">演示指南</a>
+      <a href="#s-grading" class="toc-pill en-only">Evaluation Criteria</a>
+      <a href="#s-grading" class="toc-pill zh-only">评估标准</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- S1: Course Journey -->
+  <div class="section" id="s-journey">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">Course Journey</h2>
+    <h2 class="sec-title zh-only">课程历程</h2>
+
+    <div class="sec-text en-only">
+      <p>Over the course of ten lectures, we have built a comprehensive understanding of brand management — from the most foundational questions ("What is a brand?") to the operational and strategic tools that allow brands to grow, adapt, and evolve.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>经过十讲，我们建立了对品牌管理的全面理解——从最基础的问题（"什么是品牌？"）到使品牌得以成长、适应和演进的运营与战略工具。</p>
+    </div>
+
+    <ul class="journey-list en-only">
+      <li>
+        <div class="journey-lec">Lec 1–3</div>
+        <p>Built the conceptual foundation: definitions, the identity/image distinction, and portfolio architecture.</p>
+      </li>
+      <li>
+        <div class="journey-lec">Lec 4–5</div>
+        <p>Focused on the consumer: psychological typologies (Limbic Types, Big Five), social environments (Sinus-Milieus), and the strategic art of positioning.</p>
+      </li>
+      <li>
+        <div class="journey-lec">Lec 6–7</div>
+        <p>Addressed the conditions of modern brand management: information overload, benefit structures, and the marketing mix.</p>
+      </li>
+      <li>
+        <div class="journey-lec">Lec 8–9</div>
+        <p>Covered brand dynamics over time and across borders: internationalisation strategies and evolution paths.</p>
+      </li>
+      <li>
+        <div class="journey-lec">Lec 10</div>
+        <p>We bring it all together — applying every concept to one real brand in the final project.</p>
+      </li>
+    </ul>
+    <ul class="journey-list zh-only">
+      <li>
+        <div class="journey-lec">第1-3讲</div>
+        <p>构建了概念基础：定义、识别/形象区别和组合架构。</p>
+      </li>
+      <li>
+        <div class="journey-lec">第4-5讲</div>
+        <p>聚焦于消费者：心理类型学（边缘系统类型、大五人格）、社会环境（Sinus社会阶层）和定位的战略艺术。</p>
+      </li>
+      <li>
+        <div class="journey-lec">第6-7讲</div>
+        <p>探讨了现代品牌管理的条件：信息过载、利益结构、营销组合。</p>
+      </li>
+      <li>
+        <div class="journey-lec">第8-9讲</div>
+        <p>涵盖了品牌随时间和跨越国界的动态：国际化战略和演进路径。</p>
+      </li>
+      <li>
+        <div class="journey-lec">第10讲</div>
+        <p>将一切整合在一起——通过期末项目将每个概念应用于你选择的真实品牌。</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- S2: Final Assignment Brief -->
+  <div class="section" id="s-brief">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">Final Assignment Brief</h2>
+    <h2 class="sec-title zh-only">期末作业说明</h2>
+
+    <div class="sec-text en-only">
+      <p>For the final in-class presentation (Lectures 11 &amp; 12), each student presents a new branded product or service idea for their chosen brand — building directly on the analysis work from earlier assignments. The presentation uses <strong>6 slides, one per step</strong>, with 7 minutes to present.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>对于期末课堂展示（第11和12讲），每位学生将为其所选品牌提出一个新的品牌产品或服务创意——直接建立在前期作业的分析基础之上。展示使用<strong>6页幻灯片，每步一页</strong>，展示时间为7分钟。</p>
+    </div>
+
+    <div class="slides-grid">
+      <div class="slide-card">
+        <div class="slide-num">1</div>
+        <h4 class="en-only">Argumentation Line</h4>
+        <h4 class="zh-only">论证思路</h4>
+        <p class="en-only">Based on your SWOT analysis: why does your brand need a new product or service? Which strength do you build on, which opportunity are you seizing, which weakness or threat does the idea address?</p>
+        <p class="zh-only">基于你的SWOT分析：为什么你的品牌需要新产品或服务？你依托哪项优势，抓住哪个机会，解决哪个劣势或威胁？</p>
+      </div>
+      <div class="slide-card">
+        <div class="slide-num">2</div>
+        <h4 class="en-only">The New Product / Service</h4>
+        <h4 class="zh-only">新产品/服务</h4>
+        <p class="en-only">Describe the new branded product or service. What type of brand extension is it — line extension, category extension, or geographic expansion? Why does this extension make sense for your brand?</p>
+        <p class="zh-only">描述新的品牌产品或服务。这是哪种类型的品牌延伸——产品线延伸、品类延伸还是地理扩张？为什么这种延伸对你的品牌合理？</p>
+      </div>
+      <div class="slide-card">
+        <div class="slide-num">3</div>
+        <h4 class="en-only">The USP</h4>
+        <h4 class="zh-only">独特卖点</h4>
+        <p class="en-only">What is the Unique Selling Proposition of the new product? What specific benefit — functional or emotional — makes it stand apart from existing alternatives on the market?</p>
+        <p class="zh-only">新产品的独特卖点是什么？哪种具体利益——功能性或情感性——使其有别于市场上现有的替代品？</p>
+      </div>
+      <div class="slide-card">
+        <div class="slide-num">4</div>
+        <h4 class="en-only">The (New) Target Group</h4>
+        <h4 class="zh-only">（新）目标群体</h4>
+        <p class="en-only">Who is the target consumer for this new product? Describe their profile: demographics, values, lifestyle. Is this the same target group as the parent brand, or a new segment being reached?</p>
+        <p class="zh-only">这款新产品的目标消费者是谁？描述其画像：人口统计、价值观、生活方式。这与母品牌目标群体相同，还是在触达一个新细分市场？</p>
+      </div>
+      <div class="slide-card">
+        <div class="slide-num">5</div>
+        <h4 class="en-only">Competitive Positioning</h4>
+        <h4 class="zh-only">竞争定位</h4>
+        <p class="en-only">Where does the new product sit relative to its main competitors? Use a positioning map (two relevant axes) to show the competitive space and explain why this position is defensible.</p>
+        <p class="zh-only">新产品相对于主要竞争对手处于什么位置？使用定位图（两条相关轴线）展示竞争空间，并说明为什么这个位置具有可持续性。</p>
+      </div>
+      <div class="slide-card">
+        <div class="slide-num">6</div>
+        <h4 class="en-only">Campaign Idea</h4>
+        <h4 class="zh-only">推广创意</h4>
+        <p class="en-only">Propose a campaign concept: a slogan, a visual or poster idea, and at least two touchpoint ideas (social media, POS, OOH, influencer, etc.). The campaign must reflect the brand's identity and speak to the new target group.</p>
+        <p class="zh-only">提出一个推广方案：一句口号、一个视觉或海报创意，以及至少两个触点创意（社交媒体、销售终端、户外广告、网红等）。推广方案须体现品牌个性并针对新目标群体。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Presentation Guidelines -->
+  <div class="section" id="s-guidelines">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">Presentation Guidelines</h2>
+    <h2 class="sec-title zh-only">演示指南</h2>
+
+    <div class="tips-grid en-only">
+      <div class="tip-card do">
+        <h4>Do</h4>
+        <ul>
+          <li>Be confident — you are the expert on your brand</li>
+          <li>Use a clean layout with consistent visual identity</li>
+          <li>Lead with key insights, not detail</li>
+          <li>Highlight and repeat relevant keywords</li>
+          <li>Use visual examples (product images, ad campaigns)</li>
+          <li>Show new findings — add your own analysis</li>
+          <li>Involve the audience with a question or moment</li>
+        </ul>
+      </div>
+      <div class="tip-card dont">
+        <h4>Avoid</h4>
+        <ul>
+          <li>Speaking too fast — slow down for key points</li>
+          <li>Reading directly from your slides</li>
+          <li>Standing completely still or moving nervously</li>
+          <li>Ignoring the time limit</li>
+          <li>Rushing through due to nervousness</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tips-grid zh-only">
+      <div class="tip-card do">
+        <h4>应该做</h4>
+        <ul>
+          <li>自信——你是所选品牌的专家</li>
+          <li>使用简洁、视觉识别一致的布局</li>
+          <li>以关键洞察而非细节开头</li>
+          <li>突出并重复相关关键词</li>
+          <li>使用视觉示例（产品图片、广告活动）</li>
+          <li>展示新发现——加入你自己的分析</li>
+          <li>通过问题或互动时刻吸引观众</li>
+        </ul>
+      </div>
+      <div class="tip-card dont">
+        <h4>应避免</h4>
+        <ul>
+          <li>说话太快——在关键点上放慢速度</li>
+          <li>直接从幻灯片上阅读</li>
+          <li>完全静止地站立或紧张地走动</li>
+          <li>忽视时间限制</li>
+          <li>在紧张中匆忙前进</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-text en-only" style="margin-top:16px">
+      <p>It is perfectly acceptable to pause, take a breath, and collect your thoughts. Rushing through nervousness makes the content harder to follow.</p>
+    </div>
+    <div class="sec-text-zh zh-only" style="margin-top:16px">
+      <p>完全可以暂停、深呼吸并整理思绪。在紧张中匆忙前进会使内容更难理解。</p>
+    </div>
+  </div>
+
+  <!-- S4: Grading -->
+  <div class="section" id="s-grading">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">Grading Overview</h2>
+    <h2 class="sec-title zh-only">评分概览</h2>
+
+    <table class="grade-table en-only">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Weight</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Self-Study &amp; Research</strong></td>
+          <td><span class="grade-pct">50%</span></td>
+          <td>All assignments submitted throughout the semester. 2 students per lecture present in class (not announced in advance). One short branding quiz.</td>
+        </tr>
+        <tr>
+          <td><strong>In-Class Presentation</strong></td>
+          <td><span class="grade-pct">40%</span></td>
+          <td>Final 6-slide new product presentation (Lec 11 &amp; 12). Criteria: quality of argumentation, creativity of the product idea, depth of analysis, correct application of course concepts, presentation clarity.</td>
+        </tr>
+        <tr>
+          <td><strong>Attendance</strong></td>
+          <td><span class="grade-pct">10%</span></td>
+          <td>Active participation across all sessions.</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="grade-table zh-only">
+      <thead>
+        <tr>
+          <th>评估组成</th>
+          <th>权重</th>
+          <th>详情</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>自学与研究</strong></td>
+          <td><span class="grade-pct">50%</span></td>
+          <td>整个学期提交的所有作业。每讲2名学生展示最新作业（不事先公布）。一次简短的品牌测验。</td>
+        </tr>
+        <tr>
+          <td><strong>课堂展示</strong></td>
+          <td><span class="grade-pct">40%</span></td>
+          <td>期末6页新产品展示（第11和12讲）。评估标准：论证质量、产品创意的创造力、分析深度、课程概念的正确应用、展示清晰度。</td>
+        </tr>
+        <tr>
+          <td><strong>出勤率</strong></td>
+          <td><span class="grade-pct">10%</span></td>
+          <td>积极参与所有课程。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:28px">
+      <div class="en-only"><strong>Upload requirements:</strong> All assignments submitted to the dedicated DingTalk folder. File naming format: <code>StudentNumber_Name_EnglishNickname</code>. All assignments compiled in ONE evolving PPT/PDF document per student.</div>
+      <div class="callout-zh zh-only"><strong>上传要求：</strong>所有作业提交到专用DingTalk文件夹。文件命名格式：<code>学生号_姓名_英文昵称</code>。所有作业每人编辑成一个不断完善的PPT/PDF文档。</div>
+    </div>
+  </div>
+
+  <!-- Final Callout -->
+  <div class="callout-final">
+    <p class="en-only">"Strategy without execution is just a theory. Your final presentation turns your entire semester of analysis into a concrete idea — a real product, a real audience, and a real campaign. This is what brand management looks like in practice."</p>
+    <p class="zh-only">"没有执行的战略不过是理论。你的期末展示将整个学期的分析转化为具体创意——一个真实的产品、一个真实的受众和一个真实的推广方案。这就是品牌管理在实践中的样子。"</p>
+  </div>
+
+</div>
+
+<nav class="nav-bar">
+  <a href="lecture9-brand-evolution.html" class="nav-btn">← Lecture 9</a>
+  <span class="nav-info">LECTURE 10 · BRAND MANAGEMENT</span>
+  <a href="lecture11-bonus-trademark.html" class="nav-btn">Bonus Lecture 11 →</a>
+</nav>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===lang||(lang==='zh'&&b.textContent.trim()==='中文')));
+}
+</script>
+</body>
+</html>

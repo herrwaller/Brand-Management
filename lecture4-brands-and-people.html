@@ -262,6 +262,12 @@ em{font-style:normal;color:var(--green);font-weight:500}
 .asgn-saved.show{display:block}
 
 /* ── READING ── */
+/* ── NAV BAR ── */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em}
+
 .reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);
   padding:14px 18px;margin:16px 0;display:flex;align-items:center;gap:14px}
 .rb-icon{width:36px;height:36px;background:var(--green);border-radius:6px;display:flex;
@@ -286,7 +292,7 @@ body.en .zh-only{display:none!important}
     <button class="lb on" onclick="setLang('en')">EN</button>
     <button class="lb" onclick="setLang('zh')">中文</button>
   </div>
-  <div class="lh-tag">Brand Management Basics · Lecture #4</div>
+  <div class="lh-tag"><a href="index.html" style="color:rgba(245,242,235,.38);text-decoration:none;transition:color .15s" onmouseover="this.style.color='rgba(245,242,235,.7)'" onmouseout="this.style.color='rgba(245,242,235,.38)'">← Course Overview</a> · Brand Management Basics · Lecture #4</div>
   <div class="lh-title">Brands and <span>People</span></div>
   <div class="lh-sub en-only">Prof. Dr. Stefan Waller · Brand University of Applied Sciences</div>
   <div class="lh-sub zh-only" style="font-family:'Noto Serif SC',serif">Stefan Waller教授 · 品牌应用科学大学</div>
@@ -1277,5 +1283,11 @@ function setLang(l){
     (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
 }
 </script>
+
+<div class="nav-bar">
+  <a class="nav-btn" href="lecture3-brand-architecture.html">← Lecture 3</a>
+  <span class="nav-info">Lecture 4 of 10</span>
+  <a class="nav-btn" href="lecture5-brand-positioning.html">Lecture 5 →</a>
+</div>
 </body>
 </html>

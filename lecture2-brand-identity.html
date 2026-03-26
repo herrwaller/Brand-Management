@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lecture 2 — Brand Identity, Image &amp; Personality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB;--bg2:#EBE7DE;--bg3:#DAD5C8;--card:#FDFAF4;
+  --ink:#1A1714;--ink2:#46403A;--ink3:#7A756C;
+  --border:rgba(26,23,20,.10);--border2:rgba(26,23,20,.06);
+  --green:#4A8A28;--r:12px;--accent:#C84020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7}
+body.en .zh-only{display:none!important}
+body.zh .en-only{display:none!important}
+
+/* HEADER */
+.header{background:#1A1714;padding:0;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(74,138,40,.28) 0%,transparent 70%);pointer-events:none}
+.header-inner{max-width:860px;margin:0 auto;padding:36px 32px 40px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(245,242,235,.45);text-decoration:none;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:.05em;margin-bottom:24px;transition:color .15s}
+.back-link:hover{color:rgba(245,242,235,.8)}
+.lecture-tag{display:inline-block;background:rgba(74,138,40,.22);color:#7EC855;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:18px}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:600;color:#F5F2EB;line-height:1.15;margin-bottom:8px}
+.header-title span{color:#7EC855}
+.header-subtitle{font-family:'Noto Serif SC',serif;font-size:18px;color:rgba(245,242,235,.55);margin-bottom:28px}
+
+/* TOC */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.toc-pill{background:rgba(245,242,235,.07);border:1px solid rgba(245,242,235,.12);color:rgba(245,242,235,.6);padding:5px 14px;border-radius:20px;font-size:12px;text-decoration:none;transition:all .15s}
+.toc-pill:hover{background:rgba(74,138,40,.2);border-color:rgba(74,138,40,.4);color:#7EC855}
+
+/* LANG TOGGLE */
+.lang-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 32px;display:flex;justify-content:flex-end}
+.lang-wrap{max-width:860px;margin:0 auto;width:100%;display:flex;justify-content:flex-end}
+.lang-btn{background:none;border:1px solid var(--border);padding:5px 16px;border-radius:20px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink2);transition:all .15s}
+.lang-btn:hover,.lang-btn.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:40px 32px 60px}
+
+/* SECTION */
+.section{margin-bottom:52px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,30px);font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:18px}
+.sec-text{color:var(--ink2);line-height:1.8;margin-bottom:12px}
+.sec-text-zh{color:var(--ink2);line-height:2;margin-bottom:12px}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--green);background:var(--card);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin:24px 0;box-shadow:0 2px 8px var(--border2)}
+.callout p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:0}
+.callout .callout-zh{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink3);margin-top:8px;font-style:normal}
+
+/* IDENTITY vs IMAGE diagram */
+.identity-diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin:28px 0;align-items:center}
+@media(max-width:580px){.identity-diagram{grid-template-columns:1fr;gap:12px}}
+.id-box{background:var(--card);border-radius:var(--r);padding:22px;border:1px solid var(--border);box-shadow:0 2px 8px var(--border2)}
+.id-box-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:8px}
+.id-box-label.green{color:var(--green)}
+.id-box-label.accent{color:var(--accent)}
+.id-box-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.id-box-desc{font-size:13px;color:var(--ink3);line-height:1.6}
+.id-arrow{text-align:center;font-size:22px;color:var(--ink3);padding:0 12px}
+@media(max-width:580px){.id-arrow{transform:rotate(90deg)}}
+
+/* DIMENSION GRID */
+.dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+@media(max-width:640px){.dim-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.dim-grid{grid-template-columns:1fr}}
+.dim-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;box-shadow:0 2px 6px var(--border2)}
+.dim-num{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.dim-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.dim-title-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);margin-bottom:8px}
+.dim-question{font-size:12px;font-style:italic;color:var(--ink3);margin-bottom:8px}
+.dim-body{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* PERSONALITY SCALE */
+.personality-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}
+@media(max-width:700px){.personality-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.personality-grid{grid-template-columns:1fr}}
+.pers-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 14px;text-align:center;box-shadow:0 2px 6px var(--border2)}
+.pers-icon{font-size:24px;margin-bottom:8px}
+.pers-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.pers-tags{font-size:11px;color:var(--ink3);line-height:1.5}
+.pers-example{margin-top:8px;font-size:11px;font-weight:600;color:var(--green)}
+
+/* APPROACH CARDS */
+.card-grid{display:grid;gap:16px;margin:24px 0}
+.card-grid.col2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:600px){.card-grid.col2{grid-template-columns:1fr}}
+.approach-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:0 2px 6px var(--border2)}
+.approach-card-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.approach-card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.approach-card-body{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+/* ASSIGNMENT */
+.assignment{background:var(--card);border:1px solid rgba(74,138,40,.25);border-radius:var(--r);padding:28px 28px 24px;margin:40px 0 28px;box-shadow:0 2px 12px var(--border2)}
+.assignment-badge{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.assignment-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.assignment-body{font-size:14px;color:var(--ink2);line-height:1.8}
+.assignment-body-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink3);line-height:2;margin-top:12px}
+
+/* READING */
+.reading-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:20px}
+.reading-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.reading-label{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.reading-text{font-size:13px;color:var(--ink3);line-height:1.7}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:1px solid var(--border);margin:0 0 48px}
+
+/* ── BRAND IDENTITY BUILDER ── */
+.bim-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:28px 0;box-shadow:0 2px 12px var(--border2)}
+.bim-form-area{padding:28px}
+.bim-input-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px;display:block}
+.bim-brand-row{margin-bottom:22px}
+.bim-brand-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;background:#fff;color:var(--ink);transition:border-color .15s;outline:none}
+.bim-brand-input:focus{border-color:var(--green)}
+.bim-dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+@media(max-width:640px){.bim-dim-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.bim-dim-grid{grid-template-columns:1fr}}
+.bim-field{display:flex;flex-direction:column}
+.bim-field-head{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.bim-field-num{background:var(--green);color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bim-field-label{font-size:11.5px;font-weight:500;color:var(--ink2)}
+.bim-field-question{font-size:10.5px;color:var(--ink3);font-style:italic;margin-bottom:6px}
+.bim-textarea{border:1.5px solid var(--border);border-radius:8px;padding:9px 11px;font-family:'DM Sans',sans-serif;font-size:13px;background:#fff;color:var(--ink);resize:vertical;min-height:70px;line-height:1.55;transition:border-color .15s;outline:none}
+.bim-textarea:focus{border-color:var(--green)}
+.bim-aaker-section{margin-bottom:4px}
+.bim-aaker-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px;display:block}
+.bim-aaker-grid{display:flex;gap:8px;flex-wrap:wrap}
+.bim-pers-option{cursor:pointer;flex:1;min-width:100px}
+.bim-pers-option input{display:none}
+.bim-pers-card{border:1.5px solid var(--border);border-radius:10px;padding:12px 10px;text-align:center;background:#fff;transition:all .15s}
+.bim-pers-option:hover .bim-pers-card{border-color:rgba(74,138,40,.3);background:var(--bg)}
+.bim-pers-card.selected{border-color:var(--aaker-color,var(--green));background:var(--aaker-bg,rgba(74,138,40,.06));box-shadow:0 0 0 3px var(--aaker-glow,rgba(74,138,40,.15))}
+.bim-pers-icon{font-size:20px;display:block;margin-bottom:5px}
+.bim-pers-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.bim-pers-hint{font-size:10px;color:var(--ink3);line-height:1.4}
+
+/* OUTPUT CARD */
+.bim-output{border-top:1px solid var(--border);background:#1A1714}
+.bim-out-head{padding:22px 28px 18px;border-bottom:1px solid rgba(255,255,255,.07)}
+.bim-out-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:8px}
+.bim-out-brandname{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#F5F2EB;line-height:1.1;margin-bottom:8px}
+.bim-out-personality{display:none;font-size:12px;font-weight:600;letter-spacing:.06em;padding:4px 12px;border-radius:20px;border:1px solid;display:inline-block}
+.bim-dim-output-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06)}
+@media(max-width:540px){.bim-dim-output-grid{grid-template-columns:1fr 1fr}}
+.bim-out-cell{background:#1A1714;padding:18px 20px}
+.bim-out-cell-num{font-size:9px;font-weight:700;letter-spacing:.1em;color:rgba(74,138,40,.7);margin-bottom:4px}
+.bim-out-cell-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,235,.5);margin-bottom:6px}
+.bim-out-cell-value{font-size:13px;color:rgba(245,242,235,.45);line-height:1.6;font-style:italic;min-height:40px;transition:color .2s}
+.bim-out-cell-value.filled{color:rgba(245,242,235,.88);font-style:normal}
+.bim-note{font-size:12px;color:var(--ink3);font-style:italic;padding:10px 0 0;line-height:1.6}
+
+/* NAV BAR */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body class="en">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <a class="back-link" href="index.html">← Course Overview</a>
+    <div class="lecture-tag">Lecture 02</div>
+    <h1 class="header-title en-only">Brand <span>Identity</span>, Image &amp; Personality</h1>
+    <h1 class="header-title zh-only" style="font-family:'Noto Serif SC',serif">品牌<span>识别</span>、形象与个性</h1>
+    <p class="header-subtitle zh-only">品牌管理基础 · 第二讲</p>
+    <nav class="toc">
+      <a class="toc-pill en-only" href="#s-identity">Identity vs. Image</a>
+      <a class="toc-pill zh-only" href="#s-identity">识别与形象</a>
+      <a class="toc-pill en-only" href="#s-touchpoints">Brand Touchpoints</a>
+      <a class="toc-pill zh-only" href="#s-touchpoints">品牌接触点</a>
+      <a class="toc-pill en-only" href="#s-model">Identity Model</a>
+      <a class="toc-pill zh-only" href="#s-model">身份模型</a>
+      <a class="toc-pill en-only" href="#s-dimensions">Six Dimensions</a>
+      <a class="toc-pill zh-only" href="#s-dimensions">六个维度</a>
+      <a class="toc-pill en-only" href="#s-personality">Personality &amp; Style</a>
+      <a class="toc-pill zh-only" href="#s-personality">个性与风格</a>
+      <a class="toc-pill en-only" href="#s-builder">Identity Builder</a>
+      <a class="toc-pill zh-only" href="#s-builder">身份模型构建器</a>
+      <a class="toc-pill en-only" href="#s-assignment">Assignment 2</a>
+      <a class="toc-pill zh-only" href="#s-assignment">作业 2</a>
+    </nav>
+  </div>
+</div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-bar">
+  <div class="lang-wrap">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')" style="margin-left:6px">中文</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- SECTION 1: IDENTITY VS. IMAGE -->
+  <section class="section" id="s-identity">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">Brand Identity vs. Brand Image</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌识别与品牌形象</h2>
+
+    <p class="sec-text en-only">At the heart of brand management lies the distinction between what a brand claims to stand for and what people actually believe about it. <strong>Brand Identity</strong> is the self-image of the brand — it expresses what a brand stands for and should stand for from the perspective of internal target groups (management, employees). It is the intended benefit bundle, the "inside view" crafted by the company.</p>
+    <p class="sec-text en-only"><strong>Brand Image</strong>, by contrast, is the result of the individual, subjective perception and decoding of all signals emitted by the brand by external target groups (consumers, media, trade). It is the "outside view" — a firmly anchored, condensed, evaluative image in the minds of consumers. The gap between identity and image is a key tension in brand management. A company may intend a sophisticated, premium identity, but if consumers perceive it as confusing or generic, the brand fails.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌管理的核心在于区分品牌宣称代表的是什么，以及人们实际相信的是什么。<strong>品牌识别</strong>是品牌的自我形象——它从内部目标群体（管理层、员工）的视角表达品牌代表什么、应该代表什么。这是企业精心构建的"内部视角"，即预期的利益组合。</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif"><strong>品牌形象</strong>则是外部目标群体（消费者、媒体、渠道商）对品牌发出的所有信号进行个人化、主观感知与解码的结果。这是"外部视角"——牢固植根于消费者心智中经过浓缩与评价的品牌印象。识别与形象之间的落差是品牌管理中的核心张力。</p>
+
+    <div class="identity-diagram">
+      <div class="id-box">
+        <div class="id-box-label green">Brand Identity / 品牌识别</div>
+        <div class="id-box-title en-only">Inside View</div>
+        <div class="id-box-title zh-only" style="font-family:'Noto Serif SC',serif">内部视角</div>
+        <div class="id-box-desc en-only">Crafted by management &amp; employees. Intentional promise. How we want to be seen.</div>
+        <div class="id-box-desc zh-only" style="font-family:'Noto Serif SC',serif">由管理层和员工塑造。有意图的承诺。我们希望如何被看待。</div>
+      </div>
+      <div class="id-arrow">→</div>
+      <div class="id-box">
+        <div class="id-box-label accent">Brand Image / 品牌形象</div>
+        <div class="id-box-title en-only">Outside View</div>
+        <div class="id-box-title zh-only" style="font-family:'Noto Serif SC',serif">外部视角</div>
+        <div class="id-box-desc en-only">Perceived by consumers, media &amp; trade. Subjective impression. How we are actually seen.</div>
+        <div class="id-box-desc zh-only" style="font-family:'Noto Serif SC',serif">由消费者、媒体和渠道感知。主观印象。我们实际上如何被看待。</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p class="en-only">"Brand identity is thus regarded as the fundament of a brand, which represents the starting point for all brand considerations." — Burmann et al., 2017</p>
+      <p class="callout-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌识别因此被视为品牌的基础，是所有品牌考量的出发点。——Burmann等，2017</p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2: BRAND TOUCHPOINTS -->
+  <section class="section" id="s-touchpoints">
+    <div class="sec-label en-only">Section 2</div>
+    <div class="sec-label zh-only">第二节</div>
+    <h2 class="sec-title en-only">Brand Touchpoints</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌接触点</h2>
+
+    <p class="sec-text en-only">Brand touchpoints are every moment a consumer encounters the brand — the mechanisms through which identity is (hopefully) translated into image. Touchpoints span every stage of the customer journey: from advertising and social media to the product itself, its packaging, after-sales service, and even the behaviour of employees. Managing touchpoints consistently is the operational challenge of brand management.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌接触点是消费者与品牌的每一次相遇——是将识别（理想情况下）转化为形象的机制。接触点贯穿客户旅程的每个阶段：从广告和社交媒体到产品本身、包装、售后服务，甚至员工行为。一致地管理接触点是品牌管理的运营挑战。</p>
+
+    <div class="card-grid col2">
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Pre-purchase</div>
+        <div class="approach-card-num zh-only">购买前</div>
+        <div class="approach-card-title en-only">Awareness &amp; Consideration</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">认知与考虑</div>
+        <div class="approach-card-body en-only">Advertising (TV, digital, outdoor), PR &amp; editorial coverage, social media, word-of-mouth, search visibility, influencer content</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">广告（电视、数字、户外）、公关报道、社交媒体、口碑、搜索可见度、网红内容</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">At purchase</div>
+        <div class="approach-card-num zh-only">购买时</div>
+        <div class="approach-card-title en-only">Decision &amp; Transaction</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">决策与交易</div>
+        <div class="approach-card-body en-only">Retail environment, packaging, pricing &amp; promotions, store staff interactions, website &amp; app UX, checkout experience</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">零售环境、包装、定价与促销、门店员工互动、网站和应用用户体验、结账体验</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Post-purchase</div>
+        <div class="approach-card-num zh-only">购买后</div>
+        <div class="approach-card-title en-only">Experience &amp; Loyalty</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">体验与忠诚</div>
+        <div class="approach-card-body en-only">Product usage experience, after-sales service, loyalty programs, customer support, unboxing, community &amp; CRM</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">产品使用体验、售后服务、忠诚度计划、客户支持、开箱体验、社群与CRM</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-card-num en-only">Brand Culture</div>
+        <div class="approach-card-num zh-only">品牌文化</div>
+        <div class="approach-card-title en-only">Internal Touchpoints</div>
+        <div class="approach-card-title zh-only" style="font-family:'Noto Serif SC',serif">内部接触点</div>
+        <div class="approach-card-body en-only">Employee behaviour, internal brand communication, training &amp; onboarding, corporate culture, leadership actions</div>
+        <div class="approach-card-body zh-only" style="font-family:'Noto Serif SC',serif">员工行为、内部品牌传播、培训与入职、企业文化、领导行动</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3: IDENTITY MODEL -->
+  <section class="section" id="s-model">
+    <div class="sec-label en-only">Section 3</div>
+    <div class="sec-label zh-only">第三节</div>
+    <h2 class="sec-title en-only">The Brand Identity Model</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌身份模型</h2>
+
+    <p class="sec-text en-only">The most widely used framework for structuring brand identity in this course is the <strong>Burmann / Halaszovich / Hemmann Identity Model (2012)</strong>. Drawing on identity concepts from social sciences and psychology, it proposes that strong human identities emerge from internal reflection of personal strengths, weaknesses, origins, and characteristics. Applied to brands, this yields six core dimensions of brand identity. Each dimension answers a fundamental question about what the brand is and what it stands for.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">本课程中用于构建品牌识别框架最广泛使用的是<strong>Burmann/Halaszovich/Hemmann身份模型（2012）</strong>。该模型借鉴了社会科学和心理学中的身份概念，认为强大的人类身份源于对个人优势、劣势、起源和特征的内部反思。应用于品牌，这产生了品牌识别的六个核心维度。每个维度都回答了关于品牌是什么以及其代表什么的根本性问题。</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 4: SIX DIMENSIONS -->
+  <section class="section" id="s-dimensions">
+    <div class="sec-label en-only">Section 4</div>
+    <div class="sec-label zh-only">第四节</div>
+    <h2 class="sec-title en-only">The Six Dimensions of Brand Identity</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌识别的六个维度</h2>
+
+    <div class="dim-grid">
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 01</div>
+        <div class="dim-title en-only">Origin</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">起源</div>
+        <div class="dim-question en-only">"Where do we come from?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们从哪里来？"</div>
+        <div class="dim-body en-only">The geographic, cultural, or institutional roots of the brand. Origin creates authenticity and a bond with stakeholders. <em>E.g., Champagne from France, Bratwurst from Nuremberg, Porsche from Stuttgart.</em></div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">品牌的地理、文化或机构根源。起源创造真实性并与利益相关者建立纽带。<em>例：法国香槟、纽伦堡香肠、斯图加特保时捷。</em></div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 02</div>
+        <div class="dim-title en-only">Vision</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">愿景</div>
+        <div class="dim-question en-only">"Where are we going?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们要去哪里？"</div>
+        <div class="dim-body en-only">The long-term direction and aspiration. Vision guides strategic decisions and inspires internal teams. <em>E.g., Tesla: "accelerating the world's transition to sustainable energy".</em></div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">品牌的长期方向与抱负。愿景指导战略决策并激励内部团队。<em>例：特斯拉："加速世界向可持续能源的转型"。</em></div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 03</div>
+        <div class="dim-title en-only">Values</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">价值观</div>
+        <div class="dim-question en-only">"What do we believe in?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们相信什么？"</div>
+        <div class="dim-body en-only">The core ethical convictions and guiding principles. Values shape decision-making and culture. <em>E.g., Patagonia: environmental responsibility above profit.</em></div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">核心道德信念和指导原则。价值观塑造决策和文化。<em>例：Patagonia：将环境责任置于利润之上。</em></div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 04</div>
+        <div class="dim-title en-only">Competences</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">能力</div>
+        <div class="dim-question en-only">"What can we do?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们擅长什么？"</div>
+        <div class="dim-body en-only">The unique skills and capabilities that distinguish the brand. These are the "hard" strengths it can credibly claim. <em>E.g., BMW: driving dynamics and engineering precision.</em></div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">区别品牌的独特技能和能力。这些是品牌能够可信声称的"硬"实力。<em>例：宝马：驾驶动态和工程精度。</em></div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 05</div>
+        <div class="dim-title en-only">Personality &amp; Style</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">个性/风格</div>
+        <div class="dim-question en-only">"How do we communicate?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们如何表达？"</div>
+        <div class="dim-body en-only">The brand's character and communication style — analogous to human personality. Measured via the Aaker Brand Personality Scale. In practice: tone of voice, visual language, brand character.</div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">品牌的性格和传播风格——类比于人类个性。通过Aaker品牌个性量表衡量。在实践中：语调、视觉语言、品牌性格。</div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-num">Dimension 06</div>
+        <div class="dim-title en-only">Benefits</div>
+        <div class="dim-title zh-only" style="font-family:'Noto Serif SC',serif">利益</div>
+        <div class="dim-question en-only">"What do we offer?"</div>
+        <div class="dim-question zh-only" style="font-family:'Noto Serif SC',serif">"我们提供什么？"</div>
+        <div class="dim-body en-only">The functional and emotional benefits the brand promises to deliver. This is the brand's "offer" to consumers — both tangible and intangible.</div>
+        <div class="dim-body zh-only" style="font-family:'Noto Serif SC',serif">品牌承诺提供的功能性和情感性利益。这是品牌对消费者的"承诺"——包括有形和无形的。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 5: PERSONALITY & AAKER -->
+  <section class="section" id="s-personality">
+    <div class="sec-label en-only">Section 5</div>
+    <div class="sec-label zh-only">第五节</div>
+    <h2 class="sec-title en-only">Brand Personality &amp; the Aaker Scale</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">品牌个性与Aaker量表</h2>
+
+    <p class="sec-text en-only">Brand personality refers to the set of human characteristics associated with a brand (Aaker, 1997). Just as we might describe a person as "warm and trustworthy" or "edgy and adventurous", we can describe brands in the same terms. Jennifer Aaker's Brand Personality Scale identifies five core dimensions, each with sub-traits that can be empirically measured in consumer surveys.</p>
+    <p class="sec-text en-only">In practice, brand personality is often operationalised as communication <em>style</em> — the consistent tone, visual language, and manner of expression across all brand touchpoints. A luxurious brand does not just sell luxury products; it speaks, looks, and behaves in a luxurious way.</p>
+
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">品牌个性是指与品牌相关联的一组人格特征（Aaker，1997）。就像我们可以描述一个人"温暖而可信"或"前卫而充满冒险精神"一样，我们也可以用同样的词语描述品牌。Jennifer Aaker的品牌个性量表确定了五个核心维度，每个维度都有可在消费者调查中实证测量的子特征。</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">在实践中，品牌个性通常被转化为传播"风格"——在所有品牌接触点上一致的语调、视觉语言和表达方式。奢侈品牌不仅仅销售奢侈品；它以奢侈的方式说话、呈现和行事。</p>
+
+    <div class="personality-grid">
+      <div class="pers-card">
+        <div class="pers-icon">🤝</div>
+        <div class="pers-title en-only">Sincerity</div>
+        <div class="pers-title zh-only" style="font-family:'Noto Serif SC',serif">真诚</div>
+        <div class="pers-tags en-only">Honest · Genuine · Wholesome · Cheerful</div>
+        <div class="pers-tags zh-only" style="font-family:'Noto Serif SC',serif">诚实 · 真实 · 健康</div>
+        <div class="pers-example">Dove</div>
+      </div>
+      <div class="pers-card">
+        <div class="pers-icon">⚡</div>
+        <div class="pers-title en-only">Excitement</div>
+        <div class="pers-title zh-only" style="font-family:'Noto Serif SC',serif">活力</div>
+        <div class="pers-tags en-only">Daring · Spirited · Imaginative · Up-to-date</div>
+        <div class="pers-tags zh-only" style="font-family:'Noto Serif SC',serif">大胆 · 充满活力 · 富有想象力</div>
+        <div class="pers-example">Red Bull</div>
+      </div>
+      <div class="pers-card">
+        <div class="pers-icon">🔷</div>
+        <div class="pers-title en-only">Competence</div>
+        <div class="pers-title zh-only" style="font-family:'Noto Serif SC',serif">能力</div>
+        <div class="pers-tags en-only">Reliable · Intelligent · Successful · Leader</div>
+        <div class="pers-tags zh-only" style="font-family:'Noto Serif SC',serif">可靠 · 智慧 · 成功</div>
+        <div class="pers-example">IBM</div>
+      </div>
+      <div class="pers-card">
+        <div class="pers-icon">✨</div>
+        <div class="pers-title en-only">Sophistication</div>
+        <div class="pers-title zh-only" style="font-family:'Noto Serif SC',serif">精致</div>
+        <div class="pers-tags en-only">Upper-class · Charming · Glamorous · Smooth</div>
+        <div class="pers-tags zh-only" style="font-family:'Noto Serif SC',serif">高端 · 迷人 · 优雅</div>
+        <div class="pers-example">Chanel</div>
+      </div>
+      <div class="pers-card">
+        <div class="pers-icon">🏔️</div>
+        <div class="pers-title en-only">Ruggedness</div>
+        <div class="pers-title zh-only" style="font-family:'Noto Serif SC',serif">粗犷</div>
+        <div class="pers-tags en-only">Outdoorsy · Tough · Rugged · Masculine</div>
+        <div class="pers-tags zh-only" style="font-family:'Noto Serif SC',serif">户外 · 强硬 · 男性化</div>
+        <div class="pers-example">Marlboro</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- BRAND IDENTITY BUILDER -->
+  <section class="section" id="s-builder">
+    <div class="sec-label en-only">Interactive Tool</div>
+    <div class="sec-label zh-only">互动工具</div>
+    <h2 class="sec-title en-only">Build Your Brand Identity Model</h2>
+    <h2 class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">构建你的品牌身份模型</h2>
+    <p class="sec-text en-only">Apply the six-dimensional Burmann model to your own brand. The card at the bottom updates live as you type — fill in all dimensions and select your Aaker personality type to complete it.</p>
+    <p class="sec-text-zh zh-only" style="font-family:'Noto Serif SC',serif">将Burmann六维模型应用于你自己的品牌。底部的卡片会随你输入实时更新——填写所有维度并选择Aaker个性类型以完成模型。</p>
+
+    <div class="bim-wrap">
+      <!-- INPUT FORM -->
+      <div class="bim-form-area">
+
+        <div class="bim-brand-row">
+          <label class="bim-input-label en-only">Brand Name / 品牌名称</label>
+          <input type="text" id="bim-brandname" class="bim-brand-input" placeholder="e.g. Nike, Apple, your brand..." oninput="bimUpdate()">
+        </div>
+
+        <div class="bim-dim-grid">
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">01</div>
+              <div class="bim-field-label en-only">Origin</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">起源</div>
+            </div>
+            <div class="bim-field-question en-only">Where do we come from?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们从哪里来？</div>
+            <textarea id="bim-origin" class="bim-textarea" placeholder="Geographic, cultural or institutional roots..." oninput="bimUpdate()"></textarea>
+          </div>
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">02</div>
+              <div class="bim-field-label en-only">Vision</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">愿景</div>
+            </div>
+            <div class="bim-field-question en-only">Where are we going?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们要去哪里？</div>
+            <textarea id="bim-vision" class="bim-textarea" placeholder="Long-term aspiration and strategic direction..." oninput="bimUpdate()"></textarea>
+          </div>
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">03</div>
+              <div class="bim-field-label en-only">Values</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">价值观</div>
+            </div>
+            <div class="bim-field-question en-only">What do we believe in?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们相信什么？</div>
+            <textarea id="bim-values" class="bim-textarea" placeholder="Core ethical convictions and guiding principles..." oninput="bimUpdate()"></textarea>
+          </div>
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">04</div>
+              <div class="bim-field-label en-only">Competences</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">能力</div>
+            </div>
+            <div class="bim-field-question en-only">What can we do?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们擅长什么？</div>
+            <textarea id="bim-competences" class="bim-textarea" placeholder="Unique skills, capabilities and strengths..." oninput="bimUpdate()"></textarea>
+          </div>
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">05</div>
+              <div class="bim-field-label en-only">Personality / Style</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">个性/风格</div>
+            </div>
+            <div class="bim-field-question en-only">How do we communicate?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们如何表达？</div>
+            <textarea id="bim-style" class="bim-textarea" placeholder="Tone of voice, visual language, brand character..." oninput="bimUpdate()"></textarea>
+          </div>
+          <div class="bim-field">
+            <div class="bim-field-head">
+              <div class="bim-field-num">06</div>
+              <div class="bim-field-label en-only">Benefits</div>
+              <div class="bim-field-label zh-only" style="font-family:'Noto Serif SC',serif">利益</div>
+            </div>
+            <div class="bim-field-question en-only">What do we offer?</div>
+            <div class="bim-field-question zh-only" style="font-family:'Noto Serif SC',serif">我们提供什么？</div>
+            <textarea id="bim-benefits" class="bim-textarea" placeholder="Functional and emotional benefits promised..." oninput="bimUpdate()"></textarea>
+          </div>
+        </div>
+
+        <!-- AAKER SELECTOR -->
+        <div class="bim-aaker-section">
+          <span class="bim-aaker-label en-only">Aaker Personality Dimension</span>
+          <span class="bim-aaker-label zh-only" style="font-family:'Noto Serif SC',serif">Aaker个性维度</span>
+          <div class="bim-aaker-grid">
+            <label class="bim-pers-option">
+              <input type="radio" name="bim-aaker" value="sincerity" onchange="bimUpdate()">
+              <div class="bim-pers-card">
+                <span class="bim-pers-icon">💛</span>
+                <div class="bim-pers-name en-only">Sincerity</div>
+                <div class="bim-pers-name zh-only" style="font-family:'Noto Serif SC',serif">真诚</div>
+                <div class="bim-pers-hint en-only">Honest · Genuine · Wholesome</div>
+                <div class="bim-pers-hint zh-only">诚实 · 真实 · 健康</div>
+              </div>
+            </label>
+            <label class="bim-pers-option">
+              <input type="radio" name="bim-aaker" value="excitement" onchange="bimUpdate()">
+              <div class="bim-pers-card">
+                <span class="bim-pers-icon">🔥</span>
+                <div class="bim-pers-name en-only">Excitement</div>
+                <div class="bim-pers-name zh-only" style="font-family:'Noto Serif SC',serif">活力</div>
+                <div class="bim-pers-hint en-only">Daring · Spirited · Imaginative</div>
+                <div class="bim-pers-hint zh-only">大胆 · 充满活力 · 有想象力</div>
+              </div>
+            </label>
+            <label class="bim-pers-option">
+              <input type="radio" name="bim-aaker" value="competence" onchange="bimUpdate()">
+              <div class="bim-pers-card">
+                <span class="bim-pers-icon">⚙️</span>
+                <div class="bim-pers-name en-only">Competence</div>
+                <div class="bim-pers-name zh-only" style="font-family:'Noto Serif SC',serif">能力</div>
+                <div class="bim-pers-hint en-only">Reliable · Intelligent · Successful</div>
+                <div class="bim-pers-hint zh-only">可靠 · 智慧 · 成功</div>
+              </div>
+            </label>
+            <label class="bim-pers-option">
+              <input type="radio" name="bim-aaker" value="sophistication" onchange="bimUpdate()">
+              <div class="bim-pers-card">
+                <span class="bim-pers-icon">✨</span>
+                <div class="bim-pers-name en-only">Sophistication</div>
+                <div class="bim-pers-name zh-only" style="font-family:'Noto Serif SC',serif">精致</div>
+                <div class="bim-pers-hint en-only">Upper-class · Charming · Glamorous</div>
+                <div class="bim-pers-hint zh-only">高端 · 迷人 · 优雅</div>
+              </div>
+            </label>
+            <label class="bim-pers-option">
+              <input type="radio" name="bim-aaker" value="ruggedness" onchange="bimUpdate()">
+              <div class="bim-pers-card">
+                <span class="bim-pers-icon">🏔️</span>
+                <div class="bim-pers-name en-only">Ruggedness</div>
+                <div class="bim-pers-name zh-only" style="font-family:'Noto Serif SC',serif">粗犷</div>
+                <div class="bim-pers-hint en-only">Outdoorsy · Tough · Rugged</div>
+                <div class="bim-pers-hint zh-only">户外 · 强硬 · 刚毅</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE OUTPUT CARD -->
+      <div class="bim-output">
+        <div class="bim-out-head">
+          <div class="bim-out-tag en-only">Brand Identity Model · Burmann / Halaszovich / Hemmann</div>
+          <div class="bim-out-tag zh-only">品牌识别模型 · Burmann / Halaszovich / Hemmann</div>
+          <div class="bim-out-brandname" id="bim-out-brand">Your Brand</div>
+          <div id="bim-out-personality" style="display:none;font-size:12px;font-weight:600;letter-spacing:.06em;padding:4px 14px;border-radius:20px;border:1px solid;display:inline-block;margin-top:6px"></div>
+        </div>
+        <div class="bim-dim-output-grid">
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">01</div>
+            <div class="bim-out-cell-label en-only">Origin</div>
+            <div class="bim-out-cell-label zh-only">起源</div>
+            <div class="bim-out-cell-value" id="bim-out-origin">Where do we come from?</div>
+          </div>
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">02</div>
+            <div class="bim-out-cell-label en-only">Vision</div>
+            <div class="bim-out-cell-label zh-only">愿景</div>
+            <div class="bim-out-cell-value" id="bim-out-vision">Where are we going?</div>
+          </div>
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">03</div>
+            <div class="bim-out-cell-label en-only">Values</div>
+            <div class="bim-out-cell-label zh-only">价值观</div>
+            <div class="bim-out-cell-value" id="bim-out-values">What do we believe in?</div>
+          </div>
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">04</div>
+            <div class="bim-out-cell-label en-only">Competences</div>
+            <div class="bim-out-cell-label zh-only">能力</div>
+            <div class="bim-out-cell-value" id="bim-out-competences">What can we do?</div>
+          </div>
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">05</div>
+            <div class="bim-out-cell-label en-only">Personality / Style</div>
+            <div class="bim-out-cell-label zh-only">个性/风格</div>
+            <div class="bim-out-cell-value" id="bim-out-style">How do we communicate?</div>
+          </div>
+          <div class="bim-out-cell">
+            <div class="bim-out-cell-num">06</div>
+            <div class="bim-out-cell-label en-only">Benefits</div>
+            <div class="bim-out-cell-label zh-only">利益</div>
+            <div class="bim-out-cell-value" id="bim-out-benefits">What do we offer?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bim-note en-only">The card updates live as you type. Screenshot or copy your completed model before leaving the page — entries are not saved.</p>
+    <p class="bim-note zh-only" style="font-family:'Noto Serif SC',serif">卡片随输入实时更新。离开页面前请截图或复制你的完成模型——内容不会被自动保存。</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ASSIGNMENT -->
+  <section class="section" id="s-assignment">
+    <div class="assignment">
+      <div class="assignment-badge">Assignment 2</div>
+      <div class="assignment-title en-only">Describe Your Brand's Identity</div>
+      <div class="assignment-title zh-only" style="font-family:'Noto Serif SC',serif">描述你的品牌识别</div>
+      <p class="assignment-body en-only">Using the Burmann Identity Model as a framework, describe the identity of the brand you chose in Assignment 1. Work through all six dimensions (origin, vision, values, competences, personality/style, benefits) and explain what each dimension looks like for your brand. As part of the personality dimension, apply the Aaker Brand Personality Scale — which of the five dimensions best describes your brand's character? Submit your analysis as part of your evolving brand PPT.</p>
+      <p class="assignment-body-zh zh-only" style="font-family:'Noto Serif SC',serif">以Burmann身份模型为框架，描述你在作业1中选择的品牌的识别。梳理所有六个维度（起源、愿景、价值观、能力、个性/风格、利益），并解释每个维度对你的品牌意味着什么。在个性维度中，应用Aaker品牌个性量表——五个维度中哪个最能描述你的品牌特征？将你的分析作为不断完善的品牌PPT的一部分提交。</p>
+    </div>
+
+    <!-- READING -->
+    <div class="reading-box">
+      <div class="reading-icon">📖</div>
+      <div class="reading-content">
+        <div class="reading-label">BM-Reader — Lecture #2</div>
+        <p class="reading-text">Burmann, C., Riley, N.-M., Halaszovich, T.F., Schade, M., 2017. <em>Identity-based brand management.</em> Springer Gabler, pp. 42–56 &middot; Aaker, J.-L., 1997. Dimensions of Brand Personality. <em>Journal of Marketing Research</em>, Vol. 34, No. 3, pp. 347–356</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a class="nav-btn" href="lecture1-introduction.html">← Previous Lecture</a>
+  <span class="nav-info">Lecture 2 of 10</span>
+  <a class="nav-btn" href="lecture3-brand-architecture.html">Next Lecture →</a>
+</div>
+
+<script>
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-zh').classList.toggle('active',lang==='zh');
+  bimUpdate();
+}
+
+/* ── BRAND IDENTITY MODEL BUILDER ── */
+const BIM_AAKER = {
+  sincerity:      {icon:'💛', color:'#C87A10', bg:'rgba(200,122,16,.08)', glow:'rgba(200,122,16,.2)', en:'Sincerity', zh:'真诚'},
+  excitement:     {icon:'🔥', color:'#C84020', bg:'rgba(200,64,32,.08)',  glow:'rgba(200,64,32,.2)',  en:'Excitement', zh:'活力'},
+  competence:     {icon:'⚙️', color:'#2A5FA8', bg:'rgba(42,95,168,.08)',  glow:'rgba(42,95,168,.2)',  en:'Competence', zh:'能力'},
+  sophistication: {icon:'✨', color:'#7A40A8', bg:'rgba(122,64,168,.08)', glow:'rgba(122,64,168,.2)', en:'Sophistication', zh:'精致'},
+  ruggedness:     {icon:'🏔️', color:'#6A4020', bg:'rgba(106,64,32,.08)',  glow:'rgba(106,64,32,.2)',  en:'Ruggedness', zh:'粗犷'}
+};
+
+const BIM_FIELDS = ['origin','vision','values','competences','style','benefits'];
+
+function bimUpdate(){
+  const isZh = document.body.classList.contains('zh');
+
+  // Brand name
+  const brand = document.getElementById('bim-brandname').value.trim();
+  document.getElementById('bim-out-brand').textContent = brand || (isZh ? '你的品牌' : 'Your Brand');
+
+  // Dimensions
+  BIM_FIELDS.forEach(f => {
+    const val = document.getElementById('bim-' + f).value.trim();
+    const el = document.getElementById('bim-out-' + f);
+    if(val){
+      el.textContent = val;
+      el.classList.add('filled');
+    } else {
+      const placeholders = {
+        origin:      ['Where do we come from?',      '我们从哪里来？'],
+        vision:      ['Where are we going?',          '我们要去哪里？'],
+        values:      ['What do we believe in?',       '我们相信什么？'],
+        competences: ['What can we do?',              '我们擅长什么？'],
+        style:       ['How do we communicate?',       '我们如何表达？'],
+        benefits:    ['What do we offer?',            '我们提供什么？']
+      };
+      el.textContent = placeholders[f][isZh ? 1 : 0];
+      el.classList.remove('filled');
+    }
+  });
+
+  // Aaker personality
+  const aaker = document.querySelector('input[name="bim-aaker"]:checked');
+  const persEl = document.getElementById('bim-out-personality');
+  document.querySelectorAll('.bim-pers-card').forEach(c => c.classList.remove('selected'));
+
+  if(aaker){
+    const m = BIM_AAKER[aaker.value];
+    persEl.textContent = m.icon + '\u2002' + (isZh ? m.zh : m.en);
+    persEl.style.cssText = `display:inline-block;color:${m.color};background:${m.bg};border-color:${m.color}44;font-size:12px;font-weight:600;letter-spacing:.06em;padding:4px 14px;border-radius:20px;border:1px solid;margin-top:6px`;
+    const card = aaker.parentElement.querySelector('.bim-pers-card');
+    card.classList.add('selected');
+    card.style.setProperty('--aaker-color', m.color);
+    card.style.setProperty('--aaker-bg', m.bg);
+    card.style.setProperty('--aaker-glow', m.glow);
+  } else {
+    persEl.style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
