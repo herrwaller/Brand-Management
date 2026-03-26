@@ -727,6 +727,12 @@
     .flow-diagram { flex-direction: column; }
     .flow-arrow { transform: rotate(90deg); align-self: center; }
   }
+
+/* READER QUOTE */
+.reader-quote{border-left:3px solid #C84020;padding:16px 20px;background:var(--card,#FDFAF4);border-radius:0 8px 8px 0;margin:24px 0 16px}
+.rq-text{font-family:'Cormorant Garamond','Georgia',serif;font-size:17px;font-style:italic;color:#1A1714;line-height:1.6;margin-bottom:8px}
+.rq-text-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:#46403A;line-height:1.8;margin-bottom:8px}
+.rq-source{font-size:11px;color:#7A756C;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -841,14 +847,6 @@
       </div>
     </div>
 
-    <div class="bm-reader">
-      <div class="bm-reader-icon">BM-<br>READER</div>
-      <div>
-        <p><strong class="lang-en">Lecture #5 reading</strong><strong class="lang-cn">第五讲阅读材料</strong></p>
-        <p class="lang-en">Johansson &amp; Carlson, 2015, pp. 50–64 · Esch, 2018, p. 91 · Burmann et al., 2015, p. 147ff.</p>
-        <p class="lang-cn">Johansson &amp; Carlson, 2015, 第50–64页 · Esch, 2018, 第91页 · Burmann等, 2015, 第147页起</p>
-      </div>
-    </div>
   </section>
 
   <!-- ═══ SECTION 2: POSITIONING ELEMENTS ═══ -->
@@ -1295,6 +1293,21 @@
     <p style="margin-top:12px; font-size:14px; opacity:0.85;" class="lang-en">📖 Reading: Chernev, A., 2015. Strategic Brand Management. Cerebellum Press, Chicago, pp. 58–64</p>
     <p style="margin-top:12px; font-size:14px; opacity:0.85;" class="lang-cn">📖 阅读材料：Chernev, A., 2015. Strategic Brand Management. Cerebellum Press, 芝加哥, 第58–64页</p>
   </div>
+
+
+    <blockquote class="reader-quote">
+      <p class="rq-text lang-en">"Brand positioning is the process of creating a meaningful and distinct image of a brand in target customers’ minds. Brand positioning reflects the set of common benefits that the brand aims to create for all target customers."</p>
+      <p class="rq-text lang-cn" style="font-family:'Noto Serif SC',serif">“品牌定位是在目标客户心智中塑造有意义和独特形象的过程。品牌定位应体现品牌旨在为所有目标客户创造的共同利益集合。”</p>
+      <p class="rq-source">— Chernev, A., <em>Strategic Brand Management</em>, Cerebellum Press, 2015, p. 58</p>
+    </blockquote>
+    <div class="bm-reader">
+      <div class="bm-reader-icon">BM-<br>READER</div>
+      <div>
+        <p><strong class="lang-en">Lecture #5 reading</strong><strong class="lang-cn">第五讲阅读材料</strong></p>
+        <p class="lang-en">Johansson &amp; Carlson, 2015, pp. 50–64 · Esch, 2018, p. 91 · Burmann et al., 2015, p. 147ff.</p>
+        <p class="lang-cn">Johansson &amp; Carlson, 2015, 第50–64页 · Esch, 2018, 第91页 · Burmann等, 2015, 第147页起</p>
+      </div>
+    </div>
 
 </div><!-- /content -->
 

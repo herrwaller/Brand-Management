@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BM Reader · Brand Management Basics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EB; --bg2:#EBE7DE; --bg3:#DAD5C8; --card:#FDFAF4;
+  --ink:#1A1714; --ink2:#46403A; --ink3:#7A756C;
+  --border:rgba(26,23,20,.10); --border2:rgba(26,23,20,.06);
+  --green:#4A8A28; --accent:#C84020; --r:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HERO */
+.hero{background:#1A1714;color:#F5F2EB;padding:60px 48px 52px;position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 350px at 85% 50%,rgba(200,64,32,.14) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 14px)}
+.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto;width:100%}
+.hero-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,242,235,.38);margin-bottom:14px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,54px);font-weight:700;line-height:1.05;margin-bottom:12px}
+.hero-title span{color:#D4603A}
+.hero-sub{font-size:13.5px;color:rgba(245,242,235,.5);max-width:560px;line-height:1.65}
+.lang-row{position:absolute;top:24px;right:24px;display:flex;gap:6px;z-index:2}
+.lb{background:none;border:1px solid rgba(245,242,235,.25);color:rgba(245,242,235,.55);
+    padding:4px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .15s}
+.lb.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* LAYOUT */
+.page{max-width:860px;margin:0 auto;padding:0 24px 60px}
+
+/* DOWNLOAD CARD */
+.dl-card{background:var(--ink);color:#F5F2EB;border-radius:var(--r);padding:32px 36px;display:flex;align-items:center;gap:28px;margin:40px 0 0;position:relative;overflow:hidden}
+.dl-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 400px 300px at 90% 50%,rgba(200,64,32,.18) 0%,transparent 70%)}
+.dl-icon{font-size:42px;flex-shrink:0;position:relative;z-index:1}
+.dl-body{position:relative;z-index:1;flex:1}
+.dl-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.dl-title-zh{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.dl-desc{font-size:13px;color:rgba(245,242,235,.6);line-height:1.6;max-width:480px}
+.dl-btn{display:inline-block;margin-top:16px;background:var(--accent);color:#fff;text-decoration:none;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:500;transition:opacity .15s}
+.dl-btn:hover{opacity:.85}
+.dl-btn-zh{font-family:'Noto Serif SC',serif;font-size:12px}
+
+/* SECTION HEADER */
+.sec-block{padding:44px 0 20px}
+.sec-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(200,64,32,.2)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:700;line-height:1.2;margin-bottom:6px}
+.sec-text{font-size:14px;color:var(--ink2);line-height:1.75;max-width:680px}
+
+/* LECTURE LIST */
+.lecture-list{display:flex;flex-direction:column;gap:0}
+.lec-row{display:grid;grid-template-columns:52px 1fr;gap:0;border-top:1px solid var(--border2);padding:20px 0}
+.lec-row:last-child{border-bottom:1px solid var(--border2)}
+.lec-num{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding-top:3px}
+.lec-body{}
+.lec-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;margin-bottom:6px;line-height:1.25}
+.lec-title-zh{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink2)}
+.lec-ref{font-size:12.5px;color:var(--ink3);line-height:1.65;margin-bottom:4px}
+.lec-ref-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);line-height:1.75}
+.lec-link{display:inline-block;margin-top:8px;font-size:12px;color:var(--green);text-decoration:none;font-weight:500}
+.lec-link:hover{text-decoration:underline}
+
+/* QUOTE BLOCK */
+.reader-quote{border-left:3px solid var(--accent);padding:14px 18px;background:var(--card);border-radius:0 var(--r) var(--r) 0;margin:6px 0 0}
+.rq-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:6px}
+.rq-text-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:6px}
+.rq-source{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+
+/* NAV BAR */
+.nav-bar{background:#1A1714;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:0}
+.nav-btn{color:rgba(245,242,235,.6);text-decoration:none;font-size:13px;transition:color .15s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{color:#F5F2EB}
+.nav-info{font-size:12px;color:rgba(245,242,235,.3);letter-spacing:.06em;font-family:'DM Sans',sans-serif}
+
+body.zh .en-only{display:none!important}
+body.en .zh-only{display:none!important}
+</style>
+</head>
+<body class="en">
+
+<div class="lang-row">
+  <button class="lb on" onclick="setLang('en')">EN</button>
+  <button class="lb" onclick="setLang('zh')">中文</button>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag en-only">Brand Management Basics · SuSe 2026 · Course Reader</div>
+    <div class="hero-tag zh-only" style="font-family:'Noto Serif SC',serif">品牌管理基础 · 2026年夏季学期 · 课程读本</div>
+    <div class="hero-title">BM <span>Reader</span></div>
+    <div class="hero-sub en-only">Compiled academic texts for all nine lectures — key readings in brand management, identity, positioning, and internationalisation.</div>
+    <div class="hero-sub zh-only" style="font-family:'Noto Serif SC',serif">九讲配套学术文献——涵盖品牌管理、品牌识别、品牌定位与国际化的核心阅读材料。</div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- DOWNLOAD -->
+  <div class="dl-card">
+    <div class="dl-icon">📚</div>
+    <div class="dl-body">
+      <div class="dl-title en-only">BM Reader · PDF Download</div>
+      <div class="dl-title-zh zh-only">BM Reader · PDF下载</div>
+      <p class="dl-desc en-only">The complete reader in a single PDF — all nine lecture texts compiled. For best results, open in a PDF reader that supports annotation.</p>
+      <p class="dl-desc zh-only" style="font-family:'Noto Serif SC',serif">完整课程读本合集PDF——含九讲全部文献。建议在支持批注功能的PDF阅读器中打开。</p>
+      <a class="dl-btn en-only" href="reader/BM Reader.pdf" target="_blank">⬇ Download PDF</a>
+      <a class="dl-btn dl-btn-zh zh-only" href="reader/BM Reader.pdf" target="_blank">⬇ 下载PDF</a>
+    </div>
+  </div>
+
+  <!-- LECTURE LIST -->
+  <div class="sec-block">
+    <div class="sec-label en-only">Reading List · 9 Lectures</div>
+    <div class="sec-label zh-only" style="font-family:'Noto Serif SC',serif">阅读列表 · 9讲</div>
+    <div class="sec-title en-only">Texts by Lecture</div>
+    <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">各讲阅读文献</div>
+    <p class="sec-text en-only">Each lecture is accompanied by one or two academic texts. Read the assigned pages before the lecture for best comprehension.</p>
+    <p class="sec-text zh-only" style="font-family:'Noto Serif SC',serif">每讲配有一至两篇学术文献，建议在听课前完成指定页数的阅读。</p>
+  </div>
+
+  <div class="lecture-list">
+
+    <!-- L1 -->
+    <div class="lec-row">
+      <div class="lec-num">#1</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Introduction — What are Brands?</div>
+        <div class="lec-title-zh zh-only">导论——什么是品牌？</div>
+        <p class="lec-ref en-only">De Pelsmacker, P., Geuens, M. &amp; Van den Bergh, J., 2010. <em>Marketing Communications: A European Perspective</em>, 4th ed. FT/Prentice Hall, pp. 50–56</p>
+        <p class="lec-ref-zh zh-only">De Pelsmacker等，2010，《营销传播：欧洲视角》，第4版，FT/Prentice Hall，第50–56页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"You buy a product for what it does. You choose a brand for what it means. A product sits on retailers' shelves. A brand exists in consumers' minds."</p>
+          <p class="rq-text-zh zh-only">「购买产品，是因为它能做什么；选择品牌，是因为它意味着什么。产品陈列在货架上，品牌存活于消费者心中。」</p>
+          <p class="rq-source">— Batey (2008), cited in De Pelsmacker et al., p. 51</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture1-introduction.html">→ Open Lecture #1</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture1-introduction.html">→ 打开第一讲</a>
+      </div>
+    </div>
+
+    <!-- L2 -->
+    <div class="lec-row">
+      <div class="lec-num">#2</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Brand Identity, Image &amp; Personality</div>
+        <div class="lec-title-zh zh-only">品牌识别、形象与个性</div>
+        <p class="lec-ref en-only">Burmann, C., Riley, N.-M., Halaszovich, T.F., Schade, M., 2017. <em>Identity-Based Brand Management</em>. Springer Gabler, Wiesbaden, pp. 42–56</p>
+        <p class="lec-ref en-only">Aaker, J.-L., 1997. Dimensions of Brand Personalities. <em>Journal of Marketing Research</em>, Vol. 34, No. 3, pp. 347–356</p>
+        <p class="lec-ref-zh zh-only">Burmann等，2017，《基于身份的品牌管理》，Springer Gabler，第42–56页；Aaker，1997，《品牌个性维度》，《营销研究杂志》，第34卷第3期，第347–356页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Strong identities are formed through the clear accentuation of specific features in conjunction with a consciousness of skills and past achievements. The same applies to brands."</p>
+          <p class="rq-text-zh zh-only">「强大的身份认同源于对自身特质的清晰彰显，以及对过往成就的深刻自觉。品牌亦然。」</p>
+          <p class="rq-source">— Burmann et al., Identity-Based Brand Management, 2017, p. 43</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture2-brand-identity.html">→ Open Lecture #2</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture2-brand-identity.html">→ 打开第二讲</a>
+      </div>
+    </div>
+
+    <!-- L3 -->
+    <div class="lec-row">
+      <div class="lec-num">#3</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Brand Architecture &amp; Portfolio</div>
+        <div class="lec-title-zh zh-only">品牌架构与品牌组合</div>
+        <p class="lec-ref en-only">Burmann, C., Riley, N.-M., Halaszovich, T.F., Schade, M., 2017. <em>Identity-Based Brand Management</em>. Springer Gabler, Wiesbaden, pp. 122–140</p>
+        <p class="lec-ref-zh zh-only">Burmann等，2017，《基于身份的品牌管理》，Springer Gabler，第122–140页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Multi-sensual brand experiences should address as many senses as possible to garner greater attention, recognition and stronger differentiation, which will lead to an increase in the recall effect and in the emotionality of the experience."</p>
+          <p class="rq-text-zh zh-only">「多感官品牌体验应尽可能调动更多感官，以获得更高的关注度、识别度和差异化，进而提升回忆效果与情感深度。」</p>
+          <p class="rq-source">— Burmann et al., Identity-Based Brand Management, 2017, p. 122</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture3-brand-architecture.html">→ Open Lecture #3</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture3-brand-architecture.html">→ 打开第三讲</a>
+      </div>
+    </div>
+
+    <!-- L4 -->
+    <div class="lec-row">
+      <div class="lec-num">#4</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Brands &amp; People — Consumer Typologies</div>
+        <div class="lec-title-zh zh-only">品牌与人——消费者类型学</div>
+        <p class="lec-ref en-only">SINUS Markt- und Sozialforschung GmbH, 2017. <em>Sinus-Milieus® 2017/18</em>. Heidelberg</p>
+        <p class="lec-ref-zh zh-only">SINUS市场与社会研究有限公司，2017，《Sinus社会阶层® 2017/18》，海德堡</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"With Sinus-Milieus, we can understand people's life worlds 'from the inside out', and 'immerse' ourselves in them. We understand what moves people and how they can be moved."</p>
+          <p class="rq-text-zh zh-only">「借助Sinus社会阶层模型，我们可以从内部理解人们的生活世界，仿佛身临其境。我们能理解什么在打动人心，以及如何打动之。」</p>
+          <p class="rq-source">— SINUS Markt- und Sozialforschung GmbH, Sinus-Milieus® 2017/18, p. 4</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture4-brands-and-people.html">→ Open Lecture #4</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture4-brands-and-people.html">→ 打开第四讲</a>
+      </div>
+    </div>
+
+    <!-- L5 -->
+    <div class="lec-row">
+      <div class="lec-num">#5</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Brand Positioning</div>
+        <div class="lec-title-zh zh-only">品牌定位</div>
+        <p class="lec-ref en-only">Chernev, A., 2015. <em>Strategic Brand Management</em>. Cerebellum Press, Chicago, Illinois, pp. 58–64</p>
+        <p class="lec-ref-zh zh-only">Chernev, A.，2015，《战略品牌管理》，Cerebellum Press，芝加哥，第58–64页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Brand positioning is the process of creating a meaningful and distinct image of a brand in target customers' minds. Brand positioning reflects the set of common benefits that the brand aims to create for all target customers."</p>
+          <p class="rq-text-zh zh-only">「品牌定位是在目标消费者心智中塑造有意义且独特形象的过程。品牌定位体现了品牌旨在为所有目标消费者创造的共同利益集合。」</p>
+          <p class="rq-source">— Chernev, A., Strategic Brand Management, 2015, p. 58</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture5-brand-positioning.html">→ Open Lecture #5</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture5-brand-positioning.html">→ 打开第五讲</a>
+      </div>
+    </div>
+
+    <!-- L6 -->
+    <div class="lec-row">
+      <div class="lec-num">#6</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Market Conditions &amp; Consumer Behaviour</div>
+        <div class="lec-title-zh zh-only">市场条件与消费者行为</div>
+        <p class="lec-ref en-only">Meffert, H., Burmann, C., Koers, M. (Eds.), 2002. <em>Markenmanagement: Grundfragen der identitätsorientierten Markenführung</em>. Gabler Verlag, Wiesbaden (English translation), pp. 32–33</p>
+        <p class="lec-ref-zh zh-only">Meffert, Burmann, Koers (主编)，2002，《品牌管理：以身份为导向的品牌经营基础问题》，Gabler Verlag，威斯巴登（英译本），第32–33页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Consumer motivation encompasses several motives closely related to needs: motivation is directed toward the satisfaction of needs. Consumer behavior can be influenced by satisfying or specifically stimulating certain needs through marketing measures."</p>
+          <p class="rq-text-zh zh-only">「消费者动机由多种与需求密切相关的动机构成：动机指向需求的满足。营销手段通过满足或定向激发特定需求，可有效影响消费者行为。」</p>
+          <p class="rq-source">— Meffert, Burmann, Koers (Eds.), Markenmanagement, Gabler Verlag, 2002, p. 32</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture6-market-conditions.html">→ Open Lecture #6</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture6-market-conditions.html">→ 打开第六讲</a>
+      </div>
+    </div>
+
+    <!-- L7 -->
+    <div class="lec-row">
+      <div class="lec-num">#7</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Marketing Mix &amp; Brand Communication</div>
+        <div class="lec-title-zh zh-only">营销组合与品牌传播</div>
+        <p class="lec-ref en-only">Goi, C., 2009. A Review of Marketing Mix. <em>International Journal of Marketing Studies</em>, Vol. 1, No. 1, May 2009</p>
+        <p class="lec-ref-zh zh-only">Goi, C.，2009，《营销组合综述》，《国际营销研究杂志》，第1卷第1期，2009年5月</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Kent (1986) refers to the 4Ps of the marketing mix as 'the holy quadruple … of the marketing faith … written in tablets of stone'. Yet the concept remains the dominant framework in both theory and practice."</p>
+          <p class="rq-text-zh zh-only">「Kent（1986）将营销组合的4P称为"营销信仰中的神圣四元组……如同刻在石板上的戒律"。然而时至今日，这一概念仍主导着理论与实践。」</p>
+          <p class="rq-source">— Goi, C., A Review of Marketing Mix, International Journal of Marketing Studies, Vol. 1, 2009, p. 2</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture7-marketing-mix.html">→ Open Lecture #7</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture7-marketing-mix.html">→ 打开第七讲</a>
+      </div>
+    </div>
+
+    <!-- L8 -->
+    <div class="lec-row">
+      <div class="lec-num">#8</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Internationalisation &amp; Global Brands</div>
+        <div class="lec-title-zh zh-only">国际化与全球品牌</div>
+        <p class="lec-ref en-only">Johansson, J.K., Carlson, K.A., 2015. <em>Contemporary Brand Management</em>. SAGE Publications, Los Angeles, pp. 164–189</p>
+        <p class="lec-ref-zh zh-only">Johansson, J.K., Carlson, K.A.，2015，《当代品牌管理》，SAGE Publications，洛杉矶，第164–189页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"A global brand isn't a brand which comes from nowhere — it is a brand which may be sold everywhere but it comes from somewhere quite definite."</p>
+          <p class="rq-text-zh zh-only">「全球品牌并非来自虚无——它可以在全球各地销售，但必然源自某个相当明确的地方。」</p>
+          <p class="rq-source">— Simon Anholt, cited in Johansson &amp; Carlson, Contemporary Brand Management, SAGE, 2015, p. 164</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture8-internationalisation.html">→ Open Lecture #8</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture8-internationalisation.html">→ 打开第八讲</a>
+      </div>
+    </div>
+
+    <!-- L9 -->
+    <div class="lec-row">
+      <div class="lec-num">#9</div>
+      <div class="lec-body">
+        <div class="lec-title en-only">Brand Evolution &amp; Co-Branding</div>
+        <div class="lec-title-zh zh-only">品牌演进与联合品牌</div>
+        <p class="lec-ref en-only">Burmann, C., Riley, N.-M., Halaszovich, T.F., Schade, M., 2017. <em>Identity-Based Brand Management</em>. Springer Gabler, Wiesbaden, pp. 140–165</p>
+        <p class="lec-ref-zh zh-only">Burmann等，2017，《基于身份的品牌管理》，Springer Gabler，第140–165页</p>
+        <blockquote class="reader-quote">
+          <p class="rq-text en-only">"Successful brand dynamisation can only succeed if a sufficient number of important identifying features remain unchanged. This 'medium' mix of old, reinforcing information and new characteristics ensures maximum communication impact."</p>
+          <p class="rq-text-zh zh-only">「成功的品牌动态化要求足够多的核心识别特征保持不变。旧有强化信息与新特征的"适度"调和，方能实现最大传播效果。」</p>
+          <p class="rq-source">— Burmann et al., Identity-Based Brand Management, Springer, 2017, p. 142</p>
+        </blockquote>
+        <a class="lec-link en-only" href="lecture9-brand-evolution.html">→ Open Lecture #9</a>
+        <a class="lec-link zh-only" style="font-family:'Noto Serif SC',serif" href="lecture9-brand-evolution.html">→ 打开第九讲</a>
+      </div>
+    </div>
+
+  </div><!-- /lecture-list -->
+
+</div><!-- /page -->
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a class="nav-btn" href="index.html">← Course Overview</a>
+  <span class="nav-info en-only">BM Reader · Brand Management Basics</span>
+  <span class="nav-info zh-only" style="font-family:'Noto Serif SC',serif">BM Reader · 品牌管理基础</span>
+  <a class="nav-btn" href="reader/BM Reader.pdf" target="_blank">Download PDF →</a>
+</div>
+
+<script>
+function setLang(l){
+  document.body.className=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',
+    (l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
+}
+</script>
+</body>
+</html>

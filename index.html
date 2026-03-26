@@ -56,6 +56,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line
 .lc-tag{background:var(--bg2);border-radius:20px;padding:3px 10px;font-size:10.5px;color:var(--ink3)}
 .lc-arrow{color:var(--green);font-size:12.5px;margin-top:10px;display:block;font-weight:500}
 
+/* READER TILE */
+.reader-tile{background:#1A1714;color:#F5F2EB;border-radius:var(--r);padding:28px 32px;display:flex;align-items:center;gap:24px;text-decoration:none;position:relative;overflow:hidden;transition:opacity .2s;margin-bottom:4px}
+.reader-tile::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 400px 300px at 90% 50%,rgba(200,64,32,.15) 0%,transparent 70%)}
+.reader-tile:hover{opacity:.92}
+.rt-icon{font-size:38px;flex-shrink:0;position:relative;z-index:1}
+.rt-body{position:relative;z-index:1;flex:1}
+.rt-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,242,235,.35);margin-bottom:8px}
+.rt-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:6px;line-height:1.2}
+.rt-desc{font-size:13px;color:rgba(245,242,235,.55);line-height:1.6;max-width:520px}
+.rt-arrow{font-size:12.5px;color:rgba(200,64,32,.9);margin-top:12px;display:block;font-weight:500}
+
 /* TOOLS SECTION */
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding-bottom:16px}
 .tool-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:inherit;transition:all .15s;display:block}
@@ -225,6 +236,29 @@ body.en .zh-only{display:none!important}
     </a>
 
   </div>
+
+  <div class="section-head">
+    <div class="sec-label en-only">Course Reader</div>
+    <div class="sec-label zh-only" style="font-family:'Noto Serif SC',serif">课程读本</div>
+    <div class="sec-title en-only">BM Reader</div>
+    <div class="sec-title zh-only" style="font-family:'Noto Serif SC',serif">BM Reader</div>
+    <p class="sec-text en-only">Compiled academic texts for all nine lectures — download the PDF or browse readings and key quotes by lecture.</p>
+    <p class="sec-text-zh zh-only">九讲配套学术文献汇编——下载PDF，或按讲次浏览阅读材料与核心引文。</p>
+  </div>
+
+  <a class="reader-tile" href="reader.html">
+    <div class="rt-icon">📚</div>
+    <div class="rt-body">
+      <div class="rt-label en-only">PDF · 9 Readings · Key Quotes</div>
+      <div class="rt-label zh-only" style="font-family:'Noto Serif SC',serif">PDF · 9篇文献 · 核心引文</div>
+      <div class="rt-title en-only">BM Reader — Course Texts</div>
+      <div class="rt-title zh-only" style="font-family:'Noto Serif SC',serif">BM Reader — 课程文献</div>
+      <p class="rt-desc en-only">Pelsmacker · Burmann et al. · Aaker · SINUS · Chernev · Meffert · Goi · Johansson &amp; Carlson</p>
+      <p class="rt-desc zh-only" style="font-family:'Noto Serif SC',serif">Pelsmacker · Burmann等 · Aaker · SINUS · Chernev · Meffert · Goi · Johansson &amp; Carlson</p>
+      <span class="rt-arrow en-only">Browse Reader &amp; Download PDF →</span>
+      <span class="rt-arrow zh-only" style="font-family:'Noto Serif SC',serif">浏览读本并下载PDF →</span>
+    </div>
+  </a>
 
   <div class="section-head">
     <div class="sec-label en-only">Interactive Tools · Lecture 4</div>

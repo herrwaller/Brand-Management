@@ -282,6 +282,12 @@ em{font-style:normal;color:var(--green);font-weight:500}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 body.zh .en-only{display:none!important}
 body.en .zh-only{display:none!important}
+
+/* READER QUOTE */
+.reader-quote{border-left:3px solid #C84020;padding:16px 20px;background:var(--card,#FDFAF4);border-radius:0 8px 8px 0;margin:24px 0 16px}
+.rq-text{font-family:'Cormorant Garamond','Georgia',serif;font-size:17px;font-style:italic;color:#1A1714;line-height:1.6;margin-bottom:8px}
+.rq-text-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:#46403A;line-height:1.8;margin-bottom:8px}
+.rq-source{font-size:11px;color:#7A756C;letter-spacing:.04em}
 </style>
 </head>
 <body class="en">
@@ -517,6 +523,12 @@ body.en .zh-only{display:none!important}
 
   <div class="note en-only">© SINUS Markt- und Sozialforschung GmbH, Heidelberg/Berlin. Figures represent 14+ population in Germany. The model is updated continuously to reflect societal change.</div>
   <div class="note zh-only" style="font-family:'Noto Serif SC',serif">© SINUS市场与社会研究有限公司，海德堡/柏林。数据代表德国14岁及以上人口。模型持续更新以反映社会变迁。</div>
+
+  <blockquote class="reader-quote">
+    <p class="rq-text en-only">"With Sinus-Milieus, we can understand people's life worlds 'from the inside out', and 'immerse' ourselves in them, so to speak. With Sinus-Milieus, we understand what moves people and how they can be moved."</p>
+    <p class="rq-text zh-only" style="font-family:'Noto Serif SC',serif">"借助Sinus社会阶层模型，我们可以从内部理解人们的生活世界，彼仯身临其境。我们能理解什么在打动人心，以及如何打动之。"</p>
+    <p class="rq-source">— SINUS Markt- und Sozialforschung GmbH, <em>Sinus-Milieus® 2017/18</em>, Heidelberg, p. 4</p>
+  </blockquote>
 </div>
 
 <!-- ──────────── 6. PERSONA BUILDER ──────────── -->
@@ -776,6 +788,7 @@ body.en .zh-only{display:none!important}
       <span class="zh-only" style="font-family:'Noto Serif SC',serif">✓ 已保存至本次会话。关闭前请复制文本。</span>
     </div>
   </div>
+
 
   <div class="spacer"></div>
   <div class="reading-box">
