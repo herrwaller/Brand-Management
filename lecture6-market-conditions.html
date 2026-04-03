@@ -211,6 +211,51 @@ body.en .zh-only{display:none!important}
 .rq-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:8px}
 .rq-text-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:8px}
 .rq-source{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+
+/* ── BRAND INFLATION CHIRP ── */
+.infl-chirp-wrap{margin:28px 0 8px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.infl-chirp-svg-wrap{width:100%;overflow-x:auto}
+.infl-chirp-svg-wrap svg{display:block;min-width:520px;width:100%}
+.infl-chirp-legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 20px 14px;border-top:1px solid var(--border)}
+.infl-leg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink3)}
+.infl-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.infl-consequence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+@media(max-width:620px){.infl-consequence-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.infl-consequence-grid{grid-template-columns:1fr}}
+.infl-con{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;text-align:center}
+.infl-con-icon{font-size:24px;margin-bottom:8px}
+.infl-con-title{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);margin-bottom:5px}
+.infl-con-title-zh{font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-bottom:5px}
+.infl-con-desc{font-size:12.5px;color:var(--ink3);line-height:1.5}
+.infl-con-desc-zh{font-family:'Noto Serif SC',serif;font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px}
+
+/* ── PRODUCT CIRCLES (Vershofen) ── */
+.pc-wrap{margin:32px 0}
+.pc-instruction{font-size:13.5px;color:var(--ink3);margin-bottom:22px;padding:12px 16px;background:var(--bg2);border-radius:8px;border:1px solid var(--border)}
+.pc-instruction-zh{font-family:'Noto Serif SC',serif;font-size:12px;color:var(--ink3);margin-top:6px}
+.pc-layout{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap}
+.pc-diagram{flex:1;min-width:260px;display:flex;justify-content:center}
+.pc-diagram svg{overflow:visible}
+.pc-ring{cursor:pointer;transition:filter .2s,opacity .2s}
+.pc-ring:hover{filter:brightness(1.08)}
+.pc-ring.active{filter:drop-shadow(0 0 12px var(--ring-color,#4A8A28))}
+.pc-ring.dimmed{opacity:.35}
+.pc-panel{flex:1;min-width:240px}
+.pc-panel-inner{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;min-height:200px;transition:border-color .2s}
+.pc-panel-header{padding:14px 18px 12px;border-bottom:1px solid var(--border)}
+.pc-panel-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.pc-panel-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink)}
+.pc-panel-title-zh{font-family:'Noto Serif SC',serif;font-size:1rem;color:var(--ink3);margin-top:2px}
+.pc-panel-body{padding:16px 18px}
+.pc-panel-def{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:14px}
+.pc-panel-def-zh{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);line-height:1.8;margin-bottom:12px}
+.pc-examples-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.pc-examples{display:flex;flex-wrap:wrap;gap:6px}
+.pc-ex-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:14px;font-weight:500}
+.pc-empty{font-size:13.5px;color:var(--ink3);font-style:italic;padding:16px 0}
+.pc-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.pc-tab{background:var(--bg2);border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink3);transition:all .15s;white-space:nowrap}
+.pc-tab.active{border-color:currentColor;font-weight:600}
 </style>
 </head>
 <body class="en">
@@ -231,6 +276,8 @@ body.en .zh-only{display:none!important}
     <h1 class="zh-only">市场与传播环境</h1>
     <div class="hero-zh en-only">市场与传播环境</div>
     <div class="toc-pills">
+      <a href="#s-inflation" class="toc-pill en-only">Brand Inflation</a>
+      <a href="#s-inflation" class="toc-pill zh-only">品牌通货膨胀</a>
       <a href="#s-overload" class="toc-pill en-only">Information Overload</a>
       <a href="#s-overload" class="toc-pill zh-only">信息过载</a>
       <a href="#s-benefits" class="toc-pill en-only">Maslow &amp; Benefit Dimensions</a>
@@ -248,7 +295,164 @@ body.en .zh-only{display:none!important}
 <!-- MAIN -->
 <div class="page">
 
-  <!-- S1: Information Overload -->
+  <!-- S0: Brand Inflation & Product Circles -->
+  <div class="section" id="s-inflation">
+    <div class="sec-label en-only">Section 1</div>
+    <div class="sec-label zh-only">第一节</div>
+    <h2 class="sec-title en-only">The Inflation of Brands &amp; Products</h2>
+    <h2 class="sec-title zh-only">品牌与产品的通货膨胀</h2>
+
+    <div class="sec-text en-only">
+      <p>Over the past decades, the number and variety of products and brands has <strong>exploded</strong>. A single supermarket category — washing detergent, toothpaste, soft drinks — may now carry 40, 80, or even 200+ distinct SKUs. What was once a simple purchase decision has become an exercise in navigation and comparison.</p>
+      <p>The critical consequence: <strong>functionality and quality differ less and less</strong> between products. Blind tests routinely show consumers cannot distinguish premium from private-label equivalents. This drives competition away from the product itself and towards <em>communication</em> — towards the stories, symbols, and associations that surround a brand.</p>
+    </div>
+    <div class="sec-text-zh zh-only">
+      <p>过去几十年来，产品和品牌的数量与种类<strong>爆炸式增长</strong>。一个超市品类——洗涤剂、牙膏、软饮料——现在可能陈列40种、80种甚至200多种不同的SKU。曾经简单的购买决策如今变成了导航与比较的练习。</p>
+      <p>关键后果：产品之间的<strong>功能与质量差异越来越小</strong>。盲测反复证明，消费者无法区分溢价品牌与自有品牌的同类产品。这将竞争从产品本身驱向<em>传播</em>——驱向围绕品牌的故事、符号和联想。</p>
+    </div>
+
+    <div class="callout">
+      <strong class="en-only">"Having a choice became having to choose."</strong>
+      <strong class="zh-only">"拥有选择变成了不得不选择。"</strong>
+      <div class="callout-zh en-only">— Esch 2014 · The paradox of product inflation: more variety creates more confusion, not more satisfaction.</div>
+      <div class="callout-zh zh-only">— Esch 2014 · 产品通胀的悖论：更多品种带来的是更多困惑，而非更多满足。</div>
+    </div>
+
+    <!-- Chirp sine wave -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:28px 0 6px" class="en-only">The Product Lifecycle Under Inflation</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:28px 0 6px" class="zh-only">通货膨胀下的产品生命周期</h3>
+    <p style="font-size:13px;color:var(--ink3);margin-bottom:16px;line-height:1.6" class="en-only">Each wave represents one product's lifecycle. As markets saturate, cycles compress — and new products overlap the old ones before they have run their course.</p>
+    <p style="font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink3);margin-bottom:16px;line-height:1.7" class="zh-only">每条曲线代表一个产品的生命周期。随着市场饱和，周期不断压缩——新产品在旧产品完成其生命周期之前便已进入并重叠。</p>
+
+    <div class="infl-chirp-wrap">
+      <div class="infl-chirp-svg-wrap">
+        <svg id="chirp-svg" viewBox="0 0 760 220" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid & axis -->
+          <line x1="40" y1="110" x2="740" y2="110" stroke="#DAD5C8" stroke-width="1"/>
+          <!-- Phase labels -->
+          <text x="40"  y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">1960</text>
+          <text x="180" y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">1975</text>
+          <text x="320" y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">1990</text>
+          <text x="460" y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">2005</text>
+          <text x="600" y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">2020</text>
+          <text x="740" y="206" font-family="DM Sans,sans-serif" font-size="10" fill="#7A756C" text-anchor="middle">Today</text>
+          <!-- Tick marks -->
+          <line x1="40"  y1="108" x2="40"  y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <line x1="180" y1="108" x2="180" y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <line x1="320" y1="108" x2="320" y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <line x1="460" y1="108" x2="460" y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <line x1="600" y1="108" x2="600" y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <line x1="740" y1="108" x2="740" y2="114" stroke="#C4BDB0" stroke-width="1"/>
+          <!-- Y axis label -->
+          <text x="10" y="60"  font-family="DM Sans,sans-serif" font-size="9" fill="#7A756C" text-anchor="middle" transform="rotate(-90 10 110)">differentiation</text>
+          <!-- Wave paths rendered by JS -->
+          <g id="chirp-paths"></g>
+          <!-- Amplitude arrow -->
+          <line x1="28" y1="30" x2="28" y2="190" stroke="#C4BDB0" stroke-width="1" marker-end="url(#arr)"/>
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#C4BDB0"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <div class="infl-chirp-legend">
+        <div class="infl-leg-item"><div class="infl-leg-dot" style="background:#4A8A28"></div><span class="en-only">Product A — pioneer, long cycle</span><span class="zh-only">产品A — 先驱，长周期</span></div>
+        <div class="infl-leg-item"><div class="infl-leg-dot" style="background:#C87A10"></div><span class="en-only">Product B — follower, shorter cycle</span><span class="zh-only">产品B — 跟随者，较短周期</span></div>
+        <div class="infl-leg-item"><div class="infl-leg-dot" style="background:#C84020"></div><span class="en-only">Product C/D… — saturated market, cycles compress &amp; overlap</span><span class="zh-only">产品C/D…— 市场饱和，周期压缩并重叠</span></div>
+      </div>
+    </div>
+
+    <!-- Consequences -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="en-only">Consequences for Brand Management</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:28px 0 16px" class="zh-only">对品牌管理的影响</h3>
+    <div class="infl-consequence-grid">
+      <div class="infl-con">
+        <div class="infl-con-icon">👁️</div>
+        <div class="infl-con-title en-only">Invisible Differences</div>
+        <div class="infl-con-title-zh zh-only">差异隐形化</div>
+        <div class="infl-con-desc en-only">Consumers see hardly any functional differences between competing brands. The product alone no longer sells itself.</div>
+        <div class="infl-con-desc-zh zh-only">消费者几乎看不到竞争品牌之间的功能差异。产品本身已无法独立销售。</div>
+      </div>
+      <div class="infl-con">
+        <div class="infl-con-icon">📣</div>
+        <div class="infl-con-title en-only">Communication War</div>
+        <div class="infl-con-title-zh zh-only">传播战</div>
+        <div class="infl-con-desc en-only">Competition shifts from product to communication. High advertising budgets and brand continuity become survival requirements.</div>
+        <div class="infl-con-desc-zh zh-only">竞争从产品转向传播。高广告预算和品牌持续性成为生存要求。</div>
+      </div>
+      <div class="infl-con">
+        <div class="infl-con-icon">⭐</div>
+        <div class="infl-con-title en-only">USP Imperative</div>
+        <div class="infl-con-title-zh zh-only">USP必要性</div>
+        <div class="infl-con-desc en-only">Brands need a clear basic benefit plus a meaningful additional (symbolic) benefit that is worthy of communication.</div>
+        <div class="infl-con-desc-zh zh-only">品牌需要明确的基础利益，加上值得传播的有意义的附加（象征性）利益。</div>
+      </div>
+    </div>
+
+    <!-- Product Circles -->
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:36px 0 6px" class="en-only">The Product Circle: Vershofen's Benefit Model</h3>
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.15rem;font-weight:600;color:var(--ink);margin:36px 0 6px" class="zh-only">产品圈：Vershofen利益模型</h3>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:4px" class="en-only">Every product can be understood as a set of concentric benefit rings — from the functional core outward to the symbolic surface. Brands that only compete on the inner ring are most exposed to price competition and imitation. Those that build strong outer rings command premium prices and loyalty.</p>
+    <p style="font-family:'Noto Serif SC',serif;font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:4px" class="zh-only">每个产品都可以理解为一组同心利益圈——从功能核心向外延伸至象征表面。仅在内圈竞争的品牌最易受价格竞争和模仿的影响。那些建立了强大外圈的品牌能获得溢价和忠诚度。</p>
+
+    <div class="pc-wrap">
+      <div class="pc-instruction">
+        <span class="en-only">Click on each ring of the product circle to explore what that benefit layer means — and see real brand examples for each level.</span>
+        <span class="zh-only">点击产品圈的每个环，探索该利益层的含义——并查看每个层级的真实品牌案例。</span>
+        <div class="pc-instruction-zh en-only">点击每个圆环以探索各利益层级的含义与品牌案例。</div>
+      </div>
+
+      <div class="pc-layout">
+        <!-- SVG Diagram -->
+        <div class="pc-diagram">
+          <svg width="270" height="270" viewBox="0 0 270 270" id="pc-svg">
+            <!-- Outer ring: Symbolic -->
+            <circle class="pc-ring" id="pc-r3" cx="135" cy="135" r="128" fill="#C84020" fill-opacity="0.18" stroke="#C84020" stroke-width="2.5" style="--ring-color:#C84020" onclick="pcSelect(3)"/>
+            <!-- Middle ring: Aesthetic/Emotional -->
+            <circle class="pc-ring" id="pc-r2" cx="135" cy="135" r="84" fill="#C87A10" fill-opacity="0.22" stroke="#C87A10" stroke-width="2.5" style="--ring-color:#C87A10" onclick="pcSelect(2)"/>
+            <!-- Inner circle: Functional -->
+            <circle class="pc-ring" id="pc-r1" cx="135" cy="135" r="44" fill="#4A8A28" fill-opacity="0.30" stroke="#4A8A28" stroke-width="2.5" style="--ring-color:#4A8A28" onclick="pcSelect(1)"/>
+            <!-- Labels -->
+            <text x="135" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#1A1714" pointer-events="none">① BASIC</text>
+            <text x="135" y="145" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#1A1714" pointer-events="none">BENEFIT</text>
+            <!-- Ring 2 label -->
+            <text x="135" y="97" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7A4A00" pointer-events="none">② AESTHETIC</text>
+            <!-- Ring 3 label -->
+            <text x="135" y="20" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#8B1A0A" pointer-events="none">③ SYMBOLIC BENEFIT</text>
+            <!-- Click hint -->
+            <text x="135" y="258" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#7A756C" pointer-events="none">tap any ring to explore</text>
+          </svg>
+        </div>
+
+        <!-- Info panel -->
+        <div class="pc-panel">
+          <!-- Tabs -->
+          <div class="pc-tabs">
+            <button class="pc-tab" id="pc-tab1" onclick="pcSelect(1)" style="color:#4A8A28;border-color:#4A8A28">
+              <span class="en-only">① Basic</span><span class="zh-only">① 基础利益</span>
+            </button>
+            <button class="pc-tab" id="pc-tab2" onclick="pcSelect(2)" style="color:#7A756C">
+              <span class="en-only">② Aesthetic</span><span class="zh-only">② 审美利益</span>
+            </button>
+            <button class="pc-tab" id="pc-tab3" onclick="pcSelect(3)" style="color:#7A756C">
+              <span class="en-only">③ Symbolic</span><span class="zh-only">③ 象征利益</span>
+            </button>
+          </div>
+          <div class="pc-panel-inner" id="pc-panel-inner">
+            <div id="pc-content">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--ink3);margin-top:10px" class="en-only">Source: Vershofen 1959, cited in Herrmann &amp; Huber 2013, p. 321</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:11px;color:var(--ink3);margin-top:10px" class="zh-only">来源：Vershofen 1959，转引自Herrmann &amp; Huber 2013，第321页</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /s-inflation -->
+
+  <!-- S2: Information Overload (was S1) -->
   <div class="section" id="s-overload">
     <div class="sec-label en-only">Section 1</div>
     <div class="sec-label zh-only">第一节</div>
@@ -839,10 +1043,197 @@ body.en .zh-only{display:none!important}
 </nav>
 
 <script>
+/* ═══════════════════════════════════════
+   CHIRP SINE WAVE — Product Lifecycle
+   ═══════════════════════════════════════
+   Each "product" is a sine wave starting at a given x offset.
+   Period shrinks quadratically → chirp effect.
+   Amplitude also shrinks to show diminishing differentiation.
+   ═══════════════════════════════════════ */
+(function(){
+  var W = 700, CY = 110, STEPS = 1200;
+  var X0 = 40; // left margin
+
+  // Products: [startX, color, opacity, initialAmplitude, initialPeriod, periodDecay, ampDecay]
+  // periodDecay: how fast period shrinks (higher = faster compression)
+  // The wave is drawn from startX to X0+W
+  var products = [
+    { x0: 0,   color:'#4A8A28', op:0.85, amp0:72, p0:190, pd:0.28, ad:0.30 },
+    { x0: 110, color:'#C87A10', op:0.80, amp0:62, p0:150, pd:0.32, ad:0.32 },
+    { x0: 230, color:'#C84020', op:0.75, amp0:52, p0:110, pd:0.38, ad:0.36 },
+    { x0: 350, color:'#8B1A0A', op:0.65, amp0:40, p0: 80, pd:0.44, ad:0.40 },
+  ];
+
+  function buildPath(prod){
+    var pts = [];
+    var phase = 0;
+    var dx = W / STEPS;
+    for(var i = 0; i <= STEPS; i++){
+      var gx = i * dx; // x relative to left margin
+      var px = X0 + gx;
+      if(px < X0 + prod.x0){ continue; }
+      var lx = gx - prod.x0; // local x from product start
+      // period shrinks: p(lx) = p0 / (1 + pd * lx/W)
+      var period = prod.p0 / (1 + prod.pd * lx / W);
+      // amplitude shrinks
+      var amp = prod.amp0 * (1 - prod.ad * lx / W);
+      if(amp < 4) amp = 4;
+      // accumulate phase
+      phase += (2 * Math.PI / period) * dx;
+      var y = CY - amp * Math.sin(phase);
+      if(px > X0 + W) break;
+      pts.push([px, y]);
+    }
+    if(!pts.length) return '';
+    var d = 'M ' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+    for(var j = 1; j < pts.length; j++){
+      d += ' L ' + pts[j][0].toFixed(1) + ' ' + pts[j][1].toFixed(1);
+    }
+    return d;
+  }
+
+  function render(){
+    var g = document.getElementById('chirp-paths');
+    if(!g) return;
+    g.innerHTML = '';
+    products.forEach(function(prod, idx){
+      var d = buildPath(prod);
+      if(!d) return;
+      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', prod.color);
+      path.setAttribute('stroke-width', idx === 0 ? '2.2' : '1.8');
+      path.setAttribute('opacity', prod.op);
+      path.setAttribute('stroke-linejoin', 'round');
+      // Animate with stroke-dasharray trick
+      var len = path.getTotalLength ? path.getTotalLength() : 2000;
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      path.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1) ' + (idx * 0.25) + 's';
+      g.appendChild(path);
+      // trigger after paint
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          path.style.strokeDashoffset = '0';
+        });
+      });
+    });
+  }
+
+  var triggered = false;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !triggered){ triggered = true; render(); }
+    });
+  }, {threshold: 0.2});
+  document.addEventListener('DOMContentLoaded', function(){
+    var el = document.getElementById('chirp-svg');
+    if(el) obs.observe(el);
+  });
+})();
+
+/* ═══════════════════════════════════════
+   PRODUCT CIRCLES (Vershofen)
+   ═══════════════════════════════════════ */
+var PC_DATA = {
+  1: {
+    color: '#4A8A28',
+    label_en: 'Basic Benefit',
+    label_zh: '基础利益 (Grundnutzen)',
+    def_en: 'The core, functional utility a product <em>must</em> provide to be considered in its category. Every competitor offers this — it is the price of entry. On its own, the basic benefit cannot justify a price premium and offers no protection against imitation.',
+    def_zh: '产品<em>必须</em>提供的核心功能效用，才能被纳入该品类的考虑范围。每个竞争者都提供这一点——它是入场门票。仅凭基础利益无法证明溢价合理，也无法抵御模仿。',
+    examples: [
+      {label:'Butter Cookies → Nourishment', color:'rgba(74,138,40,.12)', text:'#2D6A0A'},
+      {label:'Car → Transport A→B', color:'rgba(74,138,40,.12)', text:'#2D6A0A'},
+      {label:'Detergent → Cleans clothes', color:'rgba(74,138,40,.12)', text:'#2D6A0A'},
+      {label:'Deodorant → Reduces odour', color:'rgba(74,138,40,.12)', text:'#2D6A0A'},
+      {label:'Smartphone → Calls & internet', color:'rgba(74,138,40,.12)', text:'#2D6A0A'},
+    ],
+    examples_zh: ['饼干 → 提供营养','汽车 → A到B的交通','洗涤剂 → 清洁衣物','除臭剂 → 减少气味','智能手机 → 通话与上网']
+  },
+  2: {
+    color: '#C87A10',
+    label_en: 'Aesthetic / Emotional Benefit',
+    label_zh: '审美/情感利益 (Ästhetischer Zusatznutzen)',
+    def_en: 'The sensory and emotional pleasure derived from product design, taste, scent, sound, or touch. This layer distinguishes a product from bare functionality and begins to create desirability. Think of how Nespresso makes coffee feel like a ritual, or how a BMW engine sounds different by design.',
+    def_zh: '从产品设计、口味、气味、声音或触感中获得的感官和情感愉悦。这一层将产品从纯粹功能中区分出来，开始创造吸引力。想想Nespresso如何让咖啡感觉像一种仪式，或宝马发动机声音如何通过设计而与众不同。',
+    examples: [
+      {label:'Nespresso → Coffee ritual', color:'rgba(200,122,16,.12)', text:'#7A4A00'},
+      {label:'Leibniz → 52 teeth design', color:'rgba(200,122,16,.12)', text:'#7A4A00'},
+      {label:'Audi → Interior craftsmanship', color:'rgba(200,122,16,.12)', text:'#7A4A00'},
+      {label:'iPhone → Unboxing experience', color:'rgba(200,122,16,.12)', text:'#7A4A00'},
+      {label:'Dove → Skin-soft sensation', color:'rgba(200,122,16,.12)', text:'#7A4A00'},
+    ],
+    examples_zh: ['Nespresso → 咖啡仪式感','莱布尼兹 → 52齿设计','奥迪 → 内饰工艺','iPhone → 开箱体验','Dove → 柔肤感']
+  },
+  3: {
+    color: '#C84020',
+    label_en: 'Symbolic Benefit',
+    label_zh: '象征利益 (Symbolischer Zusatznutzen)',
+    def_en: 'The social meaning a brand conveys: status, identity, group membership, or self-expression. This is the most powerful and hardest-to-copy benefit layer. Consumers are often willing to pay large premiums for symbolic benefits — a Rolex tells time no better than a Casio, yet costs 100× more. The symbolic layer is where brand communication strategy becomes most critical.',
+    def_zh: '品牌传达的社会意义：地位、身份、群体归属或自我表达。这是最强大、最难复制的利益层。消费者通常愿意为象征利益支付大量溢价——劳力士计时并不比卡西欧更准确，却贵100倍。象征层是品牌传播策略最为关键的地方。',
+    examples: [
+      {label:'Rolex → Achievement & status', color:'rgba(200,64,32,.10)', text:'#8B1A0A'},
+      {label:'Harley-Davidson → Tribe identity', color:'rgba(200,64,32,.10)', text:'#8B1A0A'},
+      {label:'Porsche → Success signal', color:'rgba(200,64,32,.10)', text:'#8B1A0A'},
+      {label:'Louis Vuitton → Affluent taste', color:'rgba(200,64,32,.10)', text:'#8B1A0A'},
+      {label:'Patagonia → Environmental values', color:'rgba(200,64,32,.10)', text:'#8B1A0A'},
+    ],
+    examples_zh: ['劳力士 → 成就与地位','哈雷戴维森 → 部落身份','保时捷 → 成功信号','路易威登 → 富有品味','巴塔哥尼亚 → 环保价值观']
+  }
+};
+
+var pcActive = null;
+function pcSelect(n){
+  var isEn = document.body.className !== 'zh';
+  var d = PC_DATA[n];
+  // Update rings
+  [1,2,3].forEach(function(i){
+    var ring = document.getElementById('pc-r'+i);
+    ring.classList.remove('active','dimmed');
+    if(i===n) ring.classList.add('active');
+    else ring.classList.add('dimmed');
+  });
+  // Update tabs
+  [1,2,3].forEach(function(i){
+    var tab = document.getElementById('pc-tab'+i);
+    tab.classList.remove('active');
+    tab.style.color = i===n ? PC_DATA[i].color : '#7A756C';
+    tab.style.borderColor = i===n ? PC_DATA[i].color : 'var(--border)';
+    tab.style.fontWeight = i===n ? '700' : '400';
+  });
+  // Update panel
+  var panel = document.getElementById('pc-panel-inner');
+  panel.style.borderColor = d.color;
+  var exHtml = d.examples.map(function(ex,idx){
+    var lbl = isEn ? ex.label : (d.examples_zh[idx]||ex.label);
+    return '<span class="pc-ex-tag" style="background:'+ex.color+';color:'+ex.text+'">'+lbl+'</span>';
+  }).join('');
+  document.getElementById('pc-content').innerHTML =
+    '<div class="pc-panel-header" style="border-bottom:1px solid var(--border)">'
+    +'<div class="pc-panel-label" style="color:'+d.color+'">Ring '+(n===1?'①':n===2?'②':'③')+'</div>'
+    +'<div class="pc-panel-title">'+(isEn?d.label_en:d.label_zh)+'</div>'
+    +(isEn?'<div class="pc-panel-title-zh">'+d.label_zh+'</div>':'')
+    +'</div>'
+    +'<div class="pc-panel-body">'
+    +'<div class="pc-panel-def">'+(isEn?d.def_en:d.def_zh)+'</div>'
+    +'<div class="pc-examples-label">'+(isEn?'Brand examples:':'品牌案例：')+'</div>'
+    +'<div class="pc-examples">'+exHtml+'</div>'
+    +'</div>';
+  pcActive = n;
+}
+
+// Init: show basic benefit by default
+document.addEventListener('DOMContentLoaded', function(){
+  pcSelect(1);
+});
+
 function setLang(lang){
   document.body.className = lang;
   document.getElementById('btn-en').classList.toggle('active', lang==='en');
   document.getElementById('btn-zh').classList.toggle('active', lang==='zh');
+  if(pcActive) pcSelect(pcActive);
   mlRefreshLabels();
 }
 
